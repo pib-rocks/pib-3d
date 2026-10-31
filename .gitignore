@@ -1,0 +1,12 @@
+# baked by tools/build_web_assets.py from meshes/ — ~60 MB, rebuilt with `make assets`
+web/meshes/
+
+# local python environments
+.venv/
+.buildvenv/
+__pycache__/
+*.pyc
+
+# editor / OS noise
+.DS_Store
+*.swp

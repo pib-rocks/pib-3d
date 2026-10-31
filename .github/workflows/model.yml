@@ -1,0 +1,30 @@
+name: model
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: install
+        run: pip install numpy
+
+      - name: control model matches the export
+        run: python tools/urdf_verify.py
+
+      - name: committed URDF is reproducible
+        run: |
+          python tools/urdf_reduce.py --out /tmp/pib.control.urdf
+          cmp /tmp/pib.control.urdf urdf/pib.control.urdf
+
+      - name: meshes resolve
+        run: python tools/check_meshes.py

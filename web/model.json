@@ -1,0 +1,1941 @@
+{
+ "name": "pib",
+ "links": [
+  {
+   "name": "a81_motor_shaft",
+   "mesh": "meshes/a81_motor_shaft.glb",
+   "parts": [
+    "a01_face",
+    "a02_face_neck_clamp",
+    "a03_face_plate",
+    "a04_l_head_side_left",
+    "a04_r_head_side_right",
+    "a05_mic_array_mounting_insert",
+    "a06_mic_array_knob",
+    "a81_motor_shaft",
+    "a82_neck_axis",
+    "a83_motor_adapter_neck"
+   ]
+  },
+  {
+   "name": "a71_inner_part",
+   "mesh": "meshes/a71_inner_part.glb",
+   "parts": [
+    "a71_inner_part",
+    "a72_top_part",
+    "a73_cover_neck"
+   ]
+  },
+  {
+   "name": "root",
+   "mesh": "meshes/root.glb",
+   "parts": [
+    "a75_l_neck_left",
+    "a75_r_neck_right",
+    "a76_neck_middle",
+    "b",
+    "b25_wire_connector",
+    "b25_wire_connector_1",
+    "b25_wire_connector_10",
+    "b25_wire_connector_11",
+    "b25_wire_connector_2",
+    "b25_wire_connector_3",
+    "b25_wire_connector_4",
+    "b25_wire_connector_5",
+    "b25_wire_connector_6",
+    "b25_wire_connector_7",
+    "b25_wire_connector_8",
+    "b25_wire_connector_9",
+    "b27_wire_connector_mount",
+    "b27_wire_connector_mount_1",
+    "b27_wire_connector_mount_10",
+    "b27_wire_connector_mount_11",
+    "b27_wire_connector_mount_2",
+    "b27_wire_connector_mount_3",
+    "b27_wire_connector_mount_4",
+    "b27_wire_connector_mount_5",
+    "b27_wire_connector_mount_6",
+    "b27_wire_connector_mount_7",
+    "b27_wire_connector_mount_8",
+    "b27_wire_connector_mount_9",
+    "b41_l_clavicle_left",
+    "b41_r_clavicle_right",
+    "b42_l_ribcage_left",
+    "b42_r_ribcage_right",
+    "b43_l_ribcage_lower_left",
+    "b43_r_ribcage_lower_right",
+    "b47_power_holder",
+    "b48_hinge",
+    "b48_hinge_1",
+    "b48_hinge_2",
+    "b48_hinge_3",
+    "b55_logo_plate_5_educational__1_",
+    "b57_printed_washer_relay",
+    "b57_printed_washer_relay_1",
+    "b58_button_scaffold",
+    "b62_wire_connector_knob_thumb_opposition",
+    "b62_wire_connector_knob_thumb_opposition_1",
+    "b63_wire_connector_knob_thumb_stretch",
+    "b63_wire_connector_knob_thumb_stretch_1",
+    "b64_wire_connector_knob_finger_stretch_ccw",
+    "b64_wire_connector_knob_finger_stretch_ccw_1",
+    "b65_wire_connector_knob_finger_stretch_cw",
+    "b65_wire_connector_knob_finger_stretch_cw_1",
+    "b65_wire_connector_knob_finger_stretch_cw_2",
+    "b65_wire_connector_knob_finger_stretch_cw_3",
+    "b65_wire_connector_knob_finger_stretch_cw_4",
+    "b65_wire_connector_knob_finger_stretch_cw_5",
+    "b66_body_neck_position",
+    "b66_body_neck_position_1",
+    "b67_slicky__10_",
+    "b67_slicky__11_",
+    "b67_slicky__12_",
+    "b67_slicky__13_",
+    "b67_slicky__14_",
+    "b67_slicky__15_",
+    "b67_slicky__16_",
+    "b67_slicky__17_",
+    "b67_slicky__18_",
+    "b67_slicky__19_",
+    "b67_slicky__1_",
+    "b67_slicky__20_",
+    "b67_slicky__21_",
+    "b67_slicky__22_",
+    "b67_slicky__23_",
+    "b67_slicky__24_",
+    "b67_slicky__25_",
+    "b67_slicky__26_",
+    "b67_slicky__2_",
+    "b67_slicky__3_",
+    "b67_slicky__4_",
+    "b67_slicky__5_",
+    "b67_slicky__6_",
+    "b67_slicky__7_",
+    "b67_slicky__8_",
+    "b67_slicky__9_",
+    "c51_wire_protector_servo_array_scaffold",
+    "c51_wire_protector_servo_array_scaffold_1",
+    "c52_servo_tube_cover",
+    "c52_servo_tube_cover_1",
+    "c60_flange_inner_shoulder",
+    "c60_flange_inner_shoulder_1",
+    "c60l_servo_array_scaffold_left",
+    "c60r_servo_array_scaffold_right",
+    "c61_motor_bracket_inner_shoulder",
+    "c61_motor_bracket_inner_shoulder_1",
+    "c62_ringflange_inner_shoulder",
+    "c62_ringflange_inner_shoulder_1",
+    "dot",
+    "i_major",
+    "i_minor",
+    "p",
+    "root"
+   ]
+  },
+  {
+   "name": "b44_electronics_back",
+   "mesh": "meshes/b44_electronics_back.glb",
+   "parts": [
+    "b44_electronics_back",
+    "b49_hinge_plate_2",
+    "b49_hinge_plate_3"
+   ]
+  },
+  {
+   "name": "b46_power_back",
+   "mesh": "meshes/b46_power_back.glb",
+   "parts": [
+    "b46_power_back",
+    "b49_hinge_plate",
+    "b49_hinge_plate_1"
+   ]
+  },
+  {
+   "name": "c09_central_rotator_connector",
+   "mesh": "meshes/c09_central_rotator_connector.glb",
+   "parts": [
+    "c09_central_rotator_connector",
+    "c15_central_rotator_motor_connector",
+    "c18r_forearm_distal_lock_right",
+    "c19r_forearm_distal_top_right",
+    "d31_hand_wrist_connector",
+    "d31_hand_wrist_connector_1"
+   ]
+  },
+  {
+   "name": "c09_central_rotator_connector_1",
+   "mesh": "meshes/c09_central_rotator_connector_1.glb",
+   "parts": [
+    "c09_central_rotator_connector_1",
+    "c31_elbow_shaft_motor",
+    "c32_elbow_axis_cable",
+    "c35l_elbow_clamp_left",
+    "c35r_elbow_clamp_right",
+    "c39_elbow_upper_shell",
+    "c40_elbow_upper_shell_lock",
+    "c73_wire_holder_pin",
+    "c74_wire_holder",
+    "c77_central_rotator_motor_connector_shoulder"
+   ]
+  },
+  {
+   "name": "c09_central_rotator_connector_2",
+   "mesh": "meshes/c09_central_rotator_connector_2.glb",
+   "parts": [
+    "c09_central_rotator_connector_2",
+    "c31_elbow_shaft_motor_1",
+    "c32_elbow_axis_cable_1",
+    "c35l_elbow_clamp_left_1",
+    "c35r_elbow_clamp_right_1",
+    "c39_elbow_upper_shell_1",
+    "c40_elbow_upper_shell_lock_1",
+    "c73_wire_holder_pin_3",
+    "c74_wire_holder_3",
+    "c77_central_rotator_motor_connector_shoulder_1"
+   ]
+  },
+  {
+   "name": "c09_central_rotator_connector_3",
+   "mesh": "meshes/c09_central_rotator_connector_3.glb",
+   "parts": [
+    "c09_central_rotator_connector_3",
+    "c15_central_rotator_motor_connector_1",
+    "c18l_forearm_distal_lock_left",
+    "c19l_forearm_distal_top_left",
+    "d31_hand_wrist_connector_2",
+    "d31_hand_wrist_connector_3"
+   ]
+  },
+  {
+   "name": "c25_forearm_disc_bottom",
+   "mesh": "meshes/c25_forearm_disc_bottom.glb",
+   "parts": [
+    "c25_forearm_disc_bottom",
+    "c26_forearm_disc_top",
+    "c27_forearm_bearing_distance_ring",
+    "c28_forearm_bearing_center",
+    "c30_forearm_bar"
+   ]
+  },
+  {
+   "name": "c25_forearm_disc_bottom_1",
+   "mesh": "meshes/c25_forearm_disc_bottom_1.glb",
+   "parts": [
+    "c25_forearm_disc_bottom_1",
+    "c26_forearm_disc_top_1",
+    "c27_forearm_bearing_distance_ring_1",
+    "c28_forearm_bearing_center_1",
+    "c30_forearm_bar_1"
+   ]
+  },
+  {
+   "name": "d01_r_palm_right",
+   "mesh": "meshes/d01_r_palm_right.glb",
+   "parts": [
+    "c30_forearm_bar__1__loop_closure",
+    "cylindrical_1_loop_closure",
+    "d01_r_palm_right",
+    "d11_r_bearing_enclosure_right",
+    "d30_r_cover_hand_right",
+    "d50_finger_palm_connection",
+    "d50_finger_palm_connection_1",
+    "d50_finger_palm_connection_2",
+    "d50_finger_palm_connection_3",
+    "d51_coupling_bar_proximal",
+    "d51_coupling_bar_proximal_1",
+    "d51_coupling_bar_proximal_2",
+    "d51_coupling_bar_proximal_3",
+    "d54_finger_distal__1__loop_closure_6",
+    "d59_palm_connection_skin",
+    "d59_palm_connection_skin_1",
+    "d59_palm_connection_skin_2",
+    "d59_palm_connection_skin_3",
+    "d65_r_palm_skin_right",
+    "j5",
+    "j5_1",
+    "j5_2",
+    "j5_loop_closure"
+   ]
+  },
+  {
+   "name": "d01_l_palm_left",
+   "mesh": "meshes/d01_l_palm_left.glb",
+   "parts": [
+    "c30_forearm_bar__1__loop_closure_1",
+    "cylindrical_1_loop_closure_1",
+    "d01_l_palm_left",
+    "d11_l_bearing_enclosure_left",
+    "d30_l_cover_hand_left",
+    "d50_finger_palm_connection_4",
+    "d50_finger_palm_connection_5",
+    "d50_finger_palm_connection_6",
+    "d50_finger_palm_connection_7",
+    "d51_coupling_bar_proximal_4",
+    "d51_coupling_bar_proximal_5",
+    "d51_coupling_bar_proximal_6",
+    "d51_coupling_bar_proximal_7",
+    "d54_finger_distal__1__loop_closure_5",
+    "d59_palm_connection_skin_4",
+    "d59_palm_connection_skin_5",
+    "d59_palm_connection_skin_6",
+    "d59_palm_connection_skin_7",
+    "d65_l_palm_skin_left",
+    "j5_3",
+    "j5_4",
+    "j5_5",
+    "j5_loop_closure_1"
+   ]
+  },
+  {
+   "name": "c36_elbow_lower_shell",
+   "mesh": "meshes/c36_elbow_lower_shell.glb",
+   "parts": [
+    "c33_elbow_motor_flange",
+    "c34_elbow_motor_connection",
+    "c36_elbow_lower_shell",
+    "c37_elbow_rotator_bracket",
+    "c38_elbow_cover",
+    "c41_elbow_central_motor_flange"
+   ]
+  },
+  {
+   "name": "c36_elbow_lower_shell_1",
+   "mesh": "meshes/c36_elbow_lower_shell_1.glb",
+   "parts": [
+    "c33_elbow_motor_flange_1",
+    "c34_elbow_motor_connection_1",
+    "c36_elbow_lower_shell_1",
+    "c37_elbow_rotator_bracket_1",
+    "c38_elbow_cover_1",
+    "c41_elbow_central_motor_flange_1"
+   ]
+  },
+  {
+   "name": "c64_motor_axis_cap_inner_shoulder",
+   "mesh": "meshes/c64_motor_axis_cap_inner_shoulder.glb",
+   "parts": [
+    "c63_motor_axis_inner_shoulder",
+    "c64_motor_axis_cap_inner_shoulder",
+    "c65_bracket_outer_shoulder",
+    "c65_bracket_outer_shoulder_1",
+    "c66_cap_front_outer_shoulder",
+    "c66_cap_front_outer_shoulder__1__loop_closure",
+    "c67_cap_back_outer_shoulder",
+    "c73_wire_holder_pin_1",
+    "c74_wire_holder_1",
+    "c75_front_bracket_outer_shoulder",
+    "c75_front_bracket_outer_shoulder_1"
+   ]
+  },
+  {
+   "name": "c64_motor_axis_cap_inner_shoulder_1",
+   "mesh": "meshes/c64_motor_axis_cap_inner_shoulder_1.glb",
+   "parts": [
+    "c63_motor_axis_inner_shoulder_1",
+    "c64_motor_axis_cap_inner_shoulder_1",
+    "c65_bracket_outer_shoulder_2",
+    "c65_bracket_outer_shoulder_3",
+    "c66_cap_front_outer_shoulder_1",
+    "c66_cap_front_outer_shoulder__1__loop_closure_1",
+    "c67_cap_back_outer_shoulder_1",
+    "c73_wire_holder_pin_2",
+    "c74_wire_holder_2",
+    "c75_front_bracket_outer_shoulder_2",
+    "c75_front_bracket_outer_shoulder_3"
+   ]
+  },
+  {
+   "name": "c69_inner_part_outer_shoulder",
+   "mesh": "meshes/c69_inner_part_outer_shoulder.glb",
+   "parts": [
+    "c68_inner_ring_outer_shoulder",
+    "c68_inner_ring_outer_shoulder_1",
+    "c69_inner_part_outer_shoulder",
+    "c70_shell_outer_shoulder",
+    "c72_plate_outer_shoulder",
+    "c72_plate_outer_shoulder_1",
+    "c76_shell_cap",
+    "c78_central_rotator_bracket_shoulder"
+   ]
+  },
+  {
+   "name": "c69_inner_part_outer_shoulder_1",
+   "mesh": "meshes/c69_inner_part_outer_shoulder_1.glb",
+   "parts": [
+    "c68_inner_ring_outer_shoulder_2",
+    "c68_inner_ring_outer_shoulder_3",
+    "c69_inner_part_outer_shoulder_1",
+    "c70_shell_outer_shoulder_1",
+    "c72_plate_outer_shoulder_2",
+    "c72_plate_outer_shoulder_3",
+    "c76_shell_cap_1",
+    "c78_central_rotator_bracket_shoulder_1"
+   ]
+  },
+  {
+   "name": "d13_r_thumb_rotator_right",
+   "mesh": "meshes/d13_r_thumb_rotator_right.glb",
+   "parts": [
+    "cylindrical_1",
+    "d13_r_thumb_rotator_right",
+    "d56_coupling_bar_thumb"
+   ]
+  },
+  {
+   "name": "d13_l_thumb_rotator_left",
+   "mesh": "meshes/d13_l_thumb_rotator_left.glb",
+   "parts": [
+    "cylindrical_1_1",
+    "d13_l_thumb_rotator_left",
+    "d56_coupling_bar_thumb_1"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal",
+   "mesh": "meshes/d52_finger_proximal.glb",
+   "parts": [
+    "d52_finger_proximal",
+    "d53_coupling_bar_distal",
+    "d58_thumb_tip__1__loop_closure_8",
+    "d60_proximal_skin",
+    "j7_loop_closure"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_1",
+   "mesh": "meshes/d52_finger_proximal_1.glb",
+   "parts": [
+    "d52_finger_proximal_1",
+    "d53_coupling_bar_distal_1",
+    "d54_finger_distal__1__loop_closure_3",
+    "d58_thumb_tip__1__loop_closure_6",
+    "d60_proximal_skin_1",
+    "j7_loop_closure_1"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_2",
+   "mesh": "meshes/d52_finger_proximal_2.glb",
+   "parts": [
+    "d52_finger_proximal_2",
+    "d53_coupling_bar_distal_2",
+    "d54_finger_distal__1__loop_closure",
+    "d58_thumb_tip__1__loop_closure",
+    "d60_proximal_skin_2",
+    "j7_loop_closure_3"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_3",
+   "mesh": "meshes/d52_finger_proximal_3.glb",
+   "parts": [
+    "d52_finger_proximal_3",
+    "d53_coupling_bar_distal_3",
+    "d54_finger_distal__1__loop_closure_1",
+    "d58_thumb_tip__1__loop_closure_1",
+    "d60_proximal_skin_3",
+    "j7_loop_closure_2"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_4",
+   "mesh": "meshes/d52_finger_proximal_4.glb",
+   "parts": [
+    "d52_finger_proximal_4",
+    "d53_coupling_bar_distal_4",
+    "d54_finger_distal__1__loop_closure_2",
+    "d58_thumb_tip__1__loop_closure_9",
+    "d60_proximal_skin_4",
+    "j7_loop_closure_4"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_5",
+   "mesh": "meshes/d52_finger_proximal_5.glb",
+   "parts": [
+    "d52_finger_proximal_5",
+    "d53_coupling_bar_distal_5",
+    "d60_proximal_skin_5",
+    "j7"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_6",
+   "mesh": "meshes/d52_finger_proximal_6.glb",
+   "parts": [
+    "d52_finger_proximal_6",
+    "d53_coupling_bar_distal_6",
+    "d54_finger_distal__1__loop_closure_7",
+    "d58_thumb_tip__1__loop_closure_2",
+    "d60_proximal_skin_6",
+    "j7_loop_closure_6"
+   ]
+  },
+  {
+   "name": "d52_finger_proximal_7",
+   "mesh": "meshes/d52_finger_proximal_7.glb",
+   "parts": [
+    "d52_finger_proximal_7",
+    "d53_coupling_bar_distal_7",
+    "d54_finger_distal__1__loop_closure_4",
+    "d58_thumb_tip__1__loop_closure_4",
+    "d60_proximal_skin_7",
+    "j7_loop_closure_5"
+   ]
+  },
+  {
+   "name": "d54_finger_distal",
+   "mesh": "meshes/d54_finger_distal.glb",
+   "parts": [
+    "d54_finger_distal",
+    "d61_distal_skin"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_1",
+   "mesh": "meshes/d54_finger_distal_1.glb",
+   "parts": [
+    "d54_finger_distal_1",
+    "d61_distal_skin_1"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_2",
+   "mesh": "meshes/d54_finger_distal_2.glb",
+   "parts": [
+    "d54_finger_distal_2",
+    "d61_distal_skin_2"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_3",
+   "mesh": "meshes/d54_finger_distal_3.glb",
+   "parts": [
+    "d54_finger_distal_3",
+    "d61_distal_skin_3"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_4",
+   "mesh": "meshes/d54_finger_distal_4.glb",
+   "parts": [
+    "d54_finger_distal_4",
+    "d61_distal_skin_4"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_5",
+   "mesh": "meshes/d54_finger_distal_5.glb",
+   "parts": [
+    "d54_finger_distal_5",
+    "d58_thumb_tip__1__loop_closure_3",
+    "d61_distal_skin_5"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_6",
+   "mesh": "meshes/d54_finger_distal_6.glb",
+   "parts": [
+    "d54_finger_distal_6",
+    "d61_distal_skin_6"
+   ]
+  },
+  {
+   "name": "d54_finger_distal_7",
+   "mesh": "meshes/d54_finger_distal_7.glb",
+   "parts": [
+    "d54_finger_distal_7",
+    "d61_distal_skin_7"
+   ]
+  },
+  {
+   "name": "d55_finger_tip",
+   "mesh": "meshes/d55_finger_tip.glb",
+   "parts": [
+    "d55_finger_tip",
+    "d62_tip_skin"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_1",
+   "mesh": "meshes/d55_finger_tip_1.glb",
+   "parts": [
+    "d55_finger_tip_1",
+    "d62_tip_skin_1"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_2",
+   "mesh": "meshes/d55_finger_tip_2.glb",
+   "parts": [
+    "d55_finger_tip_2",
+    "d62_tip_skin_2"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_3",
+   "mesh": "meshes/d55_finger_tip_3.glb",
+   "parts": [
+    "d55_finger_tip_3",
+    "d62_tip_skin_3"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_4",
+   "mesh": "meshes/d55_finger_tip_4.glb",
+   "parts": [
+    "d55_finger_tip_4",
+    "d62_tip_skin_4"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_5",
+   "mesh": "meshes/d55_finger_tip_5.glb",
+   "parts": [
+    "d55_finger_tip_5",
+    "d62_tip_skin_5"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_6",
+   "mesh": "meshes/d55_finger_tip_6.glb",
+   "parts": [
+    "d55_finger_tip_6",
+    "d62_tip_skin_6"
+   ]
+  },
+  {
+   "name": "d55_finger_tip_7",
+   "mesh": "meshes/d55_finger_tip_7.glb",
+   "parts": [
+    "d55_finger_tip_7",
+    "d62_tip_skin_7"
+   ]
+  },
+  {
+   "name": "d57_thumb_proximal",
+   "mesh": "meshes/d57_thumb_proximal.glb",
+   "parts": [
+    "d57_thumb_proximal",
+    "d58_thumb_tip__1__loop_closure_5",
+    "d63_thumb_proximal_skin"
+   ]
+  },
+  {
+   "name": "d57_thumb_proximal_1",
+   "mesh": "meshes/d57_thumb_proximal_1.glb",
+   "parts": [
+    "d57_thumb_proximal_1",
+    "d58_thumb_tip__1__loop_closure_7",
+    "d63_thumb_proximal_skin_1"
+   ]
+  },
+  {
+   "name": "d58_thumb_tip",
+   "mesh": "meshes/d58_thumb_tip.glb",
+   "parts": [
+    "d58_thumb_tip",
+    "d64_thumb_tip_skin"
+   ]
+  },
+  {
+   "name": "d58_thumb_tip_1",
+   "mesh": "meshes/d58_thumb_tip_1.glb",
+   "parts": [
+    "d58_thumb_tip_1",
+    "d64_thumb_tip_skin_1"
+   ]
+  }
+ ],
+ "joints": [
+  {
+   "name": "central_rotator_rotation",
+   "type": "revolute",
+   "parent": "c69_inner_part_outer_shoulder",
+   "child": "c09_central_rotator_connector_1",
+   "origin": {
+    "xyz": [
+     -0.0002,
+     0.0371999932,
+     -0.125
+    ],
+    "rpy": [
+     1.5708,
+     -1.00704409e-16,
+     -1.6081237e-16
+    ]
+   },
+   "axis": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "central_rotator_rotation_1",
+   "type": "revolute",
+   "parent": "c69_inner_part_outer_shoulder_1",
+   "child": "c09_central_rotator_connector_2",
+   "origin": {
+    "xyz": [
+     -0.0002,
+     0.0371999932,
+     -0.125
+    ],
+    "rpy": [
+     1.5708,
+     -8.92342092e-14,
+     1.69880334e-14
+    ]
+   },
+   "axis": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "dof_wrist",
+   "type": "revolute",
+   "parent": "c09_central_rotator_connector",
+   "child": "c25_forearm_disc_bottom",
+   "origin": {
+    "xyz": [
+     0.0100000503,
+     -0.0554007,
+     -0.0136999633
+    ],
+    "rpy": [
+     -2.3713999,
+     1.5707918,
+     0.625613749
+    ]
+   },
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "dof_wrist_1",
+   "type": "revolute",
+   "parent": "c09_central_rotator_connector_3",
+   "child": "c25_forearm_disc_bottom_1",
+   "origin": {
+    "xyz": [
+     -0.0100000503,
+     -0.0554007,
+     -0.0136999633
+    ],
+    "rpy": [
+     3.14159265,
+     1.57079265,
+     3.14159265
+    ]
+   },
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "gearing_rotation__new_body_",
+   "type": "revolute",
+   "parent": "root",
+   "child": "a71_inner_part",
+   "origin": {
+    "xyz": [
+     -0.074,
+     0.106,
+     -0.1421
+    ],
+    "rpy": [
+     6.12323e-17,
+     6.12323e-17,
+     1.09362e-16
+    ]
+   },
+   "axis": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "j1",
+   "type": "revolute",
+   "parent": "d01_r_palm_right",
+   "child": "d52_finger_proximal",
+   "origin": {
+    "xyz": [
+     0.013154112,
+     0.0028539842,
+     0.0963594223
+    ],
+    "rpy": [
+     0.0616663295,
+     -0.174208,
+     3.13089
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_1",
+   "type": "revolute",
+   "parent": "d01_r_palm_right",
+   "child": "d52_finger_proximal_1",
+   "origin": {
+    "xyz": [
+     -0.0135987265,
+     0.00307522096,
+     0.0999977504
+    ],
+    "rpy": [
+     0.0607347,
+     -3.52849639e-15,
+     3.14159
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_2",
+   "type": "revolute",
+   "parent": "d13_r_thumb_rotator_right",
+   "child": "d57_thumb_proximal",
+   "origin": {
+    "xyz": [
+     0.0283465,
+     3.86219e-14,
+     0.00821336
+    ],
+    "rpy": [
+     1.58695,
+     -0.522691,
+     1.53845
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_3",
+   "type": "revolute",
+   "parent": "d01_r_palm_right",
+   "child": "d52_finger_proximal_3",
+   "origin": {
+    "xyz": [
+     -0.0651540571,
+     0.00220641279,
+     0.0857098767
+    ],
+    "rpy": [
+     0.0638519,
+     0.31356,
+     -3.12187
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_4",
+   "type": "revolute",
+   "parent": "d01_r_palm_right",
+   "child": "d52_finger_proximal_2",
+   "origin": {
+    "xyz": [
+     -0.040351562,
+     0.0028539842,
+     0.0963594223
+    ],
+    "rpy": [
+     0.0064203,
+     0.174208,
+     -3.13089
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_5",
+   "type": "revolute",
+   "parent": "d01_l_palm_left",
+   "child": "d52_finger_proximal_5",
+   "origin": {
+    "xyz": [
+     -0.0651537901,
+     -0.00300028651,
+     0.096355002
+    ],
+    "rpy": [
+     -0.00136771,
+     0.174533,
+     -3.14159
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_6",
+   "type": "revolute",
+   "parent": "d01_l_palm_left",
+   "child": "d52_finger_proximal_4",
+   "origin": {
+    "xyz": [
+     -0.0384012558,
+     -0.002999999,
+     0.1
+    ],
+    "rpy": [
+     -0.00153206,
+     7.95339e-14,
+     -3.14159
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_7",
+   "type": "revolute",
+   "parent": "d13_l_thumb_rotator_left",
+   "child": "d57_thumb_proximal_1",
+   "origin": {
+    "xyz": [
+     -0.0283465,
+     -3.53884e-16,
+     0.00821336
+    ],
+    "rpy": [
+     1.62261,
+     0.522691,
+     -1.53845
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_8",
+   "type": "revolute",
+   "parent": "d01_l_palm_left",
+   "child": "d52_finger_proximal_7",
+   "origin": {
+    "xyz": [
+     0.0131541006,
+     -0.00300003016,
+     0.0856857367
+    ],
+    "rpy": [
+     -6.14730683e-11,
+     -0.314159,
+     3.14159
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j1_9",
+   "type": "revolute",
+   "parent": "d01_l_palm_left",
+   "child": "d52_finger_proximal_6",
+   "origin": {
+    "xyz": [
+     -0.011648423,
+     -0.00299998149,
+     0.0963549862
+    ],
+    "rpy": [
+     -0.00164968,
+     -0.174533,
+     -3.14159
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j2",
+   "type": "revolute",
+   "parent": "d52_finger_proximal",
+   "child": "d54_finger_distal",
+   "origin": {
+    "xyz": [
+     -3.33067e-16,
+     0.0009,
+     0.036
+    ],
+    "rpy": [
+     -1.72235e-06,
+     6.28664e-15,
+     -2.85883e-15
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j2_1",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_5",
+   "child": "d54_finger_distal_5",
+   "origin": {
+    "xyz": [
+     4.44089e-16,
+     0.0009,
+     0.036
+    ],
+    "rpy": [
+     -0.000821105,
+     1.44837e-14,
+     2.23045e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3",
+   "type": "revolute",
+   "parent": "d54_finger_distal",
+   "child": "d55_finger_tip",
+   "origin": {
+    "xyz": [
+     3.33067e-16,
+     0.0009,
+     0.031
+    ],
+    "rpy": [
+     -9.47326e-07,
+     6.12009e-15,
+     -3.16179e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3_1",
+   "type": "revolute",
+   "parent": "d54_finger_distal_1",
+   "child": "d55_finger_tip_1",
+   "origin": {
+    "xyz": [
+     2.22045e-16,
+     0.00584975,
+     0.0359497
+    ],
+    "rpy": [
+     1.27676e-14,
+     -1.11022e-16,
+     -3.34004e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3_2",
+   "type": "revolute",
+   "parent": "d54_finger_distal_3",
+   "child": "d55_finger_tip_3",
+   "origin": {
+    "xyz": [
+     1.22125e-15,
+     0.00584975,
+     0.0359497
+    ],
+    "rpy": [
+     1.47903e-14,
+     5.60663e-15,
+     -3.34906e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3_3",
+   "type": "revolute",
+   "parent": "d54_finger_distal_2",
+   "child": "d55_finger_tip_2",
+   "origin": {
+    "xyz": [
+     4.44089e-16,
+     0.00584975,
+     0.0359497
+    ],
+    "rpy": [
+     -0.0189243,
+     8.75987e-15,
+     4.63251e-15
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3_4",
+   "type": "revolute",
+   "parent": "d54_finger_distal_4",
+   "child": "d55_finger_tip_4",
+   "origin": {
+    "xyz": [
+     -5.27356e-15,
+     0.00584975,
+     0.0359497
+    ],
+    "rpy": [
+     -0.000506143,
+     -6.94455e-14,
+     -4.1945e-15
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3_5",
+   "type": "revolute",
+   "parent": "d54_finger_distal_7",
+   "child": "d55_finger_tip_7",
+   "origin": {
+    "xyz": [
+     1.22125e-15,
+     0.00584975,
+     0.0359497
+    ],
+    "rpy": [
+     -2.03714e-11,
+     1.17129e-14,
+     3.52378e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "j3_6",
+   "type": "revolute",
+   "parent": "d54_finger_distal_6",
+   "child": "d55_finger_tip_6",
+   "origin": {
+    "xyz": [
+     9.4369e-16,
+     0.00584975,
+     0.0359497
+    ],
+    "rpy": [
+     -0.000545045,
+     1.70347e-14,
+     -2.65073e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "lower_door_rotation",
+   "type": "revolute",
+   "parent": "root",
+   "child": "b46_power_back",
+   "origin": {
+    "xyz": [
+     -0.034,
+     0.1794396,
+     -0.5978
+    ],
+    "rpy": [
+     1.5708,
+     7.48896e-32,
+     -3.29469e-32
+    ]
+   },
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": 0.0,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "nodding_rotation",
+   "type": "revolute",
+   "parent": "a71_inner_part",
+   "child": "a81_motor_shaft",
+   "origin": {
+    "xyz": [
+     -0.0415,
+     -0.048,
+     0.026
+    ],
+    "rpy": [
+     -2.25926e-15,
+     5.61727e-19,
+     -1.21612e-16
+    ]
+   },
+   "axis": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "limit": {
+    "lower": -0.785398,
+    "upper": 0.785398
+   }
+  },
+  {
+   "name": "revolute_1",
+   "type": "revolute",
+   "parent": "d01_r_palm_right",
+   "child": "d13_r_thumb_rotator_right",
+   "origin": {
+    "xyz": [
+     -0.00469015,
+     -0.000880855,
+     0.0151698
+    ],
+    "rpy": [
+     -0.0607347,
+     -3.96467e-15,
+     3.95906e-14
+    ]
+   },
+   "axis": [
+    -0.228571,
+    0.0,
+    -0.973527
+   ],
+   "limit": {
+    "lower": 0.0,
+    "upper": 2.0944
+   }
+  },
+  {
+   "name": "revolute_1_1",
+   "type": "revolute",
+   "parent": "d01_l_palm_left",
+   "child": "d13_l_thumb_rotator_left",
+   "origin": {
+    "xyz": [
+     -0.0473098,
+     -0.0018,
+     0.0150884
+    ],
+    "rpy": [
+     -0.0680861,
+     0.0100846,
+     0.293983
+    ]
+   },
+   "axis": [
+    0.228571,
+    -0.0,
+    -0.973527
+   ],
+   "limit": {
+    "lower": -2.0944,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "rotate_forearm",
+   "type": "revolute",
+   "parent": "c36_elbow_lower_shell",
+   "child": "c09_central_rotator_connector",
+   "origin": {
+    "xyz": [
+     -0.033,
+     0.021,
+     -0.067
+    ],
+    "rpy": [
+     1.5708,
+     2.231366e-16,
+     2.257363e-15
+    ]
+   },
+   "axis": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "rotate_forearm_1",
+   "type": "revolute",
+   "parent": "c36_elbow_lower_shell_1",
+   "child": "c09_central_rotator_connector_3",
+   "origin": {
+    "xyz": [
+     0.033,
+     0.021,
+     -0.067
+    ],
+    "rpy": [
+     1.5708,
+     1.70445e-15,
+     -6.346595e-15
+    ]
+   },
+   "axis": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "rotation_elbow",
+   "type": "revolute",
+   "parent": "c09_central_rotator_connector_1",
+   "child": "c36_elbow_lower_shell",
+   "origin": {
+    "xyz": [
+     0.033,
+     -0.0979999229,
+     0.0210002737
+    ],
+    "rpy": [
+     -2.7489,
+     -1.45535004e-15,
+     2.33552911e-15
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.1781,
+    "upper": 1.1781
+   }
+  },
+  {
+   "name": "rotation_elbow_1",
+   "type": "revolute",
+   "parent": "c09_central_rotator_connector_2",
+   "child": "c36_elbow_lower_shell_1",
+   "origin": {
+    "xyz": [
+     -0.033,
+     -0.0979999229,
+     0.0210002949
+    ],
+    "rpy": [
+     -2.74889,
+     -1.12326721e-17,
+     7.0419652e-12
+    ]
+   },
+   "axis": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "limit": {
+    "lower": -1.1781,
+    "upper": 1.1781
+   }
+  },
+  {
+   "name": "rotation_inner_shoulder",
+   "type": "continuous",
+   "parent": "root",
+   "child": "c64_motor_axis_cap_inner_shoulder_1",
+   "origin": {
+    "xyz": [
+     0.087,
+     0.106,
+     -0.2836
+    ],
+    "rpy": [
+     3.14159,
+     7.65526678e-19,
+     5.6405998e-17
+    ]
+   },
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "limit": null
+  },
+  {
+   "name": "rotation_inner_shoulder_1",
+   "type": "continuous",
+   "parent": "root",
+   "child": "c64_motor_axis_cap_inner_shoulder",
+   "origin": {
+    "xyz": [
+     -0.235,
+     0.106000177,
+     -0.2836
+    ],
+    "rpy": [
+     3.14159,
+     8.60300059e-17,
+     3.14159
+    ]
+   },
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "limit": null
+  },
+  {
+   "name": "rotation_shoulder_left",
+   "type": "revolute",
+   "parent": "c64_motor_axis_cap_inner_shoulder",
+   "child": "c69_inner_part_outer_shoulder",
+   "origin": {
+    "xyz": [
+     0.0649,
+     1.3664323e-07,
+     -0.0372
+    ],
+    "rpy": [
+     1.57079633,
+     3.6732051e-06,
+     -1.5708
+    ]
+   },
+   "axis": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "rotation_shoulder_left_1",
+   "type": "revolute",
+   "parent": "c64_motor_axis_cap_inner_shoulder_1",
+   "child": "c69_inner_part_outer_shoulder_1",
+   "origin": {
+    "xyz": [
+     0.0649,
+     1.36643228e-07,
+     -0.0372
+    ],
+    "rpy": [
+     1.57079633,
+     3.6732051e-06,
+     -1.5708
+    ]
+   },
+   "axis": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "rotation_wrist_right",
+   "type": "continuous",
+   "parent": "c09_central_rotator_connector",
+   "child": "d01_r_palm_right",
+   "origin": {
+    "xyz": [
+     -9.55033323e-08,
+     -0.1704,
+     0.026
+    ],
+    "rpy": [
+     -1.57079265,
+     -1.57079265,
+     -3.14159265
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": null
+  },
+  {
+   "name": "upper_door_rotation",
+   "type": "revolute",
+   "parent": "root",
+   "child": "b44_electronics_back",
+   "origin": {
+    "xyz": [
+     -0.034,
+     0.1912188,
+     -0.4078
+    ],
+    "rpy": [
+     1.5708,
+     6.12323e-17,
+     2.77717e-26
+    ]
+   },
+   "axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": 0.0,
+    "upper": 1.5708
+   }
+  },
+  {
+   "name": "d54_finger_distal_1_hinge",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_1",
+   "child": "d54_finger_distal_1",
+   "origin": {
+    "xyz": [
+     -1.66533454e-16,
+     -0.00404979,
+     0.0310502
+    ],
+    "rpy": [
+     -3.07392844e-13,
+     3.30710726e-16,
+     -1.94336372e-16
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d54_finger_distal_2_hinge",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_2",
+   "child": "d54_finger_distal_2",
+   "origin": {
+    "xyz": [
+     -6.76542156e-17,
+     -0.0042146021,
+     0.0312206928
+    ],
+    "rpy": [
+     -0.0338779,
+     -6.35679851e-15,
+     1.1749563e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d54_finger_distal_3_hinge",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_3",
+   "child": "d54_finger_distal_3",
+   "origin": {
+    "xyz": [
+     -2.42861287e-17,
+     -0.00404979,
+     0.0310502
+    ],
+    "rpy": [
+     -1.65585454e-13,
+     -1.18394457e-15,
+     4.38805138e-15
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d54_finger_distal_4_hinge",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_4",
+   "child": "d54_finger_distal_4",
+   "origin": {
+    "xyz": [
+     7.11236625e-17,
+     -0.00405428982,
+     0.0310548551
+    ],
+    "rpy": [
+     -0.00091984,
+     3.00147961e-15,
+     -1.54368909e-15
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d54_finger_distal_6_hinge",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_6",
+   "child": "d54_finger_distal_6",
+   "origin": {
+    "xyz": [
+     -1.61329283e-16,
+     -0.00405463909,
+     0.0310552052
+    ],
+    "rpy": [
+     -0.00099051,
+     -3.26400585e-15,
+     1.03063732e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d54_finger_distal_7_hinge",
+   "type": "revolute",
+   "parent": "d52_finger_proximal_7",
+   "child": "d54_finger_distal_7",
+   "origin": {
+    "xyz": [
+     -8.34401992e-16,
+     -0.004049739,
+     0.0310503
+    ],
+    "rpy": [
+     -3.69074e-11,
+     -3.8105992e-15,
+     1.25934984e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d55_finger_tip_5_hinge",
+   "type": "revolute",
+   "parent": "d54_finger_distal_5",
+   "child": "d55_finger_tip_5",
+   "origin": {
+    "xyz": [
+     -2.3279989e-15,
+     -0.00405197581,
+     0.0260525368
+    ],
+    "rpy": [
+     -0.000451796,
+     -2.78787088e-14,
+     -1.92981533e-14
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d58_thumb_tip_hinge",
+   "type": "revolute",
+   "parent": "d57_thumb_proximal",
+   "child": "d58_thumb_tip",
+   "origin": {
+    "xyz": [
+     1.53653079e-08,
+     -0.00360412384,
+     0.0399448339
+    ],
+    "rpy": [
+     -0.0333616,
+     2.15989141e-14,
+     -4.28441465e-15
+    ]
+   },
+   "axis": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "d58_thumb_tip_1_hinge",
+   "type": "revolute",
+   "parent": "d57_thumb_proximal_1",
+   "child": "d58_thumb_tip_1",
+   "origin": {
+    "xyz": [
+     -1.53653414e-08,
+     -0.00347834078,
+     0.0398135133
+    ],
+    "rpy": [
+     -0.0087744,
+     1.60317917e-14,
+     -1.52149696e-14
+    ]
+   },
+   "axis": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "limit": {
+    "lower": -1.5708,
+    "upper": 0.0
+   }
+  },
+  {
+   "name": "rotation_wrist_left",
+   "type": "continuous",
+   "parent": "c09_central_rotator_connector_3",
+   "child": "d01_l_palm_left",
+   "origin": {
+    "xyz": [
+     -9.55033327e-08,
+     -0.1704,
+     -0.026
+    ],
+    "rpy": [
+     -1.57079265,
+     1.57079265,
+     -3.14159265
+    ]
+   },
+   "axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "limit": null
+  }
+ ],
+ "stats": {
+  "links": 49,
+  "joints": 48,
+  "triangles": 2542604
+ }
+}

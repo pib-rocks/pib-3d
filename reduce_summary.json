@@ -1,0 +1,605 @@
+{
+ "source_joints": 360,
+ "source_links": 351,
+ "kept_joints": 48,
+ "welded_joints": 302,
+ "out_links": 49,
+ "groups": {
+  "a81_motor_shaft": {
+   "members": [
+    "a01_face",
+    "a02_face_neck_clamp",
+    "a03_face_plate",
+    "a04_l_head_side_left",
+    "a04_r_head_side_right",
+    "a05_mic_array_mounting_insert",
+    "a06_mic_array_knob",
+    "a81_motor_shaft",
+    "a82_neck_axis",
+    "a83_motor_adapter_neck"
+   ],
+   "mass": 0.7522
+  },
+  "a71_inner_part": {
+   "members": [
+    "a71_inner_part",
+    "a72_top_part",
+    "a73_cover_neck"
+   ],
+   "mass": 0.2694
+  },
+  "root": {
+   "members": [
+    "a75_l_neck_left",
+    "a75_r_neck_right",
+    "a76_neck_middle",
+    "b",
+    "b25_wire_connector",
+    "b25_wire_connector_1",
+    "b25_wire_connector_10",
+    "b25_wire_connector_11",
+    "b25_wire_connector_2",
+    "b25_wire_connector_3",
+    "b25_wire_connector_4",
+    "b25_wire_connector_5",
+    "b25_wire_connector_6",
+    "b25_wire_connector_7",
+    "b25_wire_connector_8",
+    "b25_wire_connector_9",
+    "b27_wire_connector_mount",
+    "b27_wire_connector_mount_1",
+    "b27_wire_connector_mount_10",
+    "b27_wire_connector_mount_11",
+    "b27_wire_connector_mount_2",
+    "b27_wire_connector_mount_3",
+    "b27_wire_connector_mount_4",
+    "b27_wire_connector_mount_5",
+    "b27_wire_connector_mount_6",
+    "b27_wire_connector_mount_7",
+    "b27_wire_connector_mount_8",
+    "b27_wire_connector_mount_9",
+    "b41_l_clavicle_left",
+    "b41_r_clavicle_right",
+    "b42_l_ribcage_left",
+    "b42_r_ribcage_right",
+    "b43_l_ribcage_lower_left",
+    "b43_r_ribcage_lower_right",
+    "b47_power_holder",
+    "b48_hinge",
+    "b48_hinge_1",
+    "b48_hinge_2",
+    "b48_hinge_3",
+    "b55_logo_plate_5_educational__1_",
+    "b57_printed_washer_relay",
+    "b57_printed_washer_relay_1",
+    "b58_button_scaffold",
+    "b62_wire_connector_knob_thumb_opposition",
+    "b62_wire_connector_knob_thumb_opposition_1",
+    "b63_wire_connector_knob_thumb_stretch",
+    "b63_wire_connector_knob_thumb_stretch_1",
+    "b64_wire_connector_knob_finger_stretch_ccw",
+    "b64_wire_connector_knob_finger_stretch_ccw_1",
+    "b65_wire_connector_knob_finger_stretch_cw",
+    "b65_wire_connector_knob_finger_stretch_cw_1",
+    "b65_wire_connector_knob_finger_stretch_cw_2",
+    "b65_wire_connector_knob_finger_stretch_cw_3",
+    "b65_wire_connector_knob_finger_stretch_cw_4",
+    "b65_wire_connector_knob_finger_stretch_cw_5",
+    "b66_body_neck_position",
+    "b66_body_neck_position_1",
+    "b67_slicky__10_",
+    "b67_slicky__11_",
+    "b67_slicky__12_",
+    "b67_slicky__13_",
+    "b67_slicky__14_",
+    "b67_slicky__15_",
+    "b67_slicky__16_",
+    "b67_slicky__17_",
+    "b67_slicky__18_",
+    "b67_slicky__19_",
+    "b67_slicky__1_",
+    "b67_slicky__20_",
+    "b67_slicky__21_",
+    "b67_slicky__22_",
+    "b67_slicky__23_",
+    "b67_slicky__24_",
+    "b67_slicky__25_",
+    "b67_slicky__26_",
+    "b67_slicky__2_",
+    "b67_slicky__3_",
+    "b67_slicky__4_",
+    "b67_slicky__5_",
+    "b67_slicky__6_",
+    "b67_slicky__7_",
+    "b67_slicky__8_",
+    "b67_slicky__9_",
+    "c51_wire_protector_servo_array_scaffold",
+    "c51_wire_protector_servo_array_scaffold_1",
+    "c52_servo_tube_cover",
+    "c52_servo_tube_cover_1",
+    "c60_flange_inner_shoulder",
+    "c60_flange_inner_shoulder_1",
+    "c60l_servo_array_scaffold_left",
+    "c60r_servo_array_scaffold_right",
+    "c61_motor_bracket_inner_shoulder",
+    "c61_motor_bracket_inner_shoulder_1",
+    "c62_ringflange_inner_shoulder",
+    "c62_ringflange_inner_shoulder_1",
+    "dot",
+    "i_major",
+    "i_minor",
+    "p",
+    "root"
+   ],
+   "mass": 6.5969
+  },
+  "b44_electronics_back": {
+   "members": [
+    "b44_electronics_back",
+    "b49_hinge_plate_2",
+    "b49_hinge_plate_3"
+   ],
+   "mass": 0.0966
+  },
+  "b46_power_back": {
+   "members": [
+    "b46_power_back",
+    "b49_hinge_plate",
+    "b49_hinge_plate_1"
+   ],
+   "mass": 0.1982
+  },
+  "c09_central_rotator_connector": {
+   "members": [
+    "c09_central_rotator_connector",
+    "c15_central_rotator_motor_connector",
+    "c18r_forearm_distal_lock_right",
+    "c19r_forearm_distal_top_right",
+    "d31_hand_wrist_connector",
+    "d31_hand_wrist_connector_1"
+   ],
+   "mass": 0.3177
+  },
+  "c09_central_rotator_connector_1": {
+   "members": [
+    "c09_central_rotator_connector_1",
+    "c31_elbow_shaft_motor",
+    "c32_elbow_axis_cable",
+    "c35l_elbow_clamp_left",
+    "c35r_elbow_clamp_right",
+    "c39_elbow_upper_shell",
+    "c40_elbow_upper_shell_lock",
+    "c73_wire_holder_pin",
+    "c74_wire_holder",
+    "c77_central_rotator_motor_connector_shoulder"
+   ],
+   "mass": 0.5243
+  },
+  "c09_central_rotator_connector_2": {
+   "members": [
+    "c09_central_rotator_connector_2",
+    "c31_elbow_shaft_motor_1",
+    "c32_elbow_axis_cable_1",
+    "c35l_elbow_clamp_left_1",
+    "c35r_elbow_clamp_right_1",
+    "c39_elbow_upper_shell_1",
+    "c40_elbow_upper_shell_lock_1",
+    "c73_wire_holder_pin_3",
+    "c74_wire_holder_3",
+    "c77_central_rotator_motor_connector_shoulder_1"
+   ],
+   "mass": 0.5243
+  },
+  "c09_central_rotator_connector_3": {
+   "members": [
+    "c09_central_rotator_connector_3",
+    "c15_central_rotator_motor_connector_1",
+    "c18l_forearm_distal_lock_left",
+    "c19l_forearm_distal_top_left",
+    "d31_hand_wrist_connector_2",
+    "d31_hand_wrist_connector_3"
+   ],
+   "mass": 0.3177
+  },
+  "c25_forearm_disc_bottom": {
+   "members": [
+    "c25_forearm_disc_bottom",
+    "c26_forearm_disc_top",
+    "c27_forearm_bearing_distance_ring",
+    "c28_forearm_bearing_center",
+    "c30_forearm_bar"
+   ],
+   "mass": 0.0198
+  },
+  "c25_forearm_disc_bottom_1": {
+   "members": [
+    "c25_forearm_disc_bottom_1",
+    "c26_forearm_disc_top_1",
+    "c27_forearm_bearing_distance_ring_1",
+    "c28_forearm_bearing_center_1",
+    "c30_forearm_bar_1"
+   ],
+   "mass": 0.0198
+  },
+  "d01_r_palm_right": {
+   "members": [
+    "c30_forearm_bar__1__loop_closure",
+    "cylindrical_1_loop_closure",
+    "d01_r_palm_right",
+    "d11_r_bearing_enclosure_right",
+    "d30_r_cover_hand_right",
+    "d50_finger_palm_connection",
+    "d50_finger_palm_connection_1",
+    "d50_finger_palm_connection_2",
+    "d50_finger_palm_connection_3",
+    "d51_coupling_bar_proximal",
+    "d51_coupling_bar_proximal_1",
+    "d51_coupling_bar_proximal_2",
+    "d51_coupling_bar_proximal_3",
+    "d54_finger_distal__1__loop_closure_6",
+    "d59_palm_connection_skin",
+    "d59_palm_connection_skin_1",
+    "d59_palm_connection_skin_2",
+    "d59_palm_connection_skin_3",
+    "d65_r_palm_skin_right",
+    "j5",
+    "j5_1",
+    "j5_2",
+    "j5_loop_closure"
+   ],
+   "mass": 0.2058
+  },
+  "d01_l_palm_left": {
+   "members": [
+    "c30_forearm_bar__1__loop_closure_1",
+    "cylindrical_1_loop_closure_1",
+    "d01_l_palm_left",
+    "d11_l_bearing_enclosure_left",
+    "d30_l_cover_hand_left",
+    "d50_finger_palm_connection_4",
+    "d50_finger_palm_connection_5",
+    "d50_finger_palm_connection_6",
+    "d50_finger_palm_connection_7",
+    "d51_coupling_bar_proximal_4",
+    "d51_coupling_bar_proximal_5",
+    "d51_coupling_bar_proximal_6",
+    "d51_coupling_bar_proximal_7",
+    "d54_finger_distal__1__loop_closure_5",
+    "d59_palm_connection_skin_4",
+    "d59_palm_connection_skin_5",
+    "d59_palm_connection_skin_6",
+    "d59_palm_connection_skin_7",
+    "d65_l_palm_skin_left",
+    "j5_3",
+    "j5_4",
+    "j5_5",
+    "j5_loop_closure_1"
+   ],
+   "mass": 0.2058
+  },
+  "c36_elbow_lower_shell": {
+   "members": [
+    "c33_elbow_motor_flange",
+    "c34_elbow_motor_connection",
+    "c36_elbow_lower_shell",
+    "c37_elbow_rotator_bracket",
+    "c38_elbow_cover",
+    "c41_elbow_central_motor_flange"
+   ],
+   "mass": 0.3846
+  },
+  "c36_elbow_lower_shell_1": {
+   "members": [
+    "c33_elbow_motor_flange_1",
+    "c34_elbow_motor_connection_1",
+    "c36_elbow_lower_shell_1",
+    "c37_elbow_rotator_bracket_1",
+    "c38_elbow_cover_1",
+    "c41_elbow_central_motor_flange_1"
+   ],
+   "mass": 0.3846
+  },
+  "c64_motor_axis_cap_inner_shoulder": {
+   "members": [
+    "c63_motor_axis_inner_shoulder",
+    "c64_motor_axis_cap_inner_shoulder",
+    "c65_bracket_outer_shoulder",
+    "c65_bracket_outer_shoulder_1",
+    "c66_cap_front_outer_shoulder",
+    "c66_cap_front_outer_shoulder__1__loop_closure",
+    "c67_cap_back_outer_shoulder",
+    "c73_wire_holder_pin_1",
+    "c74_wire_holder_1",
+    "c75_front_bracket_outer_shoulder",
+    "c75_front_bracket_outer_shoulder_1"
+   ],
+   "mass": 0.6573
+  },
+  "c64_motor_axis_cap_inner_shoulder_1": {
+   "members": [
+    "c63_motor_axis_inner_shoulder_1",
+    "c64_motor_axis_cap_inner_shoulder_1",
+    "c65_bracket_outer_shoulder_2",
+    "c65_bracket_outer_shoulder_3",
+    "c66_cap_front_outer_shoulder_1",
+    "c66_cap_front_outer_shoulder__1__loop_closure_1",
+    "c67_cap_back_outer_shoulder_1",
+    "c73_wire_holder_pin_2",
+    "c74_wire_holder_2",
+    "c75_front_bracket_outer_shoulder_2",
+    "c75_front_bracket_outer_shoulder_3"
+   ],
+   "mass": 0.6573
+  },
+  "c69_inner_part_outer_shoulder": {
+   "members": [
+    "c68_inner_ring_outer_shoulder",
+    "c68_inner_ring_outer_shoulder_1",
+    "c69_inner_part_outer_shoulder",
+    "c70_shell_outer_shoulder",
+    "c72_plate_outer_shoulder",
+    "c72_plate_outer_shoulder_1",
+    "c76_shell_cap",
+    "c78_central_rotator_bracket_shoulder"
+   ],
+   "mass": 0.9738
+  },
+  "c69_inner_part_outer_shoulder_1": {
+   "members": [
+    "c68_inner_ring_outer_shoulder_2",
+    "c68_inner_ring_outer_shoulder_3",
+    "c69_inner_part_outer_shoulder_1",
+    "c70_shell_outer_shoulder_1",
+    "c72_plate_outer_shoulder_2",
+    "c72_plate_outer_shoulder_3",
+    "c76_shell_cap_1",
+    "c78_central_rotator_bracket_shoulder_1"
+   ],
+   "mass": 0.9738
+  },
+  "d13_r_thumb_rotator_right": {
+   "members": [
+    "cylindrical_1",
+    "d13_r_thumb_rotator_right",
+    "d56_coupling_bar_thumb"
+   ],
+   "mass": 0.0135
+  },
+  "d13_l_thumb_rotator_left": {
+   "members": [
+    "cylindrical_1_1",
+    "d13_l_thumb_rotator_left",
+    "d56_coupling_bar_thumb_1"
+   ],
+   "mass": 0.0135
+  },
+  "d52_finger_proximal": {
+   "members": [
+    "d52_finger_proximal",
+    "d53_coupling_bar_distal",
+    "d58_thumb_tip__1__loop_closure_8",
+    "d60_proximal_skin",
+    "j7_loop_closure"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_1": {
+   "members": [
+    "d52_finger_proximal_1",
+    "d53_coupling_bar_distal_1",
+    "d54_finger_distal__1__loop_closure_3",
+    "d58_thumb_tip__1__loop_closure_6",
+    "d60_proximal_skin_1",
+    "j7_loop_closure_1"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_2": {
+   "members": [
+    "d52_finger_proximal_2",
+    "d53_coupling_bar_distal_2",
+    "d54_finger_distal__1__loop_closure",
+    "d58_thumb_tip__1__loop_closure",
+    "d60_proximal_skin_2",
+    "j7_loop_closure_3"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_3": {
+   "members": [
+    "d52_finger_proximal_3",
+    "d53_coupling_bar_distal_3",
+    "d54_finger_distal__1__loop_closure_1",
+    "d58_thumb_tip__1__loop_closure_1",
+    "d60_proximal_skin_3",
+    "j7_loop_closure_2"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_4": {
+   "members": [
+    "d52_finger_proximal_4",
+    "d53_coupling_bar_distal_4",
+    "d54_finger_distal__1__loop_closure_2",
+    "d58_thumb_tip__1__loop_closure_9",
+    "d60_proximal_skin_4",
+    "j7_loop_closure_4"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_5": {
+   "members": [
+    "d52_finger_proximal_5",
+    "d53_coupling_bar_distal_5",
+    "d60_proximal_skin_5",
+    "j7"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_6": {
+   "members": [
+    "d52_finger_proximal_6",
+    "d53_coupling_bar_distal_6",
+    "d54_finger_distal__1__loop_closure_7",
+    "d58_thumb_tip__1__loop_closure_2",
+    "d60_proximal_skin_6",
+    "j7_loop_closure_6"
+   ],
+   "mass": 0.0143
+  },
+  "d52_finger_proximal_7": {
+   "members": [
+    "d52_finger_proximal_7",
+    "d53_coupling_bar_distal_7",
+    "d54_finger_distal__1__loop_closure_4",
+    "d58_thumb_tip__1__loop_closure_4",
+    "d60_proximal_skin_7",
+    "j7_loop_closure_5"
+   ],
+   "mass": 0.0143
+  },
+  "d54_finger_distal": {
+   "members": [
+    "d54_finger_distal",
+    "d61_distal_skin"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_1": {
+   "members": [
+    "d54_finger_distal_1",
+    "d61_distal_skin_1"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_2": {
+   "members": [
+    "d54_finger_distal_2",
+    "d61_distal_skin_2"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_3": {
+   "members": [
+    "d54_finger_distal_3",
+    "d61_distal_skin_3"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_4": {
+   "members": [
+    "d54_finger_distal_4",
+    "d61_distal_skin_4"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_5": {
+   "members": [
+    "d54_finger_distal_5",
+    "d58_thumb_tip__1__loop_closure_3",
+    "d61_distal_skin_5"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_6": {
+   "members": [
+    "d54_finger_distal_6",
+    "d61_distal_skin_6"
+   ],
+   "mass": 0.0105
+  },
+  "d54_finger_distal_7": {
+   "members": [
+    "d54_finger_distal_7",
+    "d61_distal_skin_7"
+   ],
+   "mass": 0.0105
+  },
+  "d55_finger_tip": {
+   "members": [
+    "d55_finger_tip",
+    "d62_tip_skin"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_1": {
+   "members": [
+    "d55_finger_tip_1",
+    "d62_tip_skin_1"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_2": {
+   "members": [
+    "d55_finger_tip_2",
+    "d62_tip_skin_2"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_3": {
+   "members": [
+    "d55_finger_tip_3",
+    "d62_tip_skin_3"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_4": {
+   "members": [
+    "d55_finger_tip_4",
+    "d62_tip_skin_4"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_5": {
+   "members": [
+    "d55_finger_tip_5",
+    "d62_tip_skin_5"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_6": {
+   "members": [
+    "d55_finger_tip_6",
+    "d62_tip_skin_6"
+   ],
+   "mass": 0.005
+  },
+  "d55_finger_tip_7": {
+   "members": [
+    "d55_finger_tip_7",
+    "d62_tip_skin_7"
+   ],
+   "mass": 0.005
+  },
+  "d57_thumb_proximal": {
+   "members": [
+    "d57_thumb_proximal",
+    "d58_thumb_tip__1__loop_closure_5",
+    "d63_thumb_proximal_skin"
+   ],
+   "mass": 0.0187
+  },
+  "d57_thumb_proximal_1": {
+   "members": [
+    "d57_thumb_proximal_1",
+    "d58_thumb_tip__1__loop_closure_7",
+    "d63_thumb_proximal_skin_1"
+   ],
+   "mass": 0.0187
+  },
+  "d58_thumb_tip": {
+   "members": [
+    "d58_thumb_tip",
+    "d64_thumb_tip_skin"
+   ],
+   "mass": 0.0145
+  },
+  "d58_thumb_tip_1": {
+   "members": [
+    "d58_thumb_tip_1",
+    "d64_thumb_tip_skin_1"
+   ],
+   "mass": 0.0145
+  }
+ }
+}
