@@ -10,3 +10,8 @@ __pycache__/
 # editor / OS noise
 .DS_Store
 *.swp
+
+# node + build output of the viewer package
+node_modules/
+packages/robot-view/dist/
+web/demo.js
