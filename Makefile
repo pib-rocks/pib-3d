@@ -17,7 +17,7 @@ verify:
 
 reproduce:
 	$(PY) tools/urdf_reduce.py --out /tmp/pib.control.urdf
-	cmp /tmp/pib.control.urdf urdf/pib.control.urdf
+	$(PY) tools/compare_urdf.py /tmp/pib.control.urdf urdf/pib.control.urdf
 
 check-meshes:
 	$(PY) tools/check_meshes.py

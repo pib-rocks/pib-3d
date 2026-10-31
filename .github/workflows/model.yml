@@ -24,7 +24,7 @@ jobs:
       - name: committed URDF is reproducible
         run: |
           python tools/urdf_reduce.py --out /tmp/pib.control.urdf
-          cmp /tmp/pib.control.urdf urdf/pib.control.urdf
+          python tools/compare_urdf.py /tmp/pib.control.urdf urdf/pib.control.urdf
 
       - name: meshes resolve
         run: python tools/check_meshes.py

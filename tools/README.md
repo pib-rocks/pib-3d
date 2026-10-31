@@ -7,6 +7,7 @@ a new export can be processed again without hand work.
 python3 tools/urdf_reduce.py       # urdf/pib.urdf      -> urdf/pib.control.urdf
 python3 tools/urdf_verify.py       # compares both, prints PASS/FAIL
 python3 tools/check_meshes.py      # every mesh reference resolves, none unused
+python3 tools/compare_urdf.py a.urdf b.urdf   # structure exact, numbers to 1e-9
 python3 tools/build_web_assets.py  # urdf -> web/model.json + web/meshes/*.glb
 python3 tools/visibility_bake.py   # ray-casts the model -> docs/visibility.json
 python3 tools/urdf_tree.py         # draws docs/pib.control.tree.png
