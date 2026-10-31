@@ -33,9 +33,9 @@ export const SHADOW_STYLES = `
   button:hover { background: #30363d; border-color: #484f58; }
   button.on { background: #1f6feb; border-color: #388bfd; }
 
-  #guard { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
+  #guard, #live-stale { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
     border-radius: 6px; background: #2d2103; color: #e3b341; font-size: 11px; line-height: 1.5; }
-  #guard.on { display: block; }
+  #guard.on, #live-stale.on { display: block; }
   #joints { overflow-y: auto; padding: 4px 12px 16px; flex: 1; }
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
@@ -52,7 +52,20 @@ export const SHADOW_STYLES = `
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff; min-width: 62px;
     text-align: right; }
-  .j input[type=range] { width: 100%; margin: 3px 0 0; height: 14px; accent-color: #1f6feb; }
+  .j .slider { position: relative; margin: 3px 0 0; }
+  .j .track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px;
+    background: #21262d; border-radius: 2px; pointer-events: none; overflow: hidden; }
+  .j .track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+    background: #1f6feb; border-radius: 2px; }
+  .j .track .mark.soll { position: absolute; top: -3px; width: 2px; height: 10px;
+    background: #e3b341; border-radius: 1px; display: none; transform: translateX(-1px); }
+  .j .track .mark.soll.on { display: block; }
+  .j .cmd-delta { display: none; font-size: 10px; color: #8b949e; text-align: right; margin-top: 2px; }
+  .j .cmd-delta.on { display: block; }
+  .j input[type=range] { width: 100%; margin: 0; height: 14px; accent-color: transparent;
+    background: transparent; position: relative; z-index: 1; }
+  .j input[type=range]::-webkit-slider-runnable-track { background: transparent; }
+  .j input[type=range]::-moz-range-track { background: transparent; }
   .j.active { border-left: 2px solid #1f6feb; margin-left: -8px; padding-left: 6px; }
   .j.active .name { color: #79c0ff; }
   .j input[type=range]:focus { outline: 1px solid #388bfd; outline-offset: 3px; border-radius: 2px; }
@@ -103,6 +116,7 @@ export const SHADOW_HTML = `
           <button type="button" data-action="spin">Drehen</button>
         </div>
         <div id="guard" hidden></div>
+        <div id="live-stale" hidden></div>
         <div id="joints"></div>
         <div id="info">
           <div class="irow"><span>Bauteil</span><b id="info-link">–</b></div>

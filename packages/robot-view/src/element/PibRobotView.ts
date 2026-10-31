@@ -17,6 +17,11 @@ import {
   type ValidationResult,
   type JointMappingEntry,
 } from '../joints/mapping.js';
+import {
+  LiveJointInterpolator,
+  resolveJointStateMap,
+  type JointStateSample,
+} from '../joints/liveState.js';
 import { buildJointPanel, midPoseValue, type JointPanelHandles } from '../joints/panel.js';
 import { applyJointValue } from '../joints/math.js';
 import { wirePicking } from '../interaction/picking.js';
@@ -63,6 +68,11 @@ export class PibRobotView extends HTMLElement {
   private _lastCommandBlockReason: string | null = null;
   private _showControls = true;
   private motionByJoint = new Map<string, MotionEntry>();
+  private _commandedStates: Record<string, number> = {};
+  private _staleAfterMs = 500;
+  private _stale = false;
+  private staleTimer: ReturnType<typeof setTimeout> | null = null;
+  private liveInterp: LiveJointInterpolator | null = null;
 
   constructor() {
     super();
@@ -127,8 +137,25 @@ export class PibRobotView extends HTMLElement {
     return { ...this._jointStates };
   }
   set jointStates(map: Record<string, number>) {
-    this._jointStates = { ...map };
-    this.applyJointStates('api');
+    this.setJointStates(map);
+  }
+
+  get commandedStates(): Record<string, number> {
+    return { ...this._commandedStates };
+  }
+  set commandedStates(map: Record<string, number>) {
+    this.setCommandedStates(map);
+  }
+
+  get staleAfterMs(): number {
+    return this._staleAfterMs;
+  }
+  set staleAfterMs(ms: number) {
+    this._staleAfterMs = Math.max(0, ms);
+  }
+
+  get stale(): boolean {
+    return this._stale;
   }
 
   get mode(): ViewerMode {
@@ -162,8 +189,27 @@ export class PibRobotView extends HTMLElement {
   }
 
   setJointStates(map: Record<string, number>): void {
-    this._jointStates = { ...map };
+    this._jointStates = this._mapping ? resolveJointStateMap(map, this._mapping) : { ...map };
     this.applyJointStates('api');
+  }
+
+  setCommandedStates(map: Record<string, number>): void {
+    this._commandedStates = this._mapping ? resolveJointStateMap(map, this._mapping) : { ...map };
+    this.syncCommandedPanel();
+  }
+
+  setJointStateSample(sample: JointStateSample): void {
+    if (!this._mapping || this.disposed) return;
+    if (!this.liveInterp) {
+      this.liveInterp = new LiveJointInterpolator(
+        (values) => this.applyLiveFrame(values),
+        (unknown) => this.emitLiveUnknown(unknown),
+      );
+      this.liveInterp.seedDisplay(this._jointStates);
+    }
+    const { dropped } = this.liveInterp.pushSample(sample, this._mapping);
+    if (dropped) return;
+    this.armStaleTimer();
   }
 
   setJoint(name: string, radians: number): void {
@@ -238,6 +284,9 @@ export class PibRobotView extends HTMLElement {
     this.panel = null;
     this._mapping = null;
     this._mappingValidation = null;
+    this.clearStaleTimer();
+    this.liveInterp?.dispose();
+    this.liveInterp = null;
   }
 
   private initScene(): void {
@@ -500,6 +549,67 @@ export class PibRobotView extends HTMLElement {
         this.emitJointChange(name, radians, 'api');
       }
     }
+  }
+
+  private applyLiveFrame(values: Record<string, number>): void {
+    for (const [name, radians] of Object.entries(values)) {
+      this._jointStates[name] = radians;
+      const m = this.motionByJoint.get(name);
+      if (!m) continue;
+      applyJointValue(m.joint, m.motion, m.axis, radians);
+      this.panel?.setJointUi(name, radians);
+    }
+    this.onDemand?.requestRender();
+  }
+
+  private syncCommandedPanel(): void {
+    if (!this.panel) return;
+    const driven = new Set(
+      this._mapping?.joints.filter((e) => e.class === 'driven').map((e) => e.urdfJoint) ?? [],
+    );
+    for (const name of driven) {
+      const v = this._commandedStates[name];
+      this.panel.setCommandedJoint(name, v ?? null);
+    }
+    this.onDemand?.requestRender();
+  }
+
+  private armStaleTimer(): void {
+    this.clearStaleTimer(false);
+    this.setStaleFlag(false);
+    if (this._staleAfterMs <= 0) return;
+    this.staleTimer = setTimeout(() => this.setStaleFlag(true), this._staleAfterMs);
+  }
+
+  private clearStaleTimer(clearBanner = true): void {
+    if (this.staleTimer != null) {
+      clearTimeout(this.staleTimer);
+      this.staleTimer = null;
+    }
+    if (clearBanner) this.setStaleFlag(false);
+  }
+
+  private setStaleFlag(value: boolean): void {
+    if (this._stale === value) return;
+    this._stale = value;
+    this.panel?.setStaleBanner(
+      value,
+      value
+        ? `Live-Gelenkzustand veraltet — seit über ${this._staleAfterMs} ms keine neuen Messwerte.`
+        : undefined,
+    );
+  }
+
+  private emitLiveUnknown(motors: string[]): void {
+    const message = `Unbekannte Motoren in JointState: ${motors.join(', ')}`;
+    console.warn(message);
+    this.dispatchEvent(
+      new CustomEvent('livejointunknown', {
+        bubbles: true,
+        composed: true,
+        detail: { motors },
+      }),
+    );
   }
 
   private emitJointChange(joint: string, value: number, source: JointChangeSource): void {

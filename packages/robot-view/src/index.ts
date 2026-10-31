@@ -36,3 +36,10 @@ export type {
   ValidationResult,
   LoadMappingResult,
 } from './joints/mapping.js';
+export type { JointStateSample } from './joints/liveState.js';
+export {
+  sampleToModelJoints,
+  resolveJointStateMap,
+  mappingByMotor,
+  LiveJointInterpolator,
+} from './joints/liveState.js';
