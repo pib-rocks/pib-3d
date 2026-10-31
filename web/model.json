@@ -1,6 +1,6 @@
 {
  "name": "pib",
- "build": "816788a565c8",
+ "build": "0770fee55b36",
  "links": [
   {
    "name": "a81_motor_shaft",
@@ -205,28 +205,6 @@
     "c19l_forearm_distal_top_left",
     "d31_hand_wrist_connector_2",
     "d31_hand_wrist_connector_3"
-   ]
-  },
-  {
-   "name": "c25_forearm_disc_bottom",
-   "mesh": "meshes/c25_forearm_disc_bottom.glb",
-   "parts": [
-    "c25_forearm_disc_bottom",
-    "c26_forearm_disc_top",
-    "c27_forearm_bearing_distance_ring",
-    "c28_forearm_bearing_center",
-    "c30_forearm_bar"
-   ]
-  },
-  {
-   "name": "c25_forearm_disc_bottom_1",
-   "mesh": "meshes/c25_forearm_disc_bottom_1.glb",
-   "parts": [
-    "c25_forearm_disc_bottom_1",
-    "c26_forearm_disc_top_1",
-    "c27_forearm_bearing_distance_ring_1",
-    "c28_forearm_bearing_center_1",
-    "c30_forearm_bar_1"
    ]
   },
   {
@@ -1935,8 +1913,8 @@
   }
  ],
  "stats": {
-  "links": 49,
+  "links": 47,
   "joints": 48,
-  "triangles": 2404010
+  "triangles": 1575930
  }
 }
