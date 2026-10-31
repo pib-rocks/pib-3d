@@ -37,6 +37,23 @@ describe('jointchange event payload', () => {
       model,
       parentOf: new Map([[joint.child, joint.parent]]),
       motions,
+      mappingByJoint: new Map([
+        [
+          joint.name,
+          {
+            urdfJoint: joint.name,
+            motor: 'elbow_right',
+            class: 'driven',
+            type: 'revolute',
+            direction: 1,
+            gearRatio: 1,
+            zeroOffsetDeg: 0,
+            limitsRad: [-1.5, 1.5],
+            axisDot: 1,
+            verifiedOnHardware: false,
+          },
+        ],
+      ]),
       onJointChange: (name, value) => events.push({ joint: name, value, source: 'ui' }),
       onRequestRender: () => {},
     });
