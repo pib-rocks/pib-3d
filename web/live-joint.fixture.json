@@ -1,0 +1,27 @@
+{
+  "description": "Synthetic 20 Hz joint_states snippet for ?demo=live (motor names, radians)",
+  "hz": 20,
+  "samples": [
+    { "stampMs": 0, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0, 0] },
+    { "stampMs": 50, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.05, 0.02] },
+    { "stampMs": 100, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.1, 0.04] },
+    { "stampMs": 150, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.15, 0.06] },
+    { "stampMs": 200, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.2, 0.08] },
+    { "stampMs": 250, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.25, 0.1] },
+    { "stampMs": 300, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.3, 0.12] },
+    { "stampMs": 350, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.35, 0.14] },
+    { "stampMs": 400, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.4, 0.16] },
+    { "stampMs": 450, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.45, 0.18] },
+    { "stampMs": 500, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.5, 0.2] },
+    { "stampMs": 550, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.45, 0.18] },
+    { "stampMs": 600, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.4, 0.16] },
+    { "stampMs": 650, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.35, 0.14] },
+    { "stampMs": 700, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.3, 0.12] },
+    { "stampMs": 750, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.25, 0.1] },
+    { "stampMs": 800, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.2, 0.08] },
+    { "stampMs": 850, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.15, 0.06] },
+    { "stampMs": 900, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.1, 0.04] },
+    { "stampMs": 950, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0.05, 0.02] },
+    { "stampMs": 1000, "names": ["turn_head_motor", "tilt_forward_motor"], "positions": [0, 0] }
+  ]
+}

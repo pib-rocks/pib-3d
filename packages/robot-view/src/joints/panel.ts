@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import type { MotionEntry, RobotModel, ViewerMode } from '../types.js';
 import { HEAD, LEFT_ARM, REGION_ORDER, RIGHT_ARM } from './regions.js';
 import {
@@ -18,6 +19,8 @@ export interface JointPanelHandles {
   jointsRoot: HTMLElement;
   setPose: (fn: (joint: RobotModel['joints'][0]) => number) => void;
   setJointUi: (jointName: string, radians: number) => void;
+  setCommandedJoint: (jointName: string, radians: number | null) => void;
+  setStaleBanner: (stale: boolean, message?: string) => void;
   getRow: (jointName: string) => HTMLElement | null;
   getInput: (jointName: string) => HTMLInputElement | null;
   applyMode: (requestedMode: ViewerMode, effectiveMode: ViewerMode) => void;
@@ -40,6 +43,44 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
   const motionByJoint = new Map(motions.map((m) => [m.joint.name, m]));
   let requestedMode: ViewerMode = 'preview';
   let effectiveMode: ViewerMode = 'preview';
+  const commanded = new Map<string, number>();
+
+  const pctOnTrack = (joint: RobotModel['joints'][0], radians: number): number => {
+    const [min, max] = uiRange(joint);
+    const ui = toUi(joint, radians);
+    if (max === min) return 0;
+    return Math.min(100, Math.max(0, ((ui - min) / (max - min)) * 100));
+  };
+
+  const updateTrackMarkers = (
+    joint: RobotModel['joints'][0],
+    row: HTMLElement,
+    actualRad: number,
+    commandedRad: number | null,
+  ) => {
+    const fill = row.querySelector('.track .fill.ist') as HTMLElement | null;
+    const soll = row.querySelector('.track .mark.soll') as HTMLElement | null;
+    const delta = row.querySelector('.cmd-delta') as HTMLElement | null;
+    if (fill) fill.style.width = `${pctOnTrack(joint, actualRad)}%`;
+    if (soll) {
+      if (commandedRad == null) {
+        soll.classList.remove('on');
+      } else {
+        soll.style.left = `${pctOnTrack(joint, commandedRad)}%`;
+        soll.classList.add('on');
+      }
+    }
+    if (delta) {
+      if (commandedRad == null) {
+        delta.classList.remove('on');
+        delta.textContent = '';
+      } else {
+        const deg = THREE.MathUtils.radToDeg(actualRad - commandedRad);
+        delta.textContent = `Δ ${deg >= 0 ? '+' : ''}${deg.toFixed(1)}° · Soll / Ist`;
+        delta.classList.add('on');
+      }
+    }
+  };
 
   const chainOf = (link: string): string[] => {
     const out: string[] = [];
@@ -93,16 +134,22 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
             <span class="val"></span>
           </div>
           ${motorLine}
-          <input type="range" min="${min}" max="${max}" step="1" value="0">`;
+          <div class="slider">
+            <div class="track"><span class="fill ist"></span><span class="mark soll" title="Soll"></span></div>
+            <input type="range" min="${min}" max="${max}" step="1" value="0">
+          </div>
+          <div class="cmd-delta"></div>`;
       jointsRoot.appendChild(wrap);
       const input = wrap.querySelector('input') as HTMLInputElement;
       const out = wrap.querySelector('.val') as HTMLElement;
       out.textContent = formatJointLabel(joint, 0);
+      updateTrackMarkers(joint, wrap, 0, null);
       input.addEventListener('input', () => {
         const ui = Number(input.value);
         const v = fromUi(joint, ui);
         applyJointValue(joint, m.motion, m.axis, v);
         out.textContent = formatJointLabel(joint, v);
+        updateTrackMarkers(joint, wrap, v, commanded.get(joint.name) ?? null);
         onJointChange(joint.name, v);
         onRequestRender();
       });
@@ -153,6 +200,37 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     const out = row?.querySelector('.val') as HTMLElement | null;
     if (input) input.value = String(toUi(m.joint, radians));
     if (out) out.textContent = formatJointLabel(m.joint, radians);
+    if (row) {
+      updateTrackMarkers(m.joint, row, radians, commanded.get(jointName) ?? null);
+    }
+  };
+
+  const setCommandedJoint = (jointName: string, radians: number | null) => {
+    const entry = mappingByJoint.get(jointName);
+    if (entry?.class !== 'driven') return;
+    if (radians == null) commanded.delete(jointName);
+    else commanded.set(jointName, radians);
+    const m = motionByJoint.get(jointName);
+    const row = getRow(jointName);
+    if (!m || !row) return;
+    const actual = inputRadiansFromRow(row, m.joint) ?? 0;
+    updateTrackMarkers(m.joint, row, actual, commanded.get(jointName) ?? null);
+  };
+
+  const inputRadiansFromRow = (row: HTMLElement, joint: RobotModel['joints'][0]): number | null => {
+    const input = row.querySelector('input') as HTMLInputElement | null;
+    if (!input) return null;
+    return fromUi(joint, Number(input.value));
+  };
+
+  const setStaleBanner = (stale: boolean, message?: string) => {
+    const el = root.querySelector('#live-stale') as HTMLElement | null;
+    if (!el) return;
+    el.textContent = stale
+      ? (message ??
+        'Live-Gelenkzustand veraltet — seit längerem keine neuen Messwerte.')
+      : '';
+    el.classList.toggle('on', stale);
   };
 
   const getRow = (jointName: string): HTMLElement | null =>
@@ -163,7 +241,7 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
 
   applyMode(requestedMode, effectiveMode);
 
-  return { jointsRoot, setPose, setJointUi, getRow, getInput, applyMode };
+  return { jointsRoot, setPose, setJointUi, setCommandedJoint, setStaleBanner, getRow, getInput, applyMode };
 }
 
 export function midPoseValue(joint: RobotModel['joints'][0]): number {
