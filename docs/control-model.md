@@ -87,14 +87,48 @@ link to the parts it absorbed, and the viewer shows that list.
 5. **Mass of welded-away parts sits inside the parent link**, so per-link
    masses are not the CAD part masses; the total (14.412 kg) is unchanged.
 
+## Hidden geometry
+
+The assembly ships every part, including the ones nobody can see: motor axes
+inside the shoulder ring, wire connectors behind the ribcage, the neck adapter
+under the head shell. Those are found by measurement, not by a hand-kept list.
+
+`tools/visibility_bake.py` merges all 399 visual instances into one triangle
+soup and ray-casts it with Open3D/Embree from **32 directions** on a sphere,
+512 × 512 rays each, in **two poses** (doors closed, doors open — the doors hide
+parts in one state and expose them in the other). An instance that never wins a
+pixel in either pose sits inside the body.
+
+| | instances | triangles | distinct mesh files |
+|---|---|---|---|
+| export | 399 | 2,574,636 | 130 (109.4 MB) |
+| never visible | **40** | **138,594 (5.4 %)** | 9 files only used by them (3.0 MB) |
+| kept | 359 | 2,436,042 | 121 |
+
+The 40 invisible instances (35 link names) lose their `<visual>`; their mass and
+inertia stay in the link, so the total mass is unchanged at 14.412 kg and the
+collision set only shrinks where the geometry was covered anyway. Result: 355
+visual/collision elements instead of 395, and the viewer loads 2,404,010
+triangles instead of 2,542,604.
+
+**Read the number honestly: hiding internals buys 5.4 %.** The other 94.6 % is
+visible shell — if the model has to get smaller, the lever is decimation of the
+visible parts, not hiding more of them.
+
+`visual_overrides.json` is the escape hatch, in both directions: `keep` for
+parts that must stay (sensor windows, labels, anything that becomes visible
+when a hatch opens further than measured), `drop` for parts that are visible
+but should not ship (branding). A part that is not in the bake keeps its
+geometry — a new export can never silently lose parts.
+
 ## How it was verified
 
 Four tests, all run against the original export (`make verify`):
 
-1. **Zero pose, part by part.** All 395 mesh instances land on the same world
-   positions as in the export; worst deviation **3.2 × 10⁻⁸ m**. The four
-   missing instances are the exporter's own duplicate copies, and the report
-   confirms each removed copy sat exactly on a copy that remains.
+1. **Zero pose, part by part.** All 355 remaining mesh instances land on the
+   same world positions as in the export; worst deviation **3.2 × 10⁻⁸ m**. The
+   four instances the export draws twice are gone, and the 40 that are missing
+   on purpose are exactly the ones the visibility bake never saw.
 2. **Posed, frame by frame.** Every kept joint driven to the middle of its
    range; each comparable link's absolute frame matches the export to
    **6.8 × 10⁻⁹**. Links below a synthesised finger hinge are excluded here

@@ -7,13 +7,29 @@ Test 2  posed: every joint the model kept is set to half its range; the frame
         of every shared link must match the original's frame for that pose.
 """
 import pathlib
-import sys, os, collections
+import sys, os, json, collections
 import numpy as np
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = str(ROOT / "urdf" / "pib.urdf")
+VISIBILITY = ROOT / "docs" / "visibility.json"
+OVERRIDES = ROOT / "visual_overrides.json"
 RED = str(ROOT / "urdf" / "pib.control.urdf")
+
+
+def hidden_parts():
+    """Same rule as the reducer: baked invisible, minus keep, plus drop."""
+    keep, drop = set(), set()
+    if OVERRIDES.exists():
+        data = json.loads(OVERRIDES.read_text())
+        keep = set(data.get("keep", []))
+        drop = set(data.get("drop", []))
+    baked = set()
+    if VISIBILITY.exists():
+        data = json.loads(VISIBILITY.read_text())
+        baked = {p["key"] for p in data.get("parts", []) if not p.get("visible", True) and p.get("key")}
+    return (baked - keep) | drop
 
 
 def rpy(r, p, y):
@@ -94,7 +110,9 @@ def fk(robot, angle_fn=None, use_names=True):
             if o is not None:
                 O[:3, :3] = rpy(*vec(o.get("rpy")))
                 O[:3, 3] = vec(o.get("xyz"))
-            meshes.append((mesh.get("filename"), T @ O))
+            oxyz = vec(o.get("xyz")) if o is not None else np.zeros(3)
+            key = f"{link}|{mesh.get('filename').rsplit('/', 1)[-1]}|{oxyz[0]:.6f},{oxyz[1]:.6f},{oxyz[2]:.6f}"
+            meshes.append((mesh.get("filename"), T @ O, link, key))
         for j in children[link]:
             o = j.find("origin")
             O = np.eye(4)
@@ -119,11 +137,11 @@ def fk(robot, angle_fn=None, use_names=True):
 def match(src, red, tol=1e-4):
     """Greedy match mesh instances; returns (matched, unmatched_src, unmatched_red, max_err)."""
     pool = collections.defaultdict(list)
-    for i, (m, T) in enumerate(red):
+    for i, (m, T, _link, _key) in enumerate(red):
         pool[m].append(i)
     used = set()
     unmatched_src, errs = [], []
-    for m, Ts in src:
+    for m, Ts, link, key in src:
         best, bestd = None, 1e9
         for i in pool.get(m, []):
             if i in used:
@@ -135,8 +153,8 @@ def match(src, red, tol=1e-4):
             used.add(best)
             errs.append(bestd)
         else:
-            unmatched_src.append((m, Ts))
-    unmatched_red = [(red[i][0], red[i][1]) for i in range(len(red)) if i not in used]
+            unmatched_src.append((m, Ts, link, key))
+    unmatched_red = [(red[i][0], red[i][1], red[i][2]) for i in range(len(red)) if i not in used]
     return errs, unmatched_src, unmatched_red
 
 
@@ -164,14 +182,20 @@ _, red_meshes, red_root = fk(red_robot)
 errs, un_src, un_red = match(src_meshes, red_meshes)
 print(f"\n[1] zero pose: {len(src_meshes)} mesh instances in source, {len(red_meshes)} in reduced")
 print(f"    matched {len(errs)}, max position error {max(errs) if errs else 0:.2e} m")
+drop_set = hidden_parts()
 dup_only = True
-for m, T in un_src:
-    same = [T2 for m2, T2 in src_meshes if m2 == m and np.abs(T2[:3, 3] - T[:3, 3]).max() < 1e-6]
+dropped = 0
+for m, T, link, key in un_src:
+    if key in drop_set:
+        dropped += 1
+        continue
+    same = [T2 for m2, T2, _l, _k in src_meshes if m2 == m and np.abs(T2[:3, 3] - T[:3, 3]).max() < 1e-6]
     if len(same) < 2:
         dup_only = False
     print(f"    missing copy: {m.split('/')[-1]:38s} at {fmt(T[:3, 3])}  (source had {len(same)}x here)")
-for m, T in un_red:
+for m, T, link in un_red:
     print(f"    unexpected  : {m.split('/')[-1]:38s} at {fmt(T[:3, 3])}")
+print(f"    dropped on purpose (invisible, {len(drop_set)} parts): {dropped} instances")
 print(f"    -> removed copies are exact duplicates of a remaining part: {dup_only}")
 
 # --- test 2: same pose in both models ---

@@ -1,0 +1,6035 @@
+{
+ "views": 32,
+ "resolution": 512,
+ "fov_deg": 40.0,
+ "poses": [
+  "doors_closed",
+  "doors_open"
+ ],
+ "instances": 399,
+ "hidden": 40,
+ "hidden_parts": [
+  "a83_motor_adapter_neck",
+  "b25_wire_connector_1",
+  "b25_wire_connector_10",
+  "b25_wire_connector_3",
+  "b25_wire_connector_5",
+  "b25_wire_connector_6",
+  "b66_body_neck_position",
+  "b66_body_neck_position_1",
+  "b67_slicky__12_",
+  "b67_slicky__15_",
+  "b67_slicky__23_",
+  "b67_slicky__24_",
+  "b67_slicky__25_",
+  "b67_slicky__26_",
+  "b67_slicky__2_",
+  "b67_slicky__9_",
+  "c15_central_rotator_motor_connector",
+  "c15_central_rotator_motor_connector_1",
+  "c25_forearm_disc_bottom_1",
+  "c26_forearm_disc_top",
+  "c26_forearm_disc_top_1",
+  "c27_forearm_bearing_distance_ring",
+  "c27_forearm_bearing_distance_ring_1",
+  "c28_forearm_bearing_center",
+  "c28_forearm_bearing_center_1",
+  "c34_elbow_motor_connection",
+  "c41_elbow_central_motor_flange",
+  "c63_motor_axis_inner_shoulder",
+  "c63_motor_axis_inner_shoulder_1",
+  "c72_plate_outer_shoulder",
+  "c72_plate_outer_shoulder_3",
+  "c77_central_rotator_motor_connector_shoulder",
+  "c77_central_rotator_motor_connector_shoulder_1",
+  "c78_central_rotator_bracket_shoulder",
+  "c78_central_rotator_bracket_shoulder_1"
+ ],
+ "parts": [
+  {
+   "key": "a01_face|A01_Face.glb|-0.054500,0.025400,0.026598",
+   "part": "a01_face",
+   "mesh": "meshes/A01_Face.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 46393,
+    "doors_open": 46384
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "a02_face_neck_clamp|A02_Face_neck_clamp.glb|-0.054500,0.025400,0.026598",
+   "part": "a02_face_neck_clamp",
+   "mesh": "meshes/A02_Face_neck_clamp.glb",
+   "views": {
+    "doors_closed": 17,
+    "doors_open": 17
+   },
+   "pixels": {
+    "doors_closed": 455,
+    "doors_open": 440
+   },
+   "max_views": 17,
+   "visible": true
+  },
+  {
+   "key": "a03_face_plate|A03_Face_Plate.glb|0.000000,0.000000,0.000000",
+   "part": "a03_face_plate",
+   "mesh": "meshes/A03_Face_Plate.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 16859,
+    "doors_open": 16874
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "a04_l_head_side_left|A04_L_Head_side_left.glb|0.112690,0.002000,-0.035796",
+   "part": "a04_l_head_side_left",
+   "mesh": "meshes/A04_L_Head_side_left.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 11020,
+    "doors_open": 10932
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "a04_r_head_side_right|A04_R_Head_side_right.glb|-0.112690,0.002000,-0.035796",
+   "part": "a04_r_head_side_right",
+   "mesh": "meshes/A04_R_Head_side_right.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 11278,
+    "doors_open": 11219
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "a05_mic_array_mounting_insert|A05_Mic_array_mounting_insert.glb|-0.000000,0.031196,-0.117960",
+   "part": "a05_mic_array_mounting_insert",
+   "mesh": "meshes/A05_Mic_array_mounting_insert.glb",
+   "views": {
+    "doors_closed": 15,
+    "doors_open": 16
+   },
+   "pixels": {
+    "doors_closed": 71,
+    "doors_open": 72
+   },
+   "max_views": 16,
+   "visible": true
+  },
+  {
+   "key": "a06_mic_array_knob|A06_Mic_array_knob.glb|-0.000000,0.030194,-0.110830",
+   "part": "a06_mic_array_knob",
+   "mesh": "meshes/A06_Mic_array_knob.glb",
+   "views": {
+    "doors_closed": 15,
+    "doors_open": 14
+   },
+   "pixels": {
+    "doors_closed": 188,
+    "doors_open": 192
+   },
+   "max_views": 15,
+   "visible": true
+  },
+  {
+   "key": "a71_inner_part|A71_Inner_part.glb|0.000000,0.000000,-0.086000",
+   "part": "a71_inner_part",
+   "mesh": "meshes/A71_Inner_part.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 9,
+    "doors_open": 2
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "a72_top_part|A72_Top_part.glb|0.000000,-0.000000,-0.096600",
+   "part": "a72_top_part",
+   "mesh": "meshes/A72_Top_part.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 4764,
+    "doors_open": 4727
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "a73_cover_neck|A73_Cover_neck.glb|0.000000,0.000000,-0.124900",
+   "part": "a73_cover_neck",
+   "mesh": "meshes/A73_Cover_neck.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 2143,
+    "doors_open": 2142
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "a75_l_neck_left|A75_L_Neck_Left.glb|-0.160000,0.000000,0.000000",
+   "part": "a75_l_neck_left",
+   "mesh": "meshes/A75_L_Neck_Left.glb",
+   "views": {
+    "doors_closed": 27,
+    "doors_open": 27
+   },
+   "pixels": {
+    "doors_closed": 14250,
+    "doors_open": 14342
+   },
+   "max_views": 27,
+   "visible": true
+  },
+  {
+   "key": "a75_r_neck_right|A75_R_Neck_Right.glb|0.000000,0.000000,0.000000",
+   "part": "a75_r_neck_right",
+   "mesh": "meshes/A75_R_Neck_Right.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 27
+   },
+   "pixels": {
+    "doors_closed": 14350,
+    "doors_open": 14377
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "a76_neck_middle|A76_Neck_Middle.glb|0.000000,0.000000,0.000000",
+   "part": "a76_neck_middle",
+   "mesh": "meshes/A76_Neck_Middle.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 4005,
+    "doors_open": 4006
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "a81_motor_shaft|A81_Motor_shaft.glb|0.041500,0.048000,-0.112000",
+   "part": "a81_motor_shaft",
+   "mesh": "meshes/A81_Motor_shaft.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 12
+   },
+   "pixels": {
+    "doors_closed": 199,
+    "doors_open": 196
+   },
+   "max_views": 14,
+   "visible": true
+  },
+  {
+   "key": "a82_neck_axis|A82_Neck_axis.glb|-0.059500,0.048000,-0.112000",
+   "part": "a82_neck_axis",
+   "mesh": "meshes/A82_Neck_axis.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 14
+   },
+   "pixels": {
+    "doors_closed": 212,
+    "doors_open": 208
+   },
+   "max_views": 14,
+   "visible": true
+  },
+  {
+   "key": "a83_motor_adapter_neck|A83_Motor_Adapter_Neck.glb|0.041500,0.048000,-0.112000",
+   "part": "a83_motor_adapter_neck",
+   "mesh": "meshes/A83_Motor_Adapter_Neck.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b25_wire_connector_10|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_10",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b25_wire_connector_11|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_11",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b25_wire_connector_1|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_1",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b25_wire_connector_2|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_2",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b25_wire_connector_3|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_3",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b25_wire_connector_4|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_4",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 6,
+    "doors_open": 6
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b25_wire_connector_5|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_5",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b25_wire_connector_6|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_6",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b25_wire_connector_7|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_7",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b25_wire_connector_8|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_8",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 23
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b25_wire_connector_9|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector_9",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b25_wire_connector|B25_Wire_connector.glb|-0.000000,0.000800,0.000000",
+   "part": "b25_wire_connector",
+   "mesh": "meshes/B25_Wire_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_10|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_10",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 16
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_11|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_11",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 10
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_1|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_1",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_2|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_2",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 13
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_3|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_3",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 7
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_4|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_4",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 6,
+    "doors_open": 42
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_5|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_5",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 7
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_6|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_6",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 13
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_7|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_7",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 25
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_8|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_8",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 12
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount_9|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount_9",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 6
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b27_wire_connector_mount|B27_Wire_connector_mount.glb|0.000000,0.008200,0.000000",
+   "part": "b27_wire_connector_mount",
+   "mesh": "meshes/B27_Wire_connector_mount.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 23
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b41_l_clavicle_left|B41_L_Clavicle_Left.glb|0.000000,0.000000,0.000000",
+   "part": "b41_l_clavicle_left",
+   "mesh": "meshes/B41_L_Clavicle_Left.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 32
+   },
+   "pixels": {
+    "doors_closed": 42678,
+    "doors_open": 45841
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "b41_r_clavicle_right|B41_R_Clavicle_Right.glb|0.000000,0.107416,0.190000",
+   "part": "b41_r_clavicle_right",
+   "mesh": "meshes/B41_R_Clavicle_Right.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 32
+   },
+   "pixels": {
+    "doors_closed": 46281,
+    "doors_open": 49465
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "b42_l_ribcage_left|B42_L_Ribcage_Left.glb|0.000000,0.107416,0.190000",
+   "part": "b42_l_ribcage_left",
+   "mesh": "meshes/B42_L_Ribcage_Left.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 32
+   },
+   "pixels": {
+    "doors_closed": 43804,
+    "doors_open": 48829
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "b42_r_ribcage_right|B42_R_Ribcage_Right.glb|0.000000,0.107416,0.190000",
+   "part": "b42_r_ribcage_right",
+   "mesh": "meshes/B42_R_Ribcage_Right.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 45278,
+    "doors_open": 49820
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "b43_l_ribcage_lower_left|B43_L_Ribcage_Lower_Left.glb|0.000000,0.095001,0.375000",
+   "part": "b43_l_ribcage_lower_left",
+   "mesh": "meshes/B43_L_Ribcage_Lower_Left.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 55941,
+    "doors_open": 53961
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "b43_r_ribcage_lower_right|B43_R_Ribcage_Lower_Right.glb|0.000000,0.095001,0.375000",
+   "part": "b43_r_ribcage_lower_right",
+   "mesh": "meshes/B43_R_Ribcage_Lower_Right.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 54978,
+    "doors_open": 52961
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "b44_electronics_back|B44_Electronics_back.glb|-0.040000,0.179700,0.085219",
+   "part": "b44_electronics_back",
+   "mesh": "meshes/B44_Electronics_back.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 22566,
+    "doors_open": 27846
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "b46_power_back|B46_Power_back.glb|-0.040000,0.369700,0.073376",
+   "part": "b46_power_back",
+   "mesh": "meshes/B46_Power_back.glb",
+   "views": {
+    "doors_closed": 27,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 23375,
+    "doors_open": 30271
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "b47_power_holder|B47_Power_Holder.glb|-0.045000,-0.047000,0.375000",
+   "part": "b47_power_holder",
+   "mesh": "meshes/B47_Power_Holder.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 364,
+    "doors_open": 2895
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "b48_hinge_1|B48_Hinge.glb|-0.040000,-0.072500,0.190000",
+   "part": "b48_hinge_1",
+   "mesh": "meshes/B48_Hinge.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 9,
+    "doors_open": 132
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "b48_hinge_2|B48_Hinge.glb|-0.040000,-0.072500,0.190000",
+   "part": "b48_hinge_2",
+   "mesh": "meshes/B48_Hinge.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 12,
+    "doors_open": 99
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "b48_hinge_3|B48_Hinge.glb|-0.040000,-0.072500,0.190000",
+   "part": "b48_hinge_3",
+   "mesh": "meshes/B48_Hinge.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 8,
+    "doors_open": 124
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "b48_hinge|B48_Hinge.glb|-0.040000,-0.072500,0.190000",
+   "part": "b48_hinge",
+   "mesh": "meshes/B48_Hinge.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 7,
+    "doors_open": 87
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "b49_hinge_plate_1|B49_Hinge_Plate.glb|-0.025000,-0.074376,0.369700",
+   "part": "b49_hinge_plate_1",
+   "mesh": "meshes/B49_Hinge_Plate.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 13
+   },
+   "pixels": {
+    "doors_closed": 8,
+    "doors_open": 288
+   },
+   "max_views": 13,
+   "visible": true
+  },
+  {
+   "key": "b49_hinge_plate_2|B49_Hinge_Plate.glb|-0.055000,-0.074376,0.369700",
+   "part": "b49_hinge_plate_2",
+   "mesh": "meshes/B49_Hinge_Plate.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 339
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "b49_hinge_plate_3|B49_Hinge_Plate.glb|-0.055000,-0.074376,0.369700",
+   "part": "b49_hinge_plate_3",
+   "mesh": "meshes/B49_Hinge_Plate.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 318
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "b49_hinge_plate|B49_Hinge_Plate.glb|-0.025000,-0.074376,0.369700",
+   "part": "b49_hinge_plate",
+   "mesh": "meshes/B49_Hinge_Plate.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 12
+   },
+   "pixels": {
+    "doors_closed": 16,
+    "doors_open": 249
+   },
+   "max_views": 12,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|B55_Logo_edu.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/B55_Logo_edu.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 2367,
+    "doors_open": 2604
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__10.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__10.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 13,
+    "doors_open": 12
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__11.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__11.glb",
+   "views": {
+    "doors_closed": 7,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 11,
+    "doors_open": 10
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__12.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__12.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 1
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__13.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__13.glb",
+   "views": {
+    "doors_closed": 10,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 13,
+    "doors_open": 11
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__14.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__14.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 5,
+    "doors_open": 5
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__15.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__15.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 4,
+    "doors_open": 3
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__16.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__16.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 18,
+    "doors_open": 21
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__4.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__4.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__5.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__5.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 6,
+    "doors_open": 7
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__6.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__6.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 5
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__7.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__7.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 9,
+    "doors_open": 9
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__8.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__8.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b55_logo_plate_5_educational__1_|__9.glb|0.000000,0.000000,-0.000000",
+   "part": "b55_logo_plate_5_educational__1_",
+   "mesh": "meshes/__9.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 8,
+    "doors_open": 10
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b57_printed_washer_relay_1|B57_Printed_washer_relay.glb|0.037000,-0.006500,0.367000",
+   "part": "b57_printed_washer_relay_1",
+   "mesh": "meshes/B57_Printed_washer_relay.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b57_printed_washer_relay|B57_Printed_washer_relay.glb|0.037000,-0.006500,0.367000",
+   "part": "b57_printed_washer_relay",
+   "mesh": "meshes/B57_Printed_washer_relay.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 4,
+    "doors_open": 6
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b58_button_scaffold|B58_Button_scaffold.glb|-0.111584,0.087887,0.106027",
+   "part": "b58_button_scaffold",
+   "mesh": "meshes/B58_Button_scaffold.glb",
+   "views": {
+    "doors_closed": 7,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 36,
+    "doors_open": 348
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "b62_wire_connector_knob_thumb_opposition_1|B62_Wire_connector_knob_thumb_opposition.glb|0.000000,0.002000,0.000000",
+   "part": "b62_wire_connector_knob_thumb_opposition_1",
+   "mesh": "meshes/B62_Wire_connector_knob_thumb_opposition.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 84
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b62_wire_connector_knob_thumb_opposition|B62_Wire_connector_knob_thumb_opposition.glb|0.000000,0.002000,0.000000",
+   "part": "b62_wire_connector_knob_thumb_opposition",
+   "mesh": "meshes/B62_Wire_connector_knob_thumb_opposition.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 49
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b63_wire_connector_knob_thumb_stretch_1|B63_Wire_connector_knob_thumb_stretch.glb|0.000000,0.002000,0.000000",
+   "part": "b63_wire_connector_knob_thumb_stretch_1",
+   "mesh": "meshes/B63_Wire_connector_knob_thumb_stretch.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 60
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b63_wire_connector_knob_thumb_stretch|B63_Wire_connector_knob_thumb_stretch.glb|0.000000,0.002000,0.000000",
+   "part": "b63_wire_connector_knob_thumb_stretch",
+   "mesh": "meshes/B63_Wire_connector_knob_thumb_stretch.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 20
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b64_wire_connector_knob_finger_stretch_ccw_1|B64_Wire_connector_knob_finger_stretch_CCW.glb|0.000000,0.002000,0.000000",
+   "part": "b64_wire_connector_knob_finger_stretch_ccw_1",
+   "mesh": "meshes/B64_Wire_connector_knob_finger_stretch_CCW.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 89
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b64_wire_connector_knob_finger_stretch_ccw|B64_Wire_connector_knob_finger_stretch_CCW.glb|0.000000,0.002000,0.000000",
+   "part": "b64_wire_connector_knob_finger_stretch_ccw",
+   "mesh": "meshes/B64_Wire_connector_knob_finger_stretch_CCW.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 7,
+    "doors_open": 39
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b65_wire_connector_knob_finger_stretch_cw_1|B65_Wire_connector_knob_finger_stretch_CW.glb|0.000000,-0.002000,0.000000",
+   "part": "b65_wire_connector_knob_finger_stretch_cw_1",
+   "mesh": "meshes/B65_Wire_connector_knob_finger_stretch_CW.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 60
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b65_wire_connector_knob_finger_stretch_cw_2|B65_Wire_connector_knob_finger_stretch_CW.glb|0.000000,-0.002000,0.000000",
+   "part": "b65_wire_connector_knob_finger_stretch_cw_2",
+   "mesh": "meshes/B65_Wire_connector_knob_finger_stretch_CW.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 8,
+    "doors_open": 324
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "b65_wire_connector_knob_finger_stretch_cw_3|B65_Wire_connector_knob_finger_stretch_CW.glb|0.000000,-0.002000,0.000000",
+   "part": "b65_wire_connector_knob_finger_stretch_cw_3",
+   "mesh": "meshes/B65_Wire_connector_knob_finger_stretch_CW.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 4,
+    "doors_open": 102
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b65_wire_connector_knob_finger_stretch_cw_4|B65_Wire_connector_knob_finger_stretch_CW.glb|0.000000,-0.002000,0.000000",
+   "part": "b65_wire_connector_knob_finger_stretch_cw_4",
+   "mesh": "meshes/B65_Wire_connector_knob_finger_stretch_CW.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 7,
+    "doors_open": 67
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b65_wire_connector_knob_finger_stretch_cw_5|B65_Wire_connector_knob_finger_stretch_CW.glb|0.000000,-0.002000,0.000000",
+   "part": "b65_wire_connector_knob_finger_stretch_cw_5",
+   "mesh": "meshes/B65_Wire_connector_knob_finger_stretch_CW.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 4,
+    "doors_open": 104
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b65_wire_connector_knob_finger_stretch_cw|B65_Wire_connector_knob_finger_stretch_CW.glb|0.000000,-0.002000,0.000000",
+   "part": "b65_wire_connector_knob_finger_stretch_cw",
+   "mesh": "meshes/B65_Wire_connector_knob_finger_stretch_CW.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 17,
+    "doors_open": 116
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b66_body_neck_position_1|B66_Body_Neck_Position.glb|-0.152114,0.004795,0.000000",
+   "part": "b66_body_neck_position_1",
+   "mesh": "meshes/B66_Body_Neck_Position.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b66_body_neck_position|B66_Body_Neck_Position.glb|-0.152114,0.004795,0.000000",
+   "part": "b66_body_neck_position",
+   "mesh": "meshes/B66_Body_Neck_Position.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__10_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__10_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 7,
+    "doors_open": 71
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__10_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__10_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__10_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__10_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 6
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__10_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__10_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 23
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__11_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__11_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 6,
+    "doors_open": 192
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__11_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__11_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 12
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__11_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__11_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 18
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__11_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__11_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 12,
+    "doors_open": 143
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__12_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__12_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 54
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__12_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__12_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__12_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__12_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__12_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__12_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 47
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__13_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__13_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 6,
+    "doors_open": 63
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__13_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__13_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__13_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__13_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__13_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__13_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 68
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__14_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__14_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 7,
+    "doors_open": 85
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__14_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__14_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__14_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__14_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__14_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__14_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 54
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__15_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__15_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 64,
+    "doors_open": 95
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__15_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__15_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__15_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__15_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__15_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__15_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 35,
+    "doors_open": 42
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__16_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__16_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 45,
+    "doors_open": 65
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__16_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__16_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__16_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__16_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 5,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__16_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__16_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 24,
+    "doors_open": 31
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__17_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__17_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 48,
+    "doors_open": 82
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__17_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__17_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__17_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__17_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 5,
+    "doors_open": 6
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__17_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__17_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 23,
+    "doors_open": 49
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__18_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__18_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 22,
+    "doors_open": 37
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__18_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__18_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__18_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__18_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__18_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__18_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__19_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__19_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 65,
+    "doors_open": 84
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__19_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__19_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 3
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__19_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__19_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 3
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__19_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__19_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 30,
+    "doors_open": 44
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__1_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__1_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 15,
+    "doors_open": 48
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__1_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__1_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__1_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__1_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 5
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__1_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__1_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 8,
+    "doors_open": 40
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__20_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__20_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 63,
+    "doors_open": 62
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__20_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__20_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__20_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__20_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 6,
+    "doors_open": 7
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__20_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__20_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 21,
+    "doors_open": 25
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__21_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__21_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 50,
+    "doors_open": 58
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__21_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__21_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__21_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__21_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 4,
+    "doors_open": 4
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__21_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__21_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 24,
+    "doors_open": 31
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__22_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__22_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 58,
+    "doors_open": 82
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__22_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__22_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__22_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__22_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__22_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__22_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 10,
+    "doors_open": 21
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__23_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__23_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 30
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__23_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__23_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__23_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__23_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__23_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__23_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 34
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__24_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__24_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 47
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__24_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__24_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__24_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__24_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__24_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__24_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 47
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__25_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__25_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 48
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__25_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__25_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__25_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__25_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__25_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__25_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 8
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__26_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__26_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 57
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__26_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__26_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__26_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__26_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__26_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__26_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 11
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__2_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__2_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 1
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__2_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__2_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__2_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__2_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__2_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__2_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 7
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__3_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__3_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 14
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__3_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__3_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__3_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__3_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__3_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__3_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 15
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__4_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__4_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 61
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__4_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__4_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__4_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__4_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__4_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__4_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 57
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__5_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__5_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 44
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__5_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__5_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__5_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__5_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__5_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__5_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 47
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__6_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__6_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 43
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__6_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__6_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__6_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__6_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__6_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__6_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 20
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__7_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__7_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 147
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__7_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__7_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 8
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__7_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__7_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__7_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__7_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 62
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__8_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__8_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 9,
+    "doors_open": 29
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__8_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__8_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__8_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__8_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 3
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__8_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__8_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 5,
+    "doors_open": 19
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__9_|_.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__9_",
+   "mesh": "meshes/_.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 0
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "b67_slicky__9_|__1.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__9_",
+   "mesh": "meshes/__1.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__9_|__2.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__9_",
+   "mesh": "meshes/__2.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b67_slicky__9_|__3.glb|0.000000,0.000000,0.000000",
+   "part": "b67_slicky__9_",
+   "mesh": "meshes/__3.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "b|B.glb|0.000000,0.000000,0.000000",
+   "part": "b",
+   "mesh": "meshes/B.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 13
+   },
+   "pixels": {
+    "doors_closed": 145,
+    "doors_open": 132
+   },
+   "max_views": 14,
+   "visible": true
+  },
+  {
+   "key": "c09_central_rotator_connector_1|C09_Central_rotator_connector.glb|0.000000,-0.004000,0.000000",
+   "part": "c09_central_rotator_connector_1",
+   "mesh": "meshes/C09_Central_rotator_connector.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 75,
+    "doors_open": 82
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "c09_central_rotator_connector_2|C09_Central_rotator_connector.glb|0.000000,-0.004000,0.000000",
+   "part": "c09_central_rotator_connector_2",
+   "mesh": "meshes/C09_Central_rotator_connector.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 15,
+    "doors_open": 13
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "c09_central_rotator_connector_3|C09_Central_rotator_connector.glb|0.000000,-0.004000,0.000000",
+   "part": "c09_central_rotator_connector_3",
+   "mesh": "meshes/C09_Central_rotator_connector.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 2
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 4
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "c09_central_rotator_connector|C09_Central_rotator_connector.glb|0.000000,-0.004000,0.000000",
+   "part": "c09_central_rotator_connector",
+   "mesh": "meshes/C09_Central_rotator_connector.glb",
+   "views": {
+    "doors_closed": 2,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 4,
+    "doors_open": 3
+   },
+   "max_views": 2,
+   "visible": true
+  },
+  {
+   "key": "c15_central_rotator_motor_connector_1|C15_Central_rotator_motor_connector.glb|0.000000,-0.004000,0.000000",
+   "part": "c15_central_rotator_motor_connector_1",
+   "mesh": "meshes/C15_Central_rotator_motor_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c15_central_rotator_motor_connector|C15_Central_rotator_motor_connector.glb|0.000000,-0.004000,0.000000",
+   "part": "c15_central_rotator_motor_connector",
+   "mesh": "meshes/C15_Central_rotator_motor_connector.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c18l_forearm_distal_lock_left|C18L_Forearm_distal_lock_left.glb|0.000000,0.000000,0.000000",
+   "part": "c18l_forearm_distal_lock_left",
+   "mesh": "meshes/C18L_Forearm_distal_lock_left.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 5765,
+    "doors_open": 5763
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "c18r_forearm_distal_lock_right|C18R_Forearm_distal_lock_right.glb|0.200000,0.000000,0.000000",
+   "part": "c18r_forearm_distal_lock_right",
+   "mesh": "meshes/C18R_Forearm_distal_lock_right.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 5872,
+    "doors_open": 5899
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "c19l_forearm_distal_top_left|C19L_Forearm_distal_top_left.glb|0.000000,0.007500,0.000000",
+   "part": "c19l_forearm_distal_top_left",
+   "mesh": "meshes/C19L_Forearm_distal_top_left.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 23597,
+    "doors_open": 23442
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "c19r_forearm_distal_top_right|C19R_Forearm_distal_top_right.glb|0.200000,0.007500,0.000000",
+   "part": "c19r_forearm_distal_top_right",
+   "mesh": "meshes/C19R_Forearm_distal_top_right.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 32
+   },
+   "pixels": {
+    "doors_closed": 23740,
+    "doors_open": 23705
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "c25_forearm_disc_bottom_1|C25_Forearm_disc_bottom.glb|-0.013900,0.039401,0.010000",
+   "part": "c25_forearm_disc_bottom_1",
+   "mesh": "meshes/C25_Forearm_disc_bottom.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c25_forearm_disc_bottom|C25_Forearm_disc_bottom.glb|-0.013900,0.039401,0.010000",
+   "part": "c25_forearm_disc_bottom",
+   "mesh": "meshes/C25_Forearm_disc_bottom.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 3,
+    "doors_open": 2
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "c26_forearm_disc_top_1|C26_Forearm_disc_top.glb|-0.020900,0.039470,0.016000",
+   "part": "c26_forearm_disc_top_1",
+   "mesh": "meshes/C26_Forearm_disc_top.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c26_forearm_disc_top|C26_Forearm_disc_top.glb|-0.020900,0.039470,0.016000",
+   "part": "c26_forearm_disc_top",
+   "mesh": "meshes/C26_Forearm_disc_top.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c27_forearm_bearing_distance_ring_1|C27_Forearm_bearing_distance_ring.glb|-0.027900,0.039401,0.010000",
+   "part": "c27_forearm_bearing_distance_ring_1",
+   "mesh": "meshes/C27_Forearm_bearing_distance_ring.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c27_forearm_bearing_distance_ring|C27_Forearm_bearing_distance_ring.glb|-0.027900,0.039401,0.010000",
+   "part": "c27_forearm_bearing_distance_ring",
+   "mesh": "meshes/C27_Forearm_bearing_distance_ring.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c28_forearm_bearing_center_1|C28_Forearm_bearing_center.glb|-0.033900,0.039401,0.010000",
+   "part": "c28_forearm_bearing_center_1",
+   "mesh": "meshes/C28_Forearm_bearing_center.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c28_forearm_bearing_center|C28_Forearm_bearing_center.glb|-0.033900,0.039401,0.010000",
+   "part": "c28_forearm_bearing_center",
+   "mesh": "meshes/C28_Forearm_bearing_center.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c30_forearm_bar_1|C30_Forearm_bar.glb|-0.016900,0.039470,0.016000",
+   "part": "c30_forearm_bar_1",
+   "mesh": "meshes/C30_Forearm_bar.glb",
+   "views": {
+    "doors_closed": 16,
+    "doors_open": 15
+   },
+   "pixels": {
+    "doors_closed": 157,
+    "doors_open": 153
+   },
+   "max_views": 16,
+   "visible": true
+  },
+  {
+   "key": "c30_forearm_bar|C30_Forearm_bar.glb|-0.016900,0.039470,0.016000",
+   "part": "c30_forearm_bar",
+   "mesh": "meshes/C30_Forearm_bar.glb",
+   "views": {
+    "doors_closed": 18,
+    "doors_open": 17
+   },
+   "pixels": {
+    "doors_closed": 162,
+    "doors_open": 164
+   },
+   "max_views": 18,
+   "visible": true
+  },
+  {
+   "key": "c31_elbow_shaft_motor_1|C31_Elbow_shaft_motor.glb|-0.041000,0.021000,0.000000",
+   "part": "c31_elbow_shaft_motor_1",
+   "mesh": "meshes/C31_Elbow_shaft_motor.glb",
+   "views": {
+    "doors_closed": 17,
+    "doors_open": 17
+   },
+   "pixels": {
+    "doors_closed": 1920,
+    "doors_open": 1915
+   },
+   "max_views": 17,
+   "visible": true
+  },
+  {
+   "key": "c31_elbow_shaft_motor|C31_Elbow_shaft_motor.glb|-0.041000,0.021000,0.000000",
+   "part": "c31_elbow_shaft_motor",
+   "mesh": "meshes/C31_Elbow_shaft_motor.glb",
+   "views": {
+    "doors_closed": 17,
+    "doors_open": 16
+   },
+   "pixels": {
+    "doors_closed": 1957,
+    "doors_open": 1950
+   },
+   "max_views": 17,
+   "visible": true
+  },
+  {
+   "key": "c32_elbow_axis_cable_1|C32_Elbow_axis_cable.glb|0.051000,0.021000,0.000000",
+   "part": "c32_elbow_axis_cable_1",
+   "mesh": "meshes/C32_Elbow_axis_cable.glb",
+   "views": {
+    "doors_closed": 16,
+    "doors_open": 15
+   },
+   "pixels": {
+    "doors_closed": 1119,
+    "doors_open": 1117
+   },
+   "max_views": 16,
+   "visible": true
+  },
+  {
+   "key": "c32_elbow_axis_cable|C32_Elbow_axis_cable.glb|0.051000,0.021000,0.000000",
+   "part": "c32_elbow_axis_cable",
+   "mesh": "meshes/C32_Elbow_axis_cable.glb",
+   "views": {
+    "doors_closed": 17,
+    "doors_open": 16
+   },
+   "pixels": {
+    "doors_closed": 1146,
+    "doors_open": 1134
+   },
+   "max_views": 17,
+   "visible": true
+  },
+  {
+   "key": "c33_elbow_motor_flange_1|C33_Elbow_motor_flange.glb|-0.010200,0.039500,0.008500",
+   "part": "c33_elbow_motor_flange_1",
+   "mesh": "meshes/C33_Elbow_motor_flange.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 0
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "c33_elbow_motor_flange|C33_Elbow_motor_flange.glb|-0.010200,-0.035500,-0.008500",
+   "part": "c33_elbow_motor_flange",
+   "mesh": "meshes/C33_Elbow_motor_flange.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 3
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "max_views": 3,
+   "visible": true
+  },
+  {
+   "key": "c34_elbow_motor_connection_1|C34_Elbow_motor_connection.glb|-0.010200,0.039500,-0.046000",
+   "part": "c34_elbow_motor_connection_1",
+   "mesh": "meshes/C34_Elbow_motor_connection.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 2,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "c34_elbow_motor_connection|C34_Elbow_motor_connection.glb|-0.020200,0.039500,-0.046000",
+   "part": "c34_elbow_motor_connection",
+   "mesh": "meshes/C34_Elbow_motor_connection.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c35l_elbow_clamp_left_1|C35L_Elbow_clamp_left.glb|-0.051000,0.021000,0.000000",
+   "part": "c35l_elbow_clamp_left_1",
+   "mesh": "meshes/C35L_Elbow_clamp_left.glb",
+   "views": {
+    "doors_closed": 27,
+    "doors_open": 27
+   },
+   "pixels": {
+    "doors_closed": 2126,
+    "doors_open": 2115
+   },
+   "max_views": 27,
+   "visible": true
+  },
+  {
+   "key": "c35l_elbow_clamp_left|C35L_Elbow_clamp_left.glb|-0.051000,0.021000,0.000000",
+   "part": "c35l_elbow_clamp_left",
+   "mesh": "meshes/C35L_Elbow_clamp_left.glb",
+   "views": {
+    "doors_closed": 24,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 2150,
+    "doors_open": 2179
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "c35r_elbow_clamp_right_1|C35R_Elbow_clamp_right.glb|0.051000,0.021000,0.000000",
+   "part": "c35r_elbow_clamp_right_1",
+   "mesh": "meshes/C35R_Elbow_clamp_right.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 2238,
+    "doors_open": 2239
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "c35r_elbow_clamp_right|C35R_Elbow_clamp_right.glb|0.051000,0.021000,0.000000",
+   "part": "c35r_elbow_clamp_right",
+   "mesh": "meshes/C35R_Elbow_clamp_right.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 27
+   },
+   "pixels": {
+    "doors_closed": 2154,
+    "doors_open": 2157
+   },
+   "max_views": 27,
+   "visible": true
+  },
+  {
+   "key": "c36_elbow_lower_shell_1|C36_Elbow_lower_shell.glb|0.033000,0.021000,0.000000",
+   "part": "c36_elbow_lower_shell_1",
+   "mesh": "meshes/C36_Elbow_lower_shell.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 10842,
+    "doors_open": 10828
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "c36_elbow_lower_shell|C36_Elbow_lower_shell.glb|-0.033000,0.021000,0.000000",
+   "part": "c36_elbow_lower_shell",
+   "mesh": "meshes/C36_Elbow_lower_shell.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 11125,
+    "doors_open": 11069
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "c37_elbow_rotator_bracket_1|C37_Elbow_rotator_bracket.glb|0.000000,0.000000,0.058950",
+   "part": "c37_elbow_rotator_bracket_1",
+   "mesh": "meshes/C37_Elbow_rotator_bracket.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 5194,
+    "doors_open": 5166
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "c37_elbow_rotator_bracket|C37_Elbow_rotator_bracket.glb|0.000000,0.000000,0.058950",
+   "part": "c37_elbow_rotator_bracket",
+   "mesh": "meshes/C37_Elbow_rotator_bracket.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 5210,
+    "doors_open": 5211
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "c38_elbow_cover_1|C38_Elbow_cover.glb|-0.031000,0.050323,-0.023670",
+   "part": "c38_elbow_cover_1",
+   "mesh": "meshes/C38_Elbow_cover.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 18
+   },
+   "pixels": {
+    "doors_closed": 2723,
+    "doors_open": 2727
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "c38_elbow_cover|C38_Elbow_cover.glb|-0.031000,0.050323,-0.023670",
+   "part": "c38_elbow_cover",
+   "mesh": "meshes/C38_Elbow_cover.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 2522,
+    "doors_open": 2537
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "c39_elbow_upper_shell_1|C39_Elbow_upper_shell.glb|0.000000,0.000000,-0.074500",
+   "part": "c39_elbow_upper_shell_1",
+   "mesh": "meshes/C39_Elbow_upper_shell.glb",
+   "views": {
+    "doors_closed": 32,
+    "doors_open": 32
+   },
+   "pixels": {
+    "doors_closed": 14246,
+    "doors_open": 14169
+   },
+   "max_views": 32,
+   "visible": true
+  },
+  {
+   "key": "c39_elbow_upper_shell|C39_Elbow_upper_shell.glb|0.000000,0.000000,-0.074500",
+   "part": "c39_elbow_upper_shell",
+   "mesh": "meshes/C39_Elbow_upper_shell.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 14067,
+    "doors_open": 14052
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "c40_elbow_upper_shell_lock_1|C40_Elbow_upper_shell_lock.glb|0.000000,0.000000,-0.074500",
+   "part": "c40_elbow_upper_shell_lock_1",
+   "mesh": "meshes/C40_Elbow_upper_shell_lock.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 5907,
+    "doors_open": 5918
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "c40_elbow_upper_shell_lock|C40_Elbow_upper_shell_lock.glb|0.000000,0.000000,-0.074500",
+   "part": "c40_elbow_upper_shell_lock",
+   "mesh": "meshes/C40_Elbow_upper_shell_lock.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 5670,
+    "doors_open": 5674
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "c41_elbow_central_motor_flange_1|C41_Elbow_central_motor_flange.glb|-0.005000,0.014350,0.045900",
+   "part": "c41_elbow_central_motor_flange_1",
+   "mesh": "meshes/C41_Elbow_central_motor_flange.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "c41_elbow_central_motor_flange|C41_Elbow_central_motor_flange.glb|0.005000,0.014350,0.045900",
+   "part": "c41_elbow_central_motor_flange",
+   "mesh": "meshes/C41_Elbow_central_motor_flange.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c51_wire_protector_servo_array_scaffold_1|C51_Wire_Protector_Servo_Array_Scaffold.glb|0.061300,-0.069000,0.131900",
+   "part": "c51_wire_protector_servo_array_scaffold_1",
+   "mesh": "meshes/C51_Wire_Protector_Servo_Array_Scaffold.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 21,
+    "doors_open": 570
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "c51_wire_protector_servo_array_scaffold|C51_Wire_Protector_Servo_Array_Scaffold.glb|0.061300,-0.069000,0.131900",
+   "part": "c51_wire_protector_servo_array_scaffold",
+   "mesh": "meshes/C51_Wire_Protector_Servo_Array_Scaffold.glb",
+   "views": {
+    "doors_closed": 8,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 30,
+    "doors_open": 598
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "c52_servo_tube_cover_1|C52_Servo_Tube_Cover.glb|0.061300,-0.069000,0.131900",
+   "part": "c52_servo_tube_cover_1",
+   "mesh": "meshes/C52_Servo_Tube_Cover.glb",
+   "views": {
+    "doors_closed": 8,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 91,
+    "doors_open": 218
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "c52_servo_tube_cover|C52_Servo_Tube_Cover.glb|0.061300,-0.069000,0.131900",
+   "part": "c52_servo_tube_cover",
+   "mesh": "meshes/C52_Servo_Tube_Cover.glb",
+   "views": {
+    "doors_closed": 8,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 89,
+    "doors_open": 210
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "c60_flange_inner_shoulder_1|C60_Flange_Inner_Shoulder.glb|0.064000,-0.008500,-0.018500",
+   "part": "c60_flange_inner_shoulder_1",
+   "mesh": "meshes/C60_Flange_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 15,
+    "doors_open": 164
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "c60_flange_inner_shoulder|C60_Flange_Inner_Shoulder.glb|0.064000,-0.008500,-0.018500",
+   "part": "c60_flange_inner_shoulder",
+   "mesh": "meshes/C60_Flange_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 17,
+    "doors_open": 169
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "c60l_servo_array_scaffold_left|C60L_Servo_Array_Scaffold_left.glb|-0.029123,0.100000,0.151500",
+   "part": "c60l_servo_array_scaffold_left",
+   "mesh": "meshes/C60L_Servo_Array_Scaffold_left.glb",
+   "views": {
+    "doors_closed": 15,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 264,
+    "doors_open": 1469
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "c60r_servo_array_scaffold_right|C60R_Servo_Array_Scaffold_right.glb|0.029123,0.100000,0.151500",
+   "part": "c60r_servo_array_scaffold_right",
+   "mesh": "meshes/C60R_Servo_Array_Scaffold_right.glb",
+   "views": {
+    "doors_closed": 16,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 250,
+    "doors_open": 1947
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "c61_motor_bracket_inner_shoulder_1|C61_Motor_Bracket_Inner_Shoulder.glb|-0.120567,0.000000,0.000000",
+   "part": "c61_motor_bracket_inner_shoulder_1",
+   "mesh": "meshes/C61_Motor_Bracket_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 4,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 72,
+    "doors_open": 731
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "c61_motor_bracket_inner_shoulder|C61_Motor_Bracket_Inner_Shoulder.glb|-0.120567,0.000000,0.000000",
+   "part": "c61_motor_bracket_inner_shoulder",
+   "mesh": "meshes/C61_Motor_Bracket_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 3,
+    "doors_open": 4
+   },
+   "pixels": {
+    "doors_closed": 29,
+    "doors_open": 509
+   },
+   "max_views": 4,
+   "visible": true
+  },
+  {
+   "key": "c62_ringflange_inner_shoulder_1|C62_Ringflange_Inner_Shoulder.glb|0.066546,0.000000,0.000000",
+   "part": "c62_ringflange_inner_shoulder_1",
+   "mesh": "meshes/C62_Ringflange_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 26
+   },
+   "pixels": {
+    "doors_closed": 1152,
+    "doors_open": 1160
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "c62_ringflange_inner_shoulder|C62_Ringflange_Inner_Shoulder.glb|0.066546,0.000000,0.000000",
+   "part": "c62_ringflange_inner_shoulder",
+   "mesh": "meshes/C62_Ringflange_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 1216,
+    "doors_open": 1208
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "c63_motor_axis_inner_shoulder_1|C63_Motor_Axis_Inner_Shoulder.glb|0.004400,0.000000,0.000000",
+   "part": "c63_motor_axis_inner_shoulder_1",
+   "mesh": "meshes/C63_Motor_Axis_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c63_motor_axis_inner_shoulder|C63_Motor_Axis_Inner_Shoulder.glb|0.004400,0.000000,0.000000",
+   "part": "c63_motor_axis_inner_shoulder",
+   "mesh": "meshes/C63_Motor_Axis_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c64_motor_axis_cap_inner_shoulder_1|C64_Motor_Axis_Cap_Inner_Shoulder.glb|0.000000,0.000000,0.000000",
+   "part": "c64_motor_axis_cap_inner_shoulder_1",
+   "mesh": "meshes/C64_Motor_Axis_Cap_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 7,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 181,
+    "doors_open": 177
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "c64_motor_axis_cap_inner_shoulder|C64_Motor_Axis_Cap_Inner_Shoulder.glb|0.000000,0.000000,0.000000",
+   "part": "c64_motor_axis_cap_inner_shoulder",
+   "mesh": "meshes/C64_Motor_Axis_Cap_Inner_Shoulder.glb",
+   "views": {
+    "doors_closed": 11,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 212,
+    "doors_open": 226
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "c65_bracket_outer_shoulder_1|C65_Bracket_Outer_Shoulder.glb|-0.006000,-0.000000,-0.000000",
+   "part": "c65_bracket_outer_shoulder_1",
+   "mesh": "meshes/C65_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 6489,
+    "doors_open": 6144
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "c65_bracket_outer_shoulder_2|C65_Bracket_Outer_Shoulder.glb|-0.011000,0.000000,0.000000",
+   "part": "c65_bracket_outer_shoulder_2",
+   "mesh": "meshes/C65_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 6796,
+    "doors_open": 6782
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "c65_bracket_outer_shoulder_3|C65_Bracket_Outer_Shoulder.glb|-0.006000,-0.000000,-0.000000",
+   "part": "c65_bracket_outer_shoulder_3",
+   "mesh": "meshes/C65_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 6202,
+    "doors_open": 6171
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "c65_bracket_outer_shoulder|C65_Bracket_Outer_Shoulder.glb|-0.011000,0.000000,0.000000",
+   "part": "c65_bracket_outer_shoulder",
+   "mesh": "meshes/C65_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 6775,
+    "doors_open": 6666
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "c66_cap_front_outer_shoulder_1|C66_Cap_Front_Outer_Shoulder.glb|-0.065000,0.057450,0.000000",
+   "part": "c66_cap_front_outer_shoulder_1",
+   "mesh": "meshes/C66_Cap_Front_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 14
+   },
+   "pixels": {
+    "doors_closed": 1332,
+    "doors_open": 1345
+   },
+   "max_views": 14,
+   "visible": true
+  },
+  {
+   "key": "c66_cap_front_outer_shoulder|C66_Cap_Front_Outer_Shoulder.glb|-0.065000,0.057450,0.000000",
+   "part": "c66_cap_front_outer_shoulder",
+   "mesh": "meshes/C66_Cap_Front_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 15
+   },
+   "pixels": {
+    "doors_closed": 1576,
+    "doors_open": 1584
+   },
+   "max_views": 15,
+   "visible": true
+  },
+  {
+   "key": "c67_cap_back_outer_shoulder_1|C67_Cap_Back_Outer_Shoulder.glb|-0.065000,-0.006250,0.000000",
+   "part": "c67_cap_back_outer_shoulder_1",
+   "mesh": "meshes/C67_Cap_Back_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 15,
+    "doors_open": 16
+   },
+   "pixels": {
+    "doors_closed": 3692,
+    "doors_open": 3420
+   },
+   "max_views": 16,
+   "visible": true
+  },
+  {
+   "key": "c67_cap_back_outer_shoulder|C67_Cap_Back_Outer_Shoulder.glb|-0.065000,-0.006250,0.000000",
+   "part": "c67_cap_back_outer_shoulder",
+   "mesh": "meshes/C67_Cap_Back_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 16
+   },
+   "pixels": {
+    "doors_closed": 3932,
+    "doors_open": 3689
+   },
+   "max_views": 16,
+   "visible": true
+  },
+  {
+   "key": "c68_inner_ring_outer_shoulder_1|C68_Inner_Ring_Outer_Shoulder.glb|-0.065000,0.012153,0.000000",
+   "part": "c68_inner_ring_outer_shoulder_1",
+   "mesh": "meshes/C68_Inner_Ring_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 22,
+    "doors_open": 20
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "c68_inner_ring_outer_shoulder_2|C68_Inner_Ring_Outer_Shoulder.glb|-0.065000,0.012153,0.000000",
+   "part": "c68_inner_ring_outer_shoulder_2",
+   "mesh": "meshes/C68_Inner_Ring_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 6,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 17,
+    "doors_open": 19
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "c68_inner_ring_outer_shoulder_3|C68_Inner_Ring_Outer_Shoulder.glb|-0.065000,0.012153,0.000000",
+   "part": "c68_inner_ring_outer_shoulder_3",
+   "mesh": "meshes/C68_Inner_Ring_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 29,
+    "doors_open": 30
+   },
+   "max_views": 6,
+   "visible": true
+  },
+  {
+   "key": "c68_inner_ring_outer_shoulder|C68_Inner_Ring_Outer_Shoulder.glb|-0.065000,0.012153,0.000000",
+   "part": "c68_inner_ring_outer_shoulder",
+   "mesh": "meshes/C68_Inner_Ring_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 5,
+    "doors_open": 5
+   },
+   "pixels": {
+    "doors_closed": 17,
+    "doors_open": 11
+   },
+   "max_views": 5,
+   "visible": true
+  },
+  {
+   "key": "c69_inner_part_outer_shoulder_1|C69_Inner_Part_Outer_Shoulder.glb|-0.065000,0.037200,0.000000",
+   "part": "c69_inner_part_outer_shoulder_1",
+   "mesh": "meshes/C69_Inner_Part_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 9433,
+    "doors_open": 9371
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "c69_inner_part_outer_shoulder|C69_Inner_Part_Outer_Shoulder.glb|-0.065000,0.037200,0.000000",
+   "part": "c69_inner_part_outer_shoulder",
+   "mesh": "meshes/C69_Inner_Part_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 9616,
+    "doors_open": 9340
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "c70_shell_outer_shoulder_1|C70_Shell_Outer_Shoulder.glb|-0.065000,-0.000000,0.133050",
+   "part": "c70_shell_outer_shoulder_1",
+   "mesh": "meshes/C70_Shell_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 19098,
+    "doors_open": 19071
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "c70_shell_outer_shoulder|C70_Shell_Outer_Shoulder.glb|-0.065000,-0.000000,0.133050",
+   "part": "c70_shell_outer_shoulder",
+   "mesh": "meshes/C70_Shell_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 19057,
+    "doors_open": 18975
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "c72_plate_outer_shoulder_1|C72_Plate_Outer_Shoulder.glb|-0.056500,-0.002000,-0.018500",
+   "part": "c72_plate_outer_shoulder_1",
+   "mesh": "meshes/C72_Plate_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 18,
+    "doors_open": 18
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "c72_plate_outer_shoulder_2|C72_Plate_Outer_Shoulder.glb|-0.056500,-0.002000,-0.018500",
+   "part": "c72_plate_outer_shoulder_2",
+   "mesh": "meshes/C72_Plate_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 1,
+    "doors_open": 1
+   },
+   "pixels": {
+    "doors_closed": 5,
+    "doors_open": 5
+   },
+   "max_views": 1,
+   "visible": true
+  },
+  {
+   "key": "c72_plate_outer_shoulder_3|C72_Plate_Outer_Shoulder.glb|-0.056500,-0.002000,-0.018500",
+   "part": "c72_plate_outer_shoulder_3",
+   "mesh": "meshes/C72_Plate_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c72_plate_outer_shoulder|C72_Plate_Outer_Shoulder.glb|-0.056500,-0.002000,-0.018500",
+   "part": "c72_plate_outer_shoulder",
+   "mesh": "meshes/C72_Plate_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c73_wire_holder_pin_1|C73_Wire_holder_pin.glb|0.000000,0.001200,-0.012000",
+   "part": "c73_wire_holder_pin_1",
+   "mesh": "meshes/C73_Wire_holder_pin.glb",
+   "views": {
+    "doors_closed": 13,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 55,
+    "doors_open": 52
+   },
+   "max_views": 13,
+   "visible": true
+  },
+  {
+   "key": "c73_wire_holder_pin_2|C73_Wire_holder_pin.glb|0.000000,0.001200,-0.012000",
+   "part": "c73_wire_holder_pin_2",
+   "mesh": "meshes/C73_Wire_holder_pin.glb",
+   "views": {
+    "doors_closed": 10,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 51,
+    "doors_open": 39
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "c73_wire_holder_pin_3|C73_Wire_holder_pin.glb|0.000000,0.001200,-0.012000",
+   "part": "c73_wire_holder_pin_3",
+   "mesh": "meshes/C73_Wire_holder_pin.glb",
+   "views": {
+    "doors_closed": 10,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 53,
+    "doors_open": 50
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "c73_wire_holder_pin|C73_Wire_holder_pin.glb|0.000000,0.001200,-0.012000",
+   "part": "c73_wire_holder_pin",
+   "mesh": "meshes/C73_Wire_holder_pin.glb",
+   "views": {
+    "doors_closed": 7,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 45,
+    "doors_open": 48
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "c74_wire_holder_1|C74_Wire_holder.glb|0.000000,0.001200,-0.012000",
+   "part": "c74_wire_holder_1",
+   "mesh": "meshes/C74_Wire_holder.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 1049,
+    "doors_open": 988
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "c74_wire_holder_2|C74_Wire_holder.glb|0.000000,0.001200,-0.012000",
+   "part": "c74_wire_holder_2",
+   "mesh": "meshes/C74_Wire_holder.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 18
+   },
+   "pixels": {
+    "doors_closed": 1003,
+    "doors_open": 934
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "c74_wire_holder_3|C74_Wire_holder.glb|0.000000,0.001200,-0.012000",
+   "part": "c74_wire_holder_3",
+   "mesh": "meshes/C74_Wire_holder.glb",
+   "views": {
+    "doors_closed": 21,
+    "doors_open": 21
+   },
+   "pixels": {
+    "doors_closed": 1345,
+    "doors_open": 1346
+   },
+   "max_views": 21,
+   "visible": true
+  },
+  {
+   "key": "c74_wire_holder|C74_Wire_holder.glb|0.000000,0.001200,-0.012000",
+   "part": "c74_wire_holder",
+   "mesh": "meshes/C74_Wire_holder.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 1297,
+    "doors_open": 1302
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "c75_front_bracket_outer_shoulder_1|C75_Front_Bracket_Outer_Shoulder.glb|-0.065000,0.006250,0.000000",
+   "part": "c75_front_bracket_outer_shoulder_1",
+   "mesh": "meshes/C75_Front_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 21,
+    "doors_open": 21
+   },
+   "pixels": {
+    "doors_closed": 2050,
+    "doors_open": 2065
+   },
+   "max_views": 21,
+   "visible": true
+  },
+  {
+   "key": "c75_front_bracket_outer_shoulder_2|C75_Front_Bracket_Outer_Shoulder.glb|-0.065000,0.006250,0.000000",
+   "part": "c75_front_bracket_outer_shoulder_2",
+   "mesh": "meshes/C75_Front_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 21
+   },
+   "pixels": {
+    "doors_closed": 1947,
+    "doors_open": 1970
+   },
+   "max_views": 21,
+   "visible": true
+  },
+  {
+   "key": "c75_front_bracket_outer_shoulder_3|C75_Front_Bracket_Outer_Shoulder.glb|-0.065000,0.006250,0.000000",
+   "part": "c75_front_bracket_outer_shoulder_3",
+   "mesh": "meshes/C75_Front_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 1961,
+    "doors_open": 1970
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "c75_front_bracket_outer_shoulder|C75_Front_Bracket_Outer_Shoulder.glb|-0.065000,0.006250,0.000000",
+   "part": "c75_front_bracket_outer_shoulder",
+   "mesh": "meshes/C75_Front_Bracket_Outer_Shoulder.glb",
+   "views": {
+    "doors_closed": 21,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 2147,
+    "doors_open": 2180
+   },
+   "max_views": 21,
+   "visible": true
+  },
+  {
+   "key": "c76_shell_cap_1|C76_Shell_cap.glb|-0.064999,-0.045481,0.065100",
+   "part": "c76_shell_cap_1",
+   "mesh": "meshes/C76_Shell_cap.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 22
+   },
+   "pixels": {
+    "doors_closed": 389,
+    "doors_open": 371
+   },
+   "max_views": 22,
+   "visible": true
+  },
+  {
+   "key": "c76_shell_cap|C76_Shell_cap.glb|-0.064999,-0.045481,0.065100",
+   "part": "c76_shell_cap",
+   "mesh": "meshes/C76_Shell_cap.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 376,
+    "doors_open": 374
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "c77_central_rotator_motor_connector_shoulder_1|C77_Central_rotator_motor_connector_shoulder.glb|0.000000,-0.004000,0.000000",
+   "part": "c77_central_rotator_motor_connector_shoulder_1",
+   "mesh": "meshes/C77_Central_rotator_motor_connector_shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c77_central_rotator_motor_connector_shoulder|C77_Central_rotator_motor_connector_shoulder.glb|0.000000,-0.004000,0.000000",
+   "part": "c77_central_rotator_motor_connector_shoulder",
+   "mesh": "meshes/C77_Central_rotator_motor_connector_shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c78_central_rotator_bracket_shoulder_1|C78_Central_rotator_bracket_shoulder.glb|-0.038150,-0.004050,0.000000",
+   "part": "c78_central_rotator_bracket_shoulder_1",
+   "mesh": "meshes/C78_Central_rotator_bracket_shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "c78_central_rotator_bracket_shoulder|C78_Central_rotator_bracket_shoulder.glb|-0.038150,-0.004050,0.000000",
+   "part": "c78_central_rotator_bracket_shoulder",
+   "mesh": "meshes/C78_Central_rotator_bracket_shoulder.glb",
+   "views": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "pixels": {
+    "doors_closed": 0,
+    "doors_open": 0
+   },
+   "max_views": 0,
+   "visible": false
+  },
+  {
+   "key": "d01_l_palm_left|D01_L_Palm_left.glb|-0.038401,-0.001800,0.100000",
+   "part": "d01_l_palm_left",
+   "mesh": "meshes/D01_L_Palm_left.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 2781,
+    "doors_open": 2825
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d01_r_palm_right|D01_R_Palm_right.glb|-0.173599,0.004273,0.099925",
+   "part": "d01_r_palm_right",
+   "mesh": "meshes/D01_R_Palm_right.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 2874,
+    "doors_open": 2854
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d11_l_bearing_enclosure_left|D11_L_Bearing_enclosure_left.glb|0.020300,0.000200,0.053894",
+   "part": "d11_l_bearing_enclosure_left",
+   "mesh": "meshes/D11_L_Bearing_enclosure_left.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 102,
+    "doors_open": 109
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "d11_r_bearing_enclosure_right|D11_R_Bearing_enclosure_right.glb|-0.180300,0.000200,0.053894",
+   "part": "d11_r_bearing_enclosure_right",
+   "mesh": "meshes/D11_R_Bearing_enclosure_right.glb",
+   "views": {
+    "doors_closed": 18,
+    "doors_open": 18
+   },
+   "pixels": {
+    "doors_closed": 112,
+    "doors_open": 122
+   },
+   "max_views": 18,
+   "visible": true
+  },
+  {
+   "key": "d13_l_thumb_rotator_left|D13_L_Thumb_rotator_left.glb|0.008909,0.000000,0.084912",
+   "part": "d13_l_thumb_rotator_left",
+   "mesh": "meshes/D13_L_Thumb_rotator_left.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 898,
+    "doors_open": 880
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d13_r_thumb_rotator_right|D13_R_Thumb_rotator_right.glb|-0.168909,0.000000,0.084912",
+   "part": "d13_r_thumb_rotator_right",
+   "mesh": "meshes/D13_R_Thumb_rotator_right.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 883,
+    "doors_open": 887
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d30_l_cover_hand_left|D30_L_Cover_hand_left.glb|-0.012401,-0.001800,0.100000",
+   "part": "d30_l_cover_hand_left",
+   "mesh": "meshes/D30_L_Cover_hand_left.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 6040,
+    "doors_open": 6045
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d30_r_cover_hand_right|D30_R_Cover_hand_right.glb|-0.147599,-0.001800,0.100000",
+   "part": "d30_r_cover_hand_right",
+   "mesh": "meshes/D30_R_Cover_hand_right.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 6190,
+    "doors_open": 6188
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d31_hand_wrist_connector_1|D31_Hand_wrist_connector.glb|-0.022500,0.000000,-0.000000",
+   "part": "d31_hand_wrist_connector_1",
+   "mesh": "meshes/D31_Hand_wrist_connector.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 187,
+    "doors_open": 189
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d31_hand_wrist_connector_2|D31_Hand_wrist_connector.glb|-0.022500,0.000000,-0.000000",
+   "part": "d31_hand_wrist_connector_2",
+   "mesh": "meshes/D31_Hand_wrist_connector.glb",
+   "views": {
+    "doors_closed": 24,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 186,
+    "doors_open": 193
+   },
+   "max_views": 24,
+   "visible": true
+  },
+  {
+   "key": "d31_hand_wrist_connector_3|D31_Hand_wrist_connector.glb|-0.022500,0.000000,-0.000000",
+   "part": "d31_hand_wrist_connector_3",
+   "mesh": "meshes/D31_Hand_wrist_connector.glb",
+   "views": {
+    "doors_closed": 18,
+    "doors_open": 17
+   },
+   "pixels": {
+    "doors_closed": 224,
+    "doors_open": 215
+   },
+   "max_views": 18,
+   "visible": true
+  },
+  {
+   "key": "d31_hand_wrist_connector|D31_Hand_wrist_connector.glb|-0.022500,0.000000,-0.000000",
+   "part": "d31_hand_wrist_connector",
+   "mesh": "meshes/D31_Hand_wrist_connector.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 220,
+    "doors_open": 221
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_1|D50_Finger_palm_connection.glb|0.000000,0.011470,0.023894",
+   "part": "d50_finger_palm_connection_1",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 265,
+    "doors_open": 262
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_2|D50_Finger_palm_connection.glb|0.000000,0.011470,0.023894",
+   "part": "d50_finger_palm_connection_2",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 258,
+    "doors_open": 256
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_3|D50_Finger_palm_connection.glb|0.000000,0.011470,0.023894",
+   "part": "d50_finger_palm_connection_3",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 27,
+    "doors_open": 26
+   },
+   "pixels": {
+    "doors_closed": 328,
+    "doors_open": 314
+   },
+   "max_views": 27,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_4|D50_Finger_palm_connection.glb|-0.000000,-0.000465,0.038000",
+   "part": "d50_finger_palm_connection_4",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 255,
+    "doors_open": 250
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_5|D50_Finger_palm_connection.glb|-0.000000,-0.000465,0.038000",
+   "part": "d50_finger_palm_connection_5",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 27,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 298,
+    "doors_open": 302
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_6|D50_Finger_palm_connection.glb|-0.000000,-0.000465,0.038000",
+   "part": "d50_finger_palm_connection_6",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 250,
+    "doors_open": 268
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection_7|D50_Finger_palm_connection.glb|-0.000000,-0.000465,0.038000",
+   "part": "d50_finger_palm_connection_7",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 322,
+    "doors_open": 327
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "d50_finger_palm_connection|D50_Finger_palm_connection.glb|0.000000,0.011470,0.023894",
+   "part": "d50_finger_palm_connection",
+   "mesh": "meshes/D50_Finger_palm_connection.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 320,
+    "doors_open": 328
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_1|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_1",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 32,
+    "doors_open": 29
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_2|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_2",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 34,
+    "doors_open": 36
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_3|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_3",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 8,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 32,
+    "doors_open": 30
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_4|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_4",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 33,
+    "doors_open": 35
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_5|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_5",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 10,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 34,
+    "doors_open": 36
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_6|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_6",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 8
+   },
+   "pixels": {
+    "doors_closed": 32,
+    "doors_open": 29
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal_7|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal_7",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 8,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 32,
+    "doors_open": 28
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "d51_coupling_bar_proximal|D51_Coupling_Bar_Proximal.glb|0.000000,-0.004950,0.004950",
+   "part": "d51_coupling_bar_proximal",
+   "mesh": "meshes/D51_Coupling_Bar_Proximal.glb",
+   "views": {
+    "doors_closed": 7,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_1|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_1",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1291,
+    "doors_open": 1305
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_2|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_2",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1312,
+    "doors_open": 1305
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_3|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_3",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1602,
+    "doors_open": 1607
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_4|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_4",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1266,
+    "doors_open": 1269
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_5|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_5",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1452,
+    "doors_open": 1453
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_6|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_6",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1292,
+    "doors_open": 1287
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal_7|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal_7",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1543,
+    "doors_open": 1541
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d52_finger_proximal|D52_Finger_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d52_finger_proximal",
+   "mesh": "meshes/D52_Finger_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1565,
+    "doors_open": 1554
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_1|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_1",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 35,
+    "doors_open": 31
+   },
+   "max_views": 10,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_2|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_2",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 11,
+    "doors_open": 12
+   },
+   "pixels": {
+    "doors_closed": 33,
+    "doors_open": 37
+   },
+   "max_views": 12,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_3|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_3",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 12,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 35,
+    "doors_open": 36
+   },
+   "max_views": 12,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_4|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_4",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 12,
+    "doors_open": 11
+   },
+   "pixels": {
+    "doors_closed": 42,
+    "doors_open": 39
+   },
+   "max_views": 12,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_5|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_5",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 9,
+    "doors_open": 9
+   },
+   "pixels": {
+    "doors_closed": 35,
+    "doors_open": 32
+   },
+   "max_views": 9,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_6|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_6",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 11,
+    "doors_open": 10
+   },
+   "pixels": {
+    "doors_closed": 36,
+    "doors_open": 37
+   },
+   "max_views": 11,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal_7|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal_7",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 12,
+    "doors_open": 12
+   },
+   "pixels": {
+    "doors_closed": 41,
+    "doors_open": 37
+   },
+   "max_views": 12,
+   "visible": true
+  },
+  {
+   "key": "d53_coupling_bar_distal|D53_Coupling_Bar_Distal.glb|0.000000,-0.005850,-0.031050",
+   "part": "d53_coupling_bar_distal",
+   "mesh": "meshes/D53_Coupling_Bar_Distal.glb",
+   "views": {
+    "doors_closed": 10,
+    "doors_open": 12
+   },
+   "pixels": {
+    "doors_closed": 31,
+    "doors_open": 36
+   },
+   "max_views": 12,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_1|D54_Finger_distal.glb|0.000000,0.004050,-0.031050",
+   "part": "d54_finger_distal_1",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1250,
+    "doors_open": 1252
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_2|D54_Finger_distal.glb|0.000000,0.004050,-0.031050",
+   "part": "d54_finger_distal_2",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1276,
+    "doors_open": 1274
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_3|D54_Finger_distal.glb|0.000000,0.004050,-0.031050",
+   "part": "d54_finger_distal_3",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1452,
+    "doors_open": 1438
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_4|D54_Finger_distal.glb|0.000000,0.004050,-0.031050",
+   "part": "d54_finger_distal_4",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1297,
+    "doors_open": 1287
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_5|D54_Finger_distal.glb|0.000000,-0.000900,-0.036000",
+   "part": "d54_finger_distal_5",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 1395,
+    "doors_open": 1381
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_6|D54_Finger_distal.glb|0.000000,0.004050,-0.031050",
+   "part": "d54_finger_distal_6",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1273,
+    "doors_open": 1277
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal_7|D54_Finger_distal.glb|0.000000,0.004050,-0.031050",
+   "part": "d54_finger_distal_7",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 1440,
+    "doors_open": 1434
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d54_finger_distal|D54_Finger_distal.glb|0.000000,-0.000900,-0.036000",
+   "part": "d54_finger_distal",
+   "mesh": "meshes/D54_Finger_distal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1430,
+    "doors_open": 1419
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_1|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip_1",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 991,
+    "doors_open": 1001
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_2|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip_2",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1006,
+    "doors_open": 1005
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_3|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip_3",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1108,
+    "doors_open": 1105
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_4|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip_4",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1023,
+    "doors_open": 1024
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_5|D55_Finger_tip.glb|0.000000,0.003150,-0.062050",
+   "part": "d55_finger_tip_5",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 1088,
+    "doors_open": 1088
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_6|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip_6",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1019,
+    "doors_open": 1015
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip_7|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip_7",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 31
+   },
+   "pixels": {
+    "doors_closed": 1080,
+    "doors_open": 1079
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d55_finger_tip|D55_Finger_tip.glb|0.000000,-0.001800,-0.067000",
+   "part": "d55_finger_tip",
+   "mesh": "meshes/D55_Finger_tip.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1052,
+    "doors_open": 1049
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d56_coupling_bar_thumb_1|D56_Coupling_Bar_Thumb.glb|0.000000,-0.005233,0.005233",
+   "part": "d56_coupling_bar_thumb_1",
+   "mesh": "meshes/D56_Coupling_Bar_Thumb.glb",
+   "views": {
+    "doors_closed": 8,
+    "doors_open": 7
+   },
+   "pixels": {
+    "doors_closed": 25,
+    "doors_open": 29
+   },
+   "max_views": 8,
+   "visible": true
+  },
+  {
+   "key": "d56_coupling_bar_thumb|D56_Coupling_Bar_Thumb.glb|0.000000,-0.005233,0.005233",
+   "part": "d56_coupling_bar_thumb",
+   "mesh": "meshes/D56_Coupling_Bar_Thumb.glb",
+   "views": {
+    "doors_closed": 7,
+    "doors_open": 6
+   },
+   "pixels": {
+    "doors_closed": 24,
+    "doors_open": 22
+   },
+   "max_views": 7,
+   "visible": true
+  },
+  {
+   "key": "d57_thumb_proximal_1|D57_Thumb_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d57_thumb_proximal_1",
+   "mesh": "meshes/D57_Thumb_proximal.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1979,
+    "doors_open": 1980
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d57_thumb_proximal|D57_Thumb_proximal.glb|0.000000,0.000000,0.000000",
+   "part": "d57_thumb_proximal",
+   "mesh": "meshes/D57_Thumb_proximal.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 2029,
+    "doors_open": 2048
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d58_thumb_tip_1|D58_Thumb_tip.glb|0.000000,0.003433,-0.039767",
+   "part": "d58_thumb_tip_1",
+   "mesh": "meshes/D58_Thumb_tip.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 1697,
+    "doors_open": 1700
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d58_thumb_tip|D58_Thumb_tip.glb|0.000000,0.003433,-0.039767",
+   "part": "d58_thumb_tip",
+   "mesh": "meshes/D58_Thumb_tip.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 1767,
+    "doors_open": 1738
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_1|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_1",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 16,
+    "doors_open": 17
+   },
+   "pixels": {
+    "doors_closed": 468,
+    "doors_open": 463
+   },
+   "max_views": 17,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_2|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_2",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 17,
+    "doors_open": 16
+   },
+   "pixels": {
+    "doors_closed": 464,
+    "doors_open": 462
+   },
+   "max_views": 17,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_3|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_3",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 21
+   },
+   "pixels": {
+    "doors_closed": 507,
+    "doors_open": 505
+   },
+   "max_views": 21,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_4|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_4",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 15,
+    "doors_open": 15
+   },
+   "pixels": {
+    "doors_closed": 455,
+    "doors_open": 449
+   },
+   "max_views": 15,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_5|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_5",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 23,
+    "doors_open": 23
+   },
+   "pixels": {
+    "doors_closed": 483,
+    "doors_open": 485
+   },
+   "max_views": 23,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_6|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_6",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 16,
+    "doors_open": 15
+   },
+   "pixels": {
+    "doors_closed": 460,
+    "doors_open": 463
+   },
+   "max_views": 16,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin_7|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin_7",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 489,
+    "doors_open": 490
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "d59_palm_connection_skin|D59_Palm_connection_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d59_palm_connection_skin",
+   "mesh": "meshes/D59_Palm_connection_skin.glb",
+   "views": {
+    "doors_closed": 24,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 490,
+    "doors_open": 490
+   },
+   "max_views": 24,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_1|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_1",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 23,
+    "doors_open": 21
+   },
+   "pixels": {
+    "doors_closed": 307,
+    "doors_open": 302
+   },
+   "max_views": 23,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_2|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_2",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 21,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 308,
+    "doors_open": 315
+   },
+   "max_views": 21,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_3|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_3",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 330,
+    "doors_open": 324
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_4|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_4",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 20,
+    "doors_open": 20
+   },
+   "pixels": {
+    "doors_closed": 303,
+    "doors_open": 296
+   },
+   "max_views": 20,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_5|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_5",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 23,
+    "doors_open": 23
+   },
+   "pixels": {
+    "doors_closed": 300,
+    "doors_open": 307
+   },
+   "max_views": 23,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_6|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_6",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 300,
+    "doors_open": 302
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin_7|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin_7",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 24,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 311,
+    "doors_open": 319
+   },
+   "max_views": 24,
+   "visible": true
+  },
+  {
+   "key": "d60_proximal_skin|D60_Proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d60_proximal_skin",
+   "mesh": "meshes/D60_Proximal_skin.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 312,
+    "doors_open": 312
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_1|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_1",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 23,
+    "doors_open": 23
+   },
+   "pixels": {
+    "doors_closed": 231,
+    "doors_open": 231
+   },
+   "max_views": 23,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_2|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_2",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 21,
+    "doors_open": 22
+   },
+   "pixels": {
+    "doors_closed": 225,
+    "doors_open": 234
+   },
+   "max_views": 22,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_3|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_3",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 26
+   },
+   "pixels": {
+    "doors_closed": 256,
+    "doors_open": 247
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_4|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_4",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 23,
+    "doors_open": 23
+   },
+   "pixels": {
+    "doors_closed": 229,
+    "doors_open": 239
+   },
+   "max_views": 23,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_5|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_5",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 239,
+    "doors_open": 233
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_6|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_6",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 22,
+    "doors_open": 21
+   },
+   "pixels": {
+    "doors_closed": 237,
+    "doors_open": 234
+   },
+   "max_views": 22,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin_7|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin_7",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 239,
+    "doors_open": 236
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d61_distal_skin|D61_Distal_skin.glb|0.000000,-0.000900,-0.036000",
+   "part": "d61_distal_skin",
+   "mesh": "meshes/D61_Distal_skin.glb",
+   "views": {
+    "doors_closed": 25,
+    "doors_open": 25
+   },
+   "pixels": {
+    "doors_closed": 237,
+    "doors_open": 236
+   },
+   "max_views": 25,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_1|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_1",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 310,
+    "doors_open": 309
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_2|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_2",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 27
+   },
+   "pixels": {
+    "doors_closed": 322,
+    "doors_open": 315
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_3|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_3",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 316,
+    "doors_open": 316
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_4|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_4",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 312,
+    "doors_open": 306
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_5|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_5",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 31,
+    "doors_open": 30
+   },
+   "pixels": {
+    "doors_closed": 309,
+    "doors_open": 312
+   },
+   "max_views": 31,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_6|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_6",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 314,
+    "doors_open": 309
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin_7|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin_7",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 317,
+    "doors_open": 314
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d62_tip_skin|D62_Tip_skin.glb|0.000000,-0.001800,-0.067000",
+   "part": "d62_tip_skin",
+   "mesh": "meshes/D62_Tip_skin.glb",
+   "views": {
+    "doors_closed": 29,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 317,
+    "doors_open": 316
+   },
+   "max_views": 29,
+   "visible": true
+  },
+  {
+   "key": "d63_thumb_proximal_skin_1|D63_Thumb_proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d63_thumb_proximal_skin_1",
+   "mesh": "meshes/D63_Thumb_proximal_skin.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 26
+   },
+   "pixels": {
+    "doors_closed": 469,
+    "doors_open": 470
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "d63_thumb_proximal_skin|D63_Thumb_proximal_skin.glb|0.000000,0.000000,0.000000",
+   "part": "d63_thumb_proximal_skin",
+   "mesh": "meshes/D63_Thumb_proximal_skin.glb",
+   "views": {
+    "doors_closed": 26,
+    "doors_open": 24
+   },
+   "pixels": {
+    "doors_closed": 461,
+    "doors_open": 465
+   },
+   "max_views": 26,
+   "visible": true
+  },
+  {
+   "key": "d64_thumb_tip_skin_1|D64_Thumb_tip_skin.glb|0.000000,-0.001800,-0.045000",
+   "part": "d64_thumb_tip_skin_1",
+   "mesh": "meshes/D64_Thumb_tip_skin.glb",
+   "views": {
+    "doors_closed": 28,
+    "doors_open": 28
+   },
+   "pixels": {
+    "doors_closed": 568,
+    "doors_open": 567
+   },
+   "max_views": 28,
+   "visible": true
+  },
+  {
+   "key": "d64_thumb_tip_skin|D64_Thumb_tip_skin.glb|0.000000,-0.001800,-0.045000",
+   "part": "d64_thumb_tip_skin",
+   "mesh": "meshes/D64_Thumb_tip_skin.glb",
+   "views": {
+    "doors_closed": 30,
+    "doors_open": 29
+   },
+   "pixels": {
+    "doors_closed": 587,
+    "doors_open": 584
+   },
+   "max_views": 30,
+   "visible": true
+  },
+  {
+   "key": "d65_l_palm_skin_left|D65_L_Palm_skin_left.glb|-0.024601,0.010500,0.100000",
+   "part": "d65_l_palm_skin_left",
+   "mesh": "meshes/D65_L_Palm_skin_left.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 19
+   },
+   "pixels": {
+    "doors_closed": 2312,
+    "doors_open": 2299
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "d65_r_palm_skin_right|D65_R_Palm_skin_right.glb|-0.135399,0.010500,0.100000",
+   "part": "d65_r_palm_skin_right",
+   "mesh": "meshes/D65_R_Palm_skin_right.glb",
+   "views": {
+    "doors_closed": 19,
+    "doors_open": 18
+   },
+   "pixels": {
+    "doors_closed": 2374,
+    "doors_open": 2370
+   },
+   "max_views": 19,
+   "visible": true
+  },
+  {
+   "key": "dot|dot.glb|0.000000,0.000000,0.000000",
+   "part": "dot",
+   "mesh": "meshes/dot.glb",
+   "views": {
+    "doors_closed": 13,
+    "doors_open": 13
+   },
+   "pixels": {
+    "doors_closed": 34,
+    "doors_open": 33
+   },
+   "max_views": 13,
+   "visible": true
+  },
+  {
+   "key": "i_major|i_major.glb|0.000000,0.000000,0.000000",
+   "part": "i_major",
+   "mesh": "meshes/i_major.glb",
+   "views": {
+    "doors_closed": 13,
+    "doors_open": 13
+   },
+   "pixels": {
+    "doors_closed": 79,
+    "doors_open": 84
+   },
+   "max_views": 13,
+   "visible": true
+  },
+  {
+   "key": "i_minor|i_minor.glb|0.000000,0.000000,0.000000",
+   "part": "i_minor",
+   "mesh": "meshes/i_minor.glb",
+   "views": {
+    "doors_closed": 13,
+    "doors_open": 13
+   },
+   "pixels": {
+    "doors_closed": 24,
+    "doors_open": 26
+   },
+   "max_views": 13,
+   "visible": true
+  },
+  {
+   "key": "p|P.glb|0.000000,0.000000,0.000000",
+   "part": "p",
+   "mesh": "meshes/P.glb",
+   "views": {
+    "doors_closed": 14,
+    "doors_open": 15
+   },
+   "pixels": {
+    "doors_closed": 123,
+    "doors_open": 129
+   },
+   "max_views": 15,
+   "visible": true
+  }
+ ]
+}

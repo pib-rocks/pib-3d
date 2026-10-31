@@ -1,11 +1,12 @@
 PY ?= python3
 
-.PHONY: help verify reproduce assets tree serve check-meshes all clean
+.PHONY: help verify reproduce assets tree serve check-meshes visibility all clean
 
 help:
 	@echo "make verify        control model vs. Onshape export (numpy only)"
 	@echo "make reproduce     fail if urdf/pib.control.urdf is not what the script produces"
 	@echo "make check-meshes  every mesh referenced by the URDFs exists, none unused"
+	@echo "make visibility    which parts can ever be seen from outside (needs open3d, ~25 s)"
 	@echo "make assets        bake web/meshes/<link>.glb (needs trimesh, ~60 s)"
 	@echo "make tree          redraw docs/pib.control.tree.png (needs matplotlib)"
 	@echo "make serve         static viewer on http://localhost:8099/"
@@ -20,6 +21,9 @@ reproduce:
 
 check-meshes:
 	$(PY) tools/check_meshes.py
+
+visibility:
+	$(PY) tools/visibility_bake.py
 
 assets:
 	$(PY) tools/build_web_assets.py

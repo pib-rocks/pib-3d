@@ -10,8 +10,8 @@ build on, and a browser viewer to look at it.
 | `meshes/` | the 130 CAD parts as glTF binaries, referenced by both URDFs |
 | `launch/` | ROS 2 launch file for the control model; the original ROS 1 file is kept as `pib.launch` |
 | `web/` | three.js viewer: orbit, joint sliders, click a part to select its joint |
-| `tools/` | the reducer, the verifier, the web asset builder, the static server |
-| `docs/` | what the control model is and how it was verified |
+| `tools/` | the reducer, the verifier, the visibility bake, the web asset builder, the static server |
+| `docs/` | what the control model is, how it was verified, and which parts are invisible |
 
 ## Quickstart
 
@@ -50,6 +50,14 @@ The reducer welds everything that is not a real axis into its parent (meshes,
 mass and inertia carried along), keeps one joint per physical degree of
 freedom, restores the left wrist roll the export had typed as a fixed mate
 (PR-2089), and gives every link collision geometry from its meshes.
+
+Parts that can never be seen from outside lose their geometry too — but only
+after a measurement, not from a hand-kept list: `tools/visibility_bake.py`
+ray-casts the whole assembly from 32 directions in two poses (doors closed and
+open) and writes `docs/visibility.json`. 40 of 399 instances (5.4 % of the
+triangles) are never hit; they keep their mass and inertia, only their meshes
+go. `visual_overrides.json` is the escape hatch for exceptions in both
+directions.
 
 `docs/control-model.md` has the numbers, the list of what was dropped and the
 approximations that remain.

@@ -86,15 +86,6 @@
                 <color rgba="0.235294 0.235294 0.235294 1" />
             </material>
         </visual>
-        <visual>
-            <origin xyz="0.0415 0.048 -0.112" rpy="-5.27356e-16 -6.13458e-17 -3.11188e-17" />
-            <geometry>
-                <mesh filename="package://pib/meshes/A83_Motor_Adapter_Neck.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
         <collision>
             <origin xyz="0.0414999326 -0.0254001446 0.0265983" rpy="-9.15934e-16 5.61727e-19 3.14159" />
             <geometry>
@@ -147,12 +138,6 @@
             <origin xyz="0.0415 0.048 -0.112" rpy="-1.11022e-16 -3.65171e-16 -4.76029e-17" />
             <geometry>
                 <mesh filename="package://pib/meshes/A82_Neck_axis.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.0415 0.048 -0.112" rpy="-5.27356e-16 -6.13458e-17 -3.11188e-17" />
-            <geometry>
-                <mesh filename="package://pib/meshes/A83_Motor_Adapter_Neck.glb" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -260,24 +245,6 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-0.0227228 0.0484438029 -0.3649" rpy="-1.5708 -5.60519e-45 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.1252772 0.0464805829 -0.3649" rpy="-1.5708 -3.14682e-29 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.1277772 0.128783783 -0.3649" rpy="-1.5708 -6.29363e-29 3.14159" />
             <geometry>
                 <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
@@ -296,34 +263,7 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="0.0246772 0.0464808029 -0.3649" rpy="-1.5708 -0 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.0263228 0.0957069029 -0.3649" rpy="-1.5708 -5.60519e-45 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.0218772 0.0873850029 -0.3649" rpy="-1.5708 -5.60519e-45 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.1726772 0.0484435829 -0.3649" rpy="-1.5708 -6.29363e-29 3.14159" />
             <geometry>
                 <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
             </geometry>
@@ -827,24 +767,6 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-0.0739829873 0.106028066 -0.228099987" rpy="3.14159 -0 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B66_Body_Neck_Position.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.235294_0.235294_0.235294_0.000000_0.000000">
-                <color rgba="0.235294 0.235294 0.235294 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.074017 0.1060287 -0.2281" rpy="-2.76101e-30 2.77717e-26 -6.12323e-17" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B66_Body_Neck_Position.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.235294_0.235294_0.235294_0.000000_0.000000">
-                <color rgba="0.235294 0.235294 0.235294 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.1633174 0.1914391 -0.4181" rpy="-3.48506e-17 -0.0946904 -1.35288" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
@@ -920,15 +842,6 @@
             <origin xyz="-0.074 0.00036762 -0.4381" rpy="-1.5708 -0.0873398 1.5708" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.074 0.00036762 -0.4381" rpy="-1.5708 -0.0873398 1.5708" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
                 <color rgba="0.91 0.91 0.91 1" />
@@ -1037,15 +950,6 @@
             <origin xyz="0.003 0.180026 -0.6081" rpy="2.99836e-17 -4.08601e-17 -1.83822" />
             <geometry>
                 <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.003 0.180026 -0.6081" rpy="2.99836e-17 -4.08601e-17 -1.83822" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
                 <color rgba="0.91 0.91 0.91 1" />
@@ -1360,24 +1264,6 @@
         <visual>
             <origin xyz="0.0095897 0.0447107 -0.2281" rpy="-3.14159 0.748476 1.7853" />
             <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.0095897 0.0447107 -0.2281" rpy="-3.14159 0.748476 1.7853" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.0095897 0.0447107 -0.2281" rpy="-3.14159 0.748476 1.7853" />
-            <geometry>
                 <mesh filename="package://pib/meshes/__3.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
@@ -1388,15 +1274,6 @@
             <origin xyz="-0.1575897 0.0447104 -0.2281" rpy="-3.14159 0.748476 1.35629" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.1575897 0.0447104 -0.2281" rpy="-3.14159 0.748476 1.35629" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
                 <color rgba="0.91 0.91 0.91 1" />
@@ -1432,24 +1309,6 @@
         <visual>
             <origin xyz="0.0095861 0.1684116 -0.2281" rpy="-3.14159 0.739835 -1.76622" />
             <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.0095861 0.1684116 -0.2281" rpy="-3.14159 0.739835 -1.76622" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.0095861 0.1684116 -0.2281" rpy="-3.14159 0.739835 -1.76622" />
-            <geometry>
                 <mesh filename="package://pib/meshes/__3.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
@@ -1469,15 +1328,6 @@
             <origin xyz="-0.1575861 0.168411 -0.2281" rpy="3.14159 0.739835 -1.37537" />
             <geometry>
                 <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.1575861 0.168411 -0.2281" rpy="3.14159 0.739835 -1.37537" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
                 <color rgba="0.91 0.91 0.91 1" />
@@ -1496,24 +1346,6 @@
             <origin xyz="0.066516 0.0809967 -0.4181" rpy="5.51957e-16 -0.15737 3.09997" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.066516 0.0809967 -0.4181" rpy="5.51957e-16 -0.15737 3.09997" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="0.066516 0.0809967 -0.4181" rpy="5.51957e-16 -0.15737 3.09997" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
                 <color rgba="0.91 0.91 0.91 1" />
@@ -1748,33 +1580,6 @@
             <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
-                <color rgba="0.91 0.91 0.91 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__3.glb" scale="1 1 1" />
             </geometry>
             <material name="0.910000_0.910000_0.910000_0.000000_0.000000">
                 <color rgba="0.91 0.91 0.91 1" />
@@ -1955,18 +1760,6 @@
             </geometry>
         </collision>
         <collision>
-            <origin xyz="-0.0227228 0.0484438029 -0.3649" rpy="-1.5708 -5.60519e-45 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.1252772 0.0464805829 -0.3649" rpy="-1.5708 -3.14682e-29 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
             <origin xyz="-0.1277772 0.128783783 -0.3649" rpy="-1.5708 -6.29363e-29 3.14159" />
             <geometry>
                 <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
@@ -1979,25 +1772,7 @@
             </geometry>
         </collision>
         <collision>
-            <origin xyz="0.0246772 0.0464808029 -0.3649" rpy="-1.5708 -0 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
             <origin xyz="-0.0263228 0.0957069029 -0.3649" rpy="-1.5708 -5.60519e-45 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.0218772 0.0873850029 -0.3649" rpy="-1.5708 -5.60519e-45 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.1726772 0.0484435829 -0.3649" rpy="-1.5708 -6.29363e-29 3.14159" />
             <geometry>
                 <mesh filename="package://pib/meshes/B25_Wire_connector.glb" scale="1 1 1" />
             </geometry>
@@ -2333,18 +2108,6 @@
             </geometry>
         </collision>
         <collision>
-            <origin xyz="-0.0739829873 0.106028066 -0.228099987" rpy="3.14159 -0 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B66_Body_Neck_Position.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.074017 0.1060287 -0.2281" rpy="-2.76101e-30 2.77717e-26 -6.12323e-17" />
-            <geometry>
-                <mesh filename="package://pib/meshes/B66_Body_Neck_Position.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
             <origin xyz="-0.1633174 0.1914391 -0.4181" rpy="-3.48506e-17 -0.0946904 -1.35288" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
@@ -2396,12 +2159,6 @@
             <origin xyz="-0.074 0.00036762 -0.4381" rpy="-1.5708 -0.0873398 1.5708" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.074 0.00036762 -0.4381" rpy="-1.5708 -0.0873398 1.5708" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -2474,12 +2231,6 @@
             <origin xyz="0.003 0.180026 -0.6081" rpy="2.99836e-17 -4.08601e-17 -1.83822" />
             <geometry>
                 <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.003 0.180026 -0.6081" rpy="2.99836e-17 -4.08601e-17 -1.83822" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -2689,18 +2440,6 @@
         <collision>
             <origin xyz="0.0095897 0.0447107 -0.2281" rpy="-3.14159 0.748476 1.7853" />
             <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.0095897 0.0447107 -0.2281" rpy="-3.14159 0.748476 1.7853" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.0095897 0.0447107 -0.2281" rpy="-3.14159 0.748476 1.7853" />
-            <geometry>
                 <mesh filename="package://pib/meshes/__3.glb" scale="1 1 1" />
             </geometry>
         </collision>
@@ -2708,12 +2447,6 @@
             <origin xyz="-0.1575897 0.0447104 -0.2281" rpy="-3.14159 0.748476 1.35629" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.1575897 0.0447104 -0.2281" rpy="-3.14159 0.748476 1.35629" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -2737,18 +2470,6 @@
         <collision>
             <origin xyz="0.0095861 0.1684116 -0.2281" rpy="-3.14159 0.739835 -1.76622" />
             <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.0095861 0.1684116 -0.2281" rpy="-3.14159 0.739835 -1.76622" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.0095861 0.1684116 -0.2281" rpy="-3.14159 0.739835 -1.76622" />
-            <geometry>
                 <mesh filename="package://pib/meshes/__3.glb" scale="1 1 1" />
             </geometry>
         </collision>
@@ -2762,12 +2483,6 @@
             <origin xyz="-0.1575861 0.168411 -0.2281" rpy="3.14159 0.739835 -1.37537" />
             <geometry>
                 <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.1575861 0.168411 -0.2281" rpy="3.14159 0.739835 -1.37537" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -2780,18 +2495,6 @@
             <origin xyz="0.066516 0.0809967 -0.4181" rpy="5.51957e-16 -0.15737 3.09997" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.066516 0.0809967 -0.4181" rpy="5.51957e-16 -0.15737 3.09997" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="0.066516 0.0809967 -0.4181" rpy="5.51957e-16 -0.15737 3.09997" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -2948,24 +2651,6 @@
             <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
             <geometry>
                 <mesh filename="package://pib/meshes/_.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__1.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__2.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.214516 0.0809967 -0.4181" rpy="-2.98593e-17 -0.15737 0.0416227" />
-            <geometry>
-                <mesh filename="package://pib/meshes/__3.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -3185,15 +2870,6 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-1.06143592e-08 -0.004 -1.06143593e-08" rpy="3.14159 1.74327e-17 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C15_Central_rotator_motor_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-7.34641021e-07 -0.016 0.2" rpy="-3.14159265 -1.57079265 -3.14159265" />
             <geometry>
                 <mesh filename="package://pib/meshes/C18R_Forearm_distal_lock_right.glb" scale="1 1 1" />
@@ -3233,12 +2909,6 @@
             <origin xyz="0 -0.004 3.95208e-17" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C09_Central_rotator_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-1.06143592e-08 -0.004 -1.06143593e-08" rpy="3.14159 1.74327e-17 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C15_Central_rotator_motor_connector.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -3353,15 +3023,6 @@
                 <color rgba="0.235294 0.235294 0.235294 1" />
             </material>
         </visual>
-        <visual>
-            <origin xyz="1.06143591e-08 -0.004 1.06143592e-08" rpy="-3.14159 -1.94289e-16 -3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C77_Central_rotator_motor_connector_shoulder.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
         <collision>
             <origin xyz="0 -0.004 3.95208e-17" rpy="0 -0 0" />
             <geometry>
@@ -3414,12 +3075,6 @@
             <origin xyz="-0.0522000318 -0.085999926 0.0210002252" rpy="-0.78539551 -1.57079113 2.35619449" />
             <geometry>
                 <mesh filename="package://pib/meshes/C74_Wire_holder.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="1.06143591e-08 -0.004 1.06143592e-08" rpy="-3.14159 -1.94289e-16 -3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C77_Central_rotator_motor_connector_shoulder.glb" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -3510,15 +3165,6 @@
                 <color rgba="0.235294 0.235294 0.235294 1" />
             </material>
         </visual>
-        <visual>
-            <origin xyz="-1.06143592e-08 -0.004 1.06143591e-08" rpy="-3.14159 5.38458e-15 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C77_Central_rotator_motor_connector_shoulder.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
         <collision>
             <origin xyz="0 -0.004 3.95208e-17" rpy="0 -0 0" />
             <geometry>
@@ -3573,12 +3219,6 @@
                 <mesh filename="package://pib/meshes/C74_Wire_holder.glb" scale="1 1 1" />
             </geometry>
         </collision>
-        <collision>
-            <origin xyz="-1.06143592e-08 -0.004 1.06143591e-08" rpy="-3.14159 5.38458e-15 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C77_Central_rotator_motor_connector_shoulder.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
     </link>
     <link name="c09_central_rotator_connector_3">
         <inertial>
@@ -3590,15 +3230,6 @@
             <origin xyz="0 -0.004 3.95208e-17" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C09_Central_rotator_connector.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-1.06143592e-08 -0.004 1.06143592e-08" rpy="-3.14159 -4.21068e-16 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C15_Central_rotator_motor_connector.glb" scale="1 1 1" />
             </geometry>
             <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
                 <color rgba="0.901961 0.901961 0.901961 1" />
@@ -3644,12 +3275,6 @@
             <origin xyz="0 -0.004 3.95208e-17" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C09_Central_rotator_connector.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-1.06143592e-08 -0.004 1.06143592e-08" rpy="-3.14159 -4.21068e-16 3.14159" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C15_Central_rotator_motor_connector.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -3693,33 +3318,6 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-0.0139 0.0394006966 0.01" rpy="-1.38778e-17 3.46945e-18 -2.77556e-17" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C26_Forearm_disc_top.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0139 -0.0394006735 -0.0100001046" rpy="-3.14159 5.2388645e-16 1.110224e-16" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C27_Forearm_bearing_distance_ring.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0139 -0.0394006735 -0.0100001046" rpy="-3.14159 5.30825266e-16 1.38778018e-16" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C28_Forearm_bearing_center.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.0139 -0.0406299347 -0.018985718" rpy="3.06632 -2.89856e-16 -3.26889e-15" />
             <geometry>
                 <mesh filename="package://pib/meshes/C30_Forearm_bar.glb" scale="1 1 1" />
@@ -3732,24 +3330,6 @@
             <origin xyz="-0.0139 0.0394007 0.01" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C25_Forearm_disc_bottom.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0139 0.0394006966 0.01" rpy="-1.38778e-17 3.46945e-18 -2.77556e-17" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C26_Forearm_disc_top.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0139 -0.0394006735 -0.0100001046" rpy="-3.14159 5.2388645e-16 1.110224e-16" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C27_Forearm_bearing_distance_ring.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0139 -0.0394006735 -0.0100001046" rpy="-3.14159 5.30825266e-16 1.38778018e-16" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C28_Forearm_bearing_center.glb" scale="1 1 1" />
             </geometry>
         </collision>
         <collision>
@@ -3766,42 +3346,6 @@
             <inertia ixx="2.51099421e-05" ixy="-8.73005882e-07" ixz="-8.66277703e-08" iyy="1.44070004e-06" iyz="-2.97773344e-08" izz="2.47182922e-05" />
         </inertial>
         <visual>
-            <origin xyz="-0.0139 0.0394007 0.01" rpy="0 -0 0" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C25_Forearm_disc_bottom.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0139 0.0394006966 0.01" rpy="6.54767e-15 -1.41983e-15 -7.54952e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C26_Forearm_disc_top.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0139 -0.0394007265 -0.00999989545" rpy="3.14159 1.56851e-15 -3.74701e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C27_Forearm_bearing_distance_ring.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0139 -0.0394007265 -0.00999989545" rpy="3.14159 -3.85755802e-16 -2.16493481e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C28_Forearm_bearing_center.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.0139 0.0394006966 0.01" rpy="2.4395e-14 -3.59918e-15 -5.66214e-15" />
             <geometry>
                 <mesh filename="package://pib/meshes/C30_Forearm_bar.glb" scale="1 1 1" />
@@ -3810,30 +3354,6 @@
                 <color rgba="0.235294 0.235294 0.235294 1" />
             </material>
         </visual>
-        <collision>
-            <origin xyz="-0.0139 0.0394007 0.01" rpy="0 -0 0" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C25_Forearm_disc_bottom.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0139 0.0394006966 0.01" rpy="6.54767e-15 -1.41983e-15 -7.54952e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C26_Forearm_disc_top.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0139 -0.0394007265 -0.00999989545" rpy="3.14159 1.56851e-15 -3.74701e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C27_Forearm_bearing_distance_ring.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0139 -0.0394007265 -0.00999989545" rpy="3.14159 -3.85755802e-16 -2.16493481e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C28_Forearm_bearing_center.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
         <collision>
             <origin xyz="-0.0139 0.0394006966 0.01" rpy="2.4395e-14 -3.59918e-15 -5.66214e-15" />
             <geometry>
@@ -4351,15 +3871,6 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-0.033 0.021 6.9388939e-18" rpy="1.11022e-16 7.88861e-31 5.91646e-31" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C34_Elbow_motor_connection.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.033 0.021 0" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C36_Elbow_lower_shell.glb" scale="1 1 1" />
@@ -4384,15 +3895,6 @@
             </geometry>
             <material name="0.235294_0.235294_0.235294_0.000000_0.000000">
                 <color rgba="0.235294 0.235294 0.235294 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.033 0.021 0" rpy="-8.32667e-17 -9.27182e-16 1.33882e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C41_Elbow_central_motor_flange.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
             </material>
         </visual>
         <collision>
@@ -4402,12 +3904,6 @@
             </geometry>
         </collision>
         <collision>
-            <origin xyz="-0.033 0.021 6.9388939e-18" rpy="1.11022e-16 7.88861e-31 5.91646e-31" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C34_Elbow_motor_connection.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
             <origin xyz="-0.033 0.021 0" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C36_Elbow_lower_shell.glb" scale="1 1 1" />
@@ -4423,12 +3919,6 @@
             <origin xyz="-0.033 0.021 7.63278329e-17" rpy="1.80411e-15 -4.15799e-16 2.54762e-16" />
             <geometry>
                 <mesh filename="package://pib/meshes/C38_Elbow_cover.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.033 0.021 0" rpy="-8.32667e-17 -9.27182e-16 1.33882e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C41_Elbow_central_motor_flange.glb" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -4536,15 +4026,6 @@
             <inertia ixx="0.00145830696" ixy="1.70247594e-07" ixz="0.000127592104" iyy="0.00200518559" iyz="2.32605021e-06" izz="0.00145394261" />
         </inertial>
         <visual>
-            <origin xyz="0 1.7748368e-18 1.2178672e-19" rpy="-3.33158e-32 -2.76788e-17 4.03372e-16" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C63_Motor_Axis_Inner_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="0 0 0" rpy="0 -0 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C64_Motor_Axis_Cap_Inner_Shoulder.glb" scale="1 1 1" />
@@ -4616,12 +4097,6 @@
                 <color rgba="0.901961 0.901961 0.901961 1" />
             </material>
         </visual>
-        <collision>
-            <origin xyz="0 1.7748368e-18 1.2178672e-19" rpy="-3.33158e-32 -2.76788e-17 4.03372e-16" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C63_Motor_Axis_Inner_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
         <collision>
             <origin xyz="0 0 0" rpy="0 -0 0" />
             <geometry>
@@ -4677,15 +4152,6 @@
             <mass value="0.657316221" />
             <inertia ixx="0.00145830695" ixy="1.69915345e-07" ixz="0.000127592568" iyy="0.00200518614" iyz="2.32734427e-06" izz="0.0014539441" />
         </inertial>
-        <visual>
-            <origin xyz="0 2.372744e-35 -1.2212464e-19" rpy="7.48374e-50 2.77556e-17 5.3926e-33" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C63_Motor_Axis_Inner_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
         <visual>
             <origin xyz="0 0 0" rpy="0 -0 0" />
             <geometry>
@@ -4758,12 +4224,6 @@
                 <color rgba="0.901961 0.901961 0.901961 1" />
             </material>
         </visual>
-        <collision>
-            <origin xyz="0 2.372744e-35 -1.2212464e-19" rpy="7.48374e-50 2.77556e-17 5.3926e-33" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C63_Motor_Axis_Inner_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
         <collision>
             <origin xyz="0 0 0" rpy="0 -0 0" />
             <geometry>
@@ -4847,15 +4307,6 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-0.065 0.0372 0" rpy="0 -1.71878e-45 0" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C72_Plate_Outer_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.065 0.0372 -0.075" rpy="0 -1.71878e-45 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C72_Plate_Outer_Shoulder.glb" scale="1 1 1" />
@@ -4868,15 +4319,6 @@
             <origin xyz="-0.0649999502 0.0372 -5e-05" rpy="2.46292e-27 -2.74129e-28 9.39238e-30" />
             <geometry>
                 <mesh filename="package://pib/meshes/C76_Shell_cap.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0002 0.0372000082 -0.1291" rpy="1.5708 -1.63179e-27 1.60736e-27" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C78_Central_rotator_bracket_shoulder.glb" scale="1 1 1" />
             </geometry>
             <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
                 <color rgba="0.901961 0.901961 0.901961 1" />
@@ -4901,12 +4343,6 @@
             </geometry>
         </collision>
         <collision>
-            <origin xyz="-0.065 0.0372 0" rpy="0 -1.71878e-45 0" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C72_Plate_Outer_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
             <origin xyz="-0.065 0.0372 -0.075" rpy="0 -1.71878e-45 0" />
             <geometry>
                 <mesh filename="package://pib/meshes/C72_Plate_Outer_Shoulder.glb" scale="1 1 1" />
@@ -4916,12 +4352,6 @@
             <origin xyz="-0.0649999502 0.0372 -5e-05" rpy="2.46292e-27 -2.74129e-28 9.39238e-30" />
             <geometry>
                 <mesh filename="package://pib/meshes/C76_Shell_cap.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0002 0.0372000082 -0.1291" rpy="1.5708 -1.63179e-27 1.60736e-27" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C78_Central_rotator_bracket_shoulder.glb" scale="1 1 1" />
             </geometry>
         </collision>
     </link>
@@ -4968,27 +4398,9 @@
             </material>
         </visual>
         <visual>
-            <origin xyz="-0.065 0.0372 0" rpy="6.93879e-19 -3.15656e-30 1.97215e-31" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C72_Plate_Outer_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
             <origin xyz="-0.0649999502 0.0372 -5e-05" rpy="-2.08555e-29 -1.57772e-30 2.09048e-29" />
             <geometry>
                 <mesh filename="package://pib/meshes/C76_Shell_cap.glb" scale="1 1 1" />
-            </geometry>
-            <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
-                <color rgba="0.901961 0.901961 0.901961 1" />
-            </material>
-        </visual>
-        <visual>
-            <origin xyz="-0.0002 0.0372000082 -0.1291" rpy="1.5708 -9.01501e-14 5.21963e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C78_Central_rotator_bracket_shoulder.glb" scale="1 1 1" />
             </geometry>
             <material name="0.901961_0.901961_0.901961_0.000000_0.000000">
                 <color rgba="0.901961 0.901961 0.901961 1" />
@@ -5019,21 +4431,9 @@
             </geometry>
         </collision>
         <collision>
-            <origin xyz="-0.065 0.0372 0" rpy="6.93879e-19 -3.15656e-30 1.97215e-31" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C72_Plate_Outer_Shoulder.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
             <origin xyz="-0.0649999502 0.0372 -5e-05" rpy="-2.08555e-29 -1.57772e-30 2.09048e-29" />
             <geometry>
                 <mesh filename="package://pib/meshes/C76_Shell_cap.glb" scale="1 1 1" />
-            </geometry>
-        </collision>
-        <collision>
-            <origin xyz="-0.0002 0.0372000082 -0.1291" rpy="1.5708 -9.01501e-14 5.21963e-15" />
-            <geometry>
-                <mesh filename="package://pib/meshes/C78_Central_rotator_bracket_shoulder.glb" scale="1 1 1" />
             </geometry>
         </collision>
     </link>

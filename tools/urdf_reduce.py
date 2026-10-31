@@ -19,6 +19,8 @@ import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = str(ROOT / "urdf" / "pib.urdf")
+VISIBILITY = ROOT / "docs" / "visibility.json"
+OVERRIDES = ROOT / "visual_overrides.json"
 OUT = str(ROOT / "urdf" / "pib.control.urdf")
 MIN_MASS = 0.001
 
@@ -39,6 +41,38 @@ KEEP_EXACT = {
 }
 KEEP_RE = re.compile(r"^j[123](_\d+)?$")          # finger: proximal, distal, tip
 DROP_RE = re.compile(r"loop_closure|^j[4567](_\d+)?$|^cylindrical_1|^revolute_3|^revolute$")
+
+
+
+def instance_key(link, vis):
+    """Same key the visibility bake writes: link, mesh file, own origin."""
+    mesh = vis.find("geometry/mesh")
+    if mesh is None:
+        return None
+    o = vis.find("origin")
+    oxyz = parse_vec(o.get("xyz")) if o is not None else np.zeros(3)
+    name = (mesh.get("filename") or "").rsplit("/", 1)[-1]
+    return f"{link}|{name}|{oxyz[0]:.6f},{oxyz[1]:.6f},{oxyz[2]:.6f}"
+
+
+def hidden_parts():
+    """Parts that the visibility bake never saw, minus the manual overrides.
+
+    A part that is inside the body keeps its mass and inertia, it only loses
+    the geometry nobody can see. Overrides are the escape hatch: `keep` for
+    parts that must stay (sensor windows, labels), `drop` for parts that are
+    visible but should not ship (branding).
+    """
+    keep, drop = set(), set()
+    if OVERRIDES.exists():
+        data = json.loads(OVERRIDES.read_text())
+        keep = set(data.get("keep", []))
+        drop = set(data.get("drop", []))
+    baked = set()
+    if VISIBILITY.exists():
+        data = json.loads(VISIBILITY.read_text())
+        baked = {p["key"] for p in data.get("parts", []) if not p.get("visible", True) and p.get("key")}
+    return (baked - keep) | drop
 
 
 def rpy_matrix(r, p, y):
@@ -275,6 +309,8 @@ def main():
     for n in links:
         group_members.setdefault(find(n), []).append(n)
 
+    drop_visuals = hidden_parts()
+    dropped_visuals = 0
     new_links = {}
     report_groups = {}
     for root_name, members in group_members.items():
@@ -297,7 +333,14 @@ def main():
             for (Rc, tc) in chains[m]:
                 t3 = t3 + R3 @ tc
                 R3 = R3 @ Rc
+            kept_visuals = []
             for v in el.findall("visual"):
+                key = instance_key(m, v)
+                if key in drop_visuals:
+                    dropped_visuals += 1      # mass and inertia stay, the geometry goes
+                else:
+                    kept_visuals.append(v)
+            for v in kept_visuals:
                 tv = transform_element(v, R3, t3)
                 mesh = tv.find("geometry/mesh")
                 if mesh is not None:
@@ -499,6 +542,7 @@ def main():
         json.dump(summary, fh, indent=1)
     print("kept joints:", len(out_joints), "welded:", len(collapse), "links:", len(out.findall("link")))
     print("doors closed into the rest pose:", doors_closed)
+    print("visuals dropped as invisible:", dropped_visuals, "source links")
     print("written:", OUT)
 
 
