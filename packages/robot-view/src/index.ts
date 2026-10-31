@@ -1,4 +1,11 @@
 export { PibRobotView, registerPibRobotView } from './element/PibRobotView.js';
+
+// A host that only wants the element writes `import '@pib/robot-view'`. Registering on
+// import keeps that working, guarded so a server-side render or a second import is inert.
+import { registerPibRobotView as register } from './element/PibRobotView.js';
+if (typeof customElements !== 'undefined' && !customElements.get('pib-robot-view')) {
+  register();
+}
 export type {
   RobotModel,
   ModelJoint,
