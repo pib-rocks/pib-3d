@@ -3,6 +3,9 @@
 The robot model of the pib: the Onshape export, the reduced control model we
 build on, and a browser viewer to look at it.
 
+**Viewer: https://pib-rocks.github.io/pib-3d/** — rebuilds itself from `main`
+on every push, no local setup needed.
+
 | path | what it is |
 |---|---|
 | `urdf/pib.urdf` | the raw Onshape export (351 links, 350 joints) — provenance, never edited by hand |
