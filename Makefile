@@ -31,8 +31,11 @@ assets:
 tree:
 	$(PY) tools/urdf_tree.py
 
-serve:
+serve: robot-view
 	$(PY) tools/serve_web.py 8099
+
+robot-view:
+	cd packages/robot-view && npm ci && npm run build
 
 all: verify reproduce check-meshes
 

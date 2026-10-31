@@ -30,6 +30,16 @@ jobs:
       - name: bake the viewer meshes
         run: python tools/build_web_assets.py
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: build robot-view package
+        run: |
+          cd packages/robot-view
+          npm ci
+          npm run build
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web
