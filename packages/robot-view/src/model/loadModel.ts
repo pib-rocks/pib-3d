@@ -9,13 +9,20 @@ export interface LoadedLinks {
 
 export type LoadProgress = (done: number, total: number) => void;
 
-function meshUrl(model: RobotModel, link: ModelLink): string {
+/**
+ * Meshes live next to the model file, not next to the page. A host that mounts the viewer on
+ * /joint-control/3d with model-url="/api/robot-model/model.json" must get
+ * /api/robot-model/meshes/<file>, so the path is resolved against the model URL.
+ */
+export function meshUrl(model: RobotModel, link: ModelLink, modelUrl: string): string {
   const q = model.build ? `?v=${model.build}` : '';
-  return `./${link.mesh}${q}`;
+  const base = new URL(modelUrl, document.baseURI);
+  return new URL(`${link.mesh}${q}`, base).href;
 }
 
 export async function loadLinkMeshes(
   model: RobotModel,
+  modelUrl: string,
   onProgress: LoadProgress,
   parallelism = 6,
 ): Promise<LoadedLinks> {
@@ -30,7 +37,7 @@ export async function loadLinkMeshes(
     while (queue.length) {
       const link = queue.shift();
       if (!link) break;
-      const url = meshUrl(model, link);
+      const url = meshUrl(model, link, modelUrl);
       const gltf = await loader.loadAsync(url);
       const node = gltf.scene;
       node.name = link.name;

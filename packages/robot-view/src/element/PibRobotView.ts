@@ -442,7 +442,7 @@ export class PibRobotView extends HTMLElement {
         }
       }
 
-      const { linkNodes, partsOf } = await loadLinkMeshes(model, (done, total) => {
+      const { linkNodes, partsOf } = await loadLinkMeshes(model, this._modelUrl, (done, total) => {
         bar.style.width = `${(done / total) * 100}%`;
         txt.textContent = `${done} / ${total} Bauteile`;
       });
