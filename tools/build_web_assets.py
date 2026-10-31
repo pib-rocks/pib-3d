@@ -115,8 +115,15 @@ def main():
     for link in links_out:
         link["parts"] = groups.get(link["name"], {}).get("members", [link["name"]])
 
+    # a stamp so a rebuilt mesh set is not served from the browser cache
+    import hashlib
+    stamp = hashlib.sha1()
+    for f in sorted(os.listdir(MESH_OUT)):
+        st = os.stat(os.path.join(MESH_OUT, f))
+        stamp.update(f"{f}:{st.st_size}:{int(st.st_mtime)}".encode())
     model = {
         "name": robot.get("name"),
+        "build": stamp.hexdigest()[:12],
         "links": links_out,
         "joints": joints,
         "stats": {"links": len(links_out), "joints": len(joints), "triangles": total_tris},

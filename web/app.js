@@ -95,7 +95,7 @@ async function main() {
   async function worker() {
     while (queue.length) {
       const link = queue.shift();
-      const gltf = await loader.loadAsync('./' + link.mesh);
+      const gltf = await loader.loadAsync(`./${link.mesh}?v=${model.build || ''}`);
       const node = gltf.scene;
       node.name = link.name;
       node.traverse((o) => {
