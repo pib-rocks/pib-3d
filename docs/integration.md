@@ -50,6 +50,12 @@ import '@pib/robot-view';               // registers <pib-robot-view>
   `preview` while the mapping is not trustworthy, with `guardReason` explaining it.
 - `dispose()` on `disconnectedCallback`; safe to call twice.
 
+## The model archive
+
+Every release also carries `robot-model-<tag>.zip` (about 15 MB) with `version.json`, `model.json`,
+`mapping.json` and `meshes/*.glb`, plus a `.sha256` next to it. That is what the robot installs
+with `pib-backend/tools/install_robot_model.py`; the backend then serves it under `/robot-model/`.
+
 ## Versioning
 
 The tarball URL is immutable. To take a new viewer version, bump the URL to the new tag

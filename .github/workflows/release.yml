@@ -1,15 +1,15 @@
 name: release
 
-# Cerebra takes @pib/robot-view as a versioned tarball from a release. A plain git
-# dependency cannot work here: the package lives in packages/robot-view, and `npm i
-# github:...` installs the repository root, which has no package.json.
+# Cerebra takes @pib/robot-view as a versioned tarball, and the robot takes the model as a
+# versioned archive it installs locally. A plain git dependency cannot work: the package lives
+# in packages/robot-view and `npm i github:...` installs the repository root.
 on:
   push:
     tags: ["v*"]
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing tag to build the package for"
+        description: "Existing tag to build the artifacts for"
         required: true
 
 permissions:
@@ -27,23 +27,46 @@ jobs:
         with:
           node-version: "20"
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: build the library
         run: |
           cd packages/robot-view
           npm ci
           npm run build:lib
 
-      - name: pack
+      - name: pack the component
         id: pack
         run: |
           cd packages/robot-view
           npm pack --pack-destination "$RUNNER_TEMP"
           echo "tgz=$(ls "$RUNNER_TEMP"/*.tgz)" >> "$GITHUB_OUTPUT"
 
+      - name: bake the meshes
+        run: |
+          pip install numpy trimesh
+          python tools/build_web_assets.py
+
+      - name: pack the model
+        id: model
+        env:
+          TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          python tools/pack_robot_model.py --version "$TAG" --out "$RUNNER_TEMP/robot-model-$TAG.zip"
+          cd "$RUNNER_TEMP"
+          sha256sum "robot-model-$TAG.zip" > "robot-model-$TAG.zip.sha256"
+          echo "zip=$RUNNER_TEMP/robot-model-$TAG.zip" >> "$GITHUB_OUTPUT"
+
       - name: upload to the release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.event.inputs.tag || github.ref_name }}
         run: |
-          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "$TAG" --notes "pib-robot-view $TAG"
-          gh release upload "$TAG" "${{ steps.pack.outputs.tgz }}" --clobber
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "$TAG" --notes "pib-robot-view and the robot model for $TAG"
+          gh release upload "$TAG" \
+            "${{ steps.pack.outputs.tgz }}" \
+            "${{ steps.model.outputs.zip }}" \
+            "${{ steps.model.outputs.zip }}.sha256" \
+            --clobber
