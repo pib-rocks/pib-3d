@@ -134,6 +134,14 @@ export class PibRobotView extends HTMLElement {
   get mode(): ViewerMode {
     return this._mode;
   }
+  /** The mode the viewer actually runs in: `command` falls back to `preview` when the
+   *  mapping cannot be trusted. Read `guardReason` for why. */
+  get effectiveMode(): ViewerMode {
+    return this._effectiveMode;
+  }
+  get guardReason(): string | null {
+    return this._lastCommandBlockReason;
+  }
   set mode(v: ViewerMode) {
     this._mode = v;
     this.setAttribute('mode', v);
@@ -316,6 +324,14 @@ export class PibRobotView extends HTMLElement {
       this._lastCommandBlockReason = null;
     }
     this._effectiveMode = effective;
+    const guard = this.shadow.querySelector('#guard') as HTMLElement | null;
+    if (guard) {
+      const blocked = requested === 'command' && effective !== 'command';
+      guard.textContent = blocked
+        ? `Befehlsmodus gesperrt: ${this._lastCommandBlockReason ?? 'Mapping ungültig'}. Der Viewer bleibt in der Vorschau.`
+        : '';
+      guard.classList.toggle('on', blocked);
+    }
     this.panel?.applyMode(requested, effective);
   }
 

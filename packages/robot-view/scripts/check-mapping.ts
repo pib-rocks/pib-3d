@@ -49,6 +49,20 @@ for (const m of drivenMotors) {
   }
 }
 
+// web/ is what GitHub Pages serves; the build copies the mapping there. A stale copy would
+// show the operator a different contract than the one this check just validated.
+const servedPath = resolve(repoRoot, 'web/mapping.json');
+try {
+  const served = readFileSync(servedPath, 'utf8');
+  if (served !== readFileSync(mappingPath, 'utf8')) {
+    report.push('error: web/mapping.json differs from joints/mapping.json (run npm run build)');
+    exitCode = 1;
+  }
+} catch {
+  report.push('error: web/mapping.json is missing (run npm run build)');
+  exitCode = 1;
+}
+
 if (report.length === 0) {
   console.log(
     `check:mapping OK — ${mapping.joints.length} joints, ${PIB5ADVANCED_MOTORS.length} motors (pib5advanced)`,
