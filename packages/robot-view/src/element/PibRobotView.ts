@@ -8,6 +8,15 @@ import {
 } from '../model/kinematicTree.js';
 import { ensureFrameLinks } from '../model/frameLinks.js';
 import { frameCameraOnModel, liftModelToFloor } from '../scene/frameCamera.js';
+import {
+  canCommand,
+  loadMapping,
+  mappingByUrdfJoint,
+  validateMapping,
+  type JointMappingDocument,
+  type ValidationResult,
+  type JointMappingEntry,
+} from '../joints/mapping.js';
 import { buildJointPanel, midPoseValue, type JointPanelHandles } from '../joints/panel.js';
 import { applyJointValue } from '../joints/math.js';
 import { wirePicking } from '../interaction/picking.js';
@@ -27,7 +36,7 @@ const TAG = 'pib-robot-view';
 
 export class PibRobotView extends HTMLElement {
   static get observedAttributes(): string[] {
-    return ['model-url', 'mode', 'show-controls'];
+    return ['model-url', 'mapping-url', 'mode', 'show-controls'];
   }
 
   private shadow: ShadowRoot;
@@ -45,8 +54,13 @@ export class PibRobotView extends HTMLElement {
   private disposed = false;
   private loadGeneration = 0;
   private _modelUrl = './model.json';
+  private _mappingUrl = './mapping.json';
   private _jointStates: Record<string, number> = {};
   private _mode: ViewerMode = 'preview';
+  private _effectiveMode: ViewerMode = 'preview';
+  private _mapping: JointMappingDocument | null = null;
+  private _mappingValidation: ValidationResult | null = null;
+  private _lastCommandBlockReason: string | null = null;
   private _showControls = true;
   private motionByJoint = new Map<string, MotionEntry>();
 
@@ -60,6 +74,9 @@ export class PibRobotView extends HTMLElement {
   connectedCallback(): void {
     if (this.hasAttribute('model-url')) {
       this._modelUrl = this.getAttribute('model-url')!;
+    }
+    if (this.hasAttribute('mapping-url')) {
+      this._mappingUrl = this.getAttribute('mapping-url')!;
     }
     if (this.hasAttribute('mode')) {
       this._mode = this.getAttribute('mode') as ViewerMode;
@@ -78,6 +95,9 @@ export class PibRobotView extends HTMLElement {
     if (name === 'model-url' && value != null) {
       this._modelUrl = value;
       if (this.isConnected) void this.load();
+    } else if (name === 'mapping-url' && value != null) {
+      this._mappingUrl = value;
+      if (this.isConnected) void this.load();
     } else if (name === 'mode' && value) {
       this._mode = value as ViewerMode;
       this.updateModeUi();
@@ -95,6 +115,14 @@ export class PibRobotView extends HTMLElement {
     this.setAttribute('model-url', v);
   }
 
+  get mappingUrl(): string {
+    return this._mappingUrl;
+  }
+  set mappingUrl(v: string) {
+    this._mappingUrl = v;
+    this.setAttribute('mapping-url', v);
+  }
+
   get jointStates(): Record<string, number> {
     return { ...this._jointStates };
   }
@@ -105,6 +133,14 @@ export class PibRobotView extends HTMLElement {
 
   get mode(): ViewerMode {
     return this._mode;
+  }
+  /** The mode the viewer actually runs in: `command` falls back to `preview` when the
+   *  mapping cannot be trusted. Read `guardReason` for why. */
+  get effectiveMode(): ViewerMode {
+    return this._effectiveMode;
+  }
+  get guardReason(): string | null {
+    return this._lastCommandBlockReason;
   }
   set mode(v: ViewerMode) {
     this._mode = v;
@@ -200,6 +236,8 @@ export class PibRobotView extends HTMLElement {
     this.linkNodes.clear();
     this.motionByJoint.clear();
     this.panel = null;
+    this._mapping = null;
+    this._mappingValidation = null;
   }
 
   private initScene(): void {
@@ -269,10 +307,43 @@ export class PibRobotView extends HTMLElement {
   }
 
   private updateModeUi(): void {
-    const disabled = this._mode === 'read';
-    this.shadow.querySelectorAll('#joints input').forEach((el) => {
-      (el as HTMLInputElement).disabled = disabled;
-    });
+    const requested = this._mode;
+    let effective: ViewerMode = requested;
+    if (requested === 'command') {
+      const gate = canCommand(this._mapping, this._mappingValidation);
+      if (!gate.ok) {
+        effective = 'preview';
+        if (this._lastCommandBlockReason !== gate.reason) {
+          this._lastCommandBlockReason = gate.reason;
+          this.emitMappingError(gate.reason);
+        }
+      } else {
+        this._lastCommandBlockReason = null;
+      }
+    } else {
+      this._lastCommandBlockReason = null;
+    }
+    this._effectiveMode = effective;
+    const guard = this.shadow.querySelector('#guard') as HTMLElement | null;
+    if (guard) {
+      const blocked = requested === 'command' && effective !== 'command';
+      guard.textContent = blocked
+        ? `Befehlsmodus gesperrt: ${this._lastCommandBlockReason ?? 'Mapping ungültig'}. Der Viewer bleibt in der Vorschau.`
+        : '';
+      guard.classList.toggle('on', blocked);
+    }
+    this.panel?.applyMode(requested, effective);
+  }
+
+  private emitMappingError(message: string): void {
+    console.error(message);
+    this.dispatchEvent(
+      new CustomEvent('error', {
+        bubbles: true,
+        composed: true,
+        detail: { message },
+      }),
+    );
   }
 
   private handleResize(): void {
@@ -297,8 +368,30 @@ export class PibRobotView extends HTMLElement {
     bar.style.width = '0%';
 
     try {
-      const model = await fetchModel(this._modelUrl);
+      const [model, mappingLoad] = await Promise.all([
+        fetchModel(this._modelUrl),
+        loadMapping(this._mappingUrl),
+      ]);
       if (gen !== this.loadGeneration || this.disposed) return;
+
+      if (mappingLoad.loadError || !mappingLoad.mapping) {
+        this._mapping = null;
+        this._mappingValidation = {
+          ok: false,
+          errors: [mappingLoad.loadError ?? 'mapping failed to load'],
+          warnings: [],
+        };
+        this.emitMappingError(this._mappingValidation.errors[0]!);
+      } else {
+        this._mapping = mappingLoad.mapping;
+        this._mappingValidation = validateMapping(mappingLoad.mapping, model);
+        if (!this._mappingValidation.ok) {
+          this.emitMappingError(this._mappingValidation.errors.join('; '));
+        }
+        for (const w of this._mappingValidation.warnings) {
+          console.warn(w);
+        }
+      }
 
       const { linkNodes, partsOf } = await loadLinkMeshes(model, (done, total) => {
         bar.style.width = `${(done / total) * 100}%`;
@@ -328,11 +421,15 @@ export class PibRobotView extends HTMLElement {
         `${size.x.toFixed(2)} × ${size.y.toFixed(2)} × ${size.z.toFixed(2)} m`;
 
       this.shadow.querySelector('#joints')!.innerHTML = '';
+      const mapByJoint = this._mapping
+        ? mappingByUrdfJoint(this._mapping)
+        : new Map<string, JointMappingEntry>();
       this.panel = buildJointPanel({
         root: this.shadow,
         model,
         parentOf: this.kinematic.parentOf,
         motions: this.motions,
+        mappingByJoint: mapByJoint,
         onJointChange: (joint, value) => {
           this._jointStates[joint] = value;
           this.emitJointChange(joint, value, 'ui');

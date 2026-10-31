@@ -1,4 +1,4 @@
-import type { MotionEntry, RobotModel } from '../types.js';
+import type { MotionEntry, RobotModel, ViewerMode } from '../types.js';
 import { HEAD, LEFT_ARM, REGION_ORDER, RIGHT_ARM } from './regions.js';
 import {
   formatJointLabel,
@@ -8,6 +8,11 @@ import {
   uiRange,
   applyJointValue,
 } from './math.js';
+import {
+  commandDisableTitle,
+  jointClassLabel,
+  type JointMappingEntry,
+} from './mapping.js';
 
 export interface JointPanelHandles {
   jointsRoot: HTMLElement;
@@ -15,6 +20,7 @@ export interface JointPanelHandles {
   setJointUi: (jointName: string, radians: number) => void;
   getRow: (jointName: string) => HTMLElement | null;
   getInput: (jointName: string) => HTMLInputElement | null;
+  applyMode: (requestedMode: ViewerMode, effectiveMode: ViewerMode) => void;
 }
 
 export interface JointPanelOptions {
@@ -22,14 +28,18 @@ export interface JointPanelOptions {
   model: RobotModel;
   parentOf: Map<string, string>;
   motions: MotionEntry[];
+  mappingByJoint: Map<string, JointMappingEntry>;
   onJointChange: (jointName: string, value: number) => void;
   onRequestRender: () => void;
 }
 
 export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
-  const { root, model, parentOf, motions, onJointChange, onRequestRender } = opts;
+  const { root, model, parentOf, motions, mappingByJoint, onJointChange, onRequestRender } =
+    opts;
   const jointsRoot = root.querySelector('#joints') as HTMLElement;
   const motionByJoint = new Map(motions.map((m) => [m.joint.name, m]));
+  let requestedMode: ViewerMode = 'preview';
+  let effectiveMode: ViewerMode = 'preview';
 
   const chainOf = (link: string): string[] => {
     const out: string[] = [];
@@ -64,13 +74,25 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     jointsRoot.appendChild(h);
     for (const m of items) {
       const { joint } = m;
+      const mapEntry = mappingByJoint.get(joint.name);
+      const className = mapEntry?.class ?? 'coupled';
+      const badge = jointClassLabel(className);
+      const motorLine =
+        mapEntry?.class === 'driven' && mapEntry.motor
+          ? `<div class="motor" title="Motor">${mapEntry.motor}</div>`
+          : '';
       const wrap = document.createElement('div');
       wrap.className = 'j';
       wrap.dataset.joint = joint.name;
+      if (mapEntry) wrap.dataset.jointClass = mapEntry.class;
       const [min, max] = uiRange(joint);
       wrap.innerHTML = `
-          <div class="row"><span class="name" title="${joint.name}">${prettyJointName(joint.name)}</span>
-          <span class="val"></span></div>
+          <div class="row">
+            <span class="name" title="${joint.name}">${prettyJointName(joint.name)}</span>
+            <span class="badge">${badge}</span>
+            <span class="val"></span>
+          </div>
+          ${motorLine}
           <input type="range" min="${min}" max="${max}" step="1" value="0">`;
       jointsRoot.appendChild(wrap);
       const input = wrap.querySelector('input') as HTMLInputElement;
@@ -86,6 +108,32 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       });
     }
   }
+
+  const applyMode = (req: ViewerMode, effective: ViewerMode) => {
+    requestedMode = req;
+    effectiveMode = effective;
+    for (const m of motions) {
+      const row = getRow(m.joint.name);
+      const input = row?.querySelector('input') as HTMLInputElement | null;
+      if (!input) continue;
+      const entry = mappingByJoint.get(m.joint.name);
+      let enabled = true;
+      let title = '';
+      if (requestedMode === 'read') {
+        enabled = false;
+        title = 'Nur-Lesen — Schieberegler deaktiviert';
+      } else if (effectiveMode === 'command') {
+        if (entry?.class === 'driven') {
+          enabled = true;
+        } else {
+          enabled = false;
+          title = entry ? commandDisableTitle(entry) : 'Kein Mapping — nicht befehlbar';
+        }
+      }
+      input.disabled = !enabled;
+      input.title = title;
+    }
+  };
 
   const setPose = (fn: (joint: RobotModel['joints'][0]) => number) => {
     for (const m of motions) {
@@ -113,7 +161,9 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
   const getInput = (jointName: string): HTMLInputElement | null =>
     getRow(jointName)?.querySelector('input') ?? null;
 
-  return { jointsRoot, setPose, setJointUi, getRow, getInput };
+  applyMode(requestedMode, effectiveMode);
+
+  return { jointsRoot, setPose, setJointUi, getRow, getInput, applyMode };
 }
 
 export function midPoseValue(joint: RobotModel['joints'][0]): number {

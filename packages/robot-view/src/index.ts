@@ -18,3 +18,21 @@ export {
   formatJointLabel,
   applyJointValue,
 } from './joints/math.js';
+export {
+  loadMapping,
+  validateMapping,
+  canCommand,
+  modelRadToMotorCentideg,
+  motorCentidegToModelRad,
+  mappingByUrdfJoint,
+  jointClassLabel,
+  PIB5ADVANCED_MOTORS,
+  expectedLimitsRad,
+} from './joints/mapping.js';
+export type {
+  JointMappingDocument,
+  JointMappingEntry,
+  JointClass,
+  ValidationResult,
+  LoadMappingResult,
+} from './joints/mapping.js';

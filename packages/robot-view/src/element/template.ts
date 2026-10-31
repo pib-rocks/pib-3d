@@ -33,13 +33,23 @@ export const SHADOW_STYLES = `
   button:hover { background: #30363d; border-color: #484f58; }
   button.on { background: #1f6feb; border-color: #388bfd; }
 
+  #guard { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
+    border-radius: 6px; background: #2d2103; color: #e3b341; font-size: 11px; line-height: 1.5; }
+  #guard.on { display: block; }
   #joints { overflow-y: auto; padding: 4px 12px 16px; flex: 1; }
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
   .j { margin: 0 0 9px; }
-  .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
-    white-space: nowrap; }
+    white-space: nowrap; flex: 1; min-width: 0; }
+  .j .badge { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px;
+    padding: 1px 5px; border-radius: 4px; border: 1px solid #30363d; color: #8b949e; flex-shrink: 0; }
+  .j[data-joint-class="driven"] .badge { color: #3fb950; border-color: #238636; }
+  .j[data-joint-class="coupled"] .badge { color: #d29922; border-color: #9e6a03; }
+  .j[data-joint-class="passive"] .badge { color: #a371f7; border-color: #8957e5; }
+  .j .motor { font-size: 10px; color: #8b949e; margin: 1px 0 2px; font-family: ui-monospace, monospace;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff; min-width: 62px;
     text-align: right; }
   .j input[type=range] { width: 100%; margin: 3px 0 0; height: 14px; accent-color: #1f6feb; }
@@ -92,6 +102,7 @@ export const SHADOW_HTML = `
           <button type="button" data-action="grid" class="on">Gitter</button>
           <button type="button" data-action="spin">Drehen</button>
         </div>
+        <div id="guard" hidden></div>
         <div id="joints"></div>
         <div id="info">
           <div class="irow"><span>Bauteil</span><b id="info-link">–</b></div>

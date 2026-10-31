@@ -1,0 +1,145 @@
+# Joint ↔ motor mapping (pib5advanced)
+
+The file `joints/mapping.json` is the single source of truth that connects every URDF joint in `web/model.json` to the robot’s actuators. The web demonstrator loads a copy at `web/mapping.json` (updated on `npm run build` in `packages/robot-view`).
+
+## Field semantics
+
+Each entry describes one model joint:
+
+| Field | Meaning |
+| --- | --- |
+| `urdfJoint` | Joint name in `model.json` / URDF |
+| `motor` | Backend motor name for **driven** joints; `null` for coupled/passive |
+| `class` | `driven` (has a motor), `coupled` (linkage follower), or `passive` (no actuator) |
+| `direction` | Sign of CAD vs pib-sdk axis alignment at zero pose (`+1` or `-1`); `null` if not applicable |
+| `gearRatio` | Motor revolutions per joint revolution (1.0 until measured) |
+| `zeroOffsetDeg` | Encoder zero offset in degrees (0.0 until measured) |
+| `limitsRad` | `[lower, upper]` in radians from the model, or `null` for continuous joints |
+| `verifiedOnHardware` | Set to `true` only after the round-trip test below |
+
+**Conversions** (API motor positions are centidegrees; the backend already applies encoder polarity):
+
+```
+motorCentideg = (radToDeg(modelRad) + zeroOffsetDeg) * 100 * direction / gearRatio
+modelRad      = degToRad((motorCentideg * gearRatio) / (100 * direction)) - degToRad(zeroOffsetDeg)
+```
+
+`direction` does **not** include `upper_endpoint` or other backend polarity flags.
+
+## Provenance
+
+- **Motor names (26):** `pib-backend` seed profile `pib_api/flask/seed_profiles/pib5advanced.py`, constant `MOTOR_MAPPING` for variant `pib5advanced` (Feetech ST bus / waveshare layout). Each name appears exactly once on a **driven** joint.
+- **Directions:** Dot product between the Onshape/CAD joint axis and the calibrated axis in `pib-sdk`’s `pib_model.urdf` at the zero pose. Values with `|axisDot| = 1.0` are aligned; ~0.92 indicates a frame rotation between export and SDK idealization.
+- **Coupled joints (20):** Two forearm disc joints (`dof_wrist`, `dof_wrist_1`) and 18 finger distal/tip hinges are four-bar followers. They move when a driven joint moves; no motor commands them.
+- **Passive joints (2):** `upper_door_rotation` and `lower_door_rotation` are service lids. They stay poseable in the demonstrator for diagnosis but are never commandable.
+
+## Mapping by region
+
+### Right arm (6 driven)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| rotation_inner_shoulder_1 | driven | shoulder_vertical_right | -1 |
+| rotation_shoulder_left | driven | shoulder_horizontal_right | 1 |
+| central_rotator_rotation | driven | upper_arm_right_rotation | 1 |
+| rotation_elbow | driven | elbow_right | -1 |
+| rotate_forearm | driven | lower_arm_right_rotation | 1 |
+| rotation_wrist_right | driven | wrist_right | 1 |
+
+### Left arm (6 driven)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| rotation_inner_shoulder | driven | shoulder_vertical_left | -1 |
+| rotation_shoulder_left_1 | driven | shoulder_horizontal_left | 1 |
+| central_rotator_rotation_1 | driven | upper_arm_left_rotation | 1 |
+| rotation_elbow_1 | driven | elbow_left | 1 |
+| rotate_forearm_1 | driven | lower_arm_left_rotation | 1 |
+| rotation_wrist_left | driven | wrist_left | 1 |
+
+### Head (2 driven)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| gearing_rotation__new_body_ | driven | turn_head_motor | 1 |
+| nodding_rotation | driven | tilt_forward_motor | -1 |
+
+### Right hand (6 driven)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| revolute_1 | driven | thumb_right_opposition | -1 |
+| j1_2 | driven | thumb_right_stretch | -1 |
+| j1 | driven | index_right_stretch | -1 |
+| j1_1 | driven | middle_right_stretch | -1 |
+| j1_4 | driven | ring_right_stretch | -1 |
+| j1_3 | driven | pinky_right_stretch | -1 |
+
+### Left hand (6 driven)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| revolute_1_1 | driven | thumb_left_opposition | -1 |
+| j1_7 | driven | thumb_left_stretch | -1 |
+| j1_5 | driven | index_left_stretch | -1 |
+| j1_6 | driven | middle_left_stretch | -1 |
+| j1_9 | driven | ring_left_stretch | -1 |
+| j1_8 | driven | pinky_left_stretch | -1 |
+
+### Coupled linkages (20)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| dof_wrist | coupled | — | — |
+| dof_wrist_1 | coupled | — | — |
+| j2 | coupled | — | — |
+| j2_1 | coupled | — | — |
+| j3 | coupled | — | — |
+| j3_1 | coupled | — | — |
+| j3_2 | coupled | — | — |
+| j3_3 | coupled | — | — |
+| j3_4 | coupled | — | — |
+| j3_5 | coupled | — | — |
+| j3_6 | coupled | — | — |
+| d54_finger_distal_1_hinge | coupled | — | — |
+| d54_finger_distal_2_hinge | coupled | — | — |
+| d54_finger_distal_3_hinge | coupled | — | — |
+| d54_finger_distal_4_hinge | coupled | — | — |
+| d54_finger_distal_6_hinge | coupled | — | — |
+| d54_finger_distal_7_hinge | coupled | — | — |
+| d55_finger_tip_5_hinge | coupled | — | — |
+| d58_thumb_tip_hinge | coupled | — | — |
+| d58_thumb_tip_1_hinge | coupled | — | — |
+
+### Passive service lids (2)
+
+| URDF joint | Class | Motor | Direction |
+|---|---|---|---|
+| upper_door_rotation | passive | — | — |
+| lower_door_rotation | passive | — | — |
+
+## Hardware round-trip (26 driven joints)
+
+Until every driven entry has `verifiedOnHardware: true`, the viewer refuses `mode="command"` and stays in preview.
+
+For **each** of the 26 driven joints, on real hardware:
+
+1. Note the current motor position (centidegrees) from the API.
+2. Command **+15°** on that motor only (joint centidegrees: current + 1500 centideg).
+3. Observe the physical joint and the 3D model after applying the same value through the mapping conversions.
+4. Record whether motion matches (+), is inverted (−), or needs a gear/offset tweak.
+5. Update `direction`, `gearRatio`, and/or `zeroOffsetDeg` in `joints/mapping.json` if needed, then set `verifiedOnHardware` to `true` for that entry.
+
+Re-run `npm run check:mapping` and the demonstrator validation after any edit.
+
+## Validation
+
+Runtime (`validateMapping` in `packages/robot-view`) and CI (`npm run check:mapping`) enforce:
+
+1. Mapping keys match `model.json` joints exactly.
+2. Each pib5advanced motor appears once; no unknown motors.
+3. Driven joints have a motor and non-null `direction`.
+4. Coupled/passive joints have `motor: null`.
+5. `limitsRad` matches the model (continuous → `null`).
+
+Command mode additionally requires all driven joints to be hardware-verified.
