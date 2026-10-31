@@ -55,24 +55,37 @@ def instance_key(link, vis):
     return f"{link}|{name}|{oxyz[0]:.6f},{oxyz[1]:.6f},{oxyz[2]:.6f}"
 
 
-def hidden_parts():
-    """Parts that the visibility bake never saw, minus the manual overrides.
+def hide_rules():
+    """What to drop, from the bake plus the manual overrides.
 
-    A part that is inside the body keeps its mass and inertia, it only loses
-    the geometry nobody can see. Overrides are the escape hatch: `keep` for
-    parts that must stay (sensor windows, labels), `drop` for parts that are
-    visible but should not ship (branding).
+    `visual_overrides.json` takes part names (`a01_face`) or full instance keys
+    (`a01_face|A01_Face.glb|0.000000,...`) — a name hits every instance of that
+    part, a key hits exactly one.
+
+    * `drop` wins over everything: this part is not shown, whatever the bake says.
+    * `keep` protects a part the bake called invisible (sensor window, label,
+      anything that becomes visible when a hatch opens further than measured).
+    * a part the bake never saw is kept, so a new export cannot silently lose
+      geometry.
     """
-    keep, drop = set(), set()
+    keep, drop = [], []
     if OVERRIDES.exists():
         data = json.loads(OVERRIDES.read_text())
-        keep = set(data.get("keep", []))
-        drop = set(data.get("drop", []))
+        keep = list(data.get("keep", []))
+        drop = list(data.get("drop", []))
     baked = set()
     if VISIBILITY.exists():
         data = json.loads(VISIBILITY.read_text())
         baked = {p["key"] for p in data.get("parts", []) if not p.get("visible", True) and p.get("key")}
-    return (baked - keep) | drop
+    return baked, set(keep), set(drop)
+
+
+def is_hidden(key, link, baked, keep, drop):
+    if key in drop or link in drop:
+        return True
+    if key in baked and not (key in keep or link in keep):
+        return True
+    return False
 
 
 def rpy_matrix(r, p, y):
@@ -309,7 +322,7 @@ def main():
     for n in links:
         group_members.setdefault(find(n), []).append(n)
 
-    drop_visuals = hidden_parts()
+    baked_hidden, keep_set, drop_set = hide_rules()
     dropped_visuals = 0
     new_links = {}
     report_groups = {}
@@ -336,7 +349,7 @@ def main():
             kept_visuals = []
             for v in el.findall("visual"):
                 key = instance_key(m, v)
-                if key in drop_visuals:
+                if is_hidden(key, m, baked_hidden, keep_set, drop_set):
                     dropped_visuals += 1      # mass and inertia stay, the geometry goes
                 else:
                     kept_visuals.append(v)

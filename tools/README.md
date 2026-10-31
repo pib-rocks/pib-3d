@@ -10,6 +10,7 @@ python3 tools/check_meshes.py      # every mesh reference resolves, none unused
 python3 tools/compare_urdf.py a.urdf b.urdf   # structure exact, numbers to 1e-9
 python3 tools/build_web_assets.py  # urdf -> web/model.json + web/meshes/*.glb
 python3 tools/visibility_bake.py   # ray-casts the model -> docs/visibility.json
+python3 tools/hide_part.py <name>  # edit visual_overrides.json (hide / keep a part)
 python3 tools/urdf_tree.py         # draws docs/pib.control.tree.png
 python3 tools/serve_web.py 8099    # static viewer
 ```
