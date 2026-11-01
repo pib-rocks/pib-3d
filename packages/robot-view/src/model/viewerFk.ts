@@ -33,7 +33,8 @@ export function buildViewerFkContext(
   const modelRoot = new THREE.Group();
   modelRoot.rotation.x = -Math.PI / 2;
   attachRootToScene(modelRoot, linkNodes, kinematic.rootLink);
-  const baseFrame = alignModelToBaseFrame(modelRoot);
+  // Same call the element makes: the frame axis runs through the root link, not the mesh box.
+  const baseFrame = alignModelToBaseFrame(modelRoot, linkNodes.get(BASE_LINK));
   return { modelRoot, baseFrame, linkNodes, motions: kinematic.motions };
 }
 

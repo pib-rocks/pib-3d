@@ -21,13 +21,20 @@ const _pointScratch = new THREE.Vector3();
  * Seat the model on the grid using the lowest geometry point at the current (zero) pose as the
  * foot point, instead of shifting by an unlabeled bounding-box minimum.
  */
-export function alignModelToBaseFrame(modelRoot: THREE.Group): BaseFrameContext {
+export function alignModelToBaseFrame(
+  modelRoot: THREE.Group,
+  baseNode?: THREE.Object3D,
+): BaseFrameContext {
   modelRoot.updateMatrixWorld(true);
   const box = new THREE.Box3().setFromObject(modelRoot);
+  // The frame axis runs through the robot's centre, not through the mesh bounding box: an open
+  // service lid must not move the origin sideways.
+  const axis = new THREE.Vector3();
+  if (baseNode) baseNode.getWorldPosition(axis);
   const footWorld = new THREE.Vector3(
-    (box.min.x + box.max.x) / 2,
+    baseNode ? axis.x : (box.min.x + box.max.x) / 2,
     box.min.y,
-    (box.min.z + box.max.z) / 2,
+    baseNode ? axis.z : (box.min.z + box.max.z) / 2,
   );
   modelRoot.position.y -= footWorld.y;
   modelRoot.updateMatrixWorld(true);

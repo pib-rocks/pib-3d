@@ -376,7 +376,9 @@ export class PibRobotView extends HTMLElement {
     if (!baseNode || !handNode) return null;
     this.sceneBundle?.modelRoot.updateMatrixWorld(true);
     return {
-      base: linkOriginInBaseMetres(baseNode, this._baseFrame),
+      // The base is the frame's origin by definition; the root link sits inside the body, so
+      // reporting its position here would read like a 0.77 m offset.
+      base: { x: 0, y: 0, z: 0 },
       hand: linkOriginInBaseMetres(handNode, this._baseFrame),
     };
   }
@@ -692,7 +694,10 @@ export class PibRobotView extends HTMLElement {
 
       if (!this.sceneBundle) this.initScene();
       attachRootToScene(this.sceneBundle!.modelRoot, linkNodes, this.kinematic.rootLink);
-      this._baseFrame = alignModelToBaseFrame(this.sceneBundle!.modelRoot);
+      this._baseFrame = alignModelToBaseFrame(
+        this.sceneBundle!.modelRoot,
+        this.linkNodes.get(BASE_LINK),
+      );
       const { size, triangles } = frameCameraOnModel(
         this.sceneBundle!.modelRoot,
         this.sceneBundle!.camera,

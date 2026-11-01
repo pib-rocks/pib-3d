@@ -6,14 +6,14 @@ degrees appear only in the panel UI via `joints/math.ts`.
 
 ## Base frame
 
-At the zero pose, the viewer finds the lowest point of the loaded CAD geometry (centre of the
-bottom of the axis-aligned bounding box) and defines that as the **foot point**. The model is
-seated on the grid by shifting `modelRoot` so the foot point sits on the ground plane; this
-replaces the old `liftModelToFloor()` blind shift with the same visual result, but the foot
-point is now the explicit origin of the base frame.
+At the zero pose, the viewer takes the lowest point of the loaded CAD geometry as the floor and
+the `root` link's X/Z as the axis, so an opened service lid cannot move the origin sideways. The
+model is seated on the grid by shifting `modelRoot` down by that amount - the old
+`liftModelToFloor()` blind shift is gone, and the foot point is the explicit origin.
 
-The `root` link origin is reported as **base** in `getPose()`. Positions are returned in
-**metres** relative to the foot point, with axes aligned to the seated model (Z up).
+`getPose()` reports the base as **0, 0, 0 by definition** - it *is* the frame. Reports of the
+`root` link position were dropped: the root sits inside the body and read like a 0.77 m offset.
+Positions are in **metres**, Z up, in this frame.
 
 ## TCP (provisional)
 
@@ -38,22 +38,16 @@ getPose(side?: 'left' | 'right'): { base: {x,y,z}, hand: {x,y,z} } | null
 
 The bundled **Onshape / control URDF** in this repository is geometry-rich; **pib-sdk** uses an
 idealized URDF (segment lengths differ by roughly 5–15 mm). We do **not** assume the viewer
-matches the SDK within 1 mm. Instead, `tools/fk_reference.py` records SDK palm positions for
-fixed joint vectors (keyed by URDF joint name via `joints/mapping.json`), and
-`packages/robot-view/test/fkReference.test.ts` computes the viewer FK and asserts per-axis
-deltas stay inside a **measured envelope** (recorded maximum + 1 mm).
+matches the SDK within 1 mm. `tools/fk_reference.py` records SDK palm positions for fixed joint vectors
+(keyed by URDF joint name via `joints/mapping.json`), and
+`packages/robot-view/test/fkReference.test.ts` compares **how far the hand travels** between two
+poses - a frame-invariant number - against the SDK. Absolute positions cannot be compared: the two
+base frames are defined differently, so the difference would be dominated by a constant offset.
 
-Measured deltas on build `0770fee55b36` (TCP palm origin, mm):
-
-| Case               | Δx   | Δy   | Δz    |
-|--------------------|------|------|-------|
-| zero_right         | 81.4 | 17.2 | 298.8 |
-| sdk_smoke_right    | 68.8 | 20.9 | 304.1 |
-| shoulder_lift_right| 81.4 | 46.3 | 323.2 |
-| elbow_bend_right   | 73.8 | 58.5 | 362.5 |
-| zero_left          | 43.0 | 17.4 | 282.7 |
-
-Recorded guard envelope (max + 1 mm): **Δx ≤ 82.4**, **Δy ≤ 59.5**, **Δz ≤ 363.5**.
+Measured with the real pib-sdk (`ArmKinematics`, pinocchio) on build `0770fee55b36`: the worst
+difference in hand travel between two poses is **75.4 mm** (right arm, elbow bend). The test's
+tolerance is **80 mm** and is a **regression guard**: it does not claim the models agree - they do
+not - it fails when the difference changes, which means the CAD or the SDK geometry moved.
 
 Closing this gap belongs to the model-alignment follow-up **PR-2158** (shared URDF / segment
 lengths between the viewer CAD export and pib-sdk).
@@ -66,5 +60,5 @@ PYTHONPATH=/path/to/pib-sdk/src python3 tools/fk_reference.py --check
 cd packages/robot-view && npm test -- test/fkReference.test.ts
 ```
 
-After intentional model changes, re-run the vitest, update `envelopeMm` in
-`tools/fk_reference.json` if needed, and refresh the table above.
+After intentional model changes, re-run the vitest, update `toleranceMm` in
+`tools/fk_reference.json` if the measured difference really changed, and say why in the commit.
