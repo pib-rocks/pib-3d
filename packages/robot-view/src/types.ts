@@ -57,3 +57,26 @@ export interface SelectionChangeDetail {
 export interface ErrorDetail {
   message: string;
 }
+
+export interface MotorLimitDeg {
+  minDeg: number;
+  maxDeg: number;
+}
+
+export type MotorLimitMap = Record<string, MotorLimitDeg>;
+
+export interface CommandRequestDetail {
+  commandId: string;
+  values: Record<string, number>;
+  motors: Record<string, number>;
+  source: JointChangeSource;
+}
+
+export interface CommandRejectedDetail {
+  commandId: string;
+  reason: string;
+}
+
+export interface EStopDetail {
+  source: 'ui' | 'api';
+}

@@ -28,14 +28,23 @@ import { wirePicking } from '../interaction/picking.js';
 import { disposeObject3D, OnDemandRenderer } from '../render/onDemand.js';
 import { SHADOW_HTML, SHADOW_STYLES } from './template.js';
 import type {
+  CommandRejectedDetail,
+  CommandRequestDetail,
+  EStopDetail,
   JointChangeDetail,
   JointChangeSource,
+  MotorLimitMap,
   MotionEntry,
   ReadyDetail,
   RobotModel,
   SelectionChangeDetail,
   ViewerMode,
 } from '../types.js';
+import {
+  buildCommandFromPending,
+  CommandSendScheduler,
+  motorLimitsProvided,
+} from '../joints/commandPath.js';
 
 const TAG = 'pib-robot-view';
 
@@ -73,6 +82,13 @@ export class PibRobotView extends HTMLElement {
   private _stale = false;
   private staleTimer: ReturnType<typeof setTimeout> | null = null;
   private liveInterp: LiveJointInterpolator | null = null;
+  private _motorLimits: MotorLimitMap = {};
+  private _minCommandIntervalMs = 120;
+  private _estopped = false;
+  private _pendingJoints: Record<string, number> = {};
+  private _acceptedJoints: Record<string, number> = {};
+  private _actualJoints: Record<string, number> = {};
+  private commandScheduler: CommandSendScheduler | null = null;
 
   constructor() {
     super();
@@ -184,12 +200,69 @@ export class PibRobotView extends HTMLElement {
     this.updatePanelVisibility();
   }
 
+  get limits(): MotorLimitMap {
+    return { ...this._motorLimits };
+  }
+  set limits(map: MotorLimitMap) {
+    this.setLimits(map);
+  }
+
+  get minCommandIntervalMs(): number {
+    return this._minCommandIntervalMs;
+  }
+  set minCommandIntervalMs(ms: number) {
+    this._minCommandIntervalMs = Math.max(0, ms);
+  }
+
+  setLimits(map: MotorLimitMap): void {
+    this._motorLimits = { ...map };
+    this.panel?.applyMotorLimits(this._motorLimits);
+    this.updateModeUi();
+  }
+
+  approve(source: JointChangeSource = 'ui'): void {
+    if (this._estopped || this._effectiveMode !== 'command') return;
+    if (!this._mapping || !motorLimitsProvided(this._mapping, this._motorLimits)) return;
+    if (Object.keys(this._pendingJoints).length === 0) return;
+    this.ensureCommandScheduler();
+    this.commandScheduler!.requestFlush(source);
+  }
+
+  cancelPending(): void {
+    if (this._effectiveMode !== 'command') return;
+    this.clearPendingUi();
+    this.revertPendingToAccepted();
+  }
+
+  stop(source: 'ui' | 'api' = 'ui'): void {
+    this._estopped = true;
+    this.commandScheduler?.cancelScheduled();
+    this.commandScheduler?.reset();
+    this.clearPendingUi();
+    this._pendingJoints = {};
+    this._commandedStates = {};
+    this._acceptedJoints = { ...this._actualJoints };
+    this.syncCommandedPanel();
+    this.applyPoseToModel(this._actualJoints);
+    this.dispatchEvent(
+      new CustomEvent<EStopDetail>('estop', {
+        bubbles: true,
+        composed: true,
+        detail: { source },
+      }),
+    );
+  }
+
   getRenderCount(): number {
     return this.onDemand?.getRenderCount() ?? 0;
   }
 
   setJointStates(map: Record<string, number>): void {
     this._jointStates = this._mapping ? resolveJointStateMap(map, this._mapping) : { ...map };
+    this._actualJoints = { ...this._jointStates };
+    if (this._effectiveMode === 'command' && !this._estopped) {
+      this._acceptedJoints = { ...this._actualJoints };
+    }
     this.applyJointStates('api');
   }
 
@@ -366,6 +439,13 @@ export class PibRobotView extends HTMLElement {
           this._lastCommandBlockReason = gate.reason;
           this.emitMappingError(gate.reason);
         }
+      } else if (!this._mapping || !motorLimitsProvided(this._mapping, this._motorLimits)) {
+        effective = 'preview';
+        const reason = 'limits not provided';
+        if (this._lastCommandBlockReason !== reason) {
+          this._lastCommandBlockReason = reason;
+          this.emitMappingError(reason);
+        }
       } else {
         this._lastCommandBlockReason = null;
       }
@@ -479,12 +559,13 @@ export class PibRobotView extends HTMLElement {
         parentOf: this.kinematic.parentOf,
         motions: this.motions,
         mappingByJoint: mapByJoint,
-        onJointChange: (joint, value) => {
-          this._jointStates[joint] = value;
-          this.emitJointChange(joint, value, 'ui');
-        },
+        onJointChange: (joint, value) => this.handleUiJointChange(joint, value),
         onRequestRender: () => this.onDemand?.requestRender(),
+        onApprove: () => this.approve('ui'),
+        onCancelPending: () => this.cancelPending(),
+        onEstop: () => this.stop('ui'),
       });
+      this.panel.applyMotorLimits(this._motorLimits);
       this.updateModeUi();
 
       this.unpick?.();
@@ -543,6 +624,10 @@ export class PibRobotView extends HTMLElement {
       applyJointValue(m.joint, m.motion, m.axis, radians);
       this.panel?.setJointUi(name, radians);
     }
+    if (Object.keys(this._actualJoints).length === 0 && Object.keys(this._jointStates).length > 0) {
+      this._actualJoints = { ...this._jointStates };
+      this._acceptedJoints = { ...this._actualJoints };
+    }
     this.onDemand?.requestRender();
     if (source === 'api') {
       for (const [name, radians] of Object.entries(this._jointStates)) {
@@ -554,10 +639,13 @@ export class PibRobotView extends HTMLElement {
   private applyLiveFrame(values: Record<string, number>): void {
     for (const [name, radians] of Object.entries(values)) {
       this._jointStates[name] = radians;
+      this._actualJoints[name] = radians;
       const m = this.motionByJoint.get(name);
       if (!m) continue;
       applyJointValue(m.joint, m.motion, m.axis, radians);
-      this.panel?.setJointUi(name, radians);
+      if (this._effectiveMode !== 'command' || this._estopped) {
+        this.panel?.setJointUi(name, radians);
+      }
     }
     this.onDemand?.requestRender();
   }
@@ -620,6 +708,102 @@ export class PibRobotView extends HTMLElement {
         detail: { joint, value, source },
       }),
     );
+  }
+
+  private handleUiJointChange(joint: string, value: number): void {
+    this._jointStates[joint] = value;
+    this.emitJointChange(joint, value, 'ui');
+    if (this._effectiveMode !== 'command' || this._estopped) return;
+    const entry = this._mapping ? mappingByUrdfJoint(this._mapping).get(joint) : undefined;
+    if (entry?.class !== 'driven') return;
+    this._pendingJoints[joint] = value;
+    this.panel?.setJointPending(joint, true);
+  }
+
+  private ensureCommandScheduler(): void {
+    if (this.commandScheduler) return;
+    this.commandScheduler = new CommandSendScheduler(this._minCommandIntervalMs, (source) =>
+      this.flushCommand(source),
+    );
+  }
+
+  private flushCommand(source: JointChangeSource): void {
+    if (this._estopped || this._effectiveMode !== 'command' || !this._mapping) return;
+    const built = buildCommandFromPending(
+      this._pendingJoints,
+      this._mapping,
+      this._motorLimits,
+      source,
+      () => crypto.randomUUID(),
+    );
+    if (!built.ok) {
+      this.emitCommandRejected('', built.reason);
+      this.revertPendingToAccepted();
+      this.clearPendingUi();
+      return;
+    }
+
+    const ev = new CustomEvent<CommandRequestDetail>('commandrequest', {
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+      detail: built.command.payload,
+    });
+    this.dispatchEvent(ev);
+    if (ev.defaultPrevented) {
+      const reason =
+        (ev as CustomEvent & { rejectionReason?: string }).rejectionReason ??
+        'command refused by host';
+      this.emitCommandRejected(built.command.payload.commandId, reason);
+      this.revertPendingToAccepted();
+      this.clearPendingUi();
+      return;
+    }
+
+    for (const joint of built.command.joints) {
+      this._acceptedJoints[joint] = built.command.payload.values[joint]!;
+      delete this._pendingJoints[joint];
+      this.panel?.setJointPending(joint, false);
+    }
+    this._commandedStates = { ...built.command.payload.values };
+    this.syncCommandedPanel();
+    this.commandScheduler?.markSent();
+  }
+
+  private emitCommandRejected(commandId: string, reason: string): void {
+    this.dispatchEvent(
+      new CustomEvent<CommandRejectedDetail>('commandrejected', {
+        bubbles: true,
+        composed: true,
+        detail: { commandId, reason },
+      }),
+    );
+  }
+
+  private clearPendingUi(): void {
+    this.panel?.clearAllPending();
+    this._pendingJoints = {};
+  }
+
+  private revertPendingToAccepted(): void {
+    const pose: Record<string, number> = { ...this._jointStates };
+    for (const joint of Object.keys(this._pendingJoints)) {
+      if (joint in this._acceptedJoints) pose[joint] = this._acceptedJoints[joint]!;
+      else if (joint in this._actualJoints) pose[joint] = this._actualJoints[joint]!;
+      else pose[joint] = 0;
+    }
+    this.applyPoseToModel(pose);
+  }
+
+  private applyPoseToModel(pose: Record<string, number>): void {
+    this._jointStates = { ...pose };
+    for (const [name, radians] of Object.entries(pose)) {
+      const m = this.motionByJoint.get(name);
+      if (!m) continue;
+      applyJointValue(m.joint, m.motion, m.axis, radians);
+      this.panel?.setJointUi(name, radians);
+    }
+    this.onDemand?.requestRender();
   }
 }
 

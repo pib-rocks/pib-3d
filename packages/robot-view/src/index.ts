@@ -16,7 +16,18 @@ export type {
   ErrorDetail,
   ViewerMode,
   JointChangeSource,
+  MotorLimitMap,
+  MotorLimitDeg,
+  CommandRequestDetail,
+  CommandRejectedDetail,
+  EStopDetail,
 } from './types.js';
+export {
+  motorLimitsProvided,
+  validateDrivenValue,
+  buildCommandFromPending,
+  CommandSendScheduler,
+} from './joints/commandPath.js';
 export {
   rpyQuat,
   uiRange,

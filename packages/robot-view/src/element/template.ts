@@ -32,6 +32,13 @@ export const SHADOW_STYLES = `
     border: 1px solid #30363d; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
   button:hover { background: #30363d; border-color: #484f58; }
   button.on { background: #1f6feb; border-color: #388bfd; }
+  button.danger { background: #3d1214; border-color: #f85149; color: #ffa198; }
+  button.danger:hover { background: #67060c; }
+
+  #command-bar { display: none; gap: 6px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 1px solid #30363d; }
+  #command-bar.on { display: flex; }
+  .j.pending .name { color: #e3b341; }
+  .j.pending .val { color: #e3b341; }
 
   #guard, #live-stale { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
     border-radius: 6px; background: #2d2103; color: #e3b341; font-size: 11px; line-height: 1.5; }

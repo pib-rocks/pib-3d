@@ -1,0 +1,106 @@
+{
+  "shoulder_vertical_right": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "shoulder_horizontal_right": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "upper_arm_right_rotation": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "elbow_right": {
+    "minDeg": -45,
+    "maxDeg": 90
+  },
+  "lower_arm_right_rotation": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "wrist_right": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "shoulder_vertical_left": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "shoulder_horizontal_left": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "upper_arm_left_rotation": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "elbow_left": {
+    "minDeg": -45,
+    "maxDeg": 90
+  },
+  "lower_arm_left_rotation": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "wrist_left": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "turn_head_motor": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "tilt_forward_motor": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "thumb_right_opposition": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "thumb_right_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "index_right_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "middle_right_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "ring_right_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "pinky_right_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "thumb_left_opposition": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "thumb_left_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "index_left_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "middle_left_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "ring_left_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  },
+  "pinky_left_stretch": {
+    "minDeg": -90,
+    "maxDeg": 90
+  }
+}
