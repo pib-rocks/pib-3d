@@ -179,15 +179,38 @@ describe('PibRobotView command lifecycle', () => {
     return el;
   }
 
-  it('does not emit commandrequest on slider drag (pending only)', () => {
+  it('commands straight from the slider drag, without an approval step', () => {
     const el = mountWithMapping();
-    const commands: unknown[] = [];
-    el.addEventListener('commandrequest', (e) => commands.push(e));
+    const values: Array<Record<string, number>> = [];
+    el.addEventListener('commandrequest', (e) => {
+      values.push((e as CustomEvent<{ values: Record<string, number> }>).detail.values);
+    });
     (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
       'rotation_elbow',
       0.2,
     );
-    expect(commands).toHaveLength(0);
+    vi.advanceTimersByTime(0);
+    expect(values).toHaveLength(1);
+    expect(values[0]!.rotation_elbow).toBeCloseTo(0.2, 9);
+  });
+
+  it('coalesces a fast drag into one command with the latest value', () => {
+    const el = mountWithMapping();
+    const values: Array<Record<string, number>> = [];
+    el.addEventListener('commandrequest', (e) => {
+      values.push((e as CustomEvent<{ values: Record<string, number> }>).detail.values);
+    });
+    const drag = (v: number) =>
+      (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+        'rotation_elbow',
+        v,
+      );
+    drag(0.1);
+    drag(0.2);
+    drag(0.3);
+    vi.advanceTimersByTime(0);
+    expect(values).toHaveLength(1);
+    expect(values[0]!.rotation_elbow).toBeCloseTo(0.3, 9);
   });
 
   it('approve emits exactly one commandrequest with unique commandId', () => {

@@ -282,6 +282,7 @@ export class PibRobotView extends HTMLElement {
     this._commandedStates = { ...values };
     this.syncCommandedPanel();
     this.commandScheduler?.markSent();
+    this.resendIfDirty();
     this.dispatchEvent(
       new CustomEvent<CommandAcceptedDetail>('commandaccepted', {
         bubbles: true,
@@ -297,6 +298,7 @@ export class PibRobotView extends HTMLElement {
     this.revertPendingToAccepted();
     this.clearPendingUi();
     this.emitCommandRejected(commandId, reason);
+    this.resendIfDirty();
   }
 
   setLimits(map: MotorLimitMap): void {
@@ -911,6 +913,26 @@ export class PibRobotView extends HTMLElement {
     if (entry?.class !== 'driven') return;
     this._pendingJoints[joint] = value;
     this.panel?.setJointPending(joint, true);
+    // Live control: the drag itself commands the motor. The scheduler throttles to
+    // _minCommandIntervalMs and coalesces to the latest value, so a fast drag still produces a
+    // steady stream instead of one request per pixel.
+    if (this._inFlightCommand) {
+      this._dirtyDuringFlight = true;
+      return;
+    }
+    this.ensureCommandScheduler();
+    this.commandScheduler!.requestFlush('ui');
+  }
+
+  /** A slider moved while a command was in flight: send the newest value once it resolves. */
+  private _dirtyDuringFlight = false;
+
+  private resendIfDirty(): void {
+    if (!this._dirtyDuringFlight) return;
+    this._dirtyDuringFlight = false;
+    if (Object.keys(this._pendingJoints).length === 0) return;
+    this.ensureCommandScheduler();
+    this.commandScheduler!.requestFlush('ui');
   }
 
   private ensureCommandScheduler(): void {

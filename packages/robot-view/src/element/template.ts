@@ -35,8 +35,6 @@ export const SHADOW_STYLES = `
   button.danger { background: #3d1214; border-color: #f85149; color: #ffa198; }
   button.danger:hover { background: #67060c; }
 
-  #command-bar { display: none; gap: 6px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 1px solid #30363d; }
-  #command-bar.on { display: flex; }
   #pose-readout { padding: 8px 12px; border-bottom: 1px solid #30363d; font-size: 11px; }
   #pose-readout .irow { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 3px; }
   #pose-readout .irow span { color: #8b949e; }
