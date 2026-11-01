@@ -89,7 +89,8 @@ async function runCommandDemo(): Promise<void> {
   view.setLimits(limits);
   el.setAttribute('mode', 'command');
 
-  let phase: 'idle' | 'drag' | 'approve' | 'post-estop' = 'idle';
+  type DemoPhase = 'idle' | 'drag' | 'approve' | 'post-estop';
+  let phase: DemoPhase = 'idle';
   const measured = {
     commandsDuringDrag: 0,
     commandsDuringApprove: 0,
@@ -106,12 +107,18 @@ async function runCommandDemo(): Promise<void> {
     phase = 'post-estop';
   });
 
-  (globalThis as unknown as { __pibCommandDemo?: { measured: typeof measured; phase: typeof phase; setPhase: (p: typeof phase) => void } }).__pibCommandDemo = {
+  (globalThis as unknown as {
+    __pibCommandDemo?: {
+      measured: typeof measured;
+      phase: DemoPhase;
+      setPhase: (p: DemoPhase) => void;
+    };
+  }).__pibCommandDemo = {
     measured,
     get phase() {
       return phase;
     },
-    setPhase(p: typeof phase) {
+    setPhase(p: DemoPhase) {
       phase = p;
     },
   };
