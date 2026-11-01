@@ -22,6 +22,10 @@ export type {
   CommandRejectedDetail,
   CommandAcceptedDetail,
   EStopDetail,
+  PoseChangeDetail,
+  PosePoint,
+  RobotPose,
+  ArmSide,
 } from './types.js';
 export {
   motorLimitsProvided,
@@ -72,3 +76,17 @@ export {
   mappingByMotor,
   LiveJointInterpolator,
 } from './joints/liveState.js';
+export {
+  BASE_LINK,
+  TCP_LINK_LEFT,
+  TCP_LINK_RIGHT,
+  alignModelToBaseFrame,
+  formatPoseMmMetres,
+} from './scene/baseFrame.js';
+export type { BaseFrameContext } from './scene/baseFrame.js';
+export {
+  applyModelJointRadians,
+  buildViewerFkContext,
+  computeHandMmInBaseFrame,
+  computePoseInBaseFrame,
+} from './model/viewerFk.js';

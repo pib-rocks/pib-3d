@@ -7,7 +7,14 @@ import {
   type KinematicTree,
 } from '../model/kinematicTree.js';
 import { ensureFrameLinks } from '../model/frameLinks.js';
-import { frameCameraOnModel, liftModelToFloor } from '../scene/frameCamera.js';
+import { frameCameraOnModel, alignModelToBaseFrame, type BaseFrameContext } from '../scene/frameCamera.js';
+import {
+  BASE_LINK,
+  TCP_LINK_LEFT,
+  TCP_LINK_RIGHT,
+  formatPoseMmMetres,
+  linkOriginInBaseMetres,
+} from '../scene/baseFrame.js';
 import {
   canCommand,
   loadMapping,
@@ -36,8 +43,11 @@ import type {
   JointChangeSource,
   MotorLimitMap,
   MotionEntry,
+  PoseChangeDetail,
   ReadyDetail,
   RobotModel,
+  RobotPose,
+  ArmSide,
   SelectionChangeDetail,
   ViewerMode,
 } from '../types.js';
@@ -106,6 +116,9 @@ export class PibRobotView extends HTMLElement {
   private _manifest: RobotModelManifest | null = null;
   private _expectedMotors: string[] | null = null;
   private _modelConsistency: ModelConsistencyResult = { ok: true, reason: null };
+  private _baseFrame: BaseFrameContext | null = null;
+  private _tcpLink = TCP_LINK_RIGHT;
+  private _poseSide: ArmSide = 'right';
 
   constructor() {
     super();
@@ -330,6 +343,46 @@ export class PibRobotView extends HTMLElement {
     return this.onDemand?.getRenderCount() ?? 0;
   }
 
+  /** Provisional tool-centre point link (palm origin until PR-2057). */
+  get tcpLink(): string {
+    return this._tcpLink;
+  }
+
+  set tcpLink(linkName: string) {
+    this._tcpLink = linkName;
+    this._poseSide = linkName === TCP_LINK_LEFT ? 'left' : 'right';
+    this.syncPose();
+  }
+
+  get poseSide(): ArmSide {
+    return this._poseSide;
+  }
+
+  set poseSide(side: ArmSide) {
+    this._poseSide = side;
+    this._tcpLink = side === 'left' ? TCP_LINK_LEFT : TCP_LINK_RIGHT;
+    this.syncPose();
+  }
+
+  /**
+   * Base link and TCP positions in metres, REP-103 base frame (foot point, Z up).
+   * Returns null before the model is loaded.
+   */
+  getPose(side: ArmSide = this._poseSide): RobotPose | null {
+    if (!this._baseFrame || !this.linkNodes.size) return null;
+    const tcp = side === 'left' ? TCP_LINK_LEFT : TCP_LINK_RIGHT;
+    const baseNode = this.linkNodes.get(BASE_LINK);
+    const handNode = this.linkNodes.get(tcp);
+    if (!baseNode || !handNode) return null;
+    this.sceneBundle?.modelRoot.updateMatrixWorld(true);
+    return {
+      // The base is the frame's origin by definition; the root link sits inside the body, so
+      // reporting its position here would read like a 0.77 m offset.
+      base: { x: 0, y: 0, z: 0 },
+      hand: linkOriginInBaseMetres(handNode, this._baseFrame),
+    };
+  }
+
   setJointStates(map: Record<string, number>): void {
     this._jointStates = this._mapping ? resolveJointStateMap(map, this._mapping) : { ...map };
     this._actualJoints = { ...this._jointStates };
@@ -367,6 +420,7 @@ export class PibRobotView extends HTMLElement {
       this.onDemand?.requestRender();
     }
     this.emitJointChange(name, radians, 'api');
+    this.syncPose();
   }
 
   focusJoint(name: string): void {
@@ -393,6 +447,7 @@ export class PibRobotView extends HTMLElement {
     for (const m of this.motions) {
       this.emitJointChange(m.joint.name, 0, 'api');
     }
+    this.syncPose();
   }
 
   dispose(): void {
@@ -486,6 +541,7 @@ export class PibRobotView extends HTMLElement {
         this._jointStates[m.joint.name] = v;
         this.emitJointChange(m.joint.name, v, 'api');
       }
+      this.syncPose();
     });
     gridBtn?.addEventListener('click', () => {
       if (!this.sceneBundle) return;
@@ -638,7 +694,10 @@ export class PibRobotView extends HTMLElement {
 
       if (!this.sceneBundle) this.initScene();
       attachRootToScene(this.sceneBundle!.modelRoot, linkNodes, this.kinematic.rootLink);
-      liftModelToFloor(this.sceneBundle!.modelRoot);
+      this._baseFrame = alignModelToBaseFrame(
+        this.sceneBundle!.modelRoot,
+        this.linkNodes.get(BASE_LINK),
+      );
       const { size, triangles } = frameCameraOnModel(
         this.sceneBundle!.modelRoot,
         this.sceneBundle!.camera,
@@ -694,6 +753,7 @@ export class PibRobotView extends HTMLElement {
 
       loading.style.display = 'none';
       this.applyJointStates('api');
+      this.syncPose();
       this.onDemand?.requestRender();
 
       this.dispatchEvent(
@@ -736,6 +796,7 @@ export class PibRobotView extends HTMLElement {
         this.emitJointChange(name, radians, 'api');
       }
     }
+    this.syncPose();
   }
 
   private applyLiveFrame(values: Record<string, number>): void {
@@ -750,6 +811,7 @@ export class PibRobotView extends HTMLElement {
       }
     }
     this.onDemand?.requestRender();
+    this.syncPose();
   }
 
   private syncCommandedPanel(): void {
@@ -812,9 +874,37 @@ export class PibRobotView extends HTMLElement {
     );
   }
 
+  private syncPose(): void {
+    const pose = this.getPose();
+    const baseEl = this.shadow.querySelector('#pose-base') as HTMLElement | null;
+    const handEl = this.shadow.querySelector('#pose-hand') as HTMLElement | null;
+    if (baseEl && handEl) {
+      if (!pose) {
+        baseEl.textContent = '–';
+        handEl.textContent = '–';
+      } else {
+        baseEl.textContent = formatPoseMmMetres(pose.base);
+        handEl.textContent = formatPoseMmMetres(pose.hand);
+      }
+    }
+    if (!pose) return;
+    this.dispatchEvent(
+      new CustomEvent<PoseChangeDetail>('posechange', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          side: this._poseSide,
+          base: pose.base,
+          hand: pose.hand,
+        },
+      }),
+    );
+  }
+
   private handleUiJointChange(joint: string, value: number): void {
     this._jointStates[joint] = value;
     this.emitJointChange(joint, value, 'ui');
+    this.syncPose();
     if (this._effectiveMode !== 'command' || this._estopped) return;
     const entry = this._mapping ? mappingByUrdfJoint(this._mapping).get(joint) : undefined;
     if (entry?.class !== 'driven') return;

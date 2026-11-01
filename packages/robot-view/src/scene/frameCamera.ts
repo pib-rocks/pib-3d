@@ -1,10 +1,7 @@
 import * as THREE from 'three';
 import type { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-export function liftModelToFloor(modelRoot: THREE.Group): void {
-  const raw = new THREE.Box3().setFromObject(modelRoot);
-  modelRoot.position.y -= raw.min.y;
-}
+export { alignModelToBaseFrame, type BaseFrameContext } from './baseFrame.js';
 
 export function frameCameraOnModel(
   modelRoot: THREE.Group,

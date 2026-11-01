@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "mappingPath": "joints/mapping.json",
+  "tcpLinkBySide": {
+    "right": "d01_r_palm_right",
+    "left": "d01_l_palm_left"
+  },
+  "cases": [
+    {
+      "name": "zero_right",
+      "side": "right",
+      "jointsRad": {
+        "rotation_inner_shoulder_1": 0.0,
+        "rotation_shoulder_left": 0.0,
+        "central_rotator_rotation": 0.0,
+        "rotation_elbow": 0.0,
+        "rotate_forearm": 0.0,
+        "rotation_wrist_right": 0.0
+      },
+      "sdkPalmMm": {
+        "x": -616.4087081139788,
+        "y": 27.665756136326635,
+        "z": 1030.578517959987
+      }
+    },
+    {
+      "name": "sdk_smoke_right",
+      "side": "right",
+      "jointsRad": {
+        "rotation_inner_shoulder_1": 0.0,
+        "rotation_shoulder_left": 0.5235987755982988,
+        "central_rotator_rotation": 0.0,
+        "rotation_elbow": 0.0,
+        "rotate_forearm": 0.7853981633974483,
+        "rotation_wrist_right": 0.0
+      },
+      "sdkPalmMm": {
+        "x": -559.42879253106,
+        "y": -184.44806071098003,
+        "z": 1032.9008484303217
+      }
+    },
+    {
+      "name": "shoulder_lift_right",
+      "side": "right",
+      "jointsRad": {
+        "rotation_inner_shoulder_1": 0.7853981633974483,
+        "rotation_shoulder_left": 0.0,
+        "central_rotator_rotation": 0.0,
+        "rotation_elbow": 0.0,
+        "rotate_forearm": 0.0,
+        "rotation_wrist_right": 0.0
+      },
+      "sdkPalmMm": {
+        "x": -616.408708113979,
+        "y": -114.56502833274271,
+        "z": 984.1738476295928
+      }
+    },
+    {
+      "name": "elbow_bend_right",
+      "side": "right",
+      "jointsRad": {
+        "rotation_inner_shoulder_1": 0.0,
+        "rotation_shoulder_left": -0.5235987755982988,
+        "central_rotator_rotation": 0.0,
+        "rotation_elbow": -0.6981317007977318,
+        "rotate_forearm": 0.0,
+        "rotation_wrist_right": 0.0
+      },
+      "sdkPalmMm": {
+        "x": -426.71435006408683,
+        "y": 142.34333627407085,
+        "z": 1097.9134457388407
+      }
+    },
+    {
+      "name": "zero_left",
+      "side": "left",
+      "jointsRad": {
+        "rotation_inner_shoulder": 0.0,
+        "rotation_shoulder_left_1": 0.0,
+        "central_rotator_rotation_1": 0.0,
+        "rotation_elbow_1": 0.0,
+        "rotate_forearm_1": 0.0,
+        "rotation_wrist_left": 0.0
+      },
+      "sdkPalmMm": {
+        "x": 626.2051787901476,
+        "y": 27.465599637332012,
+        "z": 994.515923513287
+      }
+    }
+  ],
+  "toleranceMm": 80,
+  "note": "Absolute palm positions differ by design (idealized SDK model, PR-2158). The test compares hand travel between poses, which cancels the frame offset. Worst measured difference 75.4 mm; the tolerance is a regression guard, not a claim of agreement."
+}
