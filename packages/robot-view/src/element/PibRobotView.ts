@@ -55,6 +55,7 @@ import {
   buildCommandFromPending,
   CommandSendScheduler,
   motorLimitsProvided,
+  newCommandId,
 } from '../joints/commandPath.js';
 import {
   computeModelConsistency,
@@ -927,7 +928,7 @@ export class PibRobotView extends HTMLElement {
       this._mapping,
       this._motorLimits,
       source,
-      () => crypto.randomUUID(),
+      () => newCommandId(),
     );
     if (!built.ok) {
       this.emitCommandRejected('', built.reason);
