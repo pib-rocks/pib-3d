@@ -1,5 +1,5 @@
 import type { JointMappingDocument, JointMappingEntry } from './mapping.js';
-import { mappingByUrdfJoint } from './mapping.js';
+import { mappingByUrdfJoint, motorRadToModelRad } from './mapping.js';
 
 export interface JointStateSample {
   names: string[];
@@ -80,8 +80,7 @@ export function sampleToModelJoints(
       unknown.push(motor);
       continue;
     }
-    const direction = entry.direction ?? 1;
-    values[entry.urdfJoint] = motorRad * direction;
+    values[entry.urdfJoint] = motorRadToModelRad(entry, motorRad);
   }
 
   return { values: applyCouplings(values, mapping), unknown, dropped: false };
@@ -98,8 +97,7 @@ export function resolveJointStateMap(
   for (const [key, value] of Object.entries(map)) {
     const motorEntry = byMotor.get(key);
     if (motorEntry) {
-      const direction = motorEntry.direction ?? 1;
-      out[motorEntry.urdfJoint] = value * direction;
+      out[motorEntry.urdfJoint] = motorRadToModelRad(motorEntry, value);
     } else if (byUrdf.has(key)) {
       out[key] = value;
     } else {

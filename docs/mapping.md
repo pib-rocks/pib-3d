@@ -144,6 +144,25 @@ Also note the finger directions: all eleven finger-driving joints carry `directi
 palm. The check that finds this class of error is a limit test on live samples: every driven joint
 must land inside `limitsRad`.
 
+### The finger servos are geared and offset
+
+The ten finger servos travel -90…+90 degrees, the CAD finger joints only -90…0: **180 degrees of
+servo is 90 degrees of joint**, so `gearRatio: 0.5`. And the servo's -90 is a *straight* finger
+while the CAD zero is a straight finger too, so the mapping carries `zeroOffsetDeg: 45` with
+`direction: -1`:
+
+```
+model = (motor * 0.5 / -1) - 45        motor -90 -> 0 (straight)   motor +90 -> -90 (closed)
+```
+
+Checked against the machine: a photo of the right hand in front of the camera on 2026-11-01 shows
+the fingers extended while all ten stretch servos read -89.8 degrees. A plain `motor * direction`
+(or a plain sign flip) put a closed fist on a hand that was open.
+
+**Still unverified:** which way the fingers move when the servo angle rises. One static pose fixes
+the offset and the ratio's size, not its sign. Until a commanded +15 degree step is observed, the
+finger `verifiedOnHardware` flags stay false - which keeps command mode closed anyway.
+
 ### Passive service lids (2)
 
 | URDF joint | Class | Motor | Direction |
