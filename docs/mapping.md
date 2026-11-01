@@ -118,6 +118,28 @@ check could see.
 | d58_thumb_tip_hinge | coupled | — | — |
 | d58_thumb_tip_1_hinge | coupled | — | — |
 
+### What drives a coupled joint
+
+A finger is a linkage: one motor turns the knuckle (`j1*`) and the two joints behind it bend by
+**the same angle**. That relationship lives in the mapping as a `coupling` block on the follower:
+
+```json
+{ "urdfJoint": "j2", "class": "coupled", "motor": null,
+  "coupling": { "follows": "j1", "factor": 1.0 } }
+```
+
+`factor` is the sign that lines the follower's CAD axis up with the knuckle's: `1` for the four
+fingers, `-1` for the two thumb tip hinges, whose axes run anti-parallel (dot product -1). The
+viewer resolves couplings after every sample, so a knuckle that moves takes its whole finger with
+it; `applyCouplings()` in `src/joints/liveState.ts`.
+
+`dof_wrist` and `dof_wrist_1` stay uncoupled: they belong to the parallel wrist mechanism, not to
+a finger.
+
+Also note the finger directions: all eleven finger-driving joints carry `direction: +1`. With the old value the knuckles sat at +90° against a CAD limit of [-90°, 0°] - visibly bent against the
+palm. The check that finds this class of error is a limit test on live samples: every driven joint
+must land inside `limitsRad`.
+
 ### Passive service lids (2)
 
 | URDF joint | Class | Motor | Direction |

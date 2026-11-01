@@ -21,6 +21,44 @@ export function mappingByMotor(mapping: JointMappingDocument): Map<string, Joint
   return out;
 }
 
+/**
+ * Finger joints hang off one knuckle. The linkage forces every joint of a finger to bend by the
+ * same angle as the joint the motor drives, so the driven value is copied to each follower -
+ * multiplied by the coupling factor, which is -1 where the CAD axis points the other way (the
+ * thumb). Values are resolved breadth-first so a follower of a follower still lands.
+ */
+export function applyCouplings(
+  values: Record<string, number>,
+  mapping: JointMappingDocument,
+): Record<string, number> {
+  const followers = mapping.joints.filter((entry) => entry.coupling);
+  if (!followers.length) return values;
+
+  const resolved = new Set<string>();
+  const out = { ...values };
+  let pending = followers;
+  while (pending.length) {
+    const next: JointMappingEntry[] = [];
+    for (const entry of pending) {
+      const coupling = entry.coupling!;
+      const source = out[coupling.follows];
+      if (source === undefined && !resolved.has(coupling.follows)) {
+        next.push(entry);
+        continue;
+      }
+      out[entry.urdfJoint] = (source ?? 0) * coupling.factor;
+      resolved.add(entry.urdfJoint);
+    }
+    if (next.length === pending.length) {
+      // Unresolvable chain (a cycle or an unknown source): leave the rest at zero.
+      for (const entry of next) out[entry.urdfJoint] = 0;
+      break;
+    }
+    pending = next;
+  }
+  return out;
+}
+
 export function sampleToModelJoints(
   sample: JointStateSample,
   mapping: JointMappingDocument,
@@ -46,7 +84,7 @@ export function sampleToModelJoints(
     values[entry.urdfJoint] = motorRad * direction;
   }
 
-  return { values, unknown, dropped: false };
+  return { values: applyCouplings(values, mapping), unknown, dropped: false };
 }
 
 /** Resolve URDF joint keys and motor-name keys to URDF joints in model radians. */
@@ -68,7 +106,7 @@ export function resolveJointStateMap(
       out[key] = value;
     }
   }
-  return out;
+  return applyCouplings(out, mapping);
 }
 
 export type LiveFrameCallback = (values: Record<string, number>) => void;
