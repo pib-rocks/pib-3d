@@ -4,7 +4,7 @@
   "modelBuild": "0770fee55b36",
   "source": {
     "motors": "pib-backend pib_api/flask/seed_profiles/pib5advanced.py (MOTOR_MAPPING)",
-    "directions": "pib-sdk src/pib_sdk/data/pib_model.urdf, axis dot product at zero pose"
+    "directions": "pib-sdk src/pib_sdk/data/pib_model.urdf, axis dot product at zero pose; the two left-shoulder signs were corrected by measurement - the axis dot product alone cannot see that the left arm's CAD frame is turned against the right one (packages/robot-view/test/armSymmetry.test.ts)"
   },
   "joints": [
     {
@@ -102,20 +102,20 @@
       "motor": "shoulder_vertical_left",
       "class": "driven",
       "type": "continuous",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": null,
       "axisDot": -1.0,
       "verifiedOnHardware": false,
-      "note": "left arm"
+      "note": "left arm (direction mirrors the right arm)"
     },
     {
       "urdfJoint": "rotation_shoulder_left_1",
       "motor": "shoulder_horizontal_left",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
+      "direction": -1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -124,7 +124,7 @@
       ],
       "axisDot": 1.0,
       "verifiedOnHardware": false,
-      "note": "left arm"
+      "note": "left arm (direction mirrors the right arm)"
     },
     {
       "urdfJoint": "central_rotator_rotation_1",

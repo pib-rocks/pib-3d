@@ -11,7 +11,7 @@ Each entry describes one model joint:
 | `urdfJoint` | Joint name in `model.json` / URDF |
 | `motor` | Backend motor name for **driven** joints; `null` for coupled/passive |
 | `class` | `driven` (has a motor), `coupled` (linkage follower), or `passive` (no actuator) |
-| `direction` | Sign of CAD vs pib-sdk axis alignment at zero pose (`+1` or `-1`); `null` if not applicable |
+| `direction` | Sign that maps the motor angle onto the CAD joint (`+1` or `-1`); `null` if not applicable |
 | `gearRatio` | Motor revolutions per joint revolution (1.0 until measured) |
 | `zeroOffsetDeg` | Encoder zero offset in degrees (0.0 until measured) |
 | `limitsRad` | `[lower, upper]` in radians from the model, or `null` for continuous joints |
@@ -25,6 +25,13 @@ modelRad      = degToRad((motorCentideg * gearRatio) / (100 * direction)) - degT
 ```
 
 `direction` does **not** include `upper_endpoint` or other backend polarity flags.
+
+The axis dot product against pib-sdk is the starting point, not the proof: the left arm's CAD
+frame is turned against the right one, so a dot product computed per joint silently agrees with
+itself while the arm renders on the wrong side of the body. `packages/robot-view/test/armSymmetry.test.ts`
+is the authority - it drives both arms with the same motor magnitudes and requires the hands to
+land mirrored. On the left shoulder it caught 101-344 mm of forward error that no mesh or manifest
+check could see.
 
 ## Provenance
 
