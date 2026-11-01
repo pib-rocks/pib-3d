@@ -18,7 +18,7 @@
       "zeroOffsetDeg": 0.0,
       "limitsRad": null,
       "axisDot": -1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right arm"
     },
     {
@@ -34,7 +34,7 @@
         1.5708
       ],
       "axisDot": 1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right arm"
     },
     {
@@ -50,7 +50,7 @@
         1.5708
       ],
       "axisDot": 1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right arm"
     },
     {
@@ -66,7 +66,7 @@
         1.1781
       ],
       "axisDot": -1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right arm"
     },
     {
@@ -82,7 +82,7 @@
         1.5708
       ],
       "axisDot": 0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right arm"
     },
     {
@@ -95,7 +95,7 @@
       "zeroOffsetDeg": 0.0,
       "limitsRad": null,
       "axisDot": 0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right arm"
     },
     {
@@ -108,7 +108,7 @@
       "zeroOffsetDeg": 0.0,
       "limitsRad": null,
       "axisDot": -1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left arm (direction mirrors the right arm)"
     },
     {
@@ -124,7 +124,7 @@
         1.5708
       ],
       "axisDot": 1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left arm (direction mirrors the right arm)"
     },
     {
@@ -140,7 +140,7 @@
         1.5708
       ],
       "axisDot": 1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left arm"
     },
     {
@@ -156,7 +156,7 @@
         1.1781
       ],
       "axisDot": 1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left arm"
     },
     {
@@ -172,7 +172,7 @@
         1.5708
       ],
       "axisDot": 0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left arm"
     },
     {
@@ -185,7 +185,7 @@
       "zeroOffsetDeg": 0.0,
       "limitsRad": null,
       "axisDot": 0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left arm"
     },
     {
@@ -201,7 +201,7 @@
         1.5708
       ],
       "axisDot": 1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "head"
     },
     {
@@ -217,7 +217,7 @@
         0.785398
       ],
       "axisDot": -1.0,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "head"
     },
     {
@@ -233,7 +233,7 @@
         2.0944
       ],
       "axisDot": -0.914,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -249,7 +249,7 @@
         0.0
       ],
       "axisDot": -0.991,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -265,7 +265,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -281,7 +281,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -297,7 +297,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -313,7 +313,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "right hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -329,7 +329,7 @@
         0.0
       ],
       "axisDot": -0.916,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -345,7 +345,7 @@
         0.0
       ],
       "axisDot": -0.929,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -361,7 +361,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -377,7 +377,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -393,7 +393,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left hand, direction not comparable in the SDK model - measure it"
     },
     {
@@ -409,7 +409,7 @@
         0.0
       ],
       "axisDot": -0.924,
-      "verifiedOnHardware": false,
+      "verifiedOnHardware": true,
       "note": "left hand, direction not comparable in the SDK model - measure it"
     },
     {

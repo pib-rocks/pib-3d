@@ -119,12 +119,21 @@ describe('validateMapping', () => {
 
 describe('canCommand', () => {
   it('is false while driven joints are not verified on hardware', () => {
-    const validation = validateMapping(mappingDoc, modelDoc);
-    const gate = canCommand(mappingDoc, validation);
+    // The repository mapping is verified (all 26 driven joints stepped +15 degrees on the robot,
+    // 2026-11-01), so the negative case has to be built: one joint back to false closes the gate.
+    const unverified = structuredClone(mappingDoc);
+    const entry = unverified.joints.find((j) => j.class === 'driven')!;
+    entry.verifiedOnHardware = false;
+    const gate = canCommand(unverified, validateMapping(unverified, modelDoc));
     expect(gate.ok).toBe(false);
     if (!gate.ok) {
       expect(gate.reason).toMatch(/verifiedOnHardware/i);
     }
+  });
+
+  it('opens once every driven joint is verified', () => {
+    const gate = canCommand(mappingDoc, validateMapping(mappingDoc, modelDoc));
+    expect(gate.ok).toBe(true);
   });
 
   it('is false when validation failed', () => {
