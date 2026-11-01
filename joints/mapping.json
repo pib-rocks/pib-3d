@@ -4,7 +4,8 @@
   "modelBuild": "0770fee55b36",
   "source": {
     "motors": "pib-backend pib_api/flask/seed_profiles/pib5advanced.py (MOTOR_MAPPING)",
-    "directions": "pib-sdk src/pib_sdk/data/pib_model.urdf, axis dot product at zero pose; the two left-shoulder signs were corrected by measurement - the axis dot product alone cannot see that the left arm's CAD frame is turned against the right one (packages/robot-view/test/armSymmetry.test.ts)"
+    "directions": "pib-sdk src/pib_sdk/data/pib_model.urdf, axis dot product at zero pose; the two left-shoulder signs were corrected by measurement - the axis dot product alone cannot see that the left arm's CAD frame is turned against the right one (packages/robot-view/test/armSymmetry.test.ts)",
+    "coupling": "finger linkages: every joint of a finger bends by the same angle as its knuckle (dot +1 to the knuckle axis; the thumb's distal hinge is anti-parallel, factor -1)"
   },
   "joints": [
     {
@@ -240,7 +241,7 @@
       "motor": "thumb_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -256,7 +257,7 @@
       "motor": "index_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -272,7 +273,7 @@
       "motor": "middle_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -288,7 +289,7 @@
       "motor": "ring_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -304,7 +305,7 @@
       "motor": "pinky_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -320,7 +321,7 @@
       "motor": "thumb_left_opposition",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -336,7 +337,7 @@
       "motor": "thumb_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -352,7 +353,7 @@
       "motor": "index_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -368,7 +369,7 @@
       "motor": "middle_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -384,7 +385,7 @@
       "motor": "ring_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -400,7 +401,7 @@
       "motor": "pinky_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": -1,
+      "direction": 1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -446,6 +447,10 @@
     {
       "urdfJoint": "j2",
       "motor": null,
+      "coupling": {
+        "follows": "j1",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -462,6 +467,10 @@
     {
       "urdfJoint": "j2_1",
       "motor": null,
+      "coupling": {
+        "follows": "j1_5",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -478,6 +487,10 @@
     {
       "urdfJoint": "j3",
       "motor": null,
+      "coupling": {
+        "follows": "j1",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -494,6 +507,10 @@
     {
       "urdfJoint": "j3_1",
       "motor": null,
+      "coupling": {
+        "follows": "j1_1",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -510,6 +527,10 @@
     {
       "urdfJoint": "j3_2",
       "motor": null,
+      "coupling": {
+        "follows": "j1_3",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -526,6 +547,10 @@
     {
       "urdfJoint": "j3_3",
       "motor": null,
+      "coupling": {
+        "follows": "j1_4",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -542,6 +567,10 @@
     {
       "urdfJoint": "j3_4",
       "motor": null,
+      "coupling": {
+        "follows": "j1_6",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -558,6 +587,10 @@
     {
       "urdfJoint": "j3_5",
       "motor": null,
+      "coupling": {
+        "follows": "j1_8",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -574,6 +607,10 @@
     {
       "urdfJoint": "j3_6",
       "motor": null,
+      "coupling": {
+        "follows": "j1_9",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -590,6 +627,10 @@
     {
       "urdfJoint": "d54_finger_distal_1_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_1",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -606,6 +647,10 @@
     {
       "urdfJoint": "d54_finger_distal_2_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_4",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -622,6 +667,10 @@
     {
       "urdfJoint": "d54_finger_distal_3_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_3",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -638,6 +687,10 @@
     {
       "urdfJoint": "d54_finger_distal_4_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_6",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -654,6 +707,10 @@
     {
       "urdfJoint": "d54_finger_distal_6_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_9",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -670,6 +727,10 @@
     {
       "urdfJoint": "d54_finger_distal_7_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_8",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -686,6 +747,10 @@
     {
       "urdfJoint": "d55_finger_tip_5_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_5",
+        "factor": 1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -702,6 +767,10 @@
     {
       "urdfJoint": "d58_thumb_tip_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_2",
+        "factor": -1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -718,6 +787,10 @@
     {
       "urdfJoint": "d58_thumb_tip_1_hinge",
       "motor": null,
+      "coupling": {
+        "follows": "j1_7",
+        "factor": -1.0
+      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,

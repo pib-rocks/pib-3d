@@ -2,6 +2,15 @@ import type { ModelJoint, RobotModel } from '../types.js';
 
 export type JointClass = 'driven' | 'coupled' | 'passive';
 
+export interface JointCoupling {
+  /** Joint that drives this one (a driven joint). */
+  follows: string;
+  /** Angle multiplier, -1 or 1. The fingers are linkages: every joint of a finger bends by the
+   *  same angle as its knuckle, so the factor is 1 - except where the CAD axis points the other
+   *  way, which is the thumb. */
+  factor: number;
+}
+
 export interface JointMappingEntry {
   urdfJoint: string;
   motor: string | null;
@@ -13,6 +22,7 @@ export interface JointMappingEntry {
   limitsRad: [number, number] | null;
   axisDot: number | null;
   verifiedOnHardware: boolean;
+  coupling?: JointCoupling;
   note?: string;
 }
 
@@ -155,6 +165,54 @@ export function validateMapping(
   for (const motor of PIB5ADVANCED_MOTORS) {
     if (!motorsSeen.has(motor)) {
       errors.push(`pib5advanced motor "${motor}" is not assigned to any driven joint`);
+    }
+  }
+
+  // Couplings: a follower must point at a driven joint and must not form a cycle, otherwise
+  // applyCouplings silently zeroes a finger while the panel still looks plausible.
+  const entryByName = new Map(mapping.joints.map((j) => [j.urdfJoint, j]));
+  for (const entry of mapping.joints) {
+    if (!entry.coupling) {
+      if (entry.class === 'coupled') {
+        warnings.push(`coupled joint "${entry.urdfJoint}" has no coupling; it will stay at 0`);
+      }
+      continue;
+    }
+    if (entry.class === 'driven') {
+      errors.push(`driven joint "${entry.urdfJoint}" must not carry a coupling`);
+      continue;
+    }
+    const target = entryByName.get(entry.coupling.follows);
+    if (!target) {
+      errors.push(
+        `coupling of "${entry.urdfJoint}" follows "${entry.coupling.follows}", which is not in the mapping`,
+      );
+    } else if (target.class !== 'driven' && !target.coupling) {
+      errors.push(
+        `coupling of "${entry.urdfJoint}" follows "${entry.coupling.follows}", which is neither driven nor coupled`,
+      );
+    }
+    if (entry.coupling.factor !== 1 && entry.coupling.factor !== -1) {
+      errors.push(`coupling of "${entry.urdfJoint}" has factor ${entry.coupling.factor}, expected 1 or -1`);
+    }
+    const seen = new Set<string>([entry.urdfJoint]);
+    let cursor: string | undefined = entry.coupling.follows;
+    while (cursor) {
+      if (seen.has(cursor)) {
+        errors.push(`coupling of "${entry.urdfJoint}" forms a cycle at "${cursor}"`);
+        break;
+      }
+      seen.add(cursor);
+      const next: JointMappingEntry | undefined = entryByName.get(cursor);
+      if (!next) break;
+      if (next.class === 'driven') break;
+      cursor = next.coupling?.follows;
+      if (!cursor) {
+        errors.push(
+          `coupling of "${entry.urdfJoint}" ends at "${next.urdfJoint}", which is not driven`,
+        );
+        break;
+      }
     }
   }
 
