@@ -1,0 +1,767 @@
+{
+  "schemaVersion": 1,
+  "robotVariant": "pib5advanced",
+  "modelBuild": "0770fee55b36",
+  "source": {
+    "motors": "pib-backend pib_api/flask/seed_profiles/pib5advanced.py (MOTOR_MAPPING)",
+    "directions": "pib-sdk src/pib_sdk/data/pib_model.urdf, axis dot product at zero pose"
+  },
+  "joints": [
+    {
+      "urdfJoint": "rotation_inner_shoulder_1",
+      "motor": "shoulder_vertical_right",
+      "class": "driven",
+      "type": "continuous",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": null,
+      "axisDot": -1.0,
+      "verifiedOnHardware": true,
+      "note": "right arm"
+    },
+    {
+      "urdfJoint": "rotation_shoulder_left",
+      "motor": "shoulder_horizontal_right",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 1.0,
+      "verifiedOnHardware": true,
+      "note": "right arm"
+    },
+    {
+      "urdfJoint": "central_rotator_rotation",
+      "motor": "upper_arm_right_rotation",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 1.0,
+      "verifiedOnHardware": true,
+      "note": "right arm"
+    },
+    {
+      "urdfJoint": "rotation_elbow",
+      "motor": "elbow_right",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.1781,
+        1.1781
+      ],
+      "axisDot": -1.0,
+      "verifiedOnHardware": true,
+      "note": "right arm"
+    },
+    {
+      "urdfJoint": "rotate_forearm",
+      "motor": "lower_arm_right_rotation",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 0.924,
+      "verifiedOnHardware": true,
+      "note": "right arm"
+    },
+    {
+      "urdfJoint": "rotation_wrist_right",
+      "motor": "wrist_right",
+      "class": "driven",
+      "type": "continuous",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": null,
+      "axisDot": 0.924,
+      "verifiedOnHardware": true,
+      "note": "right arm"
+    },
+    {
+      "urdfJoint": "rotation_inner_shoulder",
+      "motor": "shoulder_vertical_left",
+      "class": "driven",
+      "type": "continuous",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": null,
+      "axisDot": -1.0,
+      "verifiedOnHardware": true,
+      "note": "left arm"
+    },
+    {
+      "urdfJoint": "rotation_shoulder_left_1",
+      "motor": "shoulder_horizontal_left",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 1.0,
+      "verifiedOnHardware": true,
+      "note": "left arm"
+    },
+    {
+      "urdfJoint": "central_rotator_rotation_1",
+      "motor": "upper_arm_left_rotation",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 1.0,
+      "verifiedOnHardware": true,
+      "note": "left arm"
+    },
+    {
+      "urdfJoint": "rotation_elbow_1",
+      "motor": "elbow_left",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.1781,
+        1.1781
+      ],
+      "axisDot": 1.0,
+      "verifiedOnHardware": true,
+      "note": "left arm"
+    },
+    {
+      "urdfJoint": "rotate_forearm_1",
+      "motor": "lower_arm_left_rotation",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 0.924,
+      "verifiedOnHardware": true,
+      "note": "left arm"
+    },
+    {
+      "urdfJoint": "rotation_wrist_left",
+      "motor": "wrist_left",
+      "class": "driven",
+      "type": "continuous",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": null,
+      "axisDot": 0.924,
+      "verifiedOnHardware": true,
+      "note": "left arm"
+    },
+    {
+      "urdfJoint": "gearing_rotation__new_body_",
+      "motor": "turn_head_motor",
+      "class": "driven",
+      "type": "revolute",
+      "direction": 1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": 1.0,
+      "verifiedOnHardware": true,
+      "note": "head"
+    },
+    {
+      "urdfJoint": "nodding_rotation",
+      "motor": "tilt_forward_motor",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -0.785398,
+        0.785398
+      ],
+      "axisDot": -1.0,
+      "verifiedOnHardware": true,
+      "note": "head"
+    },
+    {
+      "urdfJoint": "revolute_1",
+      "motor": "thumb_right_opposition",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        0.0,
+        2.0944
+      ],
+      "axisDot": -0.914,
+      "verifiedOnHardware": true,
+      "note": "right hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_2",
+      "motor": "thumb_right_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.991,
+      "verifiedOnHardware": true,
+      "note": "right hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1",
+      "motor": "index_right_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "right hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_1",
+      "motor": "middle_right_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "right hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_4",
+      "motor": "ring_right_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "right hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_3",
+      "motor": "pinky_right_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "right hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "revolute_1_1",
+      "motor": "thumb_left_opposition",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -2.0944,
+        0.0
+      ],
+      "axisDot": -0.916,
+      "verifiedOnHardware": true,
+      "note": "left hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_7",
+      "motor": "thumb_left_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.929,
+      "verifiedOnHardware": true,
+      "note": "left hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_5",
+      "motor": "index_left_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "left hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_6",
+      "motor": "middle_left_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "left hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_9",
+      "motor": "ring_left_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "left hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "j1_8",
+      "motor": "pinky_left_stretch",
+      "class": "driven",
+      "type": "revolute",
+      "direction": -1,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": -0.924,
+      "verifiedOnHardware": true,
+      "note": "left hand, direction not comparable in the SDK model - measure it"
+    },
+    {
+      "urdfJoint": "dof_wrist",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "dof_wrist_1",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        1.5708
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j2",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j2_1",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3_1",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3_2",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3_3",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3_4",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3_5",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "j3_6",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d54_finger_distal_1_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d54_finger_distal_2_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d54_finger_distal_3_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d54_finger_distal_4_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d54_finger_distal_6_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d54_finger_distal_7_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d55_finger_tip_5_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d58_thumb_tip_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "d58_thumb_tip_1_hinge",
+      "motor": null,
+      "class": "coupled",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        -1.5708,
+        0.0
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "four-bar / mechanical disc, moves with its driven joint"
+    },
+    {
+      "urdfJoint": "upper_door_rotation",
+      "motor": null,
+      "class": "passive",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        0.0,
+        1.5708
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "service lid, no motor"
+    },
+    {
+      "urdfJoint": "lower_door_rotation",
+      "motor": null,
+      "class": "passive",
+      "type": "revolute",
+      "direction": null,
+      "gearRatio": 1.0,
+      "zeroOffsetDeg": 0.0,
+      "limitsRad": [
+        0.0,
+        1.5708
+      ],
+      "axisDot": null,
+      "verifiedOnHardware": false,
+      "note": "service lid, no motor"
+    }
+  ]
+}

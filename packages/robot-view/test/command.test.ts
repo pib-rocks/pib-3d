@@ -1,0 +1,305 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import * as THREE from 'three';
+import { PibRobotView, registerPibRobotView } from '../src/element/PibRobotView.js';
+import {
+  buildCommandFromPending,
+  CommandSendScheduler,
+  motorLimitsProvided,
+  validateDrivenValue,
+} from '../src/joints/commandPath.js';
+import type { JointMappingEntry } from '../src/joints/mapping.js';
+import type { MotorLimitMap } from '../src/types.js';
+
+const elbowEntry: JointMappingEntry = {
+  urdfJoint: 'rotation_elbow',
+  motor: 'elbow_right',
+  class: 'driven',
+  type: 'revolute',
+  direction: 1,
+  gearRatio: 1,
+  zeroOffsetDeg: 0,
+  limitsRad: [-1.5, 1.5],
+  axisDot: 1,
+  verifiedOnHardware: true,
+};
+
+const verifiedMapping = {
+  schemaVersion: 1,
+  robotVariant: 'test',
+  joints: [elbowEntry],
+};
+
+const elbowLimits: MotorLimitMap = {
+  elbow_right: { minDeg: -45, maxDeg: 90 },
+};
+
+function verifiedFixtureMapping() {
+  return {
+    schemaVersion: 1,
+    robotVariant: 'pib5advanced',
+    joints: [
+      {
+        ...elbowEntry,
+        verifiedOnHardware: true,
+      },
+    ],
+  };
+}
+
+describe('motorLimitsProvided', () => {
+  it('requires limits for every driven motor', () => {
+    expect(motorLimitsProvided(verifiedMapping, {})).toBe(false);
+    expect(motorLimitsProvided(verifiedMapping, elbowLimits)).toBe(true);
+  });
+});
+
+describe('validateDrivenValue', () => {
+  it('refuses values outside database limits with limit in message', () => {
+    const rad = (100 * Math.PI) / 180;
+    const err = validateDrivenValue(elbowEntry, rad, elbowLimits);
+    expect(err).toMatch(/90/);
+    expect(err).toMatch(/elbow_right/);
+  });
+});
+
+describe('buildCommandFromPending', () => {
+  it('builds motors map in centideg', () => {
+    const rad = Math.PI / 4;
+    const built = buildCommandFromPending(
+      { rotation_elbow: rad },
+      verifiedMapping,
+      elbowLimits,
+      'ui',
+      () => 'id-1',
+    );
+    expect(built.ok).toBe(true);
+    if (built.ok) {
+      expect(built.command.payload.commandId).toBe('id-1');
+      expect(built.command.payload.motors.elbow_right).toBeCloseTo(4500, 0);
+    }
+  });
+
+  it('refuses out-of-limit pending without building payload', () => {
+    const rad = (100 * Math.PI) / 180;
+    const built = buildCommandFromPending(
+      { rotation_elbow: rad },
+      verifiedMapping,
+      elbowLimits,
+      'ui',
+      () => 'id-1',
+    );
+    expect(built.ok).toBe(false);
+  });
+});
+
+describe('CommandSendScheduler', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('coalesces two flush requests before the timer fires', () => {
+    const flushes: string[] = [];
+    const sched = new CommandSendScheduler(120, (source) => flushes.push(source));
+    sched.requestFlush('ui');
+    sched.requestFlush('api');
+    expect(flushes).toEqual([]);
+    vi.advanceTimersByTime(0);
+    expect(flushes).toEqual(['api']);
+  });
+});
+
+describe('PibRobotView command lifecycle', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    registerPibRobotView();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  function mountWithMapping() {
+    const el = new PibRobotView();
+    const internal = el as unknown as {
+      _mapping: typeof verifiedFixtureMapping;
+      _mappingValidation: { ok: boolean; errors: string[]; warnings: string[] };
+      _effectiveMode: 'command';
+      _mode: 'command';
+      _motorLimits: MotorLimitMap;
+      _pendingJoints: Record<string, number>;
+      _acceptedJoints: Record<string, number>;
+      _actualJoints: Record<string, number>;
+      _jointStates: Record<string, number>;
+      motionByJoint: Map<
+        string,
+        { joint: { name: string; type: string; axis: number[] }; motion: THREE.Object3D; axis: THREE.Vector3 }
+      >;
+      panel: {
+        setJointPending: ReturnType<typeof vi.fn>;
+        clearAllPending: ReturnType<typeof vi.fn>;
+        setJointUi: ReturnType<typeof vi.fn>;
+        applyMotorLimits: ReturnType<typeof vi.fn>;
+      } | null;
+      syncCommandedPanel: () => void;
+      onDemand: { requestRender: () => void; dispose: () => void } | null;
+    };
+    internal._mapping = verifiedFixtureMapping();
+    internal._mappingValidation = { ok: true, errors: [], warnings: [] };
+    internal._mode = 'command';
+    internal._effectiveMode = 'command';
+    internal._motorLimits = { ...elbowLimits };
+    internal._actualJoints = { rotation_elbow: 0 };
+    internal._acceptedJoints = { rotation_elbow: 0 };
+    internal._jointStates = { rotation_elbow: 0 };
+    const motion = new THREE.Object3D();
+    internal.motionByJoint = new Map([
+      [
+        'rotation_elbow',
+        {
+          joint: {
+            name: 'rotation_elbow',
+            type: 'revolute',
+            axis: [0, 0, 1],
+          },
+          motion,
+          axis: new THREE.Vector3(0, 0, 1),
+        },
+      ],
+    ]);
+    internal.panel = {
+      setJointPending: vi.fn(),
+      clearAllPending: vi.fn(),
+      setJointUi: vi.fn(),
+      applyMotorLimits: vi.fn(),
+    };
+    internal.syncCommandedPanel = vi.fn();
+    internal.onDemand = { requestRender: vi.fn(), dispose: vi.fn() };
+    return el;
+  }
+
+  it('does not emit commandrequest on slider drag (pending only)', () => {
+    const el = mountWithMapping();
+    const commands: unknown[] = [];
+    el.addEventListener('commandrequest', (e) => commands.push(e));
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.2,
+    );
+    expect(commands).toHaveLength(0);
+  });
+
+  it('approve emits exactly one commandrequest with unique commandId', () => {
+    const el = mountWithMapping();
+    const ids: string[] = [];
+    el.addEventListener('commandrequest', (e) => {
+      const ev = e as CustomEvent<{ commandId: string }>;
+      ids.push(ev.detail.commandId);
+    });
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.3,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    expect(ids).toHaveLength(1);
+    expect(ids[0]).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+    );
+  });
+
+  it('preventDefault leads to commandrejected and revert', () => {
+    const el = mountWithMapping();
+    const rejected: string[] = [];
+    el.addEventListener('commandrejected', (e) => {
+      rejected.push((e as CustomEvent<{ reason: string }>).detail.reason);
+    });
+    el.addEventListener('commandrequest', (e) => e.preventDefault());
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.3,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    expect(rejected.length).toBe(1);
+    expect((el as unknown as { _jointStates: Record<string, number> })._jointStates.rotation_elbow).toBe(
+      0,
+    );
+  });
+
+  it('two approvals inside minCommandIntervalMs produce one command with latest values', () => {
+    const el = mountWithMapping();
+    el.minCommandIntervalMs = 120;
+    const payloads: Array<Record<string, number>> = [];
+    el.addEventListener('commandrequest', (e) => {
+      payloads.push((e as CustomEvent<{ values: Record<string, number> }>).detail.values);
+    });
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.2,
+    );
+    el.approve('ui');
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.5,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    expect(payloads).toHaveLength(1);
+    expect(payloads[0]!.rotation_elbow).toBeCloseTo(0.5, 5);
+  });
+
+  it('stop clears pending and emits estop; further approve sends nothing', () => {
+    const el = mountWithMapping();
+    const commands: unknown[] = [];
+    const estops: unknown[] = [];
+    el.addEventListener('commandrequest', (e) => commands.push(e));
+    el.addEventListener('estop', (e) => estops.push(e));
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.4,
+    );
+    el.stop('ui');
+    expect(estops).toHaveLength(1);
+    el.approve('ui');
+    vi.advanceTimersByTime(200);
+    expect(commands).toHaveLength(0);
+  });
+
+  it('refuses command mode without limits via guardReason', () => {
+    const el = new PibRobotView();
+    const internal = el as unknown as {
+      _mapping: typeof verifiedFixtureMapping;
+      _mappingValidation: { ok: boolean; errors: string[]; warnings: string[] };
+      _mode: 'command';
+      _motorLimits: MotorLimitMap;
+      updateModeUi: () => void;
+    };
+    internal._mapping = verifiedFixtureMapping();
+    internal._mappingValidation = { ok: true, errors: [], warnings: [] };
+    internal._mode = 'command';
+    internal._motorLimits = {};
+    internal.updateModeUi();
+    expect(el.effectiveMode).toBe('preview');
+    expect(el.guardReason).toBe('limits not provided');
+  });
+
+  it('assigns unique commandIds across successive approvals', () => {
+    const el = mountWithMapping();
+    el.minCommandIntervalMs = 0;
+    const ids = new Set<string>();
+    el.addEventListener('commandrequest', (e) => {
+      ids.add((e as CustomEvent<{ commandId: string }>).detail.commandId);
+    });
+    for (const v of [0.1, 0.2]) {
+      (el as unknown as { handleUiJointChange: (j: string, n: number) => void }).handleUiJointChange(
+        'rotation_elbow',
+        v,
+      );
+      el.approve('ui');
+      vi.advanceTimersByTime(0);
+    }
+    expect(ids.size).toBe(2);
+  });
+});

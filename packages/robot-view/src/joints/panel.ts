@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import type { MotionEntry, RobotModel, ViewerMode } from '../types.js';
+import type { MotionEntry, MotorLimitMap, RobotModel, ViewerMode } from '../types.js';
+import { uiRangeFromMotorLimits } from './commandPath.js';
 import { HEAD, LEFT_ARM, REGION_ORDER, RIGHT_ARM } from './regions.js';
 import {
   formatJointLabel,
@@ -20,10 +21,14 @@ export interface JointPanelHandles {
   setPose: (fn: (joint: RobotModel['joints'][0]) => number) => void;
   setJointUi: (jointName: string, radians: number) => void;
   setCommandedJoint: (jointName: string, radians: number | null) => void;
+  setJointPending: (jointName: string, pending: boolean) => void;
+  clearAllPending: () => void;
   setStaleBanner: (stale: boolean, message?: string) => void;
   getRow: (jointName: string) => HTMLElement | null;
   getInput: (jointName: string) => HTMLInputElement | null;
   applyMode: (requestedMode: ViewerMode, effectiveMode: ViewerMode) => void;
+  applyMotorLimits: (limits: MotorLimitMap | null) => void;
+  setCommandBarVisible: (visible: boolean) => void;
 }
 
 export interface JointPanelOptions {
@@ -34,16 +39,48 @@ export interface JointPanelOptions {
   mappingByJoint: Map<string, JointMappingEntry>;
   onJointChange: (jointName: string, value: number) => void;
   onRequestRender: () => void;
+  onApprove?: () => void;
+  onCancelPending?: () => void;
+  onEstop?: () => void;
 }
 
 export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
-  const { root, model, parentOf, motions, mappingByJoint, onJointChange, onRequestRender } =
-    opts;
+  const {
+    root,
+    model,
+    parentOf,
+    motions,
+    mappingByJoint,
+    onJointChange,
+    onRequestRender,
+    onApprove,
+    onCancelPending,
+    onEstop,
+  } = opts;
   const jointsRoot = root.querySelector('#joints') as HTMLElement;
   const motionByJoint = new Map(motions.map((m) => [m.joint.name, m]));
   let requestedMode: ViewerMode = 'preview';
   let effectiveMode: ViewerMode = 'preview';
+  let motorLimits: MotorLimitMap | null = null;
   const commanded = new Map<string, number>();
+  const pending = new Set<string>();
+
+  const tools = root.querySelector('#tools') as HTMLElement | null;
+  if (tools && !root.querySelector('[data-action="approve"]')) {
+    const bar = document.createElement('div');
+    bar.id = 'command-bar';
+    bar.className = 'command-bar';
+    bar.innerHTML = `
+      <button type="button" data-action="approve">Befehl freigeben</button>
+      <button type="button" data-action="cancel-pending">Ausstehend verwerfen</button>
+      <button type="button" data-action="estop" class="danger">E-Stop</button>`;
+    tools.after(bar);
+    bar.querySelector('[data-action="approve"]')?.addEventListener('click', () => onApprove?.());
+    bar
+      .querySelector('[data-action="cancel-pending"]')
+      ?.addEventListener('click', () => onCancelPending?.());
+    bar.querySelector('[data-action="estop"]')?.addEventListener('click', () => onEstop?.());
+  }
 
   const pctOnTrack = (joint: RobotModel['joints'][0], radians: number): number => {
     const [min, max] = uiRange(joint);
@@ -156,6 +193,26 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     }
   }
 
+  const applySliderRange = (joint: RobotModel['joints'][0], input: HTMLInputElement) => {
+    const entry = mappingByJoint.get(joint.name);
+    if (effectiveMode === 'command' && entry?.class === 'driven' && motorLimits) {
+      const range = uiRangeFromMotorLimits(entry, joint, motorLimits);
+      if (range) {
+        input.min = String(range[0]);
+        input.max = String(range[1]);
+        return;
+      }
+    }
+    const [min, max] = uiRange(joint);
+    input.min = String(min);
+    input.max = String(max);
+  };
+
+  const setCommandBarVisible = (visible: boolean) => {
+    const bar = root.querySelector('#command-bar') as HTMLElement | null;
+    if (bar) bar.classList.toggle('on', visible);
+  };
+
   const applyMode = (req: ViewerMode, effective: ViewerMode) => {
     requestedMode = req;
     effectiveMode = effective;
@@ -179,6 +236,30 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       }
       input.disabled = !enabled;
       input.title = title;
+      applySliderRange(m.joint, input);
+    }
+    setCommandBarVisible(effective === 'command');
+  };
+
+  const setJointPending = (jointName: string, isPending: boolean) => {
+    const row = getRow(jointName);
+    if (!row) return;
+    if (isPending) pending.add(jointName);
+    else pending.delete(jointName);
+    row.classList.toggle('pending', isPending);
+  };
+
+  const clearAllPending = () => {
+    for (const name of [...pending]) setJointPending(name, false);
+    pending.clear();
+  };
+
+  const applyMotorLimits = (limits: MotorLimitMap | null) => {
+    motorLimits = limits;
+    for (const m of motions) {
+      const row = getRow(m.joint.name);
+      const input = row?.querySelector('input') as HTMLInputElement | null;
+      if (input) applySliderRange(m.joint, input);
     }
   };
 
@@ -241,7 +322,20 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
 
   applyMode(requestedMode, effectiveMode);
 
-  return { jointsRoot, setPose, setJointUi, setCommandedJoint, setStaleBanner, getRow, getInput, applyMode };
+  return {
+    jointsRoot,
+    setPose,
+    setJointUi,
+    setCommandedJoint,
+    setJointPending,
+    clearAllPending,
+    setStaleBanner,
+    getRow,
+    getInput,
+    applyMode,
+    applyMotorLimits,
+    setCommandBarVisible,
+  };
 }
 
 export function midPoseValue(joint: RobotModel['joints'][0]): number {
