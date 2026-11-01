@@ -159,9 +159,13 @@ Checked against the machine: a photo of the right hand in front of the camera on
 the fingers extended while all ten stretch servos read -89.8 degrees. A plain `motor * direction`
 (or a plain sign flip) put a closed fist on a hand that was open.
 
-**Still unverified:** which way the fingers move when the servo angle rises. One static pose fixes
-the offset and the ratio's size, not its sign. Until a commanded +15 degree step is observed, the
-finger `verifiedOnHardware` flags stay false - which keeps command mode closed anyway.
+**Measured with the robot, not inferred** (2026-11-01): the servo was swept from -180 to +180 in
+30 degree steps with the hand in front of the camera. Every step was accepted and reported, and the
+finger moves only between servo -90 (straight) and +90 (closed) - roughly 8 mm of image difference
+at the start, saturating by +90. Beyond those two points the cable is slack and the finger rests on
+its stop; the model clamps at the CAD limits for that reason (`applyJointValue`), otherwise it
+would hyperextend at -180 and fold through the palm at +180. That is what the extra servo travel
+buys: 360 degrees of servo, 90 degrees of finger, slack at both ends.
 
 ### Passive service lids (2)
 

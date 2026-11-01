@@ -47,8 +47,21 @@ export function applyJointValue(
   v: number,
 ): void {
   if (joint.type === 'prismatic') {
-    motion.position.copy(axis).multiplyScalar(v);
+    const span = joint.limit
+      ? [joint.limit.lower, joint.limit.upper]
+      : null;
+    const clamped = span ? Math.min(Math.max(v, span[0]!), span[1]!) : v;
+    motion.position.copy(axis).multiplyScalar(clamped);
   } else {
-    motion.quaternion.setFromAxisAngle(axis, v);
+    // A servo may travel further than the joint it drives: the cable-driven fingers use 360
+    // degrees of servo for 90 degrees of joint, so the ends of the servo range are slack and the
+    // finger rests on its stop. Without this clamp the model would fold past the CAD limit.
+    const lower = joint.limit?.lower;
+    const upper = joint.limit?.upper;
+    const clamped =
+      lower !== undefined && upper !== undefined
+        ? Math.min(Math.max(v, Math.min(lower, upper)), Math.max(lower, upper))
+        : v;
+    motion.quaternion.setFromAxisAngle(axis, clamped);
   }
 }
