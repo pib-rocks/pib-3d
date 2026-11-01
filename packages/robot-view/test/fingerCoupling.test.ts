@@ -43,10 +43,12 @@ describe('finger coupling', () => {
     expect(values['j3']).toBeCloseTo(-1.0, 9);
   });
 
-  it('inverts the thumb tip, whose CAD axis runs against the knuckle', () => {
+  it('leaves the thumb tip hinge straight, as the robot does', () => {
+    // Photo of the real right hand (2026-11-01): the thumb is a straight digit while its knuckle
+    // motor sits at its -90 degree stop. Coupling it to the knuckle would fold it to 83 degrees.
     const { values } = sample({ thumb_left_stretch: -1.0 });
     expect(values['j1_7']).toBeCloseTo(-1.0, 9);
-    expect(values['d58_thumb_tip_1_hinge']).toBeCloseTo(1.0, 9);
+    expect(values['d58_thumb_tip_1_hinge'] ?? 0).toBeCloseTo(0, 9);
   });
 
   it('leaves the followers at zero when the knuckle motor is missing', () => {
@@ -94,7 +96,13 @@ describe('finger coupling', () => {
     const unCoupled = mapping.joints
       .filter((entry) => entry.class === 'coupled' && !entry.coupling)
       .map((entry) => entry.urdfJoint);
-    // The wrist pair is driven by the parallel wrist mechanism, not by a finger linkage.
-    expect(unCoupled.sort()).toEqual(['dof_wrist', 'dof_wrist_1']);
+    // The wrist pair belongs to the parallel wrist mechanism; the thumb tip hinges stay straight
+    // because the robot's thumb is one rigid digit, not a linkage (see the photo check).
+    expect(unCoupled.sort()).toEqual([
+      'd58_thumb_tip_1_hinge',
+      'd58_thumb_tip_hinge',
+      'dof_wrist',
+      'dof_wrist_1',
+    ]);
   });
 });

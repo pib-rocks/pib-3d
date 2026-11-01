@@ -128,13 +128,17 @@ A finger is a linkage: one motor turns the knuckle (`j1*`) and the two joints be
   "coupling": { "follows": "j1", "factor": 1.0 } }
 ```
 
-`factor` is the sign that lines the follower's CAD axis up with the knuckle's: `1` for the four
-fingers, `-1` for the two thumb tip hinges, whose axes run anti-parallel (dot product -1). The
-viewer resolves couplings after every sample, so a knuckle that moves takes its whole finger with
-it; `applyCouplings()` in `src/joints/liveState.ts`.
+`factor` is the sign that lines the follower's CAD axis up with the knuckle's; all sixteen finger
+followers use `1`. The viewer resolves couplings after every sample, so a knuckle that moves takes
+its whole finger with it; `applyCouplings()` in `src/joints/liveState.ts`.
 
-`dof_wrist` and `dof_wrist_1` stay uncoupled: they belong to the parallel wrist mechanism, not to
-a finger.
+Three joints stay uncoupled on purpose:
+
+- `dof_wrist`, `dof_wrist_1` - parallel wrist mechanism, not a finger.
+- `d58_thumb_tip_hinge`, `d58_thumb_tip_1_hinge` - the thumb is one rigid digit on this robot, not
+  a linkage. A photo of the right hand (2026-11-01) shows the thumb straight while its knuckle
+  motor sits at its -90 degree stop; the CAD agrees - the distal segment is 7 degrees off the
+  proximal one at a straight hinge and 83 degrees at -90.
 
 Also note the finger directions: all eleven finger-driving joints carry `direction: +1`. With the old value the knuckles sat at +90° against a CAD limit of [-90°, 0°] - visibly bent against the
 palm. The check that finds this class of error is a limit test on live samples: every driven joint

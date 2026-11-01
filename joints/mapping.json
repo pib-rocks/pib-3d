@@ -5,7 +5,7 @@
   "source": {
     "motors": "pib-backend pib_api/flask/seed_profiles/pib5advanced.py (MOTOR_MAPPING)",
     "directions": "pib-sdk src/pib_sdk/data/pib_model.urdf, axis dot product at zero pose; the two left-shoulder signs were corrected by measurement - the axis dot product alone cannot see that the left arm's CAD frame is turned against the right one (packages/robot-view/test/armSymmetry.test.ts)",
-    "coupling": "finger linkages: every joint of a finger bends by the same angle as its knuckle (dot +1 to the knuckle axis; the thumb's distal hinge is anti-parallel, factor -1)"
+    "coupling": "finger linkages: every joint of a finger bends by the same angle as its knuckle (dot +1 to the knuckle axis). The thumb tip hinge is NOT linked: on the robot the thumb stays straight (7 deg off its proximal segment) while its knuckle sits at its -90 deg stop"
   },
   "joints": [
     {
@@ -767,10 +767,6 @@
     {
       "urdfJoint": "d58_thumb_tip_hinge",
       "motor": null,
-      "coupling": {
-        "follows": "j1_2",
-        "factor": -1.0
-      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
@@ -787,10 +783,6 @@
     {
       "urdfJoint": "d58_thumb_tip_1_hinge",
       "motor": null,
-      "coupling": {
-        "follows": "j1_7",
-        "factor": -1.0
-      },
       "class": "coupled",
       "type": "revolute",
       "direction": null,
