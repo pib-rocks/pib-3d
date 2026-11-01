@@ -28,7 +28,6 @@ export interface JointPanelHandles {
   getInput: (jointName: string) => HTMLInputElement | null;
   applyMode: (requestedMode: ViewerMode, effectiveMode: ViewerMode) => void;
   applyMotorLimits: (limits: MotorLimitMap | null) => void;
-  setCommandBarVisible: (visible: boolean) => void;
 }
 
 export interface JointPanelOptions {
@@ -65,23 +64,9 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
   const commanded = new Map<string, number>();
   const pending = new Set<string>();
 
-  const tools = root.querySelector('#tools') as HTMLElement | null;
-  if (tools && !root.querySelector('[data-action="approve"]')) {
-    const bar = document.createElement('div');
-    bar.id = 'command-bar';
-    bar.className = 'command-bar';
-    bar.innerHTML = `
-      <button type="button" data-action="approve">Befehl freigeben</button>
-      <button type="button" data-action="cancel-pending">Ausstehend verwerfen</button>
-      <button type="button" data-action="estop" class="danger">E-Stop</button>`;
-    tools.after(bar);
-    bar.querySelector('[data-action="approve"]')?.addEventListener('click', () => onApprove?.());
-    bar
-      .querySelector('[data-action="cancel-pending"]')
-      ?.addEventListener('click', () => onCancelPending?.());
-    bar.querySelector('[data-action="estop"]')?.addEventListener('click', () => onEstop?.());
-  }
-
+  // No approve / cancel / e-stop bar: dragging a slider commands the motor directly (see
+  // PibRobotView.handleUiJointChange). A separate confirmation step only made sense while the
+  // panel was the only thing that could move a joint.
   const pctOnTrack = (joint: RobotModel['joints'][0], radians: number): number => {
     const [min, max] = uiRange(joint);
     const ui = toUi(joint, radians);
@@ -208,11 +193,6 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     input.max = String(max);
   };
 
-  const setCommandBarVisible = (visible: boolean) => {
-    const bar = root.querySelector('#command-bar') as HTMLElement | null;
-    if (bar) bar.classList.toggle('on', visible);
-  };
-
   const applyMode = (req: ViewerMode, effective: ViewerMode) => {
     requestedMode = req;
     effectiveMode = effective;
@@ -238,7 +218,6 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       input.title = title;
       applySliderRange(m.joint, input);
     }
-    setCommandBarVisible(effective === 'command');
   };
 
   const setJointPending = (jointName: string, isPending: boolean) => {
@@ -334,7 +313,6 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     getInput,
     applyMode,
     applyMotorLimits,
-    setCommandBarVisible,
   };
 }
 
