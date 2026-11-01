@@ -50,6 +50,27 @@ import '@pib/robot-view';               // registers <pib-robot-view>
   `preview` while the mapping is not trustworthy, with `guardReason` explaining it.
 - `dispose()` on `disconnectedCallback`; safe to call twice.
 
+## Acknowledging a command
+
+In `command` mode, approving sends a `commandrequest` event. The host may still refuse
+synchronously with `preventDefault()` on that event (same as before). If it does not refuse,
+the command stays **in flight**: the viewer keeps the pending pose until you answer.
+
+Answer asynchronously with methods on the element:
+
+```ts
+view.confirmCommand(commandId);           // accepted — updates commanded state, emits commandaccepted
+view.rejectCommand(commandId, reason);    // rejected — reverts to the actual pose, emits commandrejected
+```
+
+Do **not** call `preventDefault()` when you intend to execute the motion and acknowledge later
+(for example after a ROS trajectory action returns). Only use `preventDefault()` for an
+immediate refusal.
+
+If neither method is called within `ackTimeoutMs` (default 3000), the viewer rejects the command
+with reason `"no acknowledgement"`. While a command is in flight, further `approve()` calls have
+no effect until it is accepted or rejected.
+
 ## The model archive
 
 Every release also carries `robot-model-<tag>.zip` (about 15 MB) with `version.json`, `model.json`,
