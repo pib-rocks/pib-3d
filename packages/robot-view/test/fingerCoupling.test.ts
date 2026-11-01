@@ -30,24 +30,37 @@ describe('finger coupling', () => {
   }
 
   it('bends every joint of the left index finger by the knuckle angle', () => {
-    const { values } = sample({ index_left_stretch: -1.0 });
-    expect(values['j1_5']).toBeCloseTo(-1.0, 9);
-    expect(values['j2_1']).toBeCloseTo(-1.0, 9);
-    expect(values['d55_finger_tip_5_hinge']).toBeCloseTo(-1.0, 9);
+    const { values } = sample({ index_left_stretch: (-90 * Math.PI) / 180 });
+    // A -90 degree servo straightens the finger (model 0); the coupling copies it to the chain.
+    expect(values['j1_5']).toBeCloseTo(0, 6);
+    expect(values['j2_1']).toBeCloseTo(0, 6);
+    expect(values['d55_finger_tip_5_hinge']).toBeCloseTo(0, 6);
   });
 
   it('bends the right index finger the same way', () => {
-    const { values } = sample({ index_right_stretch: -1.0 });
-    expect(values['j1']).toBeCloseTo(-1.0, 9);
-    expect(values['j2']).toBeCloseTo(-1.0, 9);
-    expect(values['j3']).toBeCloseTo(-1.0, 9);
+    const { values } = sample({ index_right_stretch: (-90 * Math.PI) / 180 });
+    expect(values['j1']).toBeCloseTo(0, 6);
+    expect(values['j2']).toBeCloseTo(0, 6);
+    expect(values['j3']).toBeCloseTo(0, 6);
+  });
+
+  it('closes the finger at the other end of the servo travel', () => {
+    const { values } = sample({ index_right_stretch: (90 * Math.PI) / 180 });
+    expect(values['j1']).toBeCloseTo(-Math.PI / 2, 6);
+    expect(values['j2']).toBeCloseTo(-Math.PI / 2, 6);
+    expect(values['j3']).toBeCloseTo(-Math.PI / 2, 6);
+  });
+
+  it('halves the servo travel: 180 degrees of servo is 90 degrees of joint', () => {
+    const { values } = sample({ index_right_stretch: 0 });
+    expect(values['j1']).toBeCloseTo(-Math.PI / 4, 6);
   });
 
   it('leaves the thumb tip hinge straight, as the robot does', () => {
     // Photo of the real right hand (2026-11-01): the thumb is a straight digit while its knuckle
     // motor sits at its -90 degree stop. Coupling it to the knuckle would fold it to 83 degrees.
-    const { values } = sample({ thumb_left_stretch: -1.0 });
-    expect(values['j1_7']).toBeCloseTo(-1.0, 9);
+    const { values } = sample({ thumb_left_stretch: (-90 * Math.PI) / 180 });
+    expect(values['j1_7']).toBeCloseTo(0, 6);
     expect(values['d58_thumb_tip_1_hinge'] ?? 0).toBeCloseTo(0, 9);
   });
 

@@ -241,9 +241,9 @@
       "motor": "thumb_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -257,9 +257,9 @@
       "motor": "index_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -273,9 +273,9 @@
       "motor": "middle_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -289,9 +289,9 @@
       "motor": "ring_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -305,9 +305,9 @@
       "motor": "pinky_right_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -337,9 +337,9 @@
       "motor": "thumb_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -353,9 +353,9 @@
       "motor": "index_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -369,9 +369,9 @@
       "motor": "middle_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -385,9 +385,9 @@
       "motor": "ring_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0
@@ -401,9 +401,9 @@
       "motor": "pinky_left_stretch",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
-      "gearRatio": 1.0,
-      "zeroOffsetDeg": 0.0,
+      "direction": -1,
+      "gearRatio": 0.5,
+      "zeroOffsetDeg": 45.0,
       "limitsRad": [
         -1.5708,
         0.0

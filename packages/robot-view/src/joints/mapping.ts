@@ -75,12 +75,20 @@ const PIB5_MOTOR_SET = new Set<string>(PIB5ADVANCED_MOTORS);
 
 export function modelRadToMotorCentideg(entry: JointMappingEntry, modelRad: number): number {
   const direction = entry.direction ?? 1;
-  return (modelRad * (180 / Math.PI) + entry.zeroOffsetDeg) * 100 * direction;
+  return (((modelRad * (180 / Math.PI) + entry.zeroOffsetDeg) * direction) / entry.gearRatio) * 100;
 }
 
 export function motorCentidegToModelRad(entry: JointMappingEntry, motorCentideg: number): number {
+  return motorRadToModelRad(entry, (motorCentideg / 100) * (Math.PI / 180));
+}
+
+/**
+ * Motor radians to model radians, the one conversion every input path must use.
+ * `gearRatio` halves the finger servo travel: 180 degrees of servo is 90 degrees of joint.
+ */
+export function motorRadToModelRad(entry: JointMappingEntry, motorRad: number): number {
   const direction = entry.direction ?? 1;
-  const deg = motorCentideg / (100 * direction) - entry.zeroOffsetDeg;
+  const deg = (motorRad * (180 / Math.PI) * entry.gearRatio) / direction - entry.zeroOffsetDeg;
   return deg * (Math.PI / 180);
 }
 
