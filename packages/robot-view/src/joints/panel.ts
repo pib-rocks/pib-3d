@@ -223,7 +223,7 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       const entry = mappingByJoint.get(m.joint.name);
       let enabled = true;
       let title = '';
-      if (requestedMode === 'read') {
+      if (requestedMode === 'read' || effectiveMode === 'read') {
         enabled = false;
         title = 'Nur-Lesen — Schieberegler deaktiviert';
       } else if (effectiveMode === 'command') {

@@ -50,6 +50,26 @@ import '@pib/robot-view';               // registers <pib-robot-view>
   `preview` while the mapping is not trustworthy, with `guardReason` explaining it.
 - `dispose()` on `disconnectedCallback`; safe to call twice.
 
+## Matching the model to the robot
+
+After `model.json` and `mapping.json` load, the viewer fetches `manifest.json` from the same
+directory as the model URL. A **404** means an older robot install without a manifest — that is
+not an error; `manifest` stays `null` and other checks still run.
+
+The host should pass the motor names the robot actually has (from Cerebra `/api/motor`) via
+`setExpectedMotors(names)` or the `expectedMotors` property. The viewer compares:
+
+1. **`manifest.integrity`** — `"mismatch"` means the installed model failed the backend
+   integrity check (half-updated install).
+2. **`manifest.motors`** vs driven motors in the loaded mapping.
+3. **`expectedMotors`** vs driven motors in the mapping (when provided).
+
+On any mismatch, `modelConsistency.ok` is `false`, `readOnly` is `true`, and `effectiveMode`
+becomes `read` so joint sliders are disabled. A **`#consistency`** banner shows the reason; it
+cannot be dismissed. Command mode is refused (`guardReason` carries the same message). The
+hardware-verification gate in `canCommand()` is unchanged — consistency is enforced in addition
+to it, not instead of it.
+
 ## Acknowledging a command
 
 In `command` mode, approving sends a `commandrequest` event. The host may still refuse

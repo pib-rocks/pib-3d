@@ -40,9 +40,9 @@ export const SHADOW_STYLES = `
   .j.pending .name { color: #e3b341; }
   .j.pending .val { color: #e3b341; }
 
-  #guard, #live-stale { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
+  #guard, #consistency, #live-stale { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
     border-radius: 6px; background: #2d2103; color: #e3b341; font-size: 11px; line-height: 1.5; }
-  #guard.on, #live-stale.on { display: block; }
+  #guard.on, #consistency.on, #live-stale.on { display: block; }
   #joints { overflow-y: auto; padding: 4px 12px 16px; flex: 1; }
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
@@ -123,6 +123,7 @@ export const SHADOW_HTML = `
           <button type="button" data-action="spin">Drehen</button>
         </div>
         <div id="guard" hidden></div>
+        <div id="consistency" hidden></div>
         <div id="live-stale" hidden></div>
         <div id="joints"></div>
         <div id="info">
