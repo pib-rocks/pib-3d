@@ -77,6 +77,10 @@ export interface CommandRejectedDetail {
   reason: string;
 }
 
+export interface CommandAcceptedDetail {
+  commandId: string;
+}
+
 export interface EStopDetail {
   source: 'ui' | 'api';
 }

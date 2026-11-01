@@ -28,6 +28,7 @@ import { wirePicking } from '../interaction/picking.js';
 import { disposeObject3D, OnDemandRenderer } from '../render/onDemand.js';
 import { SHADOW_HTML, SHADOW_STYLES } from './template.js';
 import type {
+  CommandAcceptedDetail,
   CommandRejectedDetail,
   CommandRequestDetail,
   EStopDetail,
@@ -89,6 +90,13 @@ export class PibRobotView extends HTMLElement {
   private _acceptedJoints: Record<string, number> = {};
   private _actualJoints: Record<string, number> = {};
   private commandScheduler: CommandSendScheduler | null = null;
+  private _inFlightCommand: {
+    commandId: string;
+    values: Record<string, number>;
+    joints: string[];
+  } | null = null;
+  private ackTimer: ReturnType<typeof setTimeout> | null = null;
+  private _ackTimeoutMs = 3000;
 
   constructor() {
     super();
@@ -214,6 +222,43 @@ export class PibRobotView extends HTMLElement {
     this._minCommandIntervalMs = Math.max(0, ms);
   }
 
+  get ackTimeoutMs(): number {
+    return this._ackTimeoutMs;
+  }
+  set ackTimeoutMs(ms: number) {
+    this._ackTimeoutMs = Math.max(0, ms);
+  }
+
+  confirmCommand(commandId: string): void {
+    if (this._inFlightCommand?.commandId !== commandId) return;
+    const { values, joints } = this._inFlightCommand;
+    this.clearAckTimer();
+    this._inFlightCommand = null;
+    for (const joint of joints) {
+      this._acceptedJoints[joint] = values[joint]!;
+      delete this._pendingJoints[joint];
+      this.panel?.setJointPending(joint, false);
+    }
+    this._commandedStates = { ...values };
+    this.syncCommandedPanel();
+    this.commandScheduler?.markSent();
+    this.dispatchEvent(
+      new CustomEvent<CommandAcceptedDetail>('commandaccepted', {
+        bubbles: true,
+        composed: true,
+        detail: { commandId },
+      }),
+    );
+  }
+
+  rejectCommand(commandId: string, reason: string): void {
+    if (this._inFlightCommand?.commandId !== commandId) return;
+    this.clearInFlightCommand();
+    this.revertPendingToAccepted();
+    this.clearPendingUi();
+    this.emitCommandRejected(commandId, reason);
+  }
+
   setLimits(map: MotorLimitMap): void {
     this._motorLimits = { ...map };
     this.panel?.applyMotorLimits(this._motorLimits);
@@ -222,6 +267,7 @@ export class PibRobotView extends HTMLElement {
 
   approve(source: JointChangeSource = 'ui'): void {
     if (this._estopped || this._effectiveMode !== 'command') return;
+    if (this._inFlightCommand) return;
     if (!this._mapping || !motorLimitsProvided(this._mapping, this._motorLimits)) return;
     if (Object.keys(this._pendingJoints).length === 0) return;
     this.ensureCommandScheduler();
@@ -236,6 +282,7 @@ export class PibRobotView extends HTMLElement {
 
   stop(source: 'ui' | 'api' = 'ui'): void {
     this._estopped = true;
+    this.clearInFlightCommand();
     this.commandScheduler?.cancelScheduled();
     this.commandScheduler?.reset();
     this.clearPendingUi();
@@ -360,6 +407,9 @@ export class PibRobotView extends HTMLElement {
     this.clearStaleTimer();
     this.liveInterp?.dispose();
     this.liveInterp = null;
+    this.clearInFlightCommand();
+    this.commandScheduler?.cancelScheduled();
+    this.commandScheduler = null;
   }
 
   private initScene(): void {
@@ -729,6 +779,7 @@ export class PibRobotView extends HTMLElement {
 
   private flushCommand(source: JointChangeSource): void {
     if (this._estopped || this._effectiveMode !== 'command' || !this._mapping) return;
+    if (this._inFlightCommand) return;
     const built = buildCommandFromPending(
       this._pendingJoints,
       this._mapping,
@@ -760,14 +811,34 @@ export class PibRobotView extends HTMLElement {
       return;
     }
 
-    for (const joint of built.command.joints) {
-      this._acceptedJoints[joint] = built.command.payload.values[joint]!;
-      delete this._pendingJoints[joint];
-      this.panel?.setJointPending(joint, false);
+    const { commandId, values } = built.command.payload;
+    this._inFlightCommand = {
+      commandId,
+      values: { ...values },
+      joints: [...built.command.joints],
+    };
+    this.armAckTimer(commandId);
+  }
+
+  private armAckTimer(commandId: string): void {
+    this.clearAckTimer();
+    if (this._ackTimeoutMs <= 0) return;
+    this.ackTimer = setTimeout(() => {
+      this.ackTimer = null;
+      this.rejectCommand(commandId, 'no acknowledgement');
+    }, this._ackTimeoutMs);
+  }
+
+  private clearAckTimer(): void {
+    if (this.ackTimer != null) {
+      clearTimeout(this.ackTimer);
+      this.ackTimer = null;
     }
-    this._commandedStates = { ...built.command.payload.values };
-    this.syncCommandedPanel();
-    this.commandScheduler?.markSent();
+  }
+
+  private clearInFlightCommand(): void {
+    this.clearAckTimer();
+    this._inFlightCommand = null;
   }
 
   private emitCommandRejected(commandId: string, reason: string): void {

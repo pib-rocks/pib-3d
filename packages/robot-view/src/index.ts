@@ -20,6 +20,7 @@ export type {
   MotorLimitDeg,
   CommandRequestDetail,
   CommandRejectedDetail,
+  CommandAcceptedDetail,
   EStopDetail,
 } from './types.js';
 export {

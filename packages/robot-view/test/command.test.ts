@@ -289,8 +289,10 @@ describe('PibRobotView command lifecycle', () => {
     const el = mountWithMapping();
     el.minCommandIntervalMs = 0;
     const ids = new Set<string>();
+    let lastId = '';
     el.addEventListener('commandrequest', (e) => {
-      ids.add((e as CustomEvent<{ commandId: string }>).detail.commandId);
+      lastId = (e as CustomEvent<{ commandId: string }>).detail.commandId;
+      ids.add(lastId);
     });
     for (const v of [0.1, 0.2]) {
       (el as unknown as { handleUiJointChange: (j: string, n: number) => void }).handleUiJointChange(
@@ -299,7 +301,154 @@ describe('PibRobotView command lifecycle', () => {
       );
       el.approve('ui');
       vi.advanceTimersByTime(0);
+      el.confirmCommand(lastId);
     }
     expect(ids.size).toBe(2);
+  });
+
+  it('confirmCommand accepts in-flight command and emits commandaccepted', () => {
+    const el = mountWithMapping();
+    let commandId = '';
+    el.addEventListener('commandrequest', (e) => {
+      commandId = (e as CustomEvent<{ commandId: string }>).detail.commandId;
+    });
+    const accepted: string[] = [];
+    el.addEventListener('commandaccepted', (e) => {
+      accepted.push((e as CustomEvent<{ commandId: string }>).detail.commandId);
+    });
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.35,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    el.confirmCommand(commandId);
+    expect(accepted).toEqual([commandId]);
+    expect(el.commandedStates.rotation_elbow).toBeCloseTo(0.35, 5);
+    const internal = el as unknown as {
+      _pendingJoints: Record<string, number>;
+      _acceptedJoints: Record<string, number>;
+    };
+    expect(Object.keys(internal._pendingJoints)).toHaveLength(0);
+    expect(internal._acceptedJoints.rotation_elbow).toBeCloseTo(0.35, 5);
+  });
+
+  it('rejectCommand reverts pose and emits commandrejected', () => {
+    const el = mountWithMapping();
+    let commandId = '';
+    el.addEventListener('commandrequest', (e) => {
+      commandId = (e as CustomEvent<{ commandId: string }>).detail.commandId;
+    });
+    const reasons: string[] = [];
+    el.addEventListener('commandrejected', (e) => {
+      reasons.push((e as CustomEvent<{ reason: string }>).detail.reason);
+    });
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.4,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    el.rejectCommand(commandId, 'hardware fault');
+    expect(reasons).toEqual(['hardware fault']);
+    expect(
+      (el as unknown as { _jointStates: Record<string, number> })._jointStates.rotation_elbow,
+    ).toBe(0);
+  });
+
+  it('auto-rejects after ackTimeoutMs with no acknowledgement', () => {
+    const el = mountWithMapping();
+    el.ackTimeoutMs = 3000;
+    let commandId = '';
+    el.addEventListener('commandrequest', (e) => {
+      commandId = (e as CustomEvent<{ commandId: string }>).detail.commandId;
+    });
+    const reasons: string[] = [];
+    el.addEventListener('commandrejected', (e) => {
+      reasons.push((e as CustomEvent<{ reason: string }>).detail.reason);
+    });
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.25,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    vi.advanceTimersByTime(3000);
+    expect(reasons).toEqual(['no acknowledgement']);
+    expect(
+      (el as unknown as { _jointStates: Record<string, number> })._jointStates.rotation_elbow,
+    ).toBe(0);
+    expect(commandId).toBeTruthy();
+  });
+
+  it('second approve while in flight does not emit another commandrequest', () => {
+    const el = mountWithMapping();
+    const commands: unknown[] = [];
+    el.addEventListener('commandrequest', (e) => commands.push(e));
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.2,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.6,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(500);
+    expect(commands).toHaveLength(1);
+  });
+
+  it('confirmCommand ignores unknown commandId', () => {
+    const el = mountWithMapping();
+    expect(() => el.confirmCommand('not-a-real-id')).not.toThrow();
+    el.addEventListener('commandrequest', (e) => {
+      const id = (e as CustomEvent<{ commandId: string }>).detail.commandId;
+      expect(() => el.confirmCommand('wrong')).not.toThrow();
+      el.confirmCommand(id);
+    });
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.15,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+  });
+
+  it('stop during in-flight drops command; late confirm is ignored', () => {
+    const el = mountWithMapping();
+    let commandId = '';
+    el.addEventListener('commandrequest', (e) => {
+      commandId = (e as CustomEvent<{ commandId: string }>).detail.commandId;
+    });
+    const accepted: unknown[] = [];
+    el.addEventListener('commandaccepted', (e) => accepted.push(e));
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.45,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    el.stop('ui');
+    el.confirmCommand(commandId);
+    expect(accepted).toHaveLength(0);
+  });
+
+  it('dispose clears ack timer so timeout does not fire', () => {
+    const el = mountWithMapping();
+    el.ackTimeoutMs = 5000;
+    el.addEventListener('commandrequest', () => {});
+    const rejected: unknown[] = [];
+    el.addEventListener('commandrejected', (e) => rejected.push(e));
+    (el as unknown as { handleUiJointChange: (j: string, v: number) => void }).handleUiJointChange(
+      'rotation_elbow',
+      0.3,
+    );
+    el.approve('ui');
+    vi.advanceTimersByTime(0);
+    el.dispose();
+    vi.advanceTimersByTime(10000);
+    expect(rejected).toHaveLength(0);
   });
 });
