@@ -1,5 +1,9 @@
 # baked by tools/build_web_assets.py from meshes/ — ~60 MB, rebuilt with `make assets`
+# Both spellings: the directory and a symlink a worktree may put in its place. `git add -A`
+# committed three symlinks (node_modules, packages/robot-view/node_modules, web/meshes) once and
+# the CI bake step died on an absolute path that only existed on the author's machine.
 web/meshes/
+web/meshes
 
 # local python environments
 .venv/
@@ -12,6 +16,8 @@ __pycache__/
 *.swp
 
 # node + build output of the viewer package
+node_modules
 node_modules/
+packages/*/node_modules
 packages/robot-view/dist/
 web/demo.js
