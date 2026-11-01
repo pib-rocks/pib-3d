@@ -37,6 +37,11 @@ export const SHADOW_STYLES = `
 
   #command-bar { display: none; gap: 6px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 1px solid #30363d; }
   #command-bar.on { display: flex; }
+  #pose-readout { padding: 8px 12px; border-bottom: 1px solid #30363d; font-size: 11px; }
+  #pose-readout .irow { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 3px; }
+  #pose-readout .irow span { color: #8b949e; }
+  #pose-readout .irow b { color: #58a6ff; font-weight: 500; font-variant-numeric: tabular-nums;
+    text-align: right; word-break: break-all; }
   .j.pending .name { color: #e3b341; }
   .j.pending .val { color: #e3b341; }
 
@@ -125,6 +130,10 @@ export const SHADOW_HTML = `
         <div id="guard" hidden></div>
         <div id="consistency" hidden></div>
         <div id="live-stale" hidden></div>
+        <div id="pose-readout">
+          <div class="irow"><span>Basis (REP-103)</span><b id="pose-base">–</b></div>
+          <div class="irow"><span>TCP (provisorisch)</span><b id="pose-hand">–</b></div>
+        </div>
         <div id="joints"></div>
         <div id="info">
           <div class="irow"><span>Bauteil</span><b id="info-link">–</b></div>

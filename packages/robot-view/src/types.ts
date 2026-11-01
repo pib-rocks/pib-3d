@@ -84,3 +84,22 @@ export interface CommandAcceptedDetail {
 export interface EStopDetail {
   source: 'ui' | 'api';
 }
+
+export interface PosePoint {
+  x: number;
+  y: number;
+  z: number;
+}
+
+export interface RobotPose {
+  base: PosePoint;
+  hand: PosePoint;
+}
+
+export type ArmSide = 'left' | 'right';
+
+export interface PoseChangeDetail {
+  side: ArmSide;
+  base: PosePoint;
+  hand: PosePoint;
+}
