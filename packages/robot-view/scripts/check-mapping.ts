@@ -63,6 +63,28 @@ try {
   exitCode = 1;
 }
 
+// web/manifest.json is generated from the same two files; a stale copy would publish a manifest
+// the viewer compares against and then refuse to move.
+const manifestPath = resolve(repoRoot, 'web/manifest.json');
+try {
+  const manifest = readJson<{ motors?: string[]; jointNames?: string[]; mappingSha256?: string }>(
+    manifestPath,
+  );
+  const servedMotors = (manifest.motors ?? []).slice().sort();
+  const expectedMotors = [...drivenMotors].sort();
+  if (JSON.stringify(servedMotors) !== JSON.stringify(expectedMotors)) {
+    report.push('error: web/manifest.json motors differ from joints/mapping.json (run npm run build:demo)');
+    exitCode = 1;
+  }
+  if ((manifest.jointNames ?? []).length !== mapping.joints.length) {
+    report.push('error: web/manifest.json jointNames length differs from the mapping');
+    exitCode = 1;
+  }
+} catch {
+  report.push('error: web/manifest.json is missing (run npm run build:demo)');
+  exitCode = 1;
+}
+
 if (report.length === 0) {
   console.log(
     `check:mapping OK — ${mapping.joints.length} joints, ${PIB5ADVANCED_MOTORS.length} motors (pib5advanced)`,

@@ -56,6 +56,16 @@ export type {
   LoadMappingResult,
 } from './joints/mapping.js';
 export type { JointStateSample } from './joints/liveState.js';
+export type {
+  ModelConsistencyResult,
+  RobotModelManifest,
+} from './model/modelConsistency.js';
+export {
+  computeModelConsistency,
+  drivenMotorsFromMapping,
+  fetchModelManifest,
+  formatMotorSetMismatch,
+} from './model/modelConsistency.js';
 export {
   sampleToModelJoints,
   resolveJointStateMap,

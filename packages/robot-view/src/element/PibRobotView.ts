@@ -46,6 +46,12 @@ import {
   CommandSendScheduler,
   motorLimitsProvided,
 } from '../joints/commandPath.js';
+import {
+  computeModelConsistency,
+  fetchModelManifest,
+  type ModelConsistencyResult,
+  type RobotModelManifest,
+} from '../model/modelConsistency.js';
 
 const TAG = 'pib-robot-view';
 
@@ -97,6 +103,9 @@ export class PibRobotView extends HTMLElement {
   } | null = null;
   private ackTimer: ReturnType<typeof setTimeout> | null = null;
   private _ackTimeoutMs = 3000;
+  private _manifest: RobotModelManifest | null = null;
+  private _expectedMotors: string[] | null = null;
+  private _modelConsistency: ModelConsistencyResult = { ok: true, reason: null };
 
   constructor() {
     super();
@@ -192,6 +201,23 @@ export class PibRobotView extends HTMLElement {
   }
   get guardReason(): string | null {
     return this._lastCommandBlockReason;
+  }
+  get manifest(): RobotModelManifest | null {
+    return this._manifest;
+  }
+  get expectedMotors(): string[] | null {
+    return this._expectedMotors ? [...this._expectedMotors] : null;
+  }
+  get modelConsistency(): ModelConsistencyResult {
+    return { ok: this._modelConsistency.ok, reason: this._modelConsistency.reason };
+  }
+  get readOnly(): boolean {
+    return !this._modelConsistency.ok;
+  }
+  setExpectedMotors(motors: string[] | null): void {
+    this._expectedMotors = motors ? [...motors].sort((a, b) => a.localeCompare(b)) : null;
+    this.recomputeModelConsistency();
+    this.updateModeUi();
   }
   set mode(v: ViewerMode) {
     this._mode = v;
@@ -404,6 +430,8 @@ export class PibRobotView extends HTMLElement {
     this.panel = null;
     this._mapping = null;
     this._mappingValidation = null;
+    this._manifest = null;
+    this._modelConsistency = { ok: true, reason: null };
     this.clearStaleTimer();
     this.liveInterp?.dispose();
     this.liveInterp = null;
@@ -478,10 +506,24 @@ export class PibRobotView extends HTMLElement {
     panel?.classList.toggle('hidden', !this._showControls);
   }
 
+  private recomputeModelConsistency(): void {
+    this._modelConsistency = computeModelConsistency(
+      this._mapping,
+      this._manifest,
+      this._expectedMotors,
+    );
+  }
+
   private updateModeUi(): void {
     const requested = this._mode;
     let effective: ViewerMode = requested;
-    if (requested === 'command') {
+    const inconsistent = !this._modelConsistency.ok;
+    const consistencyReason = this._modelConsistency.reason;
+
+    if (inconsistent) {
+      effective = 'read';
+      this._lastCommandBlockReason = consistencyReason;
+    } else if (requested === 'command') {
       const gate = canCommand(this._mapping, this._mappingValidation);
       if (!gate.ok) {
         effective = 'preview';
@@ -503,9 +545,16 @@ export class PibRobotView extends HTMLElement {
       this._lastCommandBlockReason = null;
     }
     this._effectiveMode = effective;
+
+    const consistencyEl = this.shadow.querySelector('#consistency') as HTMLElement | null;
+    if (consistencyEl) {
+      consistencyEl.textContent = inconsistent ? (consistencyReason ?? '') : '';
+      consistencyEl.classList.toggle('on', inconsistent);
+    }
+
     const guard = this.shadow.querySelector('#guard') as HTMLElement | null;
     if (guard) {
-      const blocked = requested === 'command' && effective !== 'command';
+      const blocked = !inconsistent && requested === 'command' && effective !== 'command';
       guard.textContent = blocked
         ? `Befehlsmodus gesperrt: ${this._lastCommandBlockReason ?? 'Mapping ungültig'}. Der Viewer bleibt in der Vorschau.`
         : '';
@@ -547,12 +596,14 @@ export class PibRobotView extends HTMLElement {
     bar.style.width = '0%';
 
     try {
-      const [model, mappingLoad] = await Promise.all([
+      const [model, mappingLoad, manifestLoad] = await Promise.all([
         fetchModel(this._modelUrl),
         loadMapping(this._mappingUrl),
+        fetchModelManifest(this._modelUrl),
       ]);
       if (gen !== this.loadGeneration || this.disposed) return;
 
+      this._manifest = manifestLoad.manifest;
       if (mappingLoad.loadError || !mappingLoad.mapping) {
         this._mapping = null;
         this._mappingValidation = {
@@ -571,6 +622,7 @@ export class PibRobotView extends HTMLElement {
           console.warn(w);
         }
       }
+      this.recomputeModelConsistency();
 
       const { linkNodes, partsOf } = await loadLinkMeshes(model, this._modelUrl, (done, total) => {
         bar.style.width = `${(done / total) * 100}%`;

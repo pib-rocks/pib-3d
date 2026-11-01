@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build:lib": "vite build",
-    "build:demo": "cp ../../joints/mapping.json ../../web/mapping.json && vite build --config vite.config.demo.ts",
+    "build:demo": "node scripts/write-demo-manifest.mjs && cp ../../joints/mapping.json ../../web/mapping.json && vite build --config vite.config.demo.ts",
     "build": "npm run build:lib && npm run build:demo",
     "prepare": "npm run build:lib",
     "test": "vitest run",
