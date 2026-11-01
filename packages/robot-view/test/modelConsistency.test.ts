@@ -21,7 +21,7 @@ describe('formatMotorSetMismatch', () => {
       ['a', 'b'],
       ['a', 'b', 'c'],
     );
-    expect(msg).toBe('model has 2 motors, robot has 3: missing c');
+    expect(msg).toBe('model lists 2 motors, robot lists 3 - missing c');
   });
 });
 

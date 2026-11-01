@@ -36,7 +36,7 @@ export function formatMotorSetMismatch(
   const parts: string[] = [];
   if (missing.length) parts.push(`missing ${missing.join(', ')}`);
   if (extra.length) parts.push(`extra ${extra.join(', ')}`);
-  return `model has ${modelMotors.length} motors, robot has ${robotMotors.length}${parts.length ? `: ${parts.join(', ')}` : ''}`;
+  return `model lists ${modelMotors.length} motors, robot lists ${robotMotors.length}${parts.length ? ` - ${parts.join(', ')}` : ''}`;
 }
 
 export function computeModelConsistency(

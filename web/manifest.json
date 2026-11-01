@@ -1,8 +1,58 @@
 {
-  "version": "v0.1.2",
-  "modelBuild": "test",
+  "version": "v0.2.0",
+  "modelBuild": "0770fee55b36",
   "links": 47,
   "joints": 48,
+  "jointNames": [
+    "rotation_inner_shoulder_1",
+    "rotation_shoulder_left",
+    "central_rotator_rotation",
+    "rotation_elbow",
+    "rotate_forearm",
+    "rotation_wrist_right",
+    "rotation_inner_shoulder",
+    "rotation_shoulder_left_1",
+    "central_rotator_rotation_1",
+    "rotation_elbow_1",
+    "rotate_forearm_1",
+    "rotation_wrist_left",
+    "gearing_rotation__new_body_",
+    "nodding_rotation",
+    "revolute_1",
+    "j1_2",
+    "j1",
+    "j1_1",
+    "j1_4",
+    "j1_3",
+    "revolute_1_1",
+    "j1_7",
+    "j1_5",
+    "j1_6",
+    "j1_9",
+    "j1_8",
+    "dof_wrist",
+    "dof_wrist_1",
+    "j2",
+    "j2_1",
+    "j3",
+    "j3_1",
+    "j3_2",
+    "j3_3",
+    "j3_4",
+    "j3_5",
+    "j3_6",
+    "d54_finger_distal_1_hinge",
+    "d54_finger_distal_2_hinge",
+    "d54_finger_distal_3_hinge",
+    "d54_finger_distal_4_hinge",
+    "d54_finger_distal_6_hinge",
+    "d54_finger_distal_7_hinge",
+    "d55_finger_tip_5_hinge",
+    "d58_thumb_tip_hinge",
+    "d58_thumb_tip_1_hinge",
+    "upper_door_rotation",
+    "lower_door_rotation"
+  ],
   "motors": [
     "elbow_left",
     "elbow_right",
@@ -31,8 +81,200 @@
     "wrist_left",
     "wrist_right"
   ],
-  "mappingSha256": "5ee6106d",
+  "mappingSha256": "5ee6106d4cafe04aca3b07853f3bfa3a37d44262e320994a9c7053a7eaa58a5f",
   "integrity": "ok",
-  "files": {},
-  "meshes": []
+  "files": {
+    "model": "./model.json",
+    "mapping": "./mapping.json"
+  },
+  "meshes": [
+    {
+      "name": "a81_motor_shaft.glb",
+      "url": "./meshes/a81_motor_shaft.glb"
+    },
+    {
+      "name": "a71_inner_part.glb",
+      "url": "./meshes/a71_inner_part.glb"
+    },
+    {
+      "name": "root.glb",
+      "url": "./meshes/root.glb"
+    },
+    {
+      "name": "b44_electronics_back.glb",
+      "url": "./meshes/b44_electronics_back.glb"
+    },
+    {
+      "name": "b46_power_back.glb",
+      "url": "./meshes/b46_power_back.glb"
+    },
+    {
+      "name": "c09_central_rotator_connector.glb",
+      "url": "./meshes/c09_central_rotator_connector.glb"
+    },
+    {
+      "name": "c09_central_rotator_connector_1.glb",
+      "url": "./meshes/c09_central_rotator_connector_1.glb"
+    },
+    {
+      "name": "c09_central_rotator_connector_2.glb",
+      "url": "./meshes/c09_central_rotator_connector_2.glb"
+    },
+    {
+      "name": "c09_central_rotator_connector_3.glb",
+      "url": "./meshes/c09_central_rotator_connector_3.glb"
+    },
+    {
+      "name": "d01_r_palm_right.glb",
+      "url": "./meshes/d01_r_palm_right.glb"
+    },
+    {
+      "name": "d01_l_palm_left.glb",
+      "url": "./meshes/d01_l_palm_left.glb"
+    },
+    {
+      "name": "c36_elbow_lower_shell.glb",
+      "url": "./meshes/c36_elbow_lower_shell.glb"
+    },
+    {
+      "name": "c36_elbow_lower_shell_1.glb",
+      "url": "./meshes/c36_elbow_lower_shell_1.glb"
+    },
+    {
+      "name": "c64_motor_axis_cap_inner_shoulder.glb",
+      "url": "./meshes/c64_motor_axis_cap_inner_shoulder.glb"
+    },
+    {
+      "name": "c64_motor_axis_cap_inner_shoulder_1.glb",
+      "url": "./meshes/c64_motor_axis_cap_inner_shoulder_1.glb"
+    },
+    {
+      "name": "c69_inner_part_outer_shoulder.glb",
+      "url": "./meshes/c69_inner_part_outer_shoulder.glb"
+    },
+    {
+      "name": "c69_inner_part_outer_shoulder_1.glb",
+      "url": "./meshes/c69_inner_part_outer_shoulder_1.glb"
+    },
+    {
+      "name": "d13_r_thumb_rotator_right.glb",
+      "url": "./meshes/d13_r_thumb_rotator_right.glb"
+    },
+    {
+      "name": "d13_l_thumb_rotator_left.glb",
+      "url": "./meshes/d13_l_thumb_rotator_left.glb"
+    },
+    {
+      "name": "d52_finger_proximal.glb",
+      "url": "./meshes/d52_finger_proximal.glb"
+    },
+    {
+      "name": "d52_finger_proximal_1.glb",
+      "url": "./meshes/d52_finger_proximal_1.glb"
+    },
+    {
+      "name": "d52_finger_proximal_2.glb",
+      "url": "./meshes/d52_finger_proximal_2.glb"
+    },
+    {
+      "name": "d52_finger_proximal_3.glb",
+      "url": "./meshes/d52_finger_proximal_3.glb"
+    },
+    {
+      "name": "d52_finger_proximal_4.glb",
+      "url": "./meshes/d52_finger_proximal_4.glb"
+    },
+    {
+      "name": "d52_finger_proximal_5.glb",
+      "url": "./meshes/d52_finger_proximal_5.glb"
+    },
+    {
+      "name": "d52_finger_proximal_6.glb",
+      "url": "./meshes/d52_finger_proximal_6.glb"
+    },
+    {
+      "name": "d52_finger_proximal_7.glb",
+      "url": "./meshes/d52_finger_proximal_7.glb"
+    },
+    {
+      "name": "d54_finger_distal.glb",
+      "url": "./meshes/d54_finger_distal.glb"
+    },
+    {
+      "name": "d54_finger_distal_1.glb",
+      "url": "./meshes/d54_finger_distal_1.glb"
+    },
+    {
+      "name": "d54_finger_distal_2.glb",
+      "url": "./meshes/d54_finger_distal_2.glb"
+    },
+    {
+      "name": "d54_finger_distal_3.glb",
+      "url": "./meshes/d54_finger_distal_3.glb"
+    },
+    {
+      "name": "d54_finger_distal_4.glb",
+      "url": "./meshes/d54_finger_distal_4.glb"
+    },
+    {
+      "name": "d54_finger_distal_5.glb",
+      "url": "./meshes/d54_finger_distal_5.glb"
+    },
+    {
+      "name": "d54_finger_distal_6.glb",
+      "url": "./meshes/d54_finger_distal_6.glb"
+    },
+    {
+      "name": "d54_finger_distal_7.glb",
+      "url": "./meshes/d54_finger_distal_7.glb"
+    },
+    {
+      "name": "d55_finger_tip.glb",
+      "url": "./meshes/d55_finger_tip.glb"
+    },
+    {
+      "name": "d55_finger_tip_1.glb",
+      "url": "./meshes/d55_finger_tip_1.glb"
+    },
+    {
+      "name": "d55_finger_tip_2.glb",
+      "url": "./meshes/d55_finger_tip_2.glb"
+    },
+    {
+      "name": "d55_finger_tip_3.glb",
+      "url": "./meshes/d55_finger_tip_3.glb"
+    },
+    {
+      "name": "d55_finger_tip_4.glb",
+      "url": "./meshes/d55_finger_tip_4.glb"
+    },
+    {
+      "name": "d55_finger_tip_5.glb",
+      "url": "./meshes/d55_finger_tip_5.glb"
+    },
+    {
+      "name": "d55_finger_tip_6.glb",
+      "url": "./meshes/d55_finger_tip_6.glb"
+    },
+    {
+      "name": "d55_finger_tip_7.glb",
+      "url": "./meshes/d55_finger_tip_7.glb"
+    },
+    {
+      "name": "d57_thumb_proximal.glb",
+      "url": "./meshes/d57_thumb_proximal.glb"
+    },
+    {
+      "name": "d57_thumb_proximal_1.glb",
+      "url": "./meshes/d57_thumb_proximal_1.glb"
+    },
+    {
+      "name": "d58_thumb_tip.glb",
+      "url": "./meshes/d58_thumb_tip.glb"
+    },
+    {
+      "name": "d58_thumb_tip_1.glb",
+      "url": "./meshes/d58_thumb_tip_1.glb"
+    }
+  ]
 }
