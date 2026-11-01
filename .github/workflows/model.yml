@@ -28,3 +28,12 @@ jobs:
 
       - name: meshes resolve
         run: python tools/check_meshes.py
+
+      # The arms must mirror each other. Runs without the meshes: web/model.json carries the
+      # geometry the FK needs, so this is cheap enough to gate every push.
+      - name: arm mirror symmetry
+        working-directory: packages/robot-view
+        run: |
+          npm ci
+          npx vitest run test/armSymmetry.test.ts
+
