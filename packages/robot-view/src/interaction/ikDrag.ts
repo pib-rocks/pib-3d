@@ -193,6 +193,8 @@ export interface HandDragContext {
   onRequestRender: () => void;
   maxRadPerSecond?: number;
   tcpLink?: { left: string; right: string };
+  /** Injectable for tests; defaults to the global fetch. */
+  fetchImpl?: typeof fetch;
 }
 
 const HANDLE_RADIUS_M = 0.035;
@@ -234,10 +236,15 @@ export function wireHandDrag(ctx: HandDragContext): () => void {
   let lastAngles: number[] = [];
   let lastApplyAt = 0;
 
-  const client = new IkClient(ctx.ikUrl, applyAnswer, (reason) => {
-    setColor(COLOR_EDGE);
-    ctx.onStatus({ kind: 'unavailable', reason });
-  });
+  const client = new IkClient(
+    ctx.ikUrl,
+    applyAnswer,
+    (reason) => {
+      setColor(COLOR_EDGE);
+      ctx.onStatus({ kind: 'unavailable', reason });
+    },
+    ctx.fetchImpl,
+  );
 
   function setColor(color: number): void {
     for (const side of ['left', 'right'] as const) handles[side]?.material instanceof THREE.MeshBasicMaterial
