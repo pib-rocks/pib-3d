@@ -1,7 +1,33 @@
 # Inverse kinematics in the 3D tab: drag the hand, the robot follows
 
-Status: concept, 2026-11-02. Nothing here is built yet. Every **D** below is a fork that needs a
-decision before the first line of code - the recommendation is a recommendation, not a ruling.
+Status: concept, 2026-11-02. Decisions taken, see below. Nothing here is built yet.
+
+## Decisions (2026-11-02)
+
+| # | Question | Decision |
+|---|---|---|
+| D1 | Where does the solver run | **Backend** - pib-sdk behind `POST /kinematics/inverse` |
+| D2 | What the pointer grabs | **A** - effector ghost in the camera plane, `Shift`/wheel for depth |
+| D3 | Follow while dragging | **A** - streaming, throttled like the sliders |
+| D4 | Fingers | **B** - wheel closes the grip while dragging, `Alt`+drag for the thumb |
+| D5 | Head | **A** - draggable gaze point, analytic two-joint look-at |
+| D6 | Workspace edge | **A** - clamp to the boundary and say why |
+| D7 | Panel vs drag | **A** - last writer wins, the loser is visibly released |
+
+D1 = backend moves the solver out of the browser. Two consequences are design constraints now,
+not options:
+
+- the drag loop needs a latency budget and a coalescing rule (§5) - the pointer moves at 60 Hz,
+  the backend answers in 10-20 ms, so at most one request is in flight and the model interpolates
+  toward the newest answer;
+- the published demo viewer (GitHub Pages, no robot) has no IK. The handle is there, dragging it
+  says "inverse kinematics needs the robot backend" instead of pretending.
+
+D5 stays in the browser on purpose: the head has a closed-form two-joint solution (`atan2` over
+yaw and pitch). Routing a `atan2` through HTTP would add 10-20 ms for no shared logic, and the
+"one implementation" argument of D1 is about the six-joint arm solver, which is where the
+numerics actually live.
+
 
 ## 1. What the question is
 
@@ -161,18 +187,43 @@ label ("Rechte Hand") and a thin outline on the real link.
 
 ```
 pointer -> ray -> target in base frame (m, REP-103)
-        -> IK (per arm: 6 DOF, damped least squares, limits from mapping)
+        -> POST /kinematics/inverse  {side, xyz_m, seed_rad}
+        <- {joints_rad, reach: {ok, distance_mm, blockedBy}}
         -> clamp to limits + velocity clamp
         -> buildCommandFromPending (existing) -> commandrequest (120 ms, coalesced)
         -> Cerebra -> /apply_joint_trajectory -> motors
 ```
 
-The solver is a new module `joints/ik.ts` in the package (pure, no DOM): input is the current
-joint vector, the target pose, the chain and the limits; output is a joint vector plus a
-`reach` report (`ok`, `distance_m`, `blockedBy`). Keeping it pure is what makes it testable
-without a browser.
+**Endpoint** (pib-backend, new blueprint `kinematics`):
 
-Head: `joints/lookAt.ts`, analytic, two joints, same report shape.
+```
+POST /kinematics/inverse
+{ "side": "right", "xyz_m": [0.32, -0.12, 0.95],
+  "rpy_rad": null, "seed_rad": [0.1, 0.0, ...] }
+->
+{ "joints_rad": [...], "reach": { "ok": true, "distance_mm": 0.4, "blocked_by": null },
+  "iterations": 7, "elapsed_ms": 3.1 }
+```
+
+It wraps `pib_sdk.ChainKinematics(side).inverse(xyz_mm, initial_guess_rad=seed, respect_limits=True)`
+and maps the typed failures onto `reach`: `InverseKinematicsWorkspaceError` and
+`BehindBodyError` to `ok: false` with the distance to the closest reachable point,
+`JointLimitError` to `blocked_by: "joint_limit"`, `ConvergenceError` to `blocked_by:
+"convergence"`. A failure is a normal answer with HTTP 200, not a 500 - the drag loop must not
+error out mid-motion.
+
+**Latency budget** (measured, to be confirmed in S1): LAN round trip 3-8 ms, Flask + pib-sdk solve
+3-8 ms, so 10-20 ms per target. That supports 20-30 Hz, well inside the 120 ms command interval.
+Rules in the viewer: one request in flight, the newest pointer position replaces any pending one,
+the model interpolates toward the newest answer over ~80 ms. A request older than 200 ms is
+dropped and the readout says "Backend antwortet nicht" - the drag continues, nothing moves.
+
+The solver module on the server is `pib_sdk/kinematics.py`; no new maths. The viewer keeps no
+solver at all, only the interpolation.
+
+Fingers and the head keep their own small functions in the viewer: `joints/lookAt.ts` (analytic)
+and the grip presets, which are plain numbers on the existing couplings.
+
 
 ## 6. Verification
 
@@ -192,8 +243,8 @@ Head: `joints/lookAt.ts`, analytic, two joints, same report shape.
 
 | # | Content | Effort |
 |---|---|---|
-| S1 | `ik.ts` + tests, ghost handle, drag on the model only (no commands) | 2-3 d |
-| S2 | Streaming through the existing command path, velocity clamp, readout and states | 1-2 d |
+| S1 | `POST /kinematics/inverse` in pib-backend + tests (round trip, workspace edge, limits, latency) | 1-2 d |
+| S2 | Ghost handle and drag in the viewer, one request in flight, interpolated preview, readout and states | 2-3 d |
 | S3 | Gaze point and analytic head look-at | 1 d |
 | S4 | Finger presets, wheel grip, thumb on `Alt` | 1-2 d |
 | S5 | Cerebra wiring (chips, strings, limits pass-through), docs, release | 1-2 d |
