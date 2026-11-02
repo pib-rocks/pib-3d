@@ -12,7 +12,6 @@ import {
 } from './math.js';
 import {
   commandDisableTitle,
-  jointClassLabel,
   type JointMappingEntry,
 } from './mapping.js';
 
@@ -190,8 +189,6 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     for (const m of items) {
       const { joint } = m;
       const mapEntry = mappingByJoint.get(joint.name);
-      const className = mapEntry?.class ?? 'coupled';
-      const badge = jointClassLabel(className);
       const motorLine =
         mapEntry?.class === 'driven' && mapEntry.motor
           ? `<div class="motor" title="Motor">${mapEntry.motor}</div>`
@@ -205,7 +202,6 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       wrap.innerHTML = `
           <div class="row">
             <span class="name" title="${joint.name}">${label}</span>
-            <span class="badge">${badge}</span>
             <span class="val"></span>
           </div>
           ${motorLine}

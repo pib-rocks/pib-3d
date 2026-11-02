@@ -53,22 +53,17 @@ export const SHADOW_STYLES = `
   .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
     white-space: nowrap; flex: 1; min-width: 0; }
-  .j .badge { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px;
-    padding: 1px 5px; border-radius: 4px; border: 1px solid #30363d; color: #8b949e; flex-shrink: 0; }
-  .j[data-joint-class="driven"] .badge { color: #3fb950; border-color: #238636; }
-  .j[data-joint-class="coupled"] .badge { color: #d29922; border-color: #9e6a03; }
-  .j[data-joint-class="passive"] .badge { color: #a371f7; border-color: #8957e5; }
   .j .motor { font-size: 10px; color: #8b949e; margin: 1px 0 2px; font-family: ui-monospace, monospace;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff; min-width: 62px;
     text-align: right; }
   .j .slider { position: relative; margin: 3px 0 0; }
   .j .track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px;
-    background: #21262d; border-radius: 2px; pointer-events: none; overflow: hidden; }
+    background: #324c71; border-radius: 2px; pointer-events: none; overflow: hidden; }
   .j .track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
-    background: #1f6feb; border-radius: 2px; }
+    background: #e10072; border-radius: 2px; }
   .j .track .mark.soll { position: absolute; top: -3px; width: 2px; height: 10px;
-    background: #e3b341; border-radius: 1px; display: none; transform: translateX(-1px); }
+    background: #f0f6fc; border-radius: 1px; display: none; transform: translateX(-1px); }
   .j .track .mark.soll.on { display: block; }
   .j .cmd-delta { display: none; font-size: 10px; color: #8b949e; text-align: right; margin-top: 2px; }
   .j .cmd-delta.on { display: block; }
@@ -76,9 +71,14 @@ export const SHADOW_STYLES = `
     background: transparent; position: relative; z-index: 1; }
   .j input[type=range]::-webkit-slider-runnable-track { background: transparent; }
   .j input[type=range]::-moz-range-track { background: transparent; }
+  /* pib's slider palette: pink thumb and pink fill on the dark blue rail. */
+  .j input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px;
+    border-radius: 50%; background: #e10072; border: 2px solid #0d1117; cursor: grab; }
+  .j input[type=range]::-moz-range-thumb { width: 10px; height: 10px; border-radius: 50%;
+    background: #e10072; border: 2px solid #0d1117; cursor: grab; }
+  .j input[type=range]:focus { outline: 1px solid #e10072; outline-offset: 3px; border-radius: 2px; }
   .j.active { border-left: 2px solid #1f6feb; margin-left: -8px; padding-left: 6px; }
   .j.active .name { color: #79c0ff; }
-  .j input[type=range]:focus { outline: 1px solid #388bfd; outline-offset: 3px; border-radius: 2px; }
 
   #ik-status {
     position: absolute;
@@ -136,8 +136,6 @@ export const SHADOW_HTML = `
         <div id="tools">
           <button type="button" data-action="zero">Nullstellung</button>
           <button type="button" data-action="mid">Mitte</button>
-          <button type="button" data-action="grid" class="on">Gitter</button>
-          <button type="button" data-action="spin">Drehen</button>
         </div>
         <div id="guard" hidden></div>
         <div id="consistency" hidden></div>
