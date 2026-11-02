@@ -163,7 +163,10 @@ export function mappingMotorFor(sdkName: string): string {
  */
 export function toModelAngles(
   jointsRad: readonly number[],
-  entries: readonly Pick<JointMappingEntry, 'motor' | 'urdfJoint' | 'direction' | 'gearRatio'>[],
+  entries: readonly Pick<
+    JointMappingEntry,
+    'motor' | 'urdfJoint' | 'direction' | 'gearRatio' | 'sdkSign'
+  >[],
   jointNames: readonly string[],
 ): Record<string, number> {
   const byMotor = new Map(entries.map((entry) => [entry.motor, entry]));
@@ -172,7 +175,8 @@ export function toModelAngles(
     const entry = byMotor.get(mappingMotorFor(motor));
     const value = jointsRad[index];
     if (!entry || value === undefined) return;
-    out[entry.urdfJoint] = (value * (entry.direction ?? 1)) / (entry.gearRatio || 1);
+    out[entry.urdfJoint] =
+      (value * (entry.sdkSign ?? 1) * (entry.direction ?? 1)) / (entry.gearRatio || 1);
   });
   return out;
 }
@@ -421,7 +425,10 @@ export const SDK_ARM_JOINTS: Record<'left' | 'right', string[]> = {
  */
 export function seedFromModel(
   anglesByJoint: Record<string, number>,
-  entries: readonly Pick<JointMappingEntry, 'motor' | 'urdfJoint' | 'direction' | 'gearRatio'>[],
+  entries: readonly Pick<
+    JointMappingEntry,
+    'motor' | 'urdfJoint' | 'direction' | 'gearRatio' | 'sdkSign'
+  >[],
   side: 'left' | 'right',
 ): number[] | null {
   const byMotor = new Map(entries.map((entry) => [entry.motor, entry]));
@@ -430,7 +437,7 @@ export function seedFromModel(
     const entry = byMotor.get(mappingMotorFor(sdkName));
     if (!entry) return null;
     const model = anglesByJoint[entry.urdfJoint] ?? 0;
-    seed.push(model * (entry.direction ?? 1) * (entry.gearRatio || 1));
+    seed.push(model * (entry.direction ?? 1) * (entry.gearRatio || 1) * (entry.sdkSign ?? 1));
   }
   return seed;
 }
