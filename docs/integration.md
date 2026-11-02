@@ -101,3 +101,17 @@ with `pib-backend/tools/install_robot_model.py`; the backend then serves it unde
 
 The tarball URL is immutable. To take a new viewer version, bump the URL to the new tag
 and rebuild the host — the component is compiled in, not loaded at runtime.
+
+## Hand drag (inverse kinematics)
+
+`ik-url` points the element at the backend solver (`POST /kinematics/inverse`, pib-backend
+PR-2180). With it set, a translucent handle appears at each palm: dragging one asks for joint
+angles, and the answer is streamed through the same command path the sliders use - one request in
+flight, the newest target wins, the model is clamped to 60 deg/s per joint.
+
+The target is a **point**: the hand's orientation stays free (decided 2026-11-02). Answers keep
+the arm inside the joint limits; a target outside the workspace still returns the boundary posture
+and the distance that is left, which the status line shows.
+
+Without `ik-url` - the published demo - the handles are inert and say that inverse kinematics
+needs the robot backend.

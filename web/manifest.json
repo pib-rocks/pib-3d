@@ -1,5 +1,5 @@
 {
-  "version": "v0.4.0",
+  "version": "v0.10.2",
   "modelBuild": "0770fee55b36",
   "links": 47,
   "joints": 48,
@@ -81,7 +81,7 @@
     "wrist_left",
     "wrist_right"
   ],
-  "mappingSha256": "5ee6106d4cafe04aca3b07853f3bfa3a37d44262e320994a9c7053a7eaa58a5f",
+  "mappingSha256": "daff3e9f3c915ffd40b6cfd207120d35e2aeddb36608dbd454321eb64264b42c",
   "integrity": "ok",
   "files": {
     "model": "./model.json",

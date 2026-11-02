@@ -33,6 +33,7 @@ import { buildJointPanel, midPoseValue, type JointPanelHandles } from '../joints
 import { applyJointValue } from '../joints/math.js';
 import { wirePicking } from '../interaction/picking.js';
 import { disposeObject3D, OnDemandRenderer } from '../render/onDemand.js';
+import { seedFromModel, wireHandDrag, type DragStatus } from '../interaction/ikDrag.js';
 import { SHADOW_HTML, SHADOW_STYLES } from './template.js';
 import type {
   CommandAcceptedDetail,
@@ -68,7 +69,7 @@ const TAG = 'pib-robot-view';
 
 export class PibRobotView extends HTMLElement {
   static get observedAttributes(): string[] {
-    return ['model-url', 'mapping-url', 'mode', 'show-controls'];
+    return ['model-url', 'mapping-url', 'mode', 'show-controls', 'ik-url'];
   }
 
   private shadow: ShadowRoot;
@@ -116,6 +117,8 @@ export class PibRobotView extends HTMLElement {
   private _ackTimeoutMs = 3000;
   private _manifest: RobotModelManifest | null = null;
   private _expectedMotors: string[] | null = null;
+  private _ikUrl = '';
+  private handDrag: (() => void) | null = null;
   private _labelsByMotor: Record<string, string> = {};
   private _modelConsistency: ModelConsistencyResult = { ok: true, reason: null };
   private _baseFrame: BaseFrameContext | null = null;
@@ -159,6 +162,9 @@ export class PibRobotView extends HTMLElement {
     } else if (name === 'mode' && value) {
       this._mode = value as ViewerMode;
       this.updateModeUi();
+    } else if (name === 'ik-url') {
+      this._ikUrl = value ?? '';
+      this.wireHandDrag();
     } else if (name === 'show-controls') {
       this._showControls = value !== 'false' && value !== '0';
       this.updatePanelVisibility();
@@ -234,6 +240,16 @@ export class PibRobotView extends HTMLElement {
     this.recomputeModelConsistency();
     this.updateModeUi();
   }
+  /** Backend endpoint for inverse kinematics; without it the drag handles stay inert. */
+  get ikUrl(): string {
+    return this._ikUrl;
+  }
+  set ikUrl(url: string) {
+    this._ikUrl = url;
+    this.setAttribute('ik-url', url);
+    this.wireHandDrag();
+  }
+
   /** Human names per motor, so the panel can show "Left Hand · Index Finger" instead of a CAD name. */
   get labels(): Record<string, string> {
     return { ...this._labelsByMotor };
@@ -482,6 +498,8 @@ export class PibRobotView extends HTMLElement {
     this.onDemand?.dispose();
     this.onDemand = null;
 
+    this.handDrag?.();
+    this.handDrag = null;
     if (this.sceneBundle) {
       disposeObject3D(this.sceneBundle.modelRoot);
       this.sceneBundle.grid.geometry.dispose();
@@ -768,6 +786,7 @@ export class PibRobotView extends HTMLElement {
       loading.style.display = 'none';
       this.applyJointStates('api');
       this.syncPose();
+      this.wireHandDrag();
       this.onDemand?.requestRender();
 
       this.dispatchEvent(
@@ -944,6 +963,59 @@ export class PibRobotView extends HTMLElement {
     if (Object.keys(this._pendingJoints).length === 0) return;
     this.ensureCommandScheduler();
     this.commandScheduler!.requestFlush('ui');
+  }
+
+  private wireHandDrag(): void {
+    this.handDrag?.();
+    this.handDrag = null;
+    const bundle = this.sceneBundle;
+    const frame = this._baseFrame;
+    if (!this._ikUrl || !bundle || !frame || !this._mapping) return;
+
+    this.handDrag = wireHandDrag({
+      scene: bundle.scene,
+      camera: bundle.camera,
+      dom: bundle.renderer.domElement,
+      controls: bundle.controls,
+      baseFrame: frame,
+      linkNodes: this.linkNodes,
+      entries: this._mapping.joints,
+      ikUrl: this._ikUrl,
+      seedFor: (side) => seedFromModel(this._jointStates, this._mapping!.joints, side),
+      onJoints: (angles) => {
+        for (const [joint, radians] of Object.entries(angles)) {
+          this.handleUiJointChange(joint, radians);
+        }
+        this.applyJointStates('ui');
+        this.onDemand?.requestRender();
+      },
+      onStatus: (status) => this.showDragStatus(status),
+      onRequestRender: () => this.onDemand?.requestRender(),
+    });
+  }
+
+  private showDragStatus(status: DragStatus): void {
+    const el = this.shadow.querySelector('#ik-status') as HTMLElement | null;
+    if (!el) return;
+    el.classList.toggle('edge', status.kind === 'edge');
+    el.classList.toggle('unavailable', status.kind === 'unavailable');
+    if (status.kind === 'idle') {
+      el.hidden = true;
+      el.textContent = '';
+      return;
+    }
+    el.hidden = false;
+    if (status.kind === 'solving') el.textContent = 'Rechnet …';
+    else if (status.kind === 'reached') el.textContent = 'Roboter folgt';
+    else if (status.kind === 'edge') {
+      const reason =
+        status.blockedBy === 'joint_limit'
+          ? 'Gelenk am Anschlag'
+          : status.blockedBy === 'behind_body'
+            ? 'hinter dem Körper'
+            : 'außerhalb der Reichweite';
+      el.textContent = `${reason} · ${Math.round(status.distanceMm)} mm fehlen`;
+    } else el.textContent = `Keine Inverse Kinematik: ${status.reason}`;
   }
 
   private ensureCommandScheduler(): void {
