@@ -210,7 +210,13 @@ const COLOR_BUSY = 0x7aa2f7;
  * Two draggable spheres, one per palm. Dragging one asks the backend for joint angles and hands
  * them to the element, which streams them through the existing command path.
  */
-export function wireHandDrag(ctx: HandDragContext): () => void {
+export interface HandDragHandle {
+  dispose(): void;
+  /** Put the handles back on the palms; call it whenever the pose changed. */
+  sync(): void;
+}
+
+export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
   const tcp = ctx.tcpLink ?? { left: 'd01_l_palm_left', right: 'd01_r_palm_right' };
   const maxRate = ((ctx.maxRadPerSecond ?? 60) * Math.PI) / 180;
   const handles: Record<'left' | 'right', THREE.Mesh | null> = { left: null, right: null };
@@ -280,6 +286,7 @@ export function wireHandDrag(ctx: HandDragContext): () => void {
         blockedBy: answer.reach.blockedBy,
       });
     }
+    sync();
     ctx.onRequestRender();
   }
 
@@ -360,6 +367,7 @@ export function wireHandDrag(ctx: HandDragContext): () => void {
     ctx.controls.enabled = true;
     ctx.dom.style.cursor = '';
     setColor(COLOR_OK);
+    sync();
     ctx.onStatus({ kind: 'idle' });
   }
 
@@ -376,12 +384,25 @@ export function wireHandDrag(ctx: HandDragContext): () => void {
     });
   }
 
+  /** Put each handle back on its palm. The arm moves, the handle has to move with it - a handle
+   * left behind at the start pose makes the next drag feel like it begins somewhere else. */
+  function sync(): void {
+    for (const side of ['left', 'right'] as const) {
+      const handle = handles[side];
+      const node = ctx.linkNodes.get(tcp[side]);
+      if (!handle || !node) continue;
+      node.getWorldPosition(handle.position);
+      handle.updateMatrixWorld();
+    }
+    ctx.onRequestRender();
+  }
+
   ctx.dom.addEventListener('pointerdown', onPointerDown, true);
   ctx.dom.addEventListener('pointermove', onPointerMove, true);
   ctx.dom.addEventListener('pointerup', onPointerUp, true);
   ctx.dom.addEventListener('wheel', onWheel, { capture: true, passive: false });
 
-  return () => {
+  const dispose = () => {
     ctx.dom.removeEventListener('pointerdown', onPointerDown, true);
     ctx.dom.removeEventListener('pointermove', onPointerMove, true);
     ctx.dom.removeEventListener('pointerup', onPointerUp, true);
@@ -397,6 +418,8 @@ export function wireHandDrag(ctx: HandDragContext): () => void {
     geometry.dispose();
     ctx.onRequestRender();
   };
+
+  return { dispose, sync };
 }
 
 /** The order pib-sdk's arm chain uses, which is also the order of `jointsRad` in an answer. */
