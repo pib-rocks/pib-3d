@@ -19,6 +19,12 @@ export interface JointMappingEntry {
   direction: -1 | 1 | null;
   gearRatio: number;
   zeroOffsetDeg: number;
+  /**
+   * Sign between the solver's joint angle and the motor: `motor = sdkSign * sdk`.
+   * Default 1. Only differs where the servo turns against the axis the CAD model was exported
+   * with - without it, a hardware-calibrated `direction` would flip the IK result back.
+   */
+  sdkSign?: number;
   limitsRad: [number, number] | null;
   axisDot: number | null;
   verifiedOnHardware: boolean;

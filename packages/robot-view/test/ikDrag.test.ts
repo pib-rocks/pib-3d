@@ -65,6 +65,15 @@ describe('toModelAngles', () => {
     expect(angles['rotation_elbow_1']).toBeCloseTo(0.3, 9);
   });
 
+  it('applies sdkSign where the servo turns against the CAD axis', () => {
+    const sign = [
+      { motor: 'upper_arm_left_rotation', urdfJoint: 'central_rotator_rotation_1', direction: -1, gearRatio: 1, sdkSign: -1 },
+    ];
+    const angles = toModelAngles([0.4], sign, ['upper_arm_left']);
+    // motor = sdkSign * sdk = -0.4, model = direction * motor = +0.4
+    expect(angles['central_rotator_rotation_1']).toBeCloseTo(0.4, 9);
+  });
+
   it('ignores motors the mapping does not know', () => {
     const angles = toModelAngles([0.4], entries, ['unknown_motor']);
     expect(angles).toEqual({});

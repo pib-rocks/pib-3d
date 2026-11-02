@@ -132,7 +132,7 @@
       "motor": "upper_arm_left_rotation",
       "class": "driven",
       "type": "revolute",
-      "direction": 1,
+      "direction": -1,
       "gearRatio": 1.0,
       "zeroOffsetDeg": 0.0,
       "limitsRad": [
@@ -141,7 +141,8 @@
       ],
       "axisDot": 1.0,
       "verifiedOnHardware": true,
-      "note": "left arm"
+      "note": "left arm; direction corrected on the robot 2026-11-02 (was mirrored); sdkSign keeps the SDK solution consistent",
+      "sdkSign": -1
     },
     {
       "urdfJoint": "rotation_elbow_1",
