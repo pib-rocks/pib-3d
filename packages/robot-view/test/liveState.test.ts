@@ -79,6 +79,24 @@ describe('LiveJointInterpolator', () => {
     vi.useRealTimers();
   });
 
+  it('re-baselines when the robot clock jumps backwards', () => {
+    const interpolator = new LiveJointInterpolator(() => {}, () => {});
+    const at = (stampMs: number, position: number): JointStateSample => ({
+      names: ['elbow_right'],
+      positions: [position],
+      stampMs,
+    });
+
+    expect(interpolator.pushSample(at(10_000, -10), mapping).dropped).toBe(false);
+    expect(interpolator.pushSample(at(10_050, -20), mapping).dropped).toBe(false);
+    // Same or older stamp by a normal tick: a duplicate, dropped on purpose.
+    expect(interpolator.pushSample(at(10_050, -30), mapping).dropped).toBe(true);
+    // A jump back by seconds is a re-baseline - otherwise every later sample is dropped and the
+    // live view freezes for the rest of the session.
+    expect(interpolator.pushSample(at(4_000, -40), mapping).dropped).toBe(false);
+    expect(interpolator.pushSample(at(4_100, -50), mapping).dropped).toBe(false);
+  });
+
   it('reaches target and stops requesting frames', () => {
     const frames: number[] = [];
     const onUnknown = vi.fn();

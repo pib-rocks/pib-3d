@@ -121,7 +121,17 @@ describe('IkClient', () => {
     expect(calls).toHaveLength(2);
   });
 
-  it('reports a timeout as a failure without throwing', async () => {
+  it('sends the fast budget with every drag target', async () => {
+    const { impl, calls } = deferredFetch();
+    const client = new IkClient('/ik', () => {}, () => {}, impl);
+    client.request({ side: 'right', xyzM: [1, 0, 0], seedRad: null });
+    await vi.waitFor(() => expect(calls).toHaveLength(1));
+    const body = JSON.parse(calls[0]!.body);
+    expect(body.restarts).toBe(2);
+    expect(body.maxIterations).toBe(60);
+  });
+
+  it('treats one slow answer as slow and a run of them as a failure', async () => {
     const onFailure = vi.fn();
     const impl = vi.fn(() => {
       const error = new Error('aborted');
@@ -129,10 +139,18 @@ describe('IkClient', () => {
       return Promise.reject(error);
     }) as unknown as typeof fetch;
     const client = new IkClient('/ik', () => {}, onFailure, impl, 5);
+
     client.request({ side: 'left', xyzM: [0, 0, 1], seedRad: null });
-    await vi.waitFor(() => expect(onFailure).toHaveBeenCalled());
-    expect(onFailure.mock.calls[0]![0]).toMatch(/did not answer/);
+    await vi.waitFor(() => expect(onFailure).toHaveBeenCalledTimes(1));
+    expect(onFailure.mock.calls[0]![0]).toBe('slow');
+
+    client.request({ side: 'left', xyzM: [0, 0, 1], seedRad: null });
+    await vi.waitFor(() => expect(onFailure).toHaveBeenCalledTimes(2));
+    client.request({ side: 'left', xyzM: [0, 0, 1], seedRad: null });
+    await vi.waitFor(() => expect(onFailure).toHaveBeenCalledTimes(3));
+    expect(onFailure.mock.calls[2]![0]).toMatch(/did not answer/);
   });
+
 });
 
 describe('seedFromModel', () => {
