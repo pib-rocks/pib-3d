@@ -91,6 +91,19 @@ describe('joint panel mapping UI', () => {
     ]);
   });
 
+  it('shows no class badge: every row is a driven joint', () => {
+    const { root } = buildFullPanel('command');
+    expect(root.querySelectorAll('.j .badge').length).toBe(0);
+  });
+
+  it('offers only the pose buttons, no grid or spin toggle', () => {
+    const html = SHADOW_HTML;
+    expect(html).toContain('data-action="zero"');
+    expect(html).toContain('data-action="mid"');
+    expect(html).not.toContain('data-action="grid"');
+    expect(html).not.toContain('data-action="spin"');
+  });
+
   it('leaves passive and coupled joints out of the panel', () => {
     const { root } = buildFullPanel();
     for (const name of ['upper_door_rotation', 'lower_door_rotation', 'd55_finger_tip']) {

@@ -53,11 +53,6 @@ export const SHADOW_STYLES = `
   .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
     white-space: nowrap; flex: 1; min-width: 0; }
-  .j .badge { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px;
-    padding: 1px 5px; border-radius: 4px; border: 1px solid #30363d; color: #8b949e; flex-shrink: 0; }
-  .j[data-joint-class="driven"] .badge { color: #3fb950; border-color: #238636; }
-  .j[data-joint-class="coupled"] .badge { color: #d29922; border-color: #9e6a03; }
-  .j[data-joint-class="passive"] .badge { color: #a371f7; border-color: #8957e5; }
   .j .motor { font-size: 10px; color: #8b949e; margin: 1px 0 2px; font-family: ui-monospace, monospace;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff; min-width: 62px;
@@ -136,8 +131,6 @@ export const SHADOW_HTML = `
         <div id="tools">
           <button type="button" data-action="zero">Nullstellung</button>
           <button type="button" data-action="mid">Mitte</button>
-          <button type="button" data-action="grid" class="on">Gitter</button>
-          <button type="button" data-action="spin">Drehen</button>
         </div>
         <div id="guard" hidden></div>
         <div id="consistency" hidden></div>

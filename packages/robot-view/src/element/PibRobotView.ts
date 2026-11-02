@@ -562,8 +562,6 @@ export class PibRobotView extends HTMLElement {
 
   private wireToolbar(): void {
     const root = this.shadow;
-    const gridBtn = root.querySelector('[data-action="grid"]') as HTMLButtonElement;
-    const spinBtn = root.querySelector('[data-action="spin"]') as HTMLButtonElement;
     root.querySelector('[data-action="zero"]')?.addEventListener('click', () => this.resetPose());
     root.querySelector('[data-action="mid"]')?.addEventListener('click', () => {
       this.panel?.setPose((j) => midPoseValue(j));
@@ -574,18 +572,12 @@ export class PibRobotView extends HTMLElement {
       }
       this.syncPose();
     });
-    gridBtn?.addEventListener('click', () => {
-      if (!this.sceneBundle) return;
-      this.sceneBundle.grid.visible = !this.sceneBundle.grid.visible;
-      gridBtn.classList.toggle('on', this.sceneBundle.grid.visible);
-      this.onDemand?.requestRender();
-    });
-    spinBtn?.addEventListener('click', () => {
-      if (!this.sceneBundle) return;
-      this.sceneBundle.controls.autoRotate = !this.sceneBundle.controls.autoRotate;
-      spinBtn.classList.toggle('on', this.sceneBundle.controls.autoRotate);
-      this.onDemand?.requestRender();
-    });
+    // The grid is part of the view now and the model never spins on its own: a rotating scene
+    // makes it hard to aim at a handle.
+    if (this.sceneBundle) {
+      this.sceneBundle.grid.visible = true;
+      this.sceneBundle.controls.autoRotate = false;
+    }
   }
 
   private updatePanelVisibility(): void {
