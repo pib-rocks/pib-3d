@@ -669,14 +669,14 @@ export class PibRobotView extends HTMLElement {
         effective = 'preview';
         if (this._lastCommandBlockReason !== gate.reason) {
           this._lastCommandBlockReason = gate.reason;
-          this.emitMappingError(gate.reason);
+          this.emitCommandBlocked(gate.reason);
         }
       } else if (!this._mapping || !motorLimitsProvided(this._mapping, this._motorLimits)) {
         effective = 'preview';
         const reason = 'limits not provided';
         if (this._lastCommandBlockReason !== reason) {
           this._lastCommandBlockReason = reason;
-          this.emitMappingError(reason);
+          this.emitCommandBlocked(reason);
         }
       } else {
         this._lastCommandBlockReason = null;
@@ -701,6 +701,20 @@ export class PibRobotView extends HTMLElement {
       guard.classList.toggle('on', blocked);
     }
     this.panel?.applyMode(requested, effective);
+  }
+
+  // "command mode blocked" is a state, not a fault: raising `error` here made the console latch
+  // its load error and drop every later joint state, which showed up as a permanently stale
+  // live state.
+  private emitCommandBlocked(reason: string): void {
+    console.warn(`command blocked: ${reason}`);
+    this.dispatchEvent(
+      new CustomEvent('commandblocked', {
+        bubbles: true,
+        composed: true,
+        detail: { reason },
+      }),
+    );
   }
 
   private emitMappingError(message: string): void {
