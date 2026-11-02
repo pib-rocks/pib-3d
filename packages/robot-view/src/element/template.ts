@@ -59,11 +59,11 @@ export const SHADOW_STYLES = `
     text-align: right; }
   .j .slider { position: relative; margin: 3px 0 0; }
   .j .track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px;
-    background: #21262d; border-radius: 2px; pointer-events: none; overflow: hidden; }
+    background: #324c71; border-radius: 2px; pointer-events: none; overflow: hidden; }
   .j .track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
-    background: #1f6feb; border-radius: 2px; }
+    background: #e10072; border-radius: 2px; }
   .j .track .mark.soll { position: absolute; top: -3px; width: 2px; height: 10px;
-    background: #e3b341; border-radius: 1px; display: none; transform: translateX(-1px); }
+    background: #f0f6fc; border-radius: 1px; display: none; transform: translateX(-1px); }
   .j .track .mark.soll.on { display: block; }
   .j .cmd-delta { display: none; font-size: 10px; color: #8b949e; text-align: right; margin-top: 2px; }
   .j .cmd-delta.on { display: block; }
@@ -71,9 +71,14 @@ export const SHADOW_STYLES = `
     background: transparent; position: relative; z-index: 1; }
   .j input[type=range]::-webkit-slider-runnable-track { background: transparent; }
   .j input[type=range]::-moz-range-track { background: transparent; }
+  /* pib's slider palette: pink thumb and pink fill on the dark blue rail. */
+  .j input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px;
+    border-radius: 50%; background: #e10072; border: 2px solid #0d1117; cursor: grab; }
+  .j input[type=range]::-moz-range-thumb { width: 10px; height: 10px; border-radius: 50%;
+    background: #e10072; border: 2px solid #0d1117; cursor: grab; }
+  .j input[type=range]:focus { outline: 1px solid #e10072; outline-offset: 3px; border-radius: 2px; }
   .j.active { border-left: 2px solid #1f6feb; margin-left: -8px; padding-left: 6px; }
   .j.active .name { color: #79c0ff; }
-  .j input[type=range]:focus { outline: 1px solid #388bfd; outline-offset: 3px; border-radius: 2px; }
 
   #ik-status {
     position: absolute;
