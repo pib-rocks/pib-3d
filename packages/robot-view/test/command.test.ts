@@ -194,6 +194,35 @@ describe('PibRobotView command lifecycle', () => {
     expect(values[0]!.rotation_elbow).toBeCloseTo(0.2, 9);
   });
 
+  it('takes a named pose from the backend and commands it', async () => {
+    const el = mountWithMapping();
+    (el as unknown as { _posesUrl: string })._posesUrl = '/api/pose';
+    const values: Array<Record<string, number>> = [];
+    el.addEventListener('commandrequest', (e) => {
+      values.push((e as CustomEvent<{ values: Record<string, number> }>).detail.values);
+    });
+    const fetchMock = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ motorPositions: [{ motor: 'elbow_right', position: 3000 }] }),
+    }));
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = fetchMock as unknown as typeof fetch;
+    try {
+      await (el as unknown as { applyNamedPose: (name: string) => Promise<void> }).applyNamedPose(
+        'Calibration',
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+    vi.advanceTimersByTime(0);
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/pose/by-name/Calibration',
+      expect.anything(),
+    );
+    expect(values).toHaveLength(1);
+    expect(values[0]!.rotation_elbow).toBeCloseTo((30 * Math.PI) / 180, 6);
+  });
+
   it('coalesces a fast drag into one command with the latest value', () => {
     const el = mountWithMapping();
     const values: Array<Record<string, number>> = [];

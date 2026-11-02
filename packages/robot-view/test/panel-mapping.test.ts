@@ -98,8 +98,10 @@ describe('joint panel mapping UI', () => {
 
   it('offers only the pose buttons, no grid or spin toggle', () => {
     const html = SHADOW_HTML;
-    expect(html).toContain('data-action="zero"');
-    expect(html).toContain('data-action="mid"');
+    expect(html).toContain('data-action="startup"');
+    expect(html).toContain('data-action="calibration"');
+    expect(html).toContain('Startup/Resting');
+    expect(html).not.toContain('Nullstellung');
     expect(html).not.toContain('data-action="grid"');
     expect(html).not.toContain('data-action="spin"');
   });

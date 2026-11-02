@@ -18,6 +18,7 @@ import {
 import {
   canCommand,
   loadMapping,
+  motorCentidegToModelRad,
   mappingByUrdfJoint,
   validateMapping,
   type JointMappingDocument,
@@ -69,7 +70,7 @@ const TAG = 'pib-robot-view';
 
 export class PibRobotView extends HTMLElement {
   static get observedAttributes(): string[] {
-    return ['model-url', 'mapping-url', 'mode', 'show-controls', 'ik-url'];
+    return ['model-url', 'mapping-url', 'mode', 'show-controls', 'ik-url', 'poses-url'];
   }
 
   private shadow: ShadowRoot;
@@ -118,6 +119,7 @@ export class PibRobotView extends HTMLElement {
   private _manifest: RobotModelManifest | null = null;
   private _expectedMotors: string[] | null = null;
   private _ikUrl = '';
+  private _posesUrl = '';
   private handDrag: { dispose(): void; sync(): void } | null = null;
   private _labelsByMotor: Record<string, string> = {};
   private _modelConsistency: ModelConsistencyResult = { ok: true, reason: null };
@@ -162,6 +164,8 @@ export class PibRobotView extends HTMLElement {
     } else if (name === 'mode' && value) {
       this._mode = value as ViewerMode;
       this.updateModeUi();
+    } else if (name === 'poses-url') {
+      this._posesUrl = value ?? '';
     } else if (name === 'ik-url') {
       this._ikUrl = value ?? '';
       this.wireHandDrag();
@@ -240,6 +244,15 @@ export class PibRobotView extends HTMLElement {
     this.recomputeModelConsistency();
     this.updateModeUi();
   }
+  /** Backend base URL for named poses, e.g. "/api/pose". */
+  get posesUrl(): string {
+    return this._posesUrl;
+  }
+  set posesUrl(url: string) {
+    this._posesUrl = url;
+    this.setAttribute('poses-url', url);
+  }
+
   /** Backend endpoint for inverse kinematics; without it the drag handles stay inert. */
   get ikUrl(): string {
     return this._ikUrl;
@@ -565,17 +578,56 @@ export class PibRobotView extends HTMLElement {
     document.addEventListener('visibilitychange', this.onVisibilityChange);
   }
 
+  /**
+   * Fetch a named pose from the backend and take it: joints in the picture, and - in command
+   * mode - the same values sent to the robot.
+   */
+  private async applyNamedPose(name: string): Promise<void> {
+    if (!this._posesUrl || !this._mapping) return;
+    const url = `${this._posesUrl.replace(/\/$/, '')}/by-name/${encodeURIComponent(name)}`;
+    try {
+      const response = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (!response.ok) {
+        this.showDragStatus({ kind: 'unavailable', reason: `Pose "${name}" nicht verfügbar` });
+        return;
+      }
+      const body = (await response.json()) as { motorPositions?: { motor: string; position: number }[] };
+      const byMotor = new Map(
+        this._mapping.joints.filter((e) => e.motor).map((e) => [e.motor as string, e]),
+      );
+      let applied = 0;
+      for (const { motor, position } of body.motorPositions ?? []) {
+        const entry = byMotor.get(motor);
+        if (!entry) continue;
+        const radians = motorCentidegToModelRad(entry, position);
+        this._jointStates[entry.urdfJoint] = radians;
+        this.panel?.setJointUi(entry.urdfJoint, radians);
+        if (this._effectiveMode === 'command') this._pendingJoints[entry.urdfJoint] = radians;
+        applied += 1;
+      }
+      if (!applied) {
+        this.showDragStatus({ kind: 'unavailable', reason: `Pose "${name}" hat keine Gelenke` });
+        return;
+      }
+      this.applyJointStates('api');
+      this.syncPose();
+      this.onDemand?.requestRender();
+      if (this._effectiveMode === 'command') {
+        this.ensureCommandScheduler();
+        this.commandScheduler!.requestFlush('api');
+      }
+    } catch {
+      this.showDragStatus({ kind: 'unavailable', reason: `Pose "${name}" nicht erreichbar` });
+    }
+  }
+
   private wireToolbar(): void {
     const root = this.shadow;
-    root.querySelector('[data-action="zero"]')?.addEventListener('click', () => this.resetPose());
-    root.querySelector('[data-action="mid"]')?.addEventListener('click', () => {
-      this.panel?.setPose((j) => midPoseValue(j));
-      for (const m of this.motions) {
-        const v = midPoseValue(m.joint);
-        this._jointStates[m.joint.name] = v;
-        this.emitJointChange(m.joint.name, v, 'api');
-      }
-      this.syncPose();
+    root.querySelector('[data-action="startup"]')?.addEventListener('click', () => {
+      void this.applyNamedPose('Startup/Resting');
+    });
+    root.querySelector('[data-action="calibration"]')?.addEventListener('click', () => {
+      void this.applyNamedPose('Calibration');
     });
     // The grid is part of the view now and the model never spins on its own: a rotating scene
     // makes it hard to aim at a handle.
