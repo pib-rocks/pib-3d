@@ -454,8 +454,10 @@ export class PibRobotView extends HTMLElement {
       this.liveInterp.seedDisplay(this._jointStates);
     }
     const { dropped } = this.liveInterp.pushSample(sample, this._mapping);
-    if (dropped) return;
+    // Liveness is "a sample arrived", not "the stamp advanced": a dropped duplicate must not
+    // leave the stale banner up for the rest of the session.
     this.armStaleTimer();
+    if (dropped) return;
   }
 
   setJoint(name: string, radians: number): void {

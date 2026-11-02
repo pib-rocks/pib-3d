@@ -43,13 +43,15 @@ export class IkClient {
   private inFlight = false;
   private pending: IkTarget | null = null;
   private disposed = false;
+  /** A single slow answer is normal while dragging; three in a row is a real problem. */
+  private timeouts = 0;
 
   constructor(
     private readonly url: string,
     private readonly onAnswer: (answer: IkAnswer) => void,
     private readonly onFailure: (reason: string) => void,
     private readonly fetchImpl: typeof fetch = (...args) => fetch(...args),
-    private readonly timeoutMs = 200,
+    private readonly timeoutMs = 400,
   ) {}
 
   get pendingTarget(): IkTarget | null {
@@ -82,21 +84,30 @@ export class IkClient {
           side: target.side,
           xyzM: target.xyzM,
           seedRad: target.seedRad,
+          // The drag loop needs a fast answer, not the patient search: a target that does not
+          // converge used to run 50 x 200 iterations (4.5 s on the robot).
+          restarts: 2,
+          maxIterations: 60,
         }),
         signal: controller.signal,
       });
       if (!response.ok) {
+        this.timeouts = 0;
         this.onFailure(`backend answered ${response.status}`);
       } else {
+        this.timeouts = 0;
         this.onAnswer((await response.json()) as IkAnswer);
       }
     } catch (error) {
-      // A timeout is a normal event during a fast drag: the next target is already waiting.
-      this.onFailure(
-        (error as { name?: string })?.name === 'AbortError'
-          ? 'backend did not answer in time'
-          : 'backend not reachable',
-      );
+      // A timeout is a normal event during a fast drag: the next target is already waiting. Only
+      // a run of them means the backend is really stuck.
+      if ((error as { name?: string })?.name === 'AbortError') {
+        this.timeouts += 1;
+        this.onFailure(this.timeouts >= 3 ? 'backend did not answer in time' : 'slow');
+      } else {
+        this.timeouts = 0;
+        this.onFailure('backend not reachable');
+      }
     } finally {
       clearTimeout(timer);
       this.inFlight = false;
@@ -250,6 +261,11 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
     ctx.ikUrl,
     applyAnswer,
     (reason) => {
+      if (reason === 'slow') {
+        // Still computing: keep the colour, say nothing alarming.
+        ctx.onStatus({ kind: 'solving' });
+        return;
+      }
       setColor(COLOR_EDGE);
       ctx.onStatus({ kind: 'unavailable', reason });
     },

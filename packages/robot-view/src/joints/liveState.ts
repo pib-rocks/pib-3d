@@ -137,6 +137,12 @@ export class LiveJointInterpolator {
     sample: JointStateSample,
     mapping: JointMappingDocument,
   ): { dropped: boolean; values: Record<string, number> } {
+    // A robot clock that jumped backwards once (NTP step, ROS time reset) would otherwise drop
+    // every later sample: the interpolation would freeze for the rest of the session. A second of
+    // regression is a re-baseline, not a duplicate.
+    if (this.previousStampMs != null && sample.stampMs < this.previousStampMs - 1000) {
+      this.previousStampMs = null;
+    }
     const { values, unknown, dropped } = sampleToModelJoints(
       sample,
       mapping,
