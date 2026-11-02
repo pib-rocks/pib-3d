@@ -127,12 +127,29 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       ? motions.filter((m) => mappingByJoint.get(m.joint.name)?.class === 'driven')
       : motions;
 
+  // A driven row belongs to the side its MOTOR is on. The CAD joint names for the arms are
+  // crossed over - the joint named "left" carries the right motor - so grouping by joint name
+  // filed a right-arm slider under the left arm.
+  const regionForMotor = (motor: string): (typeof REGION_ORDER)[number] | null => {
+    if (motor === 'turn_head_motor' || motor === 'tilt_forward_motor') return 'Kopf';
+    const side = motor.endsWith('_left') ? 'links' : motor.endsWith('_right') ? 'rechts' : null;
+    if (!side) return null;
+    if (/shoulder|upper_arm|elbow|lower_arm|wrist/.test(motor)) {
+      return side === 'links' ? 'Linker Arm' : 'Rechter Arm';
+    }
+    return side === 'links' ? 'Linke Hand' : 'Rechte Hand';
+  };
+
   const groups = new Map(REGION_ORDER.map((k) => [k, [] as MotionEntry[]]));
   for (const m of visible) {
     const chain = chainOf(m.joint.child);
     const palm = chain.find((n) => n.includes('palm'));
+    const mapEntry = mappingByJoint.get(m.joint.name);
+    const fromMotor =
+      mapEntry?.class === 'driven' && mapEntry.motor ? regionForMotor(mapEntry.motor) : null;
     let region: (typeof REGION_ORDER)[number];
-    if (HEAD.has(m.joint.name)) region = 'Kopf';
+    if (fromMotor) region = fromMotor;
+    else if (HEAD.has(m.joint.name)) region = 'Kopf';
     else if (LEFT_ARM.has(m.joint.name)) region = 'Linker Arm';
     else if (RIGHT_ARM.has(m.joint.name)) region = 'Rechter Arm';
     else if (palm) region = palm.includes('_l_') ? 'Linke Hand' : 'Rechte Hand';

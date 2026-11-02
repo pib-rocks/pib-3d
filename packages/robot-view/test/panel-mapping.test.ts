@@ -62,23 +62,33 @@ describe('joint panel mapping UI', () => {
     expect(root.querySelectorAll('.j .motor').length).toBe(26);
   });
 
-  it('orders the rows anatomically inside a region', () => {
-    const { root } = buildFullPanel('command');
-    const names = [...root.querySelectorAll('.j')].map(
-      (row) => (row as HTMLElement).dataset.joint ?? '',
-    );
-    // One arm as the CAD names it: shoulder vertical, shoulder horizontal, upper arm, elbow,
-    // forearm, wrist - the order the joint tabs use, not the CAD order.
-    const arm = [
-      'rotation_inner_shoulder',
-      'rotation_shoulder_left',
-      'central_rotator_rotation',
-      'rotation_elbow',
-      'rotate_forearm',
-      'rotation_wrist_right',
-    ];
-    const start = names.indexOf(arm[0]!);
-    expect(names.slice(start, start + arm.length)).toEqual(arm);
+  it('groups by the side the motor is on and orders anatomically', () => {
+    const labels: Record<string, string> = {
+      shoulder_vertical_left: 'Left Arm · Shoulder Vertical',
+      shoulder_horizontal_left: 'Left Arm · Shoulder Horizontal',
+      upper_arm_left_rotation: 'Left Arm · Upper Arm Rotation',
+      elbow_left: 'Left Arm · Elbow Position',
+      lower_arm_left_rotation: 'Left Arm · Lower Arm Rotation',
+      wrist_left: 'Left Arm · Wrist Position',
+    };
+    const { root } = buildFullPanel('command', labels);
+    const groups = new Map<string, string[]>();
+    let current = '';
+    for (const node of [...root.querySelector('#joints')!.children]) {
+      if (node.tagName === 'H2') current = node.textContent ?? '';
+      else if ((node as HTMLElement).dataset.joint) {
+        const label = node.querySelector('.name')?.textContent ?? '';
+        groups.set(current, [...(groups.get(current) ?? []), label]);
+      }
+    }
+    expect(groups.get('Linker Arm · 6')).toEqual([
+      'Left Arm · Shoulder Vertical',
+      'Left Arm · Shoulder Horizontal',
+      'Left Arm · Upper Arm Rotation',
+      'Left Arm · Elbow Position',
+      'Left Arm · Lower Arm Rotation',
+      'Left Arm · Wrist Position',
+    ]);
   });
 
   it('leaves passive and coupled joints out of the panel', () => {
