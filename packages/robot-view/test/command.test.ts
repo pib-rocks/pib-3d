@@ -138,6 +138,7 @@ describe('PibRobotView command lifecycle', () => {
       >;
       panel: {
         setJointPending: ReturnType<typeof vi.fn>;
+        setJointMessage: ReturnType<typeof vi.fn>;
         clearAllPending: ReturnType<typeof vi.fn>;
         setJointUi: ReturnType<typeof vi.fn>;
         applyMotorLimits: ReturnType<typeof vi.fn>;
@@ -170,6 +171,7 @@ describe('PibRobotView command lifecycle', () => {
     ]);
     internal.panel = {
       setJointPending: vi.fn(),
+      setJointMessage: vi.fn(),
       clearAllPending: vi.fn(),
       setJointUi: vi.fn(),
       applyMotorLimits: vi.fn(),
@@ -385,7 +387,7 @@ describe('PibRobotView command lifecycle', () => {
     expect(internal._acceptedJoints.rotation_elbow).toBeCloseTo(0.35, 5);
   });
 
-  it('rejectCommand reverts pose and emits commandrejected', () => {
+  it('rejectCommand keeps the value the user set and reports the reason', () => {
     const el = mountWithMapping();
     let commandId = '';
     el.addEventListener('commandrequest', (e) => {
@@ -403,9 +405,10 @@ describe('PibRobotView command lifecycle', () => {
     vi.advanceTimersByTime(0);
     el.rejectCommand(commandId, 'hardware fault');
     expect(reasons).toEqual(['hardware fault']);
+    // The slider is master: a refused command must not snap it back to the measured position.
     expect(
       (el as unknown as { _jointStates: Record<string, number> })._jointStates.rotation_elbow,
-    ).toBe(0);
+    ).toBeCloseTo(0.4, 9);
   });
 
   it('auto-rejects after ackTimeoutMs with no acknowledgement', () => {
@@ -429,7 +432,7 @@ describe('PibRobotView command lifecycle', () => {
     expect(reasons).toEqual(['no acknowledgement']);
     expect(
       (el as unknown as { _jointStates: Record<string, number> })._jointStates.rotation_elbow,
-    ).toBe(0);
+    ).toBeCloseTo(0.25, 9);
     expect(commandId).toBeTruthy();
   });
 

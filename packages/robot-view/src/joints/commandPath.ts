@@ -53,7 +53,17 @@ export function uiRangeFromMotorLimits(
   const maxRad = motorCentidegToModelRad(entry, lim.maxDeg * 100);
   const lo = Math.min(minRad, maxRad);
   const hi = Math.max(minRad, maxRad);
-  return [Math.round(toUi(joint, lo)), Math.round(toUi(joint, hi))];
+  // The motor range alone lies outside the joint range on both sides (the elbow motor allows 90
+  // degrees where the joint ends at 68, the finger motors +45 where the joint ends at 0). Offering
+  // those values is what got commands refused: the motor controller answers "outside allowed
+  // range" and the slider falls back. The slider must only offer what both allow.
+  const jLimit = joint.limit;
+  const jLo = jLimit ? Math.min(jLimit.lower, jLimit.upper) : -Infinity;
+  const jHi = jLimit ? Math.max(jLimit.lower, jLimit.upper) : Infinity;
+  const loC = Math.max(lo, jLo);
+  const hiC = Math.min(hi, jHi);
+  if (!(hiC > loC)) return null;
+  return [Math.round(toUi(joint, loC)), Math.round(toUi(joint, hiC))];
 }
 
 export function validateDrivenValue(
