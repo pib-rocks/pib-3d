@@ -15,7 +15,10 @@ const modelDoc = JSON.parse(
   readFileSync(resolve(repoRoot, 'web/model.json'), 'utf8'),
 ) as RobotModel;
 
-function buildFullPanel(mode: 'preview' | 'command' = 'preview') {
+function buildFullPanel(
+  mode: 'preview' | 'command' = 'preview',
+  labelsByMotor?: Record<string, string>,
+) {
   const host = document.createElement('div');
   host.attachShadow({ mode: 'open' }).innerHTML =
     `<style>${SHADOW_STYLES}</style>${SHADOW_HTML}`;
@@ -28,6 +31,7 @@ function buildFullPanel(mode: 'preview' | 'command' = 'preview') {
   }));
   const panel = buildJointPanel({
     root,
+    labelsByMotor,
     model: modelDoc,
     parentOf,
     motions,
@@ -40,9 +44,17 @@ function buildFullPanel(mode: 'preview' | 'command' = 'preview') {
 }
 
 describe('joint panel mapping UI', () => {
-  it('renders 48 joint rows', () => {
+  it('renders one row per driven joint, and nothing else', () => {
     const { root } = buildFullPanel();
-    expect(root.querySelectorAll('.j').length).toBe(48);
+    const rows = [...root.querySelectorAll('.j')];
+    expect(rows.length).toBe(26);
+    for (const row of rows) expect(row.dataset.jointClass).toBe('driven');
+  });
+
+  it('labels a row with the host name of its motor', () => {
+    const { root } = buildFullPanel('command', { turn_head_motor: 'Head · Head Rotation' });
+    const row = root.querySelector('[data-joint="gearing_rotation__new_body_"]');
+    expect(row?.querySelector('.name')?.textContent).toBe('Head · Head Rotation');
   });
 
   it('shows 26 motor subtitles on driven joints', () => {
@@ -50,22 +62,17 @@ describe('joint panel mapping UI', () => {
     expect(root.querySelectorAll('.j .motor').length).toBe(26);
   });
 
-  it('marks door joints as passiv', () => {
+  it('leaves passive and coupled joints out of the panel', () => {
     const { root } = buildFullPanel();
-    for (const name of ['upper_door_rotation', 'lower_door_rotation']) {
-      const row = root.querySelector(`[data-joint="${name}"]`);
-      expect(row?.querySelector('.badge')?.textContent).toBe('passiv');
-      expect(row?.dataset.jointClass).toBe('passive');
+    for (const name of ['upper_door_rotation', 'lower_door_rotation', 'd55_finger_tip']) {
+      expect(root.querySelector(`[data-joint="${name}"]`)).toBeNull();
     }
   });
 
-  it('disables 22 non-driven rows in command mode', () => {
+  it('enables every slider in command mode', () => {
     const { root } = buildFullPanel('command');
     const inputs = [...root.querySelectorAll('#joints input')] as HTMLInputElement[];
-    expect(inputs.length).toBe(48);
-    const disabled = inputs.filter((i) => i.disabled);
-    expect(disabled.length).toBe(22);
-    const enabled = inputs.filter((i) => !i.disabled);
-    expect(enabled.length).toBe(26);
+    expect(inputs.length).toBe(26);
+    expect(inputs.filter((i) => i.disabled).length).toBe(0);
   });
 });

@@ -28,6 +28,7 @@ export interface JointPanelHandles {
   getInput: (jointName: string) => HTMLInputElement | null;
   applyMode: (requestedMode: ViewerMode, effectiveMode: ViewerMode) => void;
   applyMotorLimits: (limits: MotorLimitMap | null) => void;
+  applyLabels: (labelsByMotor: Record<string, string>) => void;
 }
 
 export interface JointPanelOptions {
@@ -41,6 +42,8 @@ export interface JointPanelOptions {
   onApprove?: () => void;
   onCancelPending?: () => void;
   onEstop?: () => void;
+  /** Human names per motor, e.g. { turn_head_motor: 'Head · Head Rotation' }. */
+  labelsByMotor?: Record<string, string>;
 }
 
 export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
@@ -55,6 +58,7 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     onApprove,
     onCancelPending,
     onEstop,
+    labelsByMotor,
   } = opts;
   const jointsRoot = root.querySelector('#joints') as HTMLElement;
   const motionByJoint = new Map(motions.map((m) => [m.joint.name, m]));
@@ -116,8 +120,15 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     return out;
   };
 
+  // Only driven joints get a slider once the mapping is known: a coupled joint follows its
+  // driver and a passive one has no motor, so a slider on them would lie about what moves.
+  const visible =
+    mappingByJoint.size > 0
+      ? motions.filter((m) => mappingByJoint.get(m.joint.name)?.class === 'driven')
+      : motions;
+
   const groups = new Map(REGION_ORDER.map((k) => [k, [] as MotionEntry[]]));
-  for (const m of motions) {
+  for (const m of visible) {
     const chain = chainOf(m.joint.child);
     const palm = chain.find((n) => n.includes('palm'));
     let region: (typeof REGION_ORDER)[number];
@@ -148,10 +159,11 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       wrap.className = 'j';
       wrap.dataset.joint = joint.name;
       if (mapEntry) wrap.dataset.jointClass = mapEntry.class;
+      const label = (mapEntry?.motor && labelsByMotor?.[mapEntry.motor]) || prettyJointName(joint.name);
       const [min, max] = uiRange(joint);
       wrap.innerHTML = `
           <div class="row">
-            <span class="name" title="${joint.name}">${prettyJointName(joint.name)}</span>
+            <span class="name" title="${joint.name}">${label}</span>
             <span class="badge">${badge}</span>
             <span class="val"></span>
           </div>
@@ -301,6 +313,16 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
 
   applyMode(requestedMode, effectiveMode);
 
+  const applyLabels = (next: Record<string, string>) => {
+    for (const m of motions) {
+      const entry = mappingByJoint.get(m.joint.name);
+      if (entry?.class !== 'driven' || !entry.motor) continue;
+      const label = next[entry.motor];
+      const nameEl = getRow(m.joint.name)?.querySelector('.name') as HTMLElement | null;
+      if (nameEl && label) nameEl.textContent = label;
+    }
+  };
+
   return {
     jointsRoot,
     setPose,
@@ -313,6 +335,7 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     getInput,
     applyMode,
     applyMotorLimits,
+    applyLabels,
   };
 }
 

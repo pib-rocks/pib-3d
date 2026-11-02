@@ -199,3 +199,11 @@ Runtime (`validateMapping` in `packages/robot-view`) and CI (`npm run check:mapp
 5. `limitsRad` matches the model (continuous → `null`).
 
 Command mode additionally requires all driven joints to be hardware-verified.
+
+## Panel: one slider per driven joint
+
+The joint panel renders a slider only for joints the mapping classifies as `driven` - 26 on pib.
+Coupled joints follow their driver, and a passive joint has no motor, so a slider on either would
+suggest a control that does not exist. The rows are grouped by body region and labelled with the
+host's names (`labels` property, keyed by motor name) - Cerebra passes the same names it uses in
+its joint tabs, e.g. `Left Hand · Index Finger`.
