@@ -106,6 +106,8 @@ export class PibRobotView extends HTMLElement {
   private _minCommandIntervalMs = 120;
   private _estopped = false;
   private _pendingJoints: Record<string, number> = {};
+  /** Joints whose value the user (slider or IK drag) owns: measurements must not move them. */
+  private _uiOwned = new Set<string>();
   private _acceptedJoints: Record<string, number> = {};
   private _actualJoints: Record<string, number> = {};
   private commandScheduler: CommandSendScheduler | null = null;
@@ -333,9 +335,12 @@ export class PibRobotView extends HTMLElement {
 
   rejectCommand(commandId: string, reason: string): void {
     if (this._inFlightCommand?.commandId !== commandId) return;
+    const joints = Object.keys(this._inFlightCommand.values);
     this.clearInFlightCommand();
-    this.revertPendingToAccepted();
+    // The slider stays where the user put it. Rewriting it to the measured position is what made
+    // it jump back on every refused command; the refusal is reported on the row instead.
     this.clearPendingUi();
+    for (const joint of joints) this.panel?.setJointMessage(joint, reason);
     this.emitCommandRejected(commandId, reason);
     // The drag loop has to say when a command did not land - otherwise the panel keeps looking
     // green while the arm stands still (motor power off, write failure, no acknowledgement).
@@ -362,6 +367,7 @@ export class PibRobotView extends HTMLElement {
 
   cancelPending(): void {
     if (this._effectiveMode !== 'command') return;
+    for (const joint of Object.keys(this._pendingJoints)) this._uiOwned.delete(joint);
     this.clearPendingUi();
     this.revertPendingToAccepted();
   }
@@ -374,6 +380,7 @@ export class PibRobotView extends HTMLElement {
     this.clearPendingUi();
     this._pendingJoints = {};
     this._commandedStates = {};
+    this._uiOwned.clear();
     this._acceptedJoints = { ...this._actualJoints };
     this.syncCommandedPanel();
     this.applyPoseToModel(this._actualJoints);
@@ -605,6 +612,7 @@ export class PibRobotView extends HTMLElement {
         if (!entry) continue;
         const radians = motorCentidegToModelRad(entry, position);
         this._jointStates[entry.urdfJoint] = radians;
+        this._uiOwned.add(entry.urdfJoint);
         this.panel?.setJointUi(entry.urdfJoint, radians);
         if (this._effectiveMode === 'command') this._pendingJoints[entry.urdfJoint] = radians;
         applied += 1;
@@ -901,10 +909,13 @@ export class PibRobotView extends HTMLElement {
 
   private applyLiveFrame(values: Record<string, number>): void {
     for (const [name, radians] of Object.entries(values)) {
-      this._jointStates[name] = radians;
       this._actualJoints[name] = radians;
       const m = this.motionByJoint.get(name);
       if (!m) continue;
+      // The slider (and the IK drag) is the master of a joint it commands: feeding the measured
+      // value back into the pose makes the thumb and the ghost jump between Soll and Ist.
+      if (this._effectiveMode === 'command' && !this._estopped && this._uiOwned.has(name)) continue;
+      this._jointStates[name] = radians;
       applyJointValue(m.joint, m.motion, m.axis, radians);
       if (this._effectiveMode !== 'command' || this._estopped) {
         this.panel?.setJointUi(name, radians);
@@ -1003,6 +1014,7 @@ export class PibRobotView extends HTMLElement {
   }
 
   private handleUiJointChange(joint: string, value: number): void {
+    this._uiOwned.add(joint);
     this._jointStates[joint] = value;
     this.emitJointChange(joint, value, 'ui');
     this.syncPose();

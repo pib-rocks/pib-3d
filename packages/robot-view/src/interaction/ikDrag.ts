@@ -403,6 +403,12 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
   /** Put each handle back on its palm. The arm moves, the handle has to move with it - a handle
    * left behind at the start pose makes the next drag feel like it begins somewhere else. */
   function sync(): void {
+    // While IK is master the handle is the target the user is dragging; snapping it back onto the
+    // measured palm every live frame is what made the ghost jump back mid-drag.
+    if (dragging) {
+      ctx.onRequestRender();
+      return;
+    }
     for (const side of ['left', 'right'] as const) {
       const handle = handles[side];
       const node = ctx.linkNodes.get(tcp[side]);

@@ -21,6 +21,7 @@ export interface JointPanelHandles {
   setJointUi: (jointName: string, radians: number) => void;
   setCommandedJoint: (jointName: string, radians: number | null) => void;
   setJointPending: (jointName: string, pending: boolean) => void;
+  setJointMessage: (jointName: string, text: string | null) => void;
   clearAllPending: () => void;
   setStaleBanner: (stale: boolean, message?: string) => void;
   getRow: (jointName: string) => HTMLElement | null;
@@ -269,6 +270,15 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     }
   };
 
+  /** Say why a command was refused on the row, without touching the value the user set. */
+  const setJointMessage = (jointName: string, text: string | null) => {
+    const row = getRow(jointName);
+    const delta = row?.querySelector('.cmd-delta') as HTMLElement | null;
+    if (!delta) return;
+    delta.textContent = text ?? '';
+    delta.classList.toggle('on', !!text);
+  };
+
   const setJointPending = (jointName: string, isPending: boolean) => {
     const row = getRow(jointName);
     if (!row) return;
@@ -366,6 +376,7 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     setJointUi,
     setCommandedJoint,
     setJointPending,
+    setJointMessage,
     clearAllPending,
     setStaleBanner,
     getRow,
