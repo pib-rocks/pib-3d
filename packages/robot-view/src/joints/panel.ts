@@ -140,8 +140,32 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     groups.get(region)!.push(m);
   }
 
+  // Anatomical order inside a region, matching what the host's joint tabs show. Without it the
+  // rows come out in CAD order and left/right interleave.
+  const ORDER_HINT = [
+    'tilt',
+    'turn',
+    'shoulder_vertical',
+    'shoulder_horizontal',
+    'upper_arm',
+    'elbow',
+    'lower_arm',
+    'wrist',
+    'thumb_opposition',
+    'thumb',
+    'index',
+    'middle',
+    'ring',
+    'pinky',
+  ];
+  const rank = (m: MotionEntry): number => {
+    const motor = mappingByJoint.get(m.joint.name)?.motor ?? m.joint.name;
+    const hit = ORDER_HINT.findIndex((hint) => motor.includes(hint));
+    return hit === -1 ? ORDER_HINT.length : hit;
+  };
   for (const region of REGION_ORDER) {
     const items = groups.get(region)!;
+    items.sort((a, b) => rank(a) - rank(b) || a.joint.name.localeCompare(b.joint.name));
     if (!items.length) continue;
     const h = document.createElement('h2');
     h.textContent = `${region} · ${items.length}`;

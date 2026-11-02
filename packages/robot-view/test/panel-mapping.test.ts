@@ -62,6 +62,25 @@ describe('joint panel mapping UI', () => {
     expect(root.querySelectorAll('.j .motor').length).toBe(26);
   });
 
+  it('orders the rows anatomically inside a region', () => {
+    const { root } = buildFullPanel('command');
+    const names = [...root.querySelectorAll('.j')].map(
+      (row) => (row as HTMLElement).dataset.joint ?? '',
+    );
+    // One arm as the CAD names it: shoulder vertical, shoulder horizontal, upper arm, elbow,
+    // forearm, wrist - the order the joint tabs use, not the CAD order.
+    const arm = [
+      'rotation_inner_shoulder',
+      'rotation_shoulder_left',
+      'central_rotator_rotation',
+      'rotation_elbow',
+      'rotate_forearm',
+      'rotation_wrist_right',
+    ];
+    const start = names.indexOf(arm[0]!);
+    expect(names.slice(start, start + arm.length)).toEqual(arm);
+  });
+
   it('leaves passive and coupled joints out of the panel', () => {
     const { root } = buildFullPanel();
     for (const name of ['upper_door_rotation', 'lower_door_rotation', 'd55_finger_tip']) {
