@@ -116,6 +116,7 @@ export class PibRobotView extends HTMLElement {
   private _ackTimeoutMs = 3000;
   private _manifest: RobotModelManifest | null = null;
   private _expectedMotors: string[] | null = null;
+  private _labelsByMotor: Record<string, string> = {};
   private _modelConsistency: ModelConsistencyResult = { ok: true, reason: null };
   private _baseFrame: BaseFrameContext | null = null;
   private _tcpLink = TCP_LINK_RIGHT;
@@ -233,6 +234,15 @@ export class PibRobotView extends HTMLElement {
     this.recomputeModelConsistency();
     this.updateModeUi();
   }
+  /** Human names per motor, so the panel can show "Left Hand · Index Finger" instead of a CAD name. */
+  get labels(): Record<string, string> {
+    return { ...this._labelsByMotor };
+  }
+  set labels(map: Record<string, string>) {
+    this._labelsByMotor = { ...map };
+    this.panel?.applyLabels(this._labelsByMotor);
+  }
+
   set mode(v: ViewerMode) {
     this._mode = v;
     this.setAttribute('mode', v);
@@ -728,6 +738,7 @@ export class PibRobotView extends HTMLElement {
         onApprove: () => this.approve('ui'),
         onCancelPending: () => this.cancelPending(),
         onEstop: () => this.stop('ui'),
+        labelsByMotor: this._labelsByMotor,
       });
       this.panel.applyMotorLimits(this._motorLimits);
       this.updateModeUi();
