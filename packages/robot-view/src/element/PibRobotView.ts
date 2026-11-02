@@ -108,6 +108,8 @@ export class PibRobotView extends HTMLElement {
   private _pendingJoints: Record<string, number> = {};
   /** Joints whose value the user (slider or IK drag) owns: measurements must not move them. */
   private _uiOwned = new Set<string>();
+  /** Joints of the last confirmed command, so a late service failure can name its rows. */
+  private _lastSent: { commandId: string; joints: string[] } | null = null;
   private _acceptedJoints: Record<string, number> = {};
   private _actualJoints: Record<string, number> = {};
   private commandScheduler: CommandSendScheduler | null = null;
@@ -321,6 +323,7 @@ export class PibRobotView extends HTMLElement {
       this.panel?.setJointPending(joint, false);
     }
     this._commandedStates = { ...values };
+    this._lastSent = { commandId, joints: [...joints] };
     this.syncCommandedPanel();
     this.commandScheduler?.markSent();
     this.resendIfDirty();
@@ -331,6 +334,20 @@ export class PibRobotView extends HTMLElement {
         detail: { commandId },
       }),
     );
+  }
+
+  /**
+   * A command was published and confirmed, but the service came back with a failure (out of range,
+   * motor off, ...). Report it on the row; the slider stays where the user put it.
+   */
+  reportCommandFailure(commandId: string, reason: string): void {
+    const joints =
+      this._lastSent?.commandId === commandId
+        ? this._lastSent.joints
+        : (this._inFlightCommand?.commandId === commandId ? this._inFlightCommand.joints : []);
+    for (const joint of joints) this.panel?.setJointMessage(joint, reason);
+    this.emitCommandRejected(commandId, reason);
+    if (this.handDrag) this.showDragStatus({ kind: 'unavailable', reason });
   }
 
   rejectCommand(commandId: string, reason: string): void {
@@ -1121,6 +1138,13 @@ export class PibRobotView extends HTMLElement {
       return;
     }
 
+    const { commandId, values } = built.command.payload;
+    // Before the host is asked: it may publish (and confirm) inside this dispatch.
+    this._inFlightCommand = {
+      commandId,
+      values: { ...values },
+      joints: [...built.command.joints],
+    };
     const ev = new CustomEvent<CommandRequestDetail>('commandrequest', {
       bubbles: true,
       composed: true,
@@ -1129,6 +1153,7 @@ export class PibRobotView extends HTMLElement {
     });
     this.dispatchEvent(ev);
     if (ev.defaultPrevented) {
+      this._inFlightCommand = null;
       const reason =
         (ev as CustomEvent & { rejectionReason?: string }).rejectionReason ??
         'command refused by host';
@@ -1138,13 +1163,9 @@ export class PibRobotView extends HTMLElement {
       return;
     }
 
-    const { commandId, values } = built.command.payload;
-    this._inFlightCommand = {
-      commandId,
-      values: { ...values },
-      joints: [...built.command.joints],
-    };
-    this.armAckTimer(commandId);
+    // A host that publishes and confirms inside the dispatch has already cleared the command; only
+    // an unanswered one needs the timer.
+    if (this._inFlightCommand?.commandId === commandId) this.armAckTimer(commandId);
   }
 
   private armAckTimer(commandId: string): void {
