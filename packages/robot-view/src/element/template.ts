@@ -61,18 +61,20 @@ export const SHADOW_STYLES = `
   .j .cmd-delta.on { display: block; }
   /* Without appearance: none on the input itself the browser paints its own slider on top of the
      custom rail - that is why the knob stayed dark and the rail light. */
-  .j input[type=range] { -webkit-appearance: none; appearance: none;
+  .j input[type=range] { -webkit-appearance: none; appearance: none; display: block;
     width: 100%; margin: 0; height: 18px; accent-color: transparent; border-radius: 9px;
     background: transparent; position: relative; z-index: 1; }
   .j input[type=range]::-webkit-slider-runnable-track { -webkit-appearance: none; background: transparent;
-    height: 18px; border: none; }
+    height: 16px; margin: 1px 0; border: none; }
   .j input[type=range]::-moz-range-track { background: transparent; height: 18px; border: none; }
   .j input[type=range]:focus-visible { outline: none; }
   /* pib's slider palette: pink thumb and pink fill on the dark blue rail. */
   /* Cerebra's own sliders: a plain pink knob, no dark ring - at 12 px a 2 px near-black border
      left almost nothing of the colour and the knob read as a black dot. */
+  /* The knob is centred by the track box: 18 px track, 16 px knob, no vertical offset. A
+     margin here pushed the circle above the rail line. */
   .j input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px;
-    border-radius: 50%; background: #e10072; border: none; margin-top: -1px;
+    border-radius: 50%; background: #e10072; border: none; margin: 0;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25); cursor: grab; }
   .j input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%;
     background: #e10072; border: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
