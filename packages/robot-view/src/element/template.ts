@@ -51,7 +51,7 @@ export const SHADOW_STYLES = `
     text-align: right; }
   .j .slider { position: relative; margin: 3px 0 0; }
   .j .track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px;
-    background: #324c71; border-radius: 2px; pointer-events: none; overflow: hidden; }
+    background: #3f5c8a; border-radius: 2px; pointer-events: none; overflow: hidden; }
   .j .track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
     background: #e10072; border-radius: 2px; }
   .j .track .mark.soll { position: absolute; top: -3px; width: 2px; height: 10px;
@@ -59,15 +59,19 @@ export const SHADOW_STYLES = `
   .j .track .mark.soll.on { display: block; }
   .j .cmd-delta { display: none; font-size: 10px; color: #8b949e; text-align: right; margin-top: 2px; }
   .j .cmd-delta.on { display: block; }
-  .j input[type=range] { width: 100%; margin: 0; height: 14px; accent-color: transparent;
+  .j input[type=range] { width: 100%; margin: 0; height: 18px; accent-color: transparent;
     background: transparent; position: relative; z-index: 1; }
   .j input[type=range]::-webkit-slider-runnable-track { background: transparent; }
   .j input[type=range]::-moz-range-track { background: transparent; }
   /* pib's slider palette: pink thumb and pink fill on the dark blue rail. */
-  .j input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px;
-    border-radius: 50%; background: #e10072; border: 2px solid #0d1117; cursor: grab; }
-  .j input[type=range]::-moz-range-thumb { width: 10px; height: 10px; border-radius: 50%;
-    background: #e10072; border: 2px solid #0d1117; cursor: grab; }
+  /* Cerebra's own sliders: a plain pink knob, no dark ring - at 12 px a 2 px near-black border
+     left almost nothing of the colour and the knob read as a black dot. */
+  .j input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px;
+    border-radius: 50%; background: #e10072; border: none; margin-top: -1px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25); cursor: grab; }
+  .j input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%;
+    background: #e10072; border: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+    cursor: grab; }
   .j input[type=range]:focus { outline: 1px solid #e10072; outline-offset: 3px; border-radius: 2px; }
   .j.active { border-left: 2px solid #1f6feb; margin-left: -8px; padding-left: 6px; }
   .j.active .name { color: #79c0ff; }

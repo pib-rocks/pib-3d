@@ -91,6 +91,13 @@ describe('joint panel mapping UI', () => {
     ]);
   });
 
+  it('styles the slider knob in the pib palette, without a dark ring', () => {
+    const styles = SHADOW_STYLES;
+    const thumb = styles.match(/\.j input\[type=range\]::-webkit-slider-thumb \{[^}]*\}/)?.[0] ?? '';
+    expect(thumb).toContain('#e10072');
+    expect(thumb).not.toMatch(/border:\s*\d+px\s*solid\s*#0d/i);
+  });
+
   it('shows no class badge: every row is a driven joint', () => {
     const { root } = buildFullPanel('command');
     expect(root.querySelectorAll('.j .badge').length).toBe(0);
