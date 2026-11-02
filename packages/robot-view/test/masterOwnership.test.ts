@@ -71,6 +71,13 @@ describe('the slider is the master of its joint', () => {
     expect(state._actualJoints.rotation_elbow).toBeCloseTo(0.05, 9);
   });
 
+  it('seeds an untouched slider from the first frame, in command mode too', () => {
+    const { internal } = mount();
+    internal.applyLiveFrame({ rotation_elbow: 0.3 });
+    const panel = (internal as unknown as { panel: { setJointUi: ReturnType<typeof vi.fn> } }).panel;
+    expect(panel.setJointUi).toHaveBeenCalledWith('rotation_elbow', 0.3);
+  });
+
   it('still follows the measurement for joints nobody commands', () => {
     const { internal } = mount();
     internal.applyLiveFrame({ rotation_elbow: 0.05 });
