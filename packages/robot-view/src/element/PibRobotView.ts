@@ -324,6 +324,11 @@ export class PibRobotView extends HTMLElement {
     this.revertPendingToAccepted();
     this.clearPendingUi();
     this.emitCommandRejected(commandId, reason);
+    // The drag loop has to say when a command did not land - otherwise the panel keeps looking
+    // green while the arm stands still (motor power off, write failure, no acknowledgement).
+    if (this.handDrag) {
+      this.showDragStatus({ kind: 'unavailable', reason });
+    }
     this.resendIfDirty();
   }
 
