@@ -91,6 +91,11 @@ describe('joint panel mapping UI', () => {
     ]);
   });
 
+  it('turns the native slider off so the custom rail and knob are the visible ones', () => {
+    const rule = SHADOW_STYLES.match(/\.j input\[type=range\] \{[^}]*\}/)?.[0] ?? '';
+    expect(rule).toContain('appearance: none');
+  });
+
   it('styles the slider knob in the pib palette, without a dark ring', () => {
     const styles = SHADOW_STYLES;
     const thumb = styles.match(/\.j input\[type=range\]::-webkit-slider-thumb \{[^}]*\}/)?.[0] ?? '';

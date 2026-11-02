@@ -59,10 +59,15 @@ export const SHADOW_STYLES = `
   .j .track .mark.soll.on { display: block; }
   .j .cmd-delta { display: none; font-size: 10px; color: #8b949e; text-align: right; margin-top: 2px; }
   .j .cmd-delta.on { display: block; }
-  .j input[type=range] { width: 100%; margin: 0; height: 18px; accent-color: transparent;
+  /* Without appearance: none on the input itself the browser paints its own slider on top of the
+     custom rail - that is why the knob stayed dark and the rail light. */
+  .j input[type=range] { -webkit-appearance: none; appearance: none;
+    width: 100%; margin: 0; height: 18px; accent-color: transparent; border-radius: 9px;
     background: transparent; position: relative; z-index: 1; }
-  .j input[type=range]::-webkit-slider-runnable-track { background: transparent; }
-  .j input[type=range]::-moz-range-track { background: transparent; }
+  .j input[type=range]::-webkit-slider-runnable-track { -webkit-appearance: none; background: transparent;
+    height: 18px; border: none; }
+  .j input[type=range]::-moz-range-track { background: transparent; height: 18px; border: none; }
+  .j input[type=range]:focus-visible { outline: none; }
   /* pib's slider palette: pink thumb and pink fill on the dark blue rail. */
   /* Cerebra's own sliders: a plain pink knob, no dark ring - at 12 px a 2 px near-black border
      left almost nothing of the colour and the knob read as a black dot. */
