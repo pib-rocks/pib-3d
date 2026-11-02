@@ -49,7 +49,7 @@ function setup() {
     }) as unknown as Response,
   );
 
-  const dispose = wireHandDrag({
+  const handle = wireHandDrag({
     scene,
     camera,
     dom: dom as unknown as HTMLElement,
@@ -71,16 +71,16 @@ function setup() {
     fetchImpl: fetchImpl as unknown as typeof fetch,
   });
 
-  const handle = scene.children.find((child) => child.name === 'ik-handle:right') as
+  const sphere = scene.children.find((child) => child.name === 'ik-handle:right') as
     | THREE.Mesh
     | undefined;
   const screen = new THREE.Vector3();
-  handle!.getWorldPosition(screen);
+  sphere!.getWorldPosition(screen);
   screen.project(camera);
   const x = ((screen.x + 1) / 2) * 949;
   const y = ((1 - screen.y) / 2) * 475;
 
-  return { scene, camera, dom, statuses, fetchImpl, dispose, handle, x, y };
+  return { scene, camera, dom, statuses, fetchImpl, drag: handle, palm, sphere, x, y };
 }
 
 describe('wireHandDrag', () => {
@@ -101,6 +101,16 @@ describe('wireHandDrag', () => {
     const { dom, statuses, x, y } = setup();
     dom.fire('pointerdown', { clientX: x + 200, clientY: y + 120, button: 0, pointerId: 1 });
     expect(statuses).toHaveLength(0);
+  });
+
+  it('moves the handle with the palm', () => {
+    const { drag, palm, sphere } = setup();
+    palm.position.set(0.2, 0.5, -0.3);
+    palm.updateMatrixWorld(true);
+    drag.sync();
+    expect(sphere.position.x).toBeCloseTo(0.2, 6);
+    expect(sphere.position.y).toBeCloseTo(0.5, 6);
+    expect(sphere.position.z).toBeCloseTo(-0.3, 6);
   });
 
   it('asks the backend once the handle is dragged', async () => {

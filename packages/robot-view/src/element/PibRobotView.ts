@@ -118,7 +118,7 @@ export class PibRobotView extends HTMLElement {
   private _manifest: RobotModelManifest | null = null;
   private _expectedMotors: string[] | null = null;
   private _ikUrl = '';
-  private handDrag: (() => void) | null = null;
+  private handDrag: { dispose(): void; sync(): void } | null = null;
   private _labelsByMotor: Record<string, string> = {};
   private _modelConsistency: ModelConsistencyResult = { ok: true, reason: null };
   private _baseFrame: BaseFrameContext | null = null;
@@ -503,7 +503,7 @@ export class PibRobotView extends HTMLElement {
     this.onDemand?.dispose();
     this.onDemand = null;
 
-    this.handDrag?.();
+    this.handDrag?.dispose();
     this.handDrag = null;
     if (this.sceneBundle) {
       disposeObject3D(this.sceneBundle.modelRoot);
@@ -905,6 +905,7 @@ export class PibRobotView extends HTMLElement {
   }
 
   private syncPose(): void {
+    this.handDrag?.sync();
     const pose = this.getPose();
     const baseEl = this.shadow.querySelector('#pose-base') as HTMLElement | null;
     const handEl = this.shadow.querySelector('#pose-hand') as HTMLElement | null;
@@ -963,7 +964,7 @@ export class PibRobotView extends HTMLElement {
   }
 
   private wireHandDrag(): void {
-    this.handDrag?.();
+    this.handDrag?.dispose();
     this.handDrag = null;
     const bundle = this.sceneBundle;
     const frame = this._baseFrame;
