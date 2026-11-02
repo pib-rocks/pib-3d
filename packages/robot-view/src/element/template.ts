@@ -22,9 +22,6 @@ export const SHADOW_STYLES = `
     backdrop-filter: blur(6px); box-shadow: 0 10px 30px rgba(0,0,0,.45); }
   #panel.hidden { display: none; }
 
-  header { padding: 12px 14px 10px; border-bottom: 1px solid #30363d; }
-  header h1 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: .2px; }
-  header p { margin: 3px 0 0; font-size: 11px; color: #8b949e; }
   header b { color: #e6edf3; font-weight: 600; }
 
   #tools { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border-bottom: 1px solid #30363d; }
@@ -35,11 +32,6 @@ export const SHADOW_STYLES = `
   button.danger { background: #3d1214; border-color: #f85149; color: #ffa198; }
   button.danger:hover { background: #67060c; }
 
-  #pose-readout { padding: 8px 12px; border-bottom: 1px solid #30363d; font-size: 11px; }
-  #pose-readout .irow { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 3px; }
-  #pose-readout .irow span { color: #8b949e; }
-  #pose-readout .irow b { color: #58a6ff; font-weight: 500; font-variant-numeric: tabular-nums;
-    text-align: right; word-break: break-all; }
   .j.pending .name { color: #e3b341; }
   .j.pending .val { color: #e3b341; }
 
@@ -129,21 +121,13 @@ export const SHADOW_HTML = `
     <canvas part="canvas"></canvas>
     <div class="hud">
       <aside id="panel">
-        <header>
-          <h1>pib — URDF-Demonstrator</h1>
-          <p><b>pib.control.urdf</b> · Onshape-Export, auf Steuerungsmodell reduziert</p>
-        </header>
         <div id="tools">
-          <button type="button" data-action="zero">Nullstellung</button>
-          <button type="button" data-action="mid">Mitte</button>
+          <button type="button" data-action="startup">Startup/Resting</button>
+          <button type="button" data-action="calibration">Calibration</button>
         </div>
         <div id="guard" hidden></div>
         <div id="consistency" hidden></div>
         <div id="live-stale" hidden></div>
-        <div id="pose-readout">
-          <div class="irow"><span>Basis (REP-103)</span><b id="pose-base">–</b></div>
-          <div class="irow"><span>TCP (provisorisch)</span><b id="pose-hand">–</b></div>
-        </div>
         <div id="joints"></div>
         <div id="info">
           <div class="irow"><span>Bauteil</span><b id="info-link">–</b></div>
