@@ -203,7 +203,7 @@ describe('PibRobotView command lifecycle', () => {
     });
     const fetchMock = vi.fn(async () => ({
       ok: true,
-      json: async () => ({ motorPositions: [{ motor: 'elbow_right', position: 3000 }] }),
+      json: async () => ({ motorPositions: [{ motorName: 'elbow_right', position: 3000 }] }),
     }));
     const originalFetch = globalThis.fetch;
     globalThis.fetch = fetchMock as unknown as typeof fetch;

@@ -591,13 +591,15 @@ export class PibRobotView extends HTMLElement {
         this.showDragStatus({ kind: 'unavailable', reason: `Pose "${name}" nicht verfügbar` });
         return;
       }
-      const body = (await response.json()) as { motorPositions?: { motor: string; position: number }[] };
+      const body = (await response.json()) as {
+        motorPositions?: { motorName: string; position: number }[];
+      };
       const byMotor = new Map(
         this._mapping.joints.filter((e) => e.motor).map((e) => [e.motor as string, e]),
       );
       let applied = 0;
-      for (const { motor, position } of body.motorPositions ?? []) {
-        const entry = byMotor.get(motor);
+      for (const { motorName, position } of body.motorPositions ?? []) {
+        const entry = byMotor.get(motorName);
         if (!entry) continue;
         const radians = motorCentidegToModelRad(entry, position);
         this._jointStates[entry.urdfJoint] = radians;
