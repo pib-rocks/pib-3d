@@ -913,13 +913,12 @@ export class PibRobotView extends HTMLElement {
       const m = this.motionByJoint.get(name);
       if (!m) continue;
       // The slider (and the IK drag) is the master of a joint it commands: feeding the measured
-      // value back into the pose makes the thumb and the ghost jump between Soll and Ist.
+      // value back makes the thumb and the ghost jump between Soll and Ist. Every other joint keeps
+      // following the measurement - otherwise the panel would show a pose the robot is not in.
       if (this._effectiveMode === 'command' && !this._estopped && this._uiOwned.has(name)) continue;
       this._jointStates[name] = radians;
       applyJointValue(m.joint, m.motion, m.axis, radians);
-      if (this._effectiveMode !== 'command' || this._estopped) {
-        this.panel?.setJointUi(name, radians);
-      }
+      this.panel?.setJointUi(name, radians);
     }
     this.onDemand?.requestRender();
     this.syncPose();
