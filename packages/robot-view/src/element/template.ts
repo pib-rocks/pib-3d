@@ -80,6 +80,20 @@ export const SHADOW_STYLES = `
   .j.active .name { color: #79c0ff; }
   .j input[type=range]:focus { outline: 1px solid #388bfd; outline-offset: 3px; border-radius: 2px; }
 
+  #ik-status {
+    position: absolute;
+    left: 12px;
+    bottom: 44px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(13, 17, 23, 0.82);
+    border: 1px solid #30363d;
+    font-size: 12px;
+    color: #c9d1d9;
+    pointer-events: none;
+  }
+  #ik-status.edge { border-color: #d8a33a; color: #f0c674; }
+  #ik-status.unavailable { border-color: #f85149; color: #ff8b84; }
   #stats { position: absolute; top: 16px; right: 16px; text-align: right; font-size: 11px;
     color: #8b949e; background: rgba(22,27,34,.85); border: 1px solid #30363d;
     border-radius: 8px; padding: 8px 11px; pointer-events: none; }
@@ -143,6 +157,7 @@ export const SHADOW_HTML = `
         </div>
       </aside>
       <div id="tip"></div>
+      <div id="ik-status" hidden></div>
       <div id="stats">wird geladen …</div>
       <div id="hint">Bauteil anklicken: Gelenk wählen · Maus ziehen: drehen · Rad: zoomen · Rechte Taste: verschieben</div>
     </div>
