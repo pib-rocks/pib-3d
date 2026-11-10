@@ -12,11 +12,11 @@ export function frameCameraOnModel(
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const radius = Math.max(size.x, size.y, size.z);
-  controls.target.set(center.x, center.y * 0.95, center.z);
+  controls.target.set(center.x - radius * 0.12, center.y * 0.95, center.z);
   camera.position.set(
-    center.x + radius * 1.05,
+    center.x + radius * 0.82,
     center.y + radius * 0.42,
-    center.z + radius * 1.15,
+    center.z + radius * 0.9,
   );
   camera.near = radius / 200;
   camera.far = radius * 60;

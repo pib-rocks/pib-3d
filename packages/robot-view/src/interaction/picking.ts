@@ -1,6 +1,58 @@
 import * as THREE from 'three';
 import type { RobotModel } from '../types.js';
 
+export function resolveSelectableLink(
+  linkName: string,
+  parentOf: Map<string, string>,
+  jointOfLink: Map<string, RobotModel['joints'][0]>,
+): { link: string; joint: RobotModel['joints'][0] } | null {
+  let cur = linkName;
+  let joint = jointOfLink.get(cur);
+  while (!joint && parentOf.has(cur)) {
+    cur = parentOf.get(cur)!;
+    joint = jointOfLink.get(cur);
+  }
+  if (!joint) return null;
+  return { link: cur, joint };
+}
+
+/** Highlights only meshes tagged with `linkName`, not child links nested in the kinematic tree. */
+export function highlightLinkMeshes(
+  node: THREE.Object3D,
+  linkName: string,
+  on: boolean,
+  originals: Map<THREE.Material, { color: number | null; intensity: number }>,
+): void {
+  node.traverse((o) => {
+    if (o.userData.link !== linkName) return;
+    const mesh = o as THREE.Mesh;
+    if (!mesh.isMesh || !mesh.material) return;
+    const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    for (const m of mats) {
+      const std = m as THREE.MeshStandardMaterial;
+      if (on) {
+        if (!originals.has(m))
+          originals.set(m, {
+            color: std.emissive ? std.emissive.getHex() : null,
+            intensity: std.emissiveIntensity,
+          });
+        if (std.emissive) {
+          std.emissive.setHex(0x1f6feb);
+          std.emissiveIntensity = 0.28;
+          std.needsUpdate = true;
+        }
+      } else {
+        const before = originals.get(m);
+        if (before && std.emissive && before.color !== null) {
+          std.emissive.setHex(before.color);
+          std.emissiveIntensity = before.intensity;
+          std.needsUpdate = true;
+        }
+      }
+    }
+  });
+}
+
 export interface PickingContext {
   camera: THREE.PerspectiveCamera;
   modelRoot: THREE.Group;
@@ -30,33 +82,7 @@ export function wirePicking(ctx: PickingContext): () => void {
   function highlight(linkName: string, on: boolean): void {
     const node = ctx.linkNodes.get(linkName);
     if (!node) return;
-    node.traverse((o) => {
-      const mesh = o as THREE.Mesh;
-      if (!mesh.isMesh || !mesh.material) return;
-      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-      for (const m of mats) {
-        const std = m as THREE.MeshStandardMaterial;
-        if (on) {
-          if (!originals.has(m))
-            originals.set(m, {
-              color: std.emissive ? std.emissive.getHex() : null,
-              intensity: std.emissiveIntensity,
-            });
-          if (std.emissive) {
-            std.emissive.setHex(0x1f6feb);
-            std.emissiveIntensity = 0.28;
-            std.needsUpdate = true;
-          }
-        } else {
-          const before = originals.get(m);
-          if (before && std.emissive && before.color !== null) {
-            std.emissive.setHex(before.color);
-            std.emissiveIntensity = before.intensity;
-            std.needsUpdate = true;
-          }
-        }
-      }
-    });
+    highlightLinkMeshes(node, linkName, on, originals);
     ctx.onRequestRender();
   }
 
@@ -66,13 +92,10 @@ export function wirePicking(ctx: PickingContext): () => void {
   }
 
   function selectLink(linkName: string): void {
-    let cur = linkName;
-    let joint = ctx.jointOfLink.get(cur);
-    while (!joint && ctx.parentOf.has(cur)) {
-      cur = ctx.parentOf.get(cur)!;
-      joint = ctx.jointOfLink.get(cur);
-    }
-    if (!joint) return;
+    const resolved = resolveSelectableLink(linkName, ctx.parentOf, ctx.jointOfLink);
+    if (!resolved) return;
+    const cur = resolved.link;
+    const joint = resolved.joint;
     if (selected === cur) return;
 
     if (selected) {
@@ -125,7 +148,7 @@ export function wirePicking(ctx: PickingContext): () => void {
     down = null;
     if (moved > 5 || !quick) return;
     const link = pick(e);
-    if (link) selectLink(link);
+    if (link && resolveSelectableLink(link, ctx.parentOf, ctx.jointOfLink)) selectLink(link);
   };
 
   let lastHover = 0;
@@ -139,13 +162,16 @@ export function wirePicking(ctx: PickingContext): () => void {
     if (now - lastHover < 60) return;
     lastHover = now;
     const link = pick(e);
-    dom.style.cursor = link ? 'pointer' : '';
-    if (!link) {
+    const selectable = link
+      ? resolveSelectableLink(link, ctx.parentOf, ctx.jointOfLink)
+      : null;
+    dom.style.cursor = selectable ? 'pointer' : '';
+    if (!selectable) {
       tip.style.display = 'none';
       return;
     }
-    const parts = ctx.partsOf.get(link) || [link];
-    tip.textContent = `${link} · ${parts.length} Teil${parts.length === 1 ? '' : 'e'}`;
+    const parts = ctx.partsOf.get(selectable.link) || [selectable.link];
+    tip.textContent = `${selectable.link} · ${parts.length} Teil${parts.length === 1 ? '' : 'e'}`;
     tip.style.display = 'block';
     tip.style.left = `${e.clientX + 14}px`;
     tip.style.top = `${e.clientY + 14}px`;
