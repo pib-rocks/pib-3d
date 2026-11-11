@@ -31,7 +31,7 @@ import {
   type JointStateSample,
 } from '../joints/liveState.js';
 import { buildJointPanel, midPoseValue, type JointPanelHandles } from '../joints/panel.js';
-import { applyJointValue } from '../joints/math.js';
+import { applyJointValue, formatJointLabel, fromUi, toUi } from '../joints/math.js';
 import { wirePicking } from '../interaction/picking.js';
 import { disposeObject3D, OnDemandRenderer } from '../render/onDemand.js';
 import { seedFromModel, wireHandDrag, type DragStatus } from '../interaction/ikDrag.js';
@@ -130,6 +130,14 @@ export class PibRobotView extends HTMLElement {
   private _baseFrame: BaseFrameContext | null = null;
   private _tcpLink = TCP_LINK_RIGHT;
   private _poseSide: ArmSide = 'right';
+  private _selectedJoint: string | null = null;
+  private unwiredJointHud: (() => void) | null = null;
+  private jointCtrlDrag: {
+    pointerId: number;
+    startX: number;
+    startRad: number;
+    joint: string;
+  } | null = null;
 
   constructor() {
     super();
@@ -170,6 +178,7 @@ export class PibRobotView extends HTMLElement {
       this.updateModeUi();
     } else if (name === 'poses-url') {
       this._posesUrl = value ?? '';
+      if (this.isConnected) void this.loadPosesList();
     } else if (name === 'ik-url') {
       this._ikUrl = value ?? '';
       this.wireHandDrag();
@@ -255,6 +264,7 @@ export class PibRobotView extends HTMLElement {
   set posesUrl(url: string) {
     this._posesUrl = url;
     this.setAttribute('poses-url', url);
+    if (this.isConnected) void this.loadPosesList();
   }
 
   /** Backend endpoint for inverse kinematics; without it the drag handles stay inert. */
@@ -530,6 +540,8 @@ export class PibRobotView extends HTMLElement {
 
     this.unpick?.();
     this.unpick = null;
+    this.unwiredJointHud?.();
+    this.unwiredJointHud = null;
     this.resizeObs?.disconnect();
     this.resizeObs = null;
     this.intersectObs?.disconnect();
@@ -593,6 +605,7 @@ export class PibRobotView extends HTMLElement {
     this.intersectObs.observe(this);
 
     this.wireToolbar();
+    this.wireJointHud();
     this.updatePanelVisibility();
   }
 
@@ -650,6 +663,36 @@ export class PibRobotView extends HTMLElement {
     }
   }
 
+  private async loadPosesList(): Promise<void> {
+    const select = this.shadow.querySelector('#pose-select') as HTMLSelectElement | null;
+    if (!select) return;
+    const placeholder = '<option value="">Pose wählen …</option>';
+    if (!this._posesUrl) {
+      select.innerHTML = placeholder;
+      return;
+    }
+    try {
+      const response = await fetch(`${this._posesUrl.replace(/\/$/, '')}`, {
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) {
+        select.innerHTML = placeholder;
+        return;
+      }
+      const body = (await response.json()) as
+        | { poses?: { poseId?: string; name: string; active?: boolean }[] }
+        | { poseId?: string; name: string; active?: boolean }[];
+      const poses = Array.isArray(body) ? body : (body.poses ?? []);
+      const opts = poses
+        .filter((p) => p.name)
+        .map((p) => `<option value="${p.name}">${p.name}</option>`)
+        .join('');
+      select.innerHTML = placeholder + opts;
+    } catch {
+      select.innerHTML = placeholder;
+    }
+  }
+
   private wireToolbar(): void {
     const root = this.shadow;
     root.querySelector('[data-action="startup"]')?.addEventListener('click', () => {
@@ -658,12 +701,151 @@ export class PibRobotView extends HTMLElement {
     root.querySelector('[data-action="calibration"]')?.addEventListener('click', () => {
       void this.applyNamedPose('Calibration');
     });
+    const poseSelect = root.querySelector('#pose-select') as HTMLSelectElement | null;
+    poseSelect?.addEventListener('change', () => {
+      const name = poseSelect.value;
+      if (!name) return;
+      void this.applyNamedPose(name);
+      poseSelect.value = '';
+    });
+    void this.loadPosesList();
     // The grid is part of the view now and the model never spins on its own: a rotating scene
     // makes it hard to aim at a handle.
     if (this.sceneBundle) {
       this.sceneBundle.grid.visible = true;
       this.sceneBundle.controls.autoRotate = false;
     }
+  }
+
+  private isControllableJoint(jointName: string): boolean {
+    const entry = this._mapping ? mappingByUrdfJoint(this._mapping).get(jointName) : undefined;
+    return entry?.class === 'driven';
+  }
+
+  private syncJointHudFromPanel(jointName: string): void {
+    const hud = this.shadow.querySelector('#joint-hud') as HTMLElement | null;
+    const nameEl = this.shadow.querySelector('#joint-hud-name') as HTMLElement | null;
+    const slider = this.shadow.querySelector('#joint-hud-slider') as HTMLInputElement | null;
+    const valEl = this.shadow.querySelector('#joint-hud-val') as HTMLElement | null;
+    if (!hud || !nameEl || !slider || !valEl) return;
+
+    const row = this.panel?.getRow(jointName);
+    const panelInput = this.panel?.getInput(jointName);
+    const motion = this.motionByJoint.get(jointName);
+    if (!row || !panelInput || !motion || !this.isControllableJoint(jointName)) {
+      hud.hidden = true;
+      return;
+    }
+
+    const nameLabel = row.querySelector('.name')?.textContent ?? jointName;
+    const radians = this._jointStates[jointName] ?? 0;
+    slider.min = panelInput.min;
+    slider.max = panelInput.max;
+    slider.step = panelInput.step;
+    slider.value = panelInput.value;
+    slider.disabled = panelInput.disabled;
+    nameEl.textContent = nameLabel;
+    valEl.textContent = formatJointLabel(motion.joint, radians);
+    hud.hidden = false;
+  }
+
+  private hideJointHud(): void {
+    const hud = this.shadow.querySelector('#joint-hud') as HTMLElement | null;
+    if (hud) hud.hidden = true;
+  }
+
+  private wireJointHud(): void {
+    this.unwiredJointHud?.();
+    const bundle = this.sceneBundle;
+    if (!bundle) return;
+
+    const slider = this.shadow.querySelector('#joint-hud-slider') as HTMLInputElement | null;
+    const onHudInput = () => {
+      if (!this._selectedJoint || !slider) return;
+      const joint = this._selectedJoint;
+      const motion = this.motionByJoint.get(joint);
+      if (!motion) return;
+      const v = fromUi(motion.joint, Number(slider.value));
+      const panelInput = this.panel?.getInput(joint);
+      if (panelInput) panelInput.value = slider.value;
+      applyJointValue(motion.joint, motion.motion, motion.axis, v);
+      this.handleUiJointChange(joint, v);
+      this.syncJointHudFromPanel(joint);
+      this.onDemand?.requestRender();
+    };
+    slider?.addEventListener('input', onHudInput);
+
+    const dom = bundle.renderer.domElement;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!this._selectedJoint || !e.ctrlKey || e.button !== 0) return;
+      const motion = this.motionByJoint.get(this._selectedJoint);
+      if (!motion || !this.isControllableJoint(this._selectedJoint)) return;
+      const panelInput = this.panel?.getInput(this._selectedJoint);
+      if (!panelInput || panelInput.disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+      this.jointCtrlDrag = {
+        pointerId: e.pointerId,
+        startX: e.clientX,
+        startRad: this._jointStates[this._selectedJoint] ?? 0,
+        joint: this._selectedJoint,
+      };
+      bundle.controls.enabled = false;
+      dom.setPointerCapture(e.pointerId);
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (!this.jointCtrlDrag || e.pointerId !== this.jointCtrlDrag.pointerId) return;
+      e.preventDefault();
+      const motion = this.motionByJoint.get(this.jointCtrlDrag.joint);
+      if (!motion) return;
+      const deltaX = e.clientX - this.jointCtrlDrag.startX;
+      const nextRad = this.jointCtrlDrag.startRad + deltaX * 0.01;
+      const ui = Math.round(toUi(motion.joint, nextRad));
+      const panelInput = this.panel?.getInput(this.jointCtrlDrag.joint);
+      const sliderEl = this.shadow.querySelector('#joint-hud-slider') as HTMLInputElement | null;
+      const min = panelInput ? Number(panelInput.min) : -180;
+      const max = panelInput ? Number(panelInput.max) : 180;
+      const clampedUi = Math.min(max, Math.max(min, ui));
+      const v = fromUi(motion.joint, clampedUi);
+      if (panelInput) panelInput.value = String(clampedUi);
+      if (sliderEl) sliderEl.value = String(clampedUi);
+      applyJointValue(motion.joint, motion.motion, motion.axis, v);
+      this.handleUiJointChange(this.jointCtrlDrag.joint, v);
+      this.syncJointHudFromPanel(this.jointCtrlDrag.joint);
+      this.onDemand?.requestRender();
+    };
+    const endCtrlDrag = (e: PointerEvent) => {
+      if (!this.jointCtrlDrag || e.pointerId !== this.jointCtrlDrag.pointerId) return;
+      this.jointCtrlDrag = null;
+      bundle.controls.enabled = true;
+      dom.releasePointerCapture?.(e.pointerId);
+    };
+
+    dom.addEventListener('pointerdown', onPointerDown, true);
+    dom.addEventListener('pointermove', onPointerMove, true);
+    dom.addEventListener('pointerup', endCtrlDrag, true);
+    dom.addEventListener('pointercancel', endCtrlDrag, true);
+
+    this.unwiredJointHud = () => {
+      slider?.removeEventListener('input', onHudInput);
+      dom.removeEventListener('pointerdown', onPointerDown, true);
+      dom.removeEventListener('pointermove', onPointerMove, true);
+      dom.removeEventListener('pointerup', endCtrlDrag, true);
+      dom.removeEventListener('pointercancel', endCtrlDrag, true);
+    };
+  }
+
+  private onJointSelected(link: string, joint: string): void {
+    this._selectedJoint = joint;
+    this.dispatchEvent(
+      new CustomEvent<SelectionChangeDetail>('selectionchange', {
+        bubbles: true,
+        composed: true,
+        detail: { link, joint },
+      }),
+    );
+    if (this.isControllableJoint(joint)) this.syncJointHudFromPanel(joint);
+    else this.hideJointHud();
   }
 
   private updatePanelVisibility(): void {
@@ -858,19 +1040,17 @@ export class PibRobotView extends HTMLElement {
         camera: this.sceneBundle!.camera,
         modelRoot: this.sceneBundle!.modelRoot,
         renderer: this.sceneBundle!.renderer,
+        scene: this.sceneBundle!.scene,
         linkNodes,
         parentOf: this.kinematic.parentOf,
         jointOfLink: this.kinematic.jointOfLink,
+        motionByJoint: this.motionByJoint,
         partsOf,
         root: this.shadow,
-        onSelect: (link, joint) => {
-          this.dispatchEvent(
-            new CustomEvent<SelectionChangeDetail>('selectionchange', {
-              bubbles: true,
-              composed: true,
-              detail: { link, joint },
-            }),
-          );
+        onSelect: (link, joint) => this.onJointSelected(link, joint),
+        onClearSelection: () => {
+          this._selectedJoint = null;
+          this.hideJointHud();
         },
         onRequestRender: () => this.onDemand?.requestRender(),
       });
@@ -879,6 +1059,7 @@ export class PibRobotView extends HTMLElement {
       this.applyJointStates('api');
       this.syncPose();
       this.wireHandDrag();
+      void this.loadPosesList();
       this.onDemand?.requestRender();
 
       this.dispatchEvent(
@@ -1033,6 +1214,7 @@ export class PibRobotView extends HTMLElement {
     this._uiOwned.add(joint);
     this._jointStates[joint] = value;
     this.emitJointChange(joint, value, 'ui');
+    if (this._selectedJoint === joint) this.syncJointHudFromPanel(joint);
     this.syncPose();
     if (this._effectiveMode !== 'command' || this._estopped) return;
     const entry = this._mapping ? mappingByUrdfJoint(this._mapping).get(joint) : undefined;
@@ -1066,7 +1248,7 @@ export class PibRobotView extends HTMLElement {
     this.handDrag = null;
     const bundle = this.sceneBundle;
     const frame = this._baseFrame;
-    if (!this._ikUrl || !bundle || !frame || !this._mapping) return;
+    if (!bundle || !frame || !this._mapping) return;
 
     this.handDrag = wireHandDrag({
       scene: bundle.scene,
@@ -1077,6 +1259,7 @@ export class PibRobotView extends HTMLElement {
       linkNodes: this.linkNodes,
       entries: this._mapping.joints,
       ikUrl: this._ikUrl,
+      getJointRad: (j) => this._jointStates[j] ?? 0,
       seedFor: (side) => seedFromModel(this._jointStates, this._mapping!.joints, side),
       onJoints: (angles) => {
         for (const [joint, radians] of Object.entries(angles)) {

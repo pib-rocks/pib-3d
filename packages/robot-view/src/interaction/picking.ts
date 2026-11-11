@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import type { RobotModel } from '../types.js';
+import type { MotionEntry, RobotModel } from '../types.js';
+import { attachJointGizmo, disposeJointGizmo } from './jointGizmo.js';
 
 export function resolveSelectableLink(
   linkName: string,
@@ -57,12 +58,15 @@ export interface PickingContext {
   camera: THREE.PerspectiveCamera;
   modelRoot: THREE.Group;
   renderer: THREE.WebGLRenderer;
+  scene: THREE.Scene;
   linkNodes: Map<string, THREE.Object3D>;
   parentOf: Map<string, string>;
   jointOfLink: Map<string, RobotModel['joints'][0]>;
+  motionByJoint: Map<string, MotionEntry>;
   partsOf: Map<string, string[]>;
   root: ShadowRoot;
   onSelect: (link: string, joint: string) => void;
+  onClearSelection?: () => void;
   onRequestRender: () => void;
 }
 
@@ -71,6 +75,7 @@ export function wirePicking(ctx: PickingContext): () => void {
   const pointer = new THREE.Vector2();
   const originals = new Map<THREE.Material, { color: number | null; intensity: number }>();
   let selected: string | null = null;
+  let gizmo: THREE.Group | null = null;
 
   const info = ctx.root.querySelector('#info') as HTMLElement;
   const infoLink = ctx.root.querySelector('#info-link') as HTMLElement;
@@ -91,6 +96,19 @@ export function wirePicking(ctx: PickingContext): () => void {
     row?.classList.remove('active');
   }
 
+  function clearSelection(): void {
+    if (!selected) return;
+    highlight(selected, false);
+    const prev = ctx.jointOfLink.get(selected);
+    if (prev) clearRowActive(prev.name);
+    selected = null;
+    disposeJointGizmo(gizmo);
+    gizmo = null;
+    info.classList.remove('show');
+    ctx.onClearSelection?.();
+    ctx.onRequestRender();
+  }
+
   function selectLink(linkName: string): void {
     const resolved = resolveSelectableLink(linkName, ctx.parentOf, ctx.jointOfLink);
     if (!resolved) return;
@@ -103,8 +121,15 @@ export function wirePicking(ctx: PickingContext): () => void {
       const prev = ctx.jointOfLink.get(selected);
       if (prev) clearRowActive(prev.name);
     }
+    disposeJointGizmo(gizmo);
+    gizmo = null;
     selected = cur;
     highlight(cur, true);
+
+    const motionEntry = ctx.motionByJoint.get(joint.name);
+    if (motionEntry && joint.type !== 'fixed') {
+      gizmo = attachJointGizmo(motionEntry, ctx.scene);
+    }
 
     const parts = ctx.partsOf.get(cur) || [cur];
     infoLink.textContent = cur;
@@ -190,7 +215,7 @@ export function wirePicking(ctx: PickingContext): () => void {
     dom.removeEventListener('pointerup', onPointerUp);
     dom.removeEventListener('pointermove', onPointerMove);
     dom.removeEventListener('pointerleave', onPointerLeave);
-    if (selected) highlight(selected, false);
+    clearSelection();
   };
 }
 

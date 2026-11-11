@@ -208,9 +208,18 @@ export interface HandDragContext {
   onRequestRender: () => void;
   maxRadPerSecond?: number;
   tcpLink?: { left: string; right: string };
+  headLink?: string;
+  /** Current model joint angles in radians. */
+  getJointRad?: (urdfJoint: string) => number;
   /** Injectable for tests; defaults to the global fetch. */
   fetchImpl?: typeof fetch;
 }
+
+const HEAD_PAN_JOINT = 'gearing_rotation__new_body_';
+const HEAD_TILT_JOINT = 'nodding_rotation';
+const HEAD_PAN_CLAMP = 1.5708;
+const HEAD_TILT_CLAMP = 0.785398;
+const HEAD_HANDLE_OFFSET_Y = 0.08;
 
 const HANDLE_RADIUS_M = 0.035;
 const COLOR_OK = 0x59d18c;
@@ -229,8 +238,13 @@ export interface HandDragHandle {
 
 export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
   const tcp = ctx.tcpLink ?? { left: 'd01_l_palm_left', right: 'd01_r_palm_right' };
+  const headLinkName = ctx.headLink ?? 'a81_motor_shaft';
   const maxRate = ((ctx.maxRadPerSecond ?? 60) * Math.PI) / 180;
-  const handles: Record<'left' | 'right', THREE.Mesh | null> = { left: null, right: null };
+  const handles: Record<'left' | 'right' | 'head', THREE.Mesh | null> = {
+    left: null,
+    right: null,
+    head: null,
+  };
   const material = new THREE.MeshBasicMaterial({
     color: COLOR_OK,
     transparent: true,
@@ -253,7 +267,23 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
     mesh.position.copy(node.getWorldPosition(new THREE.Vector3()));
   }
 
+  const headNode =
+    ctx.linkNodes.get(headLinkName) ?? ctx.linkNodes.get('a71_inner_part') ?? null;
+  const hasHeadMotors = ctx.entries.some(
+    (e) => e.urdfJoint === HEAD_PAN_JOINT || e.urdfJoint === HEAD_TILT_JOINT,
+  );
+  if (headNode && hasHeadMotors) {
+    const mesh = new THREE.Mesh(geometry, material.clone());
+    mesh.renderOrder = 10;
+    mesh.name = 'ik-handle:head';
+    ctx.scene.add(mesh);
+    handles.head = mesh;
+    const wp = headNode.getWorldPosition(new THREE.Vector3());
+    mesh.position.copy(wp).add(new THREE.Vector3(0, HEAD_HANDLE_OFFSET_Y, 0));
+  }
+
   let dragging: { side: 'left' | 'right'; depth: number } | null = null;
+  let headDragging: { startX: number; startY: number; pan0: number; tilt0: number } | null = null;
   let lastAngles: number[] = [];
   let lastApplyAt = 0;
 
@@ -317,14 +347,16 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
     );
   }
 
-  function handleAt(event: PointerEvent): 'left' | 'right' | null {
+  function handleAt(event: PointerEvent): 'left' | 'right' | 'head' | null {
     toNdc(event);
     raycaster.setFromCamera(pointer, ctx.camera);
-    const targets = (['left', 'right'] as const).map((side) => handles[side]).filter(Boolean);
+    const targets = (['left', 'right', 'head'] as const)
+      .map((side) => handles[side])
+      .filter(Boolean);
     const hit = raycaster.intersectObjects(targets as THREE.Object3D[], false)[0];
     if (!hit) return null;
     const id = hit.object.name.split(':')[1];
-    return id === 'left' || id === 'right' ? id : null;
+    return id === 'left' || id === 'right' || id === 'head' ? id : null;
   }
 
   function targetFromPointer(event: PointerEvent, side: 'left' | 'right', depth: number): THREE.Vector3 | null {
@@ -340,16 +372,24 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
 
   function onPointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
+    const hit = handleAt(event);
+    if (!hit) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (hit === 'head') {
+      const pan0 = ctx.getJointRad?.(HEAD_PAN_JOINT) ?? 0;
+      const tilt0 = ctx.getJointRad?.(HEAD_TILT_JOINT) ?? 0;
+      headDragging = { startX: event.clientX, startY: event.clientY, pan0, tilt0 };
+      ctx.controls.enabled = false;
+      ctx.dom.setPointerCapture?.(event.pointerId);
+      return;
+    }
     if (!ctx.ikUrl) {
       ctx.onStatus({ kind: 'unavailable', reason: 'inverse kinematics needs the robot backend' });
       return;
     }
-    const side = handleAt(event);
-    if (!side) return;
-    event.preventDefault();
-    event.stopPropagation();
-    dragging = { side, depth: 0 };
-    lastAngles = ctx.seedFor(side) ?? [];
+    dragging = { side: hit, depth: 0 };
+    lastAngles = ctx.seedFor(hit) ?? [];
     lastApplyAt = 0;
     ctx.controls.enabled = false;
     ctx.dom.setPointerCapture?.(event.pointerId);
@@ -357,6 +397,27 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
   }
 
   function onPointerMove(event: PointerEvent): void {
+    if (headDragging) {
+      event.preventDefault();
+      event.stopPropagation();
+      ctx.dom.style.cursor = 'grabbing';
+      const dx = event.clientX - headDragging.startX;
+      const dy = event.clientY - headDragging.startY;
+      const panRad = Math.min(
+        HEAD_PAN_CLAMP,
+        Math.max(-HEAD_PAN_CLAMP, headDragging.pan0 + dx * 0.01),
+      );
+      const tiltRad = Math.min(
+        HEAD_TILT_CLAMP,
+        Math.max(-HEAD_TILT_CLAMP, headDragging.tilt0 - dy * 0.01),
+      );
+      ctx.onJoints(
+        { [HEAD_PAN_JOINT]: panRad, [HEAD_TILT_JOINT]: tiltRad },
+        { ok: true, distanceMm: 0, blockedBy: null },
+      );
+      ctx.onRequestRender();
+      return;
+    }
     if (!dragging) {
       const hovered = handleAt(event);
       ctx.dom.style.cursor = hovered ? 'grab' : '';
@@ -376,6 +437,15 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
   }
 
   function onPointerUp(event: PointerEvent): void {
+    if (headDragging) {
+      event.preventDefault();
+      event.stopPropagation();
+      headDragging = null;
+      ctx.controls.enabled = true;
+      ctx.dom.style.cursor = '';
+      sync();
+      return;
+    }
     if (!dragging) return;
     event.preventDefault();
     event.stopPropagation();
@@ -416,6 +486,14 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
       node.getWorldPosition(handle.position);
       handle.updateMatrixWorld();
     }
+    const headHandle = handles.head;
+    const headAnchor =
+      ctx.linkNodes.get(headLinkName) ?? ctx.linkNodes.get('a71_inner_part') ?? null;
+    if (headHandle && headAnchor) {
+      const wp = headAnchor.getWorldPosition(new THREE.Vector3());
+      headHandle.position.copy(wp).add(new THREE.Vector3(0, HEAD_HANDLE_OFFSET_Y, 0));
+      headHandle.updateMatrixWorld();
+    }
     ctx.onRequestRender();
   }
 
@@ -430,7 +508,7 @@ export function wireHandDrag(ctx: HandDragContext): HandDragHandle {
     ctx.dom.removeEventListener('pointerup', onPointerUp, true);
     ctx.dom.removeEventListener('wheel', onWheel, true);
     client.dispose();
-    for (const side of ['left', 'right'] as const) {
+    for (const side of ['left', 'right', 'head'] as const) {
       const handle = handles[side];
       if (handle) {
         ctx.scene.remove(handle);
