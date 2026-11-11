@@ -24,7 +24,28 @@ export const SHADOW_STYLES = `
 
   header b { color: #e6edf3; font-weight: 600; }
 
-  #tools { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border-bottom: 1px solid #30363d; }
+  #panel header { padding: 10px 12px; border-bottom: 1px solid #30363d; }
+  #panel header .pose-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  #panel header .pose-bar button { width: 100%; }
+  #panel header .pose-bar #pose-select {
+    background: #141821;
+    border: 1px solid #232938;
+    border-radius: 6px;
+    color: #c8d0e0;
+    font-size: 11px;
+    padding: 5px 6px;
+    width: 100%;
+    grid-column: 1 / -1;
+    font: inherit;
+  }
+  #panel header .pose-bar #pose-select:focus-visible {
+    outline: 1px solid #388bfd;
+    outline-offset: 2px;
+  }
   button { font: inherit; font-size: 11.5px; color: #e6edf3; background: #21262d;
     border: 1px solid #30363d; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
   button:hover { background: #30363d; border-color: #484f58; }
@@ -104,6 +125,29 @@ export const SHADOW_STYLES = `
   #hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
     font-size: 11px; color: #6e7681; pointer-events: none; }
 
+  #joint-hud {
+    position: absolute;
+    left: calc(302px + (100% - 302px) / 2);
+    bottom: 14px;
+    transform: translateX(-50%);
+    background: rgba(18, 22, 31, 0.94);
+    border: 1px solid #3d568c;
+    border-radius: 8px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 6;
+    min-width: 280px;
+  }
+  #joint-hud[hidden] { display: none !important; }
+  #joint-hud .name { font-size: 11.5px; color: #c9d1d9; flex: 1; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #joint-hud .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff;
+    min-width: 48px; text-align: right; }
+  #joint-hud .hint { font-size: 10px; color: #6e7681; white-space: nowrap; }
+  #joint-hud input[type=range] { flex: 1; min-width: 100px; accent-color: #e10072; }
+
   #info { border-top: 1px solid #30363d; padding: 8px 12px 10px; font-size: 11px;
     max-height: 40%; overflow-y: auto; display: none; }
   #info.show { display: block; }
@@ -128,14 +172,19 @@ export const SHADOW_STYLES = `
 `;
 
 export const SHADOW_HTML = `
-  <div class="host-root">
+  <div class="host-root" id="wrap">
     <canvas part="canvas"></canvas>
     <div class="hud">
       <aside id="panel">
-        <div id="tools">
-          <button type="button" data-action="startup">Startup/Resting</button>
-          <button type="button" data-action="calibration">Calibration</button>
-        </div>
+        <header>
+          <div class="pose-bar">
+            <button type="button" data-action="startup">Startup/Resting</button>
+            <button type="button" data-action="calibration">Calibration</button>
+            <select id="pose-select" data-action="pose-select" aria-label="Gespeicherte Posen">
+              <option value="">Pose wählen …</option>
+            </select>
+          </div>
+        </header>
         <div id="guard" hidden></div>
         <div id="consistency" hidden></div>
         <div id="live-stale" hidden></div>
@@ -153,6 +202,12 @@ export const SHADOW_HTML = `
       <div id="ik-status" hidden></div>
       <div id="stats">wird geladen …</div>
       <div id="hint">Bauteil anklicken: Gelenk wählen · Maus ziehen: drehen · Rad: zoomen · Rechte Taste: verschieben</div>
+      <div id="joint-hud" hidden>
+        <span id="joint-hud-name" class="name"></span>
+        <input id="joint-hud-slider" type="range" min="-180" max="180" step="1" value="0">
+        <span id="joint-hud-val" class="val"></span>
+        <span class="hint" title="Halten Sie Strg gedrückt und ziehen Sie mit der Maus im 3D-Bereich">Ctrl+Drag</span>
+      </div>
     </div>
     <div id="loading">
       <div class="txt" id="load-txt">Modell wird geladen …</div>
