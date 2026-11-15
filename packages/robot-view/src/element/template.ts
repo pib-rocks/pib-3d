@@ -56,9 +56,32 @@ export const SHADOW_STYLES = `
   .j.pending .name { color: #e3b341; }
   .j.pending .val { color: #e3b341; }
 
-  #guard, #consistency, #live-stale { display: none; margin: 10px 12px 0; padding: 8px 10px; border: 1px solid #9e6a03;
-    border-radius: 6px; background: #2d2103; color: #e3b341; font-size: 11px; line-height: 1.5; }
-  #guard.on, #consistency.on, #live-stale.on { display: block; }
+  /* Notices (stale live data, command guard, consistency) are overlays over the canvas: they
+     used to sit in the panel's flow and pushed the whole slider list down on every toggle. */
+  #notices {
+    position: absolute;
+    top: 16px;
+    left: calc(302px + (100% - 302px) / 2);
+    transform: translateX(-50%);
+    width: min(520px, calc(100% - 334px - 160px));
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+    z-index: 4;
+  }
+  #notices > div {
+    display: none;
+    padding: 8px 10px;
+    border: 1px solid #9e6a03;
+    border-radius: 6px;
+    background: #2d2103;
+    color: #e3b341;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  #notices > div.on { display: block; }
   #joints { overflow-y: auto; padding: 4px 12px 16px; flex: 1; }
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
@@ -179,6 +202,11 @@ export const SHADOW_STYLES = `
 export const SHADOW_HTML = `
   <div class="host-root" id="wrap">
     <canvas part="canvas"></canvas>
+    <div id="notices">
+      <div id="consistency" hidden></div>
+      <div id="guard" hidden></div>
+      <div id="live-stale" hidden></div>
+    </div>
     <div class="hud">
       <aside id="panel">
         <header>
@@ -190,9 +218,6 @@ export const SHADOW_HTML = `
             </select>
           </div>
         </header>
-        <div id="guard" hidden></div>
-        <div id="consistency" hidden></div>
-        <div id="live-stale" hidden></div>
         <div id="joints"></div>
         <div id="info">
           <div class="irow"><span>Bauteil</span><b id="info-link">–</b></div>
