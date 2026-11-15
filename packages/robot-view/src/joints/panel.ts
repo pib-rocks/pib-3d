@@ -42,7 +42,8 @@ export interface JointPanelOptions {
   onApprove?: () => void;
   onCancelPending?: () => void;
   onEstop?: () => void;
-  /** Human names per motor, e.g. { turn_head_motor: 'Head · Head Rotation' }. */
+  /** Human names per motor, e.g. { turn_head_motor: 'Head Rotation' }. The row renders this
+   * text verbatim; the group heading above it already names the body part. */
   labelsByMotor?: Record<string, string>;
 }
 
@@ -190,10 +191,6 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     for (const m of items) {
       const { joint } = m;
       const mapEntry = mappingByJoint.get(joint.name);
-      const motorLine =
-        mapEntry?.class === 'driven' && mapEntry.motor
-          ? `<div class="motor" title="Motor">${mapEntry.motor}</div>`
-          : '';
       const wrap = document.createElement('div');
       wrap.className = 'j';
       wrap.dataset.joint = joint.name;
@@ -202,10 +199,9 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       const [min, max] = uiRange(joint);
       wrap.innerHTML = `
           <div class="row">
-            <span class="name" title="${joint.name}">${label}</span>
+            <span class="name">${label}</span>
             <span class="val"></span>
           </div>
-          ${motorLine}
           <div class="slider">
             <div class="track"><span class="fill ist"></span><span class="mark soll" title="Soll"></span></div>
             <input type="range" min="${min}" max="${max}" step="1" value="0">
