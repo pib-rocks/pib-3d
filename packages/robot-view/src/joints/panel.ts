@@ -15,6 +15,19 @@ import {
   type JointMappingEntry,
 } from './mapping.js';
 
+/** Servo temperature colour bands (°C); adjust here without touching layout code. */
+export const TEMPERATURE_THRESHOLDS_C = { amberMin: 60, redMin: 70 } as const;
+
+export type MotorTelemetry = { currentMa?: number; temperatureC?: number };
+
+export type JointTelemetryByMotor = Record<string, MotorTelemetry>;
+
+export function temperatureTelemetryClass(celsius: number): '' | 'amber' | 'red' {
+  if (celsius >= TEMPERATURE_THRESHOLDS_C.redMin) return 'red';
+  if (celsius >= TEMPERATURE_THRESHOLDS_C.amberMin) return 'amber';
+  return '';
+}
+
 export interface JointPanelHandles {
   jointsRoot: HTMLElement;
   setPose: (fn: (joint: RobotModel['joints'][0]) => number) => void;
@@ -29,6 +42,7 @@ export interface JointPanelHandles {
   applyMode: (requestedMode: ViewerMode, effectiveMode: ViewerMode) => void;
   applyMotorLimits: (limits: MotorLimitMap | null) => void;
   applyLabels: (labelsByMotor: Record<string, string>) => void;
+  setJointTelemetry: (byMotor: JointTelemetryByMotor | null) => void;
 }
 
 export interface JointPanelOptions {
@@ -200,6 +214,8 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
       wrap.innerHTML = `
           <div class="row">
             <span class="name">${label}</span>
+            <span class="temp"></span>
+            <span class="curr"></span>
             <span class="val"></span>
           </div>
           <div class="slider">
@@ -366,6 +382,44 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     }
   };
 
+  const renderTelemetryOnRow = (row: HTMLElement, telemetry: MotorTelemetry | undefined) => {
+    const tempEl = row.querySelector('.temp') as HTMLElement | null;
+    const currEl = row.querySelector('.curr') as HTMLElement | null;
+    if (currEl) {
+      if (telemetry?.currentMa != null) {
+        currEl.textContent = `${Math.round(telemetry.currentMa)} mA`;
+      } else {
+        currEl.textContent = '';
+      }
+    }
+    if (tempEl) {
+      if (telemetry?.temperatureC != null) {
+        tempEl.textContent = `${Math.round(telemetry.temperatureC)} °C`;
+        const band = temperatureTelemetryClass(telemetry.temperatureC);
+        tempEl.classList.remove('amber', 'red');
+        if (band) tempEl.classList.add(band);
+      } else {
+        tempEl.textContent = '';
+        tempEl.classList.remove('amber', 'red');
+      }
+    }
+  };
+
+  const setJointTelemetry = (byMotor: JointTelemetryByMotor | null) => {
+    const payload = byMotor ?? {};
+    let anyTemperature = false;
+    for (const m of visible) {
+      const entry = mappingByJoint.get(m.joint.name);
+      const motor = entry?.motor;
+      const row = getRow(m.joint.name);
+      if (!row || !motor) continue;
+      const telemetry = payload[motor];
+      renderTelemetryOnRow(row, telemetry);
+      if (telemetry?.temperatureC != null) anyTemperature = true;
+    }
+    jointsRoot.classList.toggle('has-temp-col', anyTemperature);
+  };
+
   return {
     jointsRoot,
     setPose,
@@ -380,6 +434,7 @@ export function buildJointPanel(opts: JointPanelOptions): JointPanelHandles {
     applyMode,
     applyMotorLimits,
     applyLabels,
+    setJointTelemetry,
   };
 }
 

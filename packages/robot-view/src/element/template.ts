@@ -63,11 +63,18 @@ export const SHADOW_STYLES = `
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
   .j { margin: 0 0 9px; }
-  .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline;
+    flex-wrap: nowrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
     white-space: nowrap; flex: 1; min-width: 0; }
-  .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff; min-width: 62px;
-    text-align: right; }
+  .j .temp, .j .curr, .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff;
+    white-space: nowrap; text-align: right; }
+  .j .temp { min-width: 40px; display: none; }
+  .j .curr { min-width: 48px; }
+  .j .val { min-width: 62px; }
+  #joints.has-temp-col .j .temp { display: block; }
+  .j .temp.amber { color: #e3b341; }
+  .j .temp.red { color: #f85149; }
   .j .slider { position: relative; margin: 3px 0 0; }
   .j .track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px;
     background: #3f5c8a; border-radius: 2px; pointer-events: none; overflow: hidden; }
