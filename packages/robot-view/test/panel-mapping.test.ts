@@ -52,24 +52,29 @@ describe('joint panel mapping UI', () => {
   });
 
   it('labels a row with the host name of its motor', () => {
-    const { root } = buildFullPanel('command', { turn_head_motor: 'Head · Head Rotation' });
+    const { root } = buildFullPanel('command', { turn_head_motor: 'Head Rotation' });
     const row = root.querySelector('[data-joint="gearing_rotation__new_body_"]');
-    expect(row?.querySelector('.name')?.textContent).toBe('Head · Head Rotation');
+    expect(row?.querySelector('.name')?.textContent).toBe('Head Rotation');
   });
 
-  it('shows 26 motor subtitles on driven joints', () => {
-    const { root } = buildFullPanel();
-    expect(root.querySelectorAll('.j .motor').length).toBe(26);
+  it('shows no internal motor or joint name in a row', () => {
+    const { root } = buildFullPanel('command', { turn_head_motor: 'Head Rotation' });
+    expect(root.querySelectorAll('.j .motor').length).toBe(0);
+    for (const row of [...root.querySelectorAll('.j')]) {
+      expect(row.querySelector('.name')?.hasAttribute('title')).toBe(false);
+      const visible = row.querySelector('.name')?.textContent ?? '';
+      expect(visible).not.toMatch(/_motor|gearing_|_rotation__/);
+    }
   });
 
   it('groups by the side the motor is on and orders anatomically', () => {
     const labels: Record<string, string> = {
-      shoulder_vertical_left: 'Left Arm · Shoulder Vertical',
-      shoulder_horizontal_left: 'Left Arm · Shoulder Horizontal',
-      upper_arm_left_rotation: 'Left Arm · Upper Arm Rotation',
-      elbow_left: 'Left Arm · Elbow Position',
-      lower_arm_left_rotation: 'Left Arm · Lower Arm Rotation',
-      wrist_left: 'Left Arm · Wrist Position',
+      shoulder_vertical_left: 'Shoulder Vertical',
+      shoulder_horizontal_left: 'Shoulder Horizontal',
+      upper_arm_left_rotation: 'Upper Arm Rotation',
+      elbow_left: 'Elbow Position',
+      lower_arm_left_rotation: 'Lower Arm Rotation',
+      wrist_left: 'Wrist Position',
     };
     const { root } = buildFullPanel('command', labels);
     const groups = new Map<string, string[]>();
@@ -82,12 +87,12 @@ describe('joint panel mapping UI', () => {
       }
     }
     expect(groups.get('Linker Arm · 6')).toEqual([
-      'Left Arm · Shoulder Vertical',
-      'Left Arm · Shoulder Horizontal',
-      'Left Arm · Upper Arm Rotation',
-      'Left Arm · Elbow Position',
-      'Left Arm · Lower Arm Rotation',
-      'Left Arm · Wrist Position',
+      'Shoulder Vertical',
+      'Shoulder Horizontal',
+      'Upper Arm Rotation',
+      'Elbow Position',
+      'Lower Arm Rotation',
+      'Wrist Position',
     ]);
   });
 

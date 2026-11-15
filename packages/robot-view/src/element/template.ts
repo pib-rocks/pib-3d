@@ -66,8 +66,6 @@ export const SHADOW_STYLES = `
   .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
     white-space: nowrap; flex: 1; min-width: 0; }
-  .j .motor { font-size: 10px; color: #8b949e; margin: 1px 0 2px; font-family: ui-monospace, monospace;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .j .val { font-variant-numeric: tabular-nums; font-size: 11px; color: #58a6ff; min-width: 62px;
     text-align: right; }
   .j .slider { position: relative; margin: 3px 0 0; }
