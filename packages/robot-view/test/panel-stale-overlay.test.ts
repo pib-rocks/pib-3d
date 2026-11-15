@@ -38,25 +38,29 @@ function buildFullPanel() {
   return { root, panel };
 }
 
-describe('stale-live overlay', () => {
-  it('renders #live-stale outside #panel over the host root', () => {
+describe('canvas notice overlays', () => {
+  it('renders every notice outside #panel, inside the host root', () => {
     const { root } = buildFullPanel();
-    const stale = root.querySelector('#live-stale');
     const panel = root.querySelector('#panel');
     const wrap = root.querySelector('#wrap');
-    expect(stale).not.toBeNull();
     expect(panel).not.toBeNull();
     expect(wrap).not.toBeNull();
-    expect(panel?.contains(stale)).toBe(false);
-    expect(wrap?.contains(stale)).toBe(true);
+    for (const id of ['#live-stale', '#guard', '#consistency']) {
+      const el = root.querySelector(id);
+      expect(el, id).not.toBeNull();
+      expect(panel?.contains(el), id).toBe(false);
+      expect(wrap?.contains(el), id).toBe(true);
+    }
   });
 
-  it('styles #live-stale as an absolute non-interactive overlay', () => {
-    expect(SHADOW_STYLES).toMatch(/#live-stale \{[\s\S]*?position: absolute/);
-    expect(SHADOW_STYLES).toMatch(/#live-stale \{[\s\S]*?pointer-events: none/);
+  it('stacks the notices in an absolutely positioned, non-interactive container', () => {
+    expect(SHADOW_STYLES).toMatch(/#notices \{[\s\S]*?position: absolute/);
+    expect(SHADOW_STYLES).toMatch(/#notices \{[\s\S]*?pointer-events: none/);
+    expect(SHADOW_STYLES).toMatch(/#notices > div \{[\s\S]*?display: none/);
+    expect(SHADOW_STYLES).toMatch(/#notices > div\.on \{ display: block; \}/);
   });
 
-  it('toggling setStaleBanner does not change the joint list DOM structure', () => {
+  it('keeps the joint list untouched while a notice toggles', () => {
     const { root, panel } = buildFullPanel();
     const joints = root.querySelector('#joints');
     const firstRow = joints?.querySelector('.j');
@@ -79,5 +83,22 @@ describe('stale-live overlay', () => {
     expect(root.querySelector('#live-stale')?.classList.contains('on')).toBe(false);
     expect(joints!.innerHTML).toBe(jointsBefore);
     expect(firstRow!.outerHTML).toBe(firstRowBefore);
+  });
+
+  it('keeps the joint list untouched while guard and consistency toggle', () => {
+    const { root } = buildFullPanel();
+    const joints = root.querySelector('#joints');
+    const jointsBefore = joints!.innerHTML;
+
+    for (const id of ['#guard', '#consistency']) {
+      const el = root.querySelector(id) as HTMLElement;
+      el.textContent = 'Befehlsmodus gesperrt: Mapping ungültig. Der Viewer bleibt in der Vorschau.';
+      el.classList.add('on');
+      expect(el.classList.contains('on'), id).toBe(true);
+      expect(joints!.innerHTML, id).toBe(jointsBefore);
+      el.classList.remove('on');
+      el.textContent = '';
+      expect(joints!.innerHTML, id).toBe(jointsBefore);
+    }
   });
 });
