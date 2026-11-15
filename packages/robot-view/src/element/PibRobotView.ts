@@ -30,7 +30,12 @@ import {
   resolveJointStateMap,
   type JointStateSample,
 } from '../joints/liveState.js';
-import { buildJointPanel, midPoseValue, type JointPanelHandles } from '../joints/panel.js';
+import {
+  buildJointPanel,
+  midPoseValue,
+  type JointPanelHandles,
+  type JointTelemetryByMotor,
+} from '../joints/panel.js';
 import { applyJointValue, formatJointLabel, fromUi, toUi } from '../joints/math.js';
 import { wirePicking } from '../interaction/picking.js';
 import { disposeObject3D, OnDemandRenderer } from '../render/onDemand.js';
@@ -476,6 +481,11 @@ export class PibRobotView extends HTMLElement {
   setCommandedStates(map: Record<string, number>): void {
     this._commandedStates = this._mapping ? resolveJointStateMap(map, this._mapping) : { ...map };
     this.syncCommandedPanel();
+  }
+
+  /** Live motor current and temperature keyed by motor name (same keys as `labels`). */
+  setJointTelemetry(byMotor: JointTelemetryByMotor | null): void {
+    this.panel?.setJointTelemetry(byMotor);
   }
 
   setJointStateSample(sample: JointStateSample): void {
