@@ -85,7 +85,10 @@ export const SHADOW_STYLES = `
   #joints { overflow-y: auto; padding: 4px 12px 16px; flex: 1; }
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
-  .j { margin: 0 0 3px; }
+  .j { margin: 0 0 6px; border-radius: 8px; }
+  /* The focus ring belongs to the whole row: on the input it cut through the label line and
+     left the delta line outside. */
+  .j:focus-within { outline: 1px solid #e10072; outline-offset: 2px; }
   .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline;
     flex-wrap: nowrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
@@ -132,7 +135,7 @@ export const SHADOW_STYLES = `
   .j input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%;
     background: #e10072; border: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
     cursor: grab; }
-  .j input[type=range]:focus { outline: 1px solid #e10072; outline-offset: 3px; border-radius: 2px; }
+  .j input[type=range]:focus { outline: none; }
   .j.active { border-left: 2px solid #1f6feb; margin-left: -8px; padding-left: 6px; }
   .j.active .name { color: #79c0ff; }
 

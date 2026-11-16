@@ -109,4 +109,11 @@ describe('canvas notice overlays', () => {
     expect(SHADOW_STYLES).toMatch(/\.j \.cmd-delta \{[\s\S]*?min-height: 12px/);
     expect(SHADOW_STYLES).not.toMatch(/\.j \.cmd-delta\.on \{ display: block; \}/);
   });
+
+  it('draws the focus ring around the whole row, not the slider input', () => {
+    // The input's ring sat at the bottom of the label line and left the current, the position
+    // and the delta line outside it.
+    expect(SHADOW_STYLES).toMatch(/\.j:focus-within \{[\s\S]*?outline: 1px solid #e10072/);
+    expect(SHADOW_STYLES).toMatch(/\.j input\[type=range\]:focus \{ outline: none; \}/);
+  });
 });
