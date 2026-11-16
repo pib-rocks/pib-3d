@@ -85,7 +85,7 @@ export const SHADOW_STYLES = `
   #joints { overflow-y: auto; padding: 4px 12px 16px; flex: 1; }
   #joints h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
     color: #8b949e; margin: 14px 0 6px; font-weight: 600; }
-  .j { margin: 0 0 9px; }
+  .j { margin: 0 0 3px; }
   .j .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline;
     flex-wrap: nowrap; }
   .j .name { font-size: 11.5px; color: #c9d1d9; overflow: hidden; text-overflow: ellipsis;
@@ -98,7 +98,7 @@ export const SHADOW_STYLES = `
   #joints.has-temp-col .j .temp { display: block; }
   .j .temp.amber { color: #e3b341; }
   .j .temp.red { color: #f85149; }
-  .j .slider { position: relative; margin: 3px 0 0; }
+  .j .slider { position: relative; margin: 2px 0 0; }
   .j .track { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px;
     background: #3f5c8a; border-radius: 2px; pointer-events: none; overflow: hidden; }
   .j .track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
@@ -106,8 +106,12 @@ export const SHADOW_STYLES = `
   .j .track .mark.soll { position: absolute; top: -3px; width: 2px; height: 10px;
     background: #f0f6fc; border-radius: 1px; display: none; transform: translateX(-1px); }
   .j .track .mark.soll.on { display: block; }
-  .j .cmd-delta { display: none; font-size: 10px; color: #8b949e; text-align: right; margin-top: 2px; }
-  .j .cmd-delta.on { display: block; }
+  /* The delta line belongs to every row's height. It used to appear only on the row being
+     dragged, which grew that row by 16 px and pushed every slider below it; reserving the
+     line keeps all rows the same height, and the trimmed row margins pay most of the space. */
+  .j .cmd-delta { display: block; min-height: 12px; line-height: 12px; font-size: 10px;
+    color: #8b949e; text-align: right; margin: 0; }
+  .j .cmd-delta.on { color: #e3b341; }
   /* Without appearance: none on the input itself the browser paints its own slider on top of the
      custom rail - that is why the knob stayed dark and the rail light. */
   .j input[type=range] { -webkit-appearance: none; appearance: none; display: block;
