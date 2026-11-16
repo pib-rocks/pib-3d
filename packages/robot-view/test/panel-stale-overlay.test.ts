@@ -101,4 +101,12 @@ describe('canvas notice overlays', () => {
       expect(joints!.innerHTML, id).toBe(jointsBefore);
     }
   });
+
+  it('reserves the command-delta line on every row', () => {
+    // The delta used to be display:none until a joint moved, which grew that row by 16 px and
+    // pushed every slider below it. The line is now part of every row's height.
+    expect(SHADOW_STYLES).toMatch(/\.j \.cmd-delta \{[\s\S]*?display: block/);
+    expect(SHADOW_STYLES).toMatch(/\.j \.cmd-delta \{[\s\S]*?min-height: 12px/);
+    expect(SHADOW_STYLES).not.toMatch(/\.j \.cmd-delta\.on \{ display: block; \}/);
+  });
 });
